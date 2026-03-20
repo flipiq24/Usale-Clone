@@ -42,8 +42,7 @@ export default function Home() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled ? "white" : "rgba(255,255,255,0.15)",
-          backdropFilter: scrolled ? "none" : "blur(4px)",
+          background: "white",
           boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.08)" : "none",
         }}
       >
@@ -58,7 +57,7 @@ export default function Home() {
                 href="#"
                 onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className="px-4 py-2 text-sm transition-colors hover:underline"
-                style={{ color: scrolled ? DARK_BLUE : "white" }}
+                style={{ color: ORANGE }}
               >
                 Home
               </a>
@@ -66,7 +65,7 @@ export default function Home() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   className="px-4 py-2 text-sm flex items-center gap-1 transition-colors hover:underline focus:outline-none"
-                  style={{ color: scrolled ? DARK_BLUE : "white" }}
+                  style={{ color: ORANGE }}
                   onMouseEnter={() => setWhoWeServeOpen(true)}
                   onMouseLeave={() => setWhoWeServeOpen(false)}
                   onClick={() => setWhoWeServeOpen(!whoWeServeOpen)}
@@ -104,7 +103,7 @@ export default function Home() {
               <a
                 href="/about-us"
                 className="px-4 py-2 text-sm transition-colors hover:underline"
-                style={{ color: scrolled ? DARK_BLUE : "white" }}
+                style={{ color: ORANGE }}
                 onClick={(e) => e.preventDefault()}
               >
                 About Us
@@ -112,7 +111,7 @@ export default function Home() {
               <a
                 href="/lets-talk"
                 className="px-4 py-2 text-sm transition-colors hover:underline"
-                style={{ color: scrolled ? DARK_BLUE : "white" }}
+                style={{ color: ORANGE }}
                 onClick={(e) => e.preventDefault()}
               >
                 Let's Talk
@@ -121,7 +120,7 @@ export default function Home() {
                 href="#join-wait-list"
                 onClick={(e) => { e.preventDefault(); scrollToSection("join-wait-list"); }}
                 className="px-4 py-2 text-sm transition-colors hover:underline"
-                style={{ color: scrolled ? DARK_BLUE : "white" }}
+                style={{ color: ORANGE }}
               >
                 Join Wait List
               </a>
@@ -129,7 +128,7 @@ export default function Home() {
 
             <button
               className="md:hidden p-2"
-              style={{ color: scrolled ? DARK_BLUE : "white" }}
+              style={{ color: ORANGE }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
