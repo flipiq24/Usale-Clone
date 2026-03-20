@@ -1,0 +1,54 @@
+USale.com Homepage Verification Report
+Here's a comprehensive summary of all elements tested on the USale.com homepage:
+
+Navigation & Branding ✅
+
+USale Logo (top-left, with "Real offers. Real fast." tagline) — Clicking returns to homepage correctly
+Home link — Works correctly, navigates to /
+Who We Serve dropdown — Hovering reveals three options: Real Estate Investors, Real Estate Agents, Strategic Partners
+About Us, Let's Talk, Join Wait List nav links — All present and linked correctly
+
+Hero Section ✅
+
+Main headline: "Real offers." (blue) + "Real fast." (orange) — Verified
+Subheading: "Where off-market deals meet credible buyers...and everyone wins." — Verified
+Value proposition: "No commitment. No cost. Just access." (bold dark blue) — Verified
+Background image: Blurred house with "SOLD" sign — Verified
+"Join Wait List" button (orange/coral) — Works, smooth-scrolls to the form section (/#join-wait-list)
+"Request Demo" button (orange/coral) — Links to /lets-talk page (the Let's Talk contact form)
+
+Join Wait List Section ✅
+
+Orange heading "Join Wait List" — Verified
+Subscription form with all fields present: Email Address (required, red asterisk), First Name, Last Name, Telephone, Company, "I am:" dropdown, Zip Code
+Black "Subscribe" button — Present (embedded Mailchimp form)
+
+Explore the USale.com Marketplace Section ✅
+
+Orange heading "Explore the USale.com Marketplace" — Verified
+Descriptive text about connecting investors, agents, home sellers, and escrow/title/lending — Verified
+Three marketplace cards:
+
+Investors (man image) — "Access off-market deals & qualified agents." → "Learn" button → navigates to /real-estate-investors
+Agents (woman in yellow blazer) — "Connect with active investors seeking deals." → "Explore" button → navigates to /real-estate-agents
+Strategic Partners (handshake image) — "Grow your business through the USale.com network." → "Align" button → navigates to /strategic-partners
+
+
+
+Spotlight Section ✅
+
+"Spotlight | Jessica Nieto, eXp Realty" — Photo, title, and testimonial text present
+
+Industry Partners Section ✅
+
+"We align with the best in the industry." heading with partner logos (Kiavi, Stewart, eXp Realty) and "Connect with us today" link (→ /lets-talk)
+
+Footer ✅
+
+USale logo, copyright "© 2026 FlipIQ. All rights reserved.", trademark notice
+Explore More: Blog link (/blog-list), LinkedIn: Coming Soon
+Policies: Privacy Policy (/privacy-policy), Terms and Conditions (/terms-and-conditions)
+
+Header Behavior
+
+The header is sticky and appears with a transparent/semi-transparent background over the hero image at the top. When scrolled down, it transitions to a white background, remaining fixed at the top of the viewport.
