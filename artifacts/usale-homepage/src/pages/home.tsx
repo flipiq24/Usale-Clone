@@ -163,8 +163,8 @@ export default function Home() {
       </header>
 
       <section
-        className="relative flex items-center justify-center min-h-screen"
-        style={{ paddingTop: "64px" }}
+        className="relative flex items-center justify-center"
+        style={{ paddingTop: "64px", minHeight: "480px" }}
       >
         <img
           src={heroBg}
@@ -442,7 +442,7 @@ export default function Home() {
                     <a href="/blog-list" className="text-sm text-white/70 hover:text-white transition-colors" onClick={(e) => e.preventDefault()}>Blog</a>
                   </li>
                   <li>
-                    <span className="text-sm text-white/40">LinkedIn: <span className="italic">Coming Soon</span></span>
+                    <a href="https://www.linkedin.com/company/usale" target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 hover:text-white transition-colors">LinkedIn</a>
                   </li>
                 </ul>
               </div>
