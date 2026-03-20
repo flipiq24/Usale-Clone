@@ -163,8 +163,8 @@ export default function Home() {
       </header>
 
       <section
-        className="relative flex items-center justify-center"
-        style={{ paddingTop: "64px", minHeight: "520px" }}
+        className="relative flex items-center justify-center min-h-screen"
+        style={{ paddingTop: "64px" }}
       >
         <img
           src={heroBg}
@@ -404,12 +404,12 @@ export default function Home() {
               <img src={kiaviLogo} alt="Kiavi" className="max-h-full max-w-full object-contain" />
             </div>
             <div className="flex items-center justify-center h-12">
-              <span className="text-xl font-bold tracking-tight" style={{ color: DARK_BLUE }}>
+              <span className="text-2xl font-extrabold tracking-tight" style={{ color: DARK_BLUE, fontFamily: "Georgia, serif" }}>
                 Stewart
               </span>
             </div>
             <div className="flex items-center justify-center h-12">
-              <span className="text-xl font-bold tracking-tight" style={{ color: DARK_BLUE }}>
+              <span className="text-2xl font-extrabold tracking-tight" style={{ color: DARK_BLUE }}>
                 eXp <span style={{ color: ORANGE }}>Realty</span>
               </span>
             </div>
