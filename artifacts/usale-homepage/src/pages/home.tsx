@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import logoImg from "../assets/logo.jpg";
-import heroBg from "../assets/hero-bg.png";
-import cardInvestors from "../assets/card-investors.avif";
-import cardAgents from "../assets/card-agents.avif";
-import cardStrategic from "../assets/card-strategic.avif";
-import jessicaHeadshot from "../assets/jessica-nieto.avif";
-import kiaviLogo from "../assets/kiavi.avif";
+import logoImg from "@assets/Capture_1774036538244.JPG";
+import heroBg from "@assets/Gemini_Generated_Image_3dgsf13dgsf13dgs_(1)_1774036717965.png";
+import cardInvestors from "@assets/flip_investoroperator-a4SwxvEOIuZdX9m3_1774036572508.avif";
+import cardAgents from "@assets/flip_agent-OEmZ4S0idaeL5cTB_1774036572510.avif";
+import cardStrategic from "@assets/flip_strategic-cSZSJ2cEYhU7j3Mn_1774036572511.avif";
+import jessicaHeadshot from "@assets/headshot_jessica_nieto-cEgrqantKphPEVth_1774036572507.avif";
+import kiaviLogo from "@assets/partners_kiavi-swthw6obORoec2iz_1774036572512.avif";
 
 const ORANGE = "#E8571A";
 const DARK_BLUE = "#2C3E50";
@@ -164,13 +164,15 @@ export default function Home() {
 
       <section
         className="relative flex items-center justify-center"
-        style={{
-          minHeight: "480px",
-          paddingTop: "64px",
-          paddingBottom: "48px",
-          background: `linear-gradient(rgba(200,210,220,0.45), rgba(200,210,220,0.45)), url(${heroBg}) center/cover no-repeat`,
-        }}
+        style={{ paddingTop: "64px", minHeight: "520px" }}
       >
+        <img
+          src={heroBg}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0, objectPosition: "center 30%" }}
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(200,210,220,0.45)", zIndex: 1 }} />
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto py-16">
           <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight mb-3">
             <span style={{ color: DARK_BLUE }}>Real offers.</span>
@@ -191,13 +193,14 @@ export default function Home() {
             >
               Join Wait List
             </button>
-            <button
-              className="px-6 py-2.5 rounded-md font-semibold text-white text-sm transition-all hover:opacity-90 active:scale-95"
+            <a
+              href="/lets-talk"
+              className="px-6 py-2.5 rounded-md font-semibold text-white text-sm transition-all hover:opacity-90 active:scale-95 inline-block"
               style={{ background: ORANGE }}
               onClick={(e) => e.preventDefault()}
             >
               Request Demo
-            </button>
+            </a>
           </div>
         </div>
       </section>
