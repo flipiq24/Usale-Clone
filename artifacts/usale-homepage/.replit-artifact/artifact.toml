@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "USale Homepage"
+version = "1.0.0"
+id = "artifacts/usale-homepage"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18755
+
+[services.development]
+run = "pnpm --filter @workspace/usale-homepage run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/usale-homepage", "run", "build" ]
+publicDir = "artifacts/usale-homepage/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18755"
+BASE_PATH = "/"

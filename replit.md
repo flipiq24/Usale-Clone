@@ -94,3 +94,18 @@ Generated React Query hooks and fetch client from the OpenAPI spec (e.g. `useHea
 ### `scripts` (`@workspace/scripts`)
 
 Utility scripts package. Each script is a `.ts` file in `src/` with a corresponding npm script in `package.json`. Run scripts via `pnpm --filter @workspace/scripts run <script>`. Scripts can import any workspace package (e.g., `@workspace/db`) by adding it as a dependency in `scripts/package.json`.
+
+### `artifacts/usale-homepage` (`@workspace/usale-homepage`)
+
+React + Vite single-page recreation of the USale.com homepage. Served at `/` (root). All images are stored in `src/assets/` and imported as ES module assets.
+
+Sections:
+- Sticky nav with transparent→white scroll transition, "Who We Serve" hover dropdown
+- Hero section with SOLD-sign background image, headline, subheading, and two CTA buttons
+- Join Wait List form section (id="join-wait-list") with all 7 fields
+- Marketplace cards section (Investors, Agents, Strategic Partners) using avif images
+- Spotlight section (Jessica Nieto, eXp Realty)
+- Industry Partners section (Kiavi, Stewart, eXp Realty)
+- Footer with copyright, links
+
+Brand colors: orange `#E8571A`, dark blue `#2C3E50`
