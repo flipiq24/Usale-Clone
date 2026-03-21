@@ -95,7 +95,7 @@ const DATA_TABS: DataTab[] = [
 ];
 
 const SCRIPTS = [
-  `Welcome ${BROKER.name} \u2014 we're a tech company that specializes in empowering investors and the agents who transact with them. We're looking for investor brokers like yourself who understand the game.`,
+  `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
   `Let's start with what we know about you. You have ${DATA_TABS[0].value} investor-friendly agents. Fernando Perez is doing a great job sourcing deals to investors like ABC LLC \u2014 he's done quite a few transactions. You've also sold ${DATA_TABS[1].value} properties for investors \u2014 that means a property is owned by an investor and one of your agents sold it. We also noticed some of your agents are finding distressed sellers and selling them to investors. And you have ${DATA_TABS[3].value} unique investor relationships \u2014 that's pretty healthy. I'm sure you know you guys have a really strong relationship with ABC LLC and 123 LLC.`,
   `We have a lot of data. We also know you have a great relationship with ${BROKER.titlePartner}.`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
@@ -557,7 +557,7 @@ function useRealtimeVoice() {
 
 export default function BrokerPresentation() {
   const [slide, setSlide] = useState(0);
-  const [audioOn, setAudioOn] = useState(false);
+  const [audioOn, setAudioOn] = useState(true);
   const [showScript, setShowScript] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
