@@ -1,0 +1,125 @@
+UPDATE THE BROKER PRESENTATION — Clean Script + New Survey Slide
+
+File: artifacts/usale-homepage/src/pages/broker-presentation.tsx
+
+═══════════════════════════════════════════════════════════════
+1. UPDATE BROKER IDENTITY
+═══════════════════════════════════════════════════════════════
+
+Change the BROKER constant to:
+  name: "Bondilyn"
+  brokerage: "bCollective Agency"
+  slug: "bcollective-agency"
+
+═══════════════════════════════════════════════════════════════
+2. REPLACE ALL SLIDE SCRIPTS (SLIDE_SEGMENTS)
+═══════════════════════════════════════════════════════════════
+
+Replace every segment's text with these cleaned-up scripts.
+Keep the same step numbers and structure — only the text changes.
+
+SLIDE 0 — Welcome (3 steps: 0=title, 1=logo, 2=tagline)
+• Step 0: "Welcome Bondilyn, my name is Tony Diaz."
+• Step 1: "I am the founder of USale. I've been in the business for 32 years and done over 1,100 flips."
+• Step 2: "We are now a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!"
+
+SLIDE 1 — Your Data (12 steps: 0=title, 1-11=metrics)
+• Step 0: "This is the data for bCollective Agency and what we know about your brokerage."
+• Step 1: "You have 18,834 total transactions to investors"
+• Step 2: "with a double-end rate of zero percent."
+• Step 3: "Your average purchase price is about $2 million"
+• Step 4: "and your average resale is about $2.2 million."
+• Step 5: "The last property sourced was at 1321 Gates Avenue in Manhattan Beach — that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC."
+• Step 6: "You've sold 2,512 listings for investors — let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there."
+• Step 7: "You've also sold 2,088 listings to investors — here's that data."
+• Step 8: "You've re-sold 935 listings to investors"
+• Step 9: "with a purchase-to-resale ratio of 89 percent."
+• Step 10: "You have 4,573 unique investor relationships — that is incredibly strong."
+• Step 11: "And you have 56 investor-friendly agents. Your agent Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. Bondilyn, bottom line — we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it — for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together, whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get down to business."
+
+SLIDE 2 — The Opportunity (5 steps: 0=title, 1=stats, 2=growth, 3=additional, 4=CTA)
+• Step 0: "Alright Bondilyn, let's talk about what we're looking at here in dollars."
+• Step 1: "Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone."
+• Step 2: "Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work — it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, Bondilyn, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money."
+• Step 3: "So you made $82.7 million — imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture."
+• Step 4: "Do I have your attention, Bondilyn?"
+
+SLIDE 3 — Why USale (4 steps: 0-3 = feature cards)
+• Step 0: "Let's explain why USale is different. We are a frictionless marketplace — think of it as an off-market MLS. Let me be very clear — we're not selling you any membership."
+• Step 1: "We have no transaction fees."
+• Step 2: "We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors."
+• Step 3: "We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent."
+
+SLIDE 4 — Why We're Doing This (4 steps: 0-2 = items, 3 = note)
+• Step 0: "So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors."
+• Step 1: "This is a great way for them to post properties, double-end their transactions,"
+• Step 2: "and also source inventory to their buyers' network. Win-win."
+• Step 3: "We work with national title and hard money lenders who want to be able to offer services whenever you transact."
+
+SLIDE 5 — Workflow (3 steps: 0-2 = paths)
+• Step 0: "Let me explain how the workflow works. Number one — if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts — the buyer pays you."
+• Step 1: "Number two — your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees."
+• Step 2: "Number three — the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace — when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer."
+
+SLIDE 6 — Credibility (3 steps)
+• Step 0: "Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with — that helps them get a listing. Your team wins."
+• Step 1: "In partnership with local service providers who know that value first is the only way to grow."
+• Step 2: "Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game — we may buy one property out of 100 offers. I'm sure you know that."
+
+SLIDE 7 — Everybody Wins (5 steps: 0-4 = checkmarks)
+• Step 0: "We connect your agents with buyers."
+• Step 1: "We provide value to brokers to help you do more business."
+• Step 2: "Your agents can get paid without a listing."
+• Step 3: "They get a custom website for free to help them provide more value to sellers than just give me a listing."
+• Step 4: "We have great data to help your agents get in front of the right sellers and provide them options."
+
+SLIDE 8 — How We Get Paid (3 steps)
+• Step 0: "How do we get paid? Pretty simple."
+• Step 1: "When our investors that are providing your agents the instant cash offer buy a property, we get a small share."
+• Step 2: "We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win."
+
+SLIDE 9 — Next Steps (5 steps: 0-3 = actions, 4 = CTA)
+• Step 0: "So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list."
+• Step 1: "We'll demo the technology to show you our data and powerful tools."
+• Step 2: "We'll explain how your agents can get paid without a listing using the white-label website."
+• Step 3: "And we'll show you how to use USale to recruit investor-friendly agents."
+• Step 4: "Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here — this is the way to easily get behind great technology without the sales pitch."
+
+SLIDE 10 — Survey (NEW SLIDE — 5 steps: 0=intro, 1=questions, 2=ratings, 3=comments, 4=closing)
+• Step 0: "Before we wrap up, Bondilyn, I'd love to get your quick feedback."
+• Step 1: "Are you currently flipping or wholesaling? Do you see value in what USale can offer?"
+• Step 2: "Please rate your interest on a few key areas — seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing."
+• Step 3: "Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here."
+• Step 4: "We're looking forward to working with you."
+
+═══════════════════════════════════════════════════════════════
+3. UPDATE SECTION_TITLES
+═══════════════════════════════════════════════════════════════
+
+Add "Survey" as the 11th entry. Also rename:
+  "What We Know" → "Your Data"
+  "Why We Do This" → "Why We're Doing This"
+
+═══════════════════════════════════════════════════════════════
+4. CREATE SectionSurvey COMPONENT
+═══════════════════════════════════════════════════════════════
+
+New section component for Slide 10 with:
+- Title: "Before we wrap up, Bondilyn..."
+- 3 yes/no question cards: "Are you currently flipping?", "Are you wholesaling?", "Do you see value in USale?"
+- 4 interest rating rows (1-5 scale): full demo, more flips, recruiting agents, paid without listing
+- Comment/feedback text area
+- Orange gradient CTA: "We're looking forward to working with you." + "Schedule a Follow-Up" button
+- Each section reveals progressively using hVisible(hl, step)
+
+Add <SectionSurvey key={10} hl={hlStep(10)} /> to the sections array.
+
+═══════════════════════════════════════════════════════════════
+5. UPDATE VISUAL SECTION COMPONENTS TO MATCH NEW SCRIPT
+═══════════════════════════════════════════════════════════════
+
+• SectionCredibility: "You guys win" → "Your team wins"
+• SectionHowWePay summary: add "no middleman"
+• SectionCTA: "Create an Advantage" → "Create an Unfair Advantage", add AI wave closing text
+• SectionWorkflow path 1: add "Full transparency and control for your agents, even without the listing"
+• SectionWhyDoingThis item 1: "We need inventory and you need more transactions"

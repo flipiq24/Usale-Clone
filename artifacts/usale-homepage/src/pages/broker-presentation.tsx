@@ -123,25 +123,25 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 ];
 
 const SCRIPTS = [
-  `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `This is the data for ${BROKER.brokerage} and what we know about you. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach, that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC. You've sold 2,512 listings for investors, let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors, here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships, that is incredibly strong. And you have 56 investor-friendly agents. Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line, we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it, for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together, whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get moving before I get too deep.`,
-  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work, it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million, imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
-  `Let's explain why USale is different. We are a frictionless marketplace, think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
-  `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
-  `Let me explain how the workflow works. Number one, if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts, the buyer pays you. Number two, your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three, the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace, when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`,
-  `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with, that helps them get a listing. You guys win. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game, we may buy one property out of 100 offers. I'm sure you know that.`,
-  `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just "give me a listing." We have great data to help your agents get in front of the right sellers and provide them options.`,
-  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just "give me a listing." We all win.`,
-  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`,
-  `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas, seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. We're looking forward to working with you.`,
+  `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale. I've been in the business for 32 years and done over 1,100 flips. We are now a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
+  `This is the data for ${BROKER.brokerage} and what we know about your brokerage. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents. Your agent Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together \u2014 whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get moving before I get too deep.`,
+  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
+  `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership. We have no transaction fees. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
+  `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
+  `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
+  `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
+  `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
+  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
+  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
+  `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. We're looking forward to working with you.`,
 ];
 
 const SECTION_TITLES = [
   "Welcome",
-  "What We Know",
+  "Your Data",
   "The Opportunity",
   "Why USale",
-  "Why We Do This",
+  "Why We're Doing This",
   "Workflow",
   "Credibility",
   "Everybody Wins",
@@ -151,17 +151,17 @@ const SECTION_TITLES = [
 ];
 
 const HIGHLIGHT_CUES: [number, number][][] = [
-  [[0, 0], [0.3, 1], [0.65, 2]],
-  [[0, 0], [0.04, 1], [0.08, 2], [0.10, 3], [0.14, 4], [0.17, 5], [0.27, 6], [0.38, 7], [0.42, 8], [0.45, 9], [0.48, 10], [0.53, 11]],
-  [[0, 0], [0.10, 1], [0.35, 2], [0.60, 3], [0.80, 4]],
-  [[0, 0], [0.20, 1], [0.45, 2], [0.70, 3]],
-  [[0, 0], [0.25, 1], [0.50, 2], [0.80, 3]],
-  [[0, 0], [0.33, 1], [0.66, 2]],
-  [[0, 0], [0.35, 1], [0.70, 2]],
-  [[0, 0], [0.20, 1], [0.40, 2], [0.60, 3], [0.80, 4]],
-  [[0, 0], [0.30, 1], [0.65, 2]],
-  [[0, 0], [0.15, 1], [0.35, 2], [0.55, 3], [0.75, 4]],
-  [[0, 0], [0.25, 1], [0.50, 2], [0.75, 3]],
+  [[0, 0], [0.11, 1], [0.37, 2]],
+  [[0, 0], [0.05, 1], [0.09, 2], [0.12, 3], [0.15, 4], [0.18, 5], [0.29, 6], [0.39, 7], [0.43, 8], [0.46, 9], [0.49, 10], [0.54, 11]],
+  [[0, 0], [0.08, 1], [0.35, 2], [0.80, 3], [0.96, 4]],
+  [[0, 0], [0.33, 1], [0.38, 2], [0.59, 3]],
+  [[0, 0], [0.37, 1], [0.58, 2], [0.75, 3]],
+  [[0.05, 0], [0.41, 1], [0.65, 2]],
+  [[0.17, 0], [0.65, 1], [0.78, 2]],
+  [[0, 0], [0.10, 1], [0.31, 2], [0.43, 3], [0.74, 4]],
+  [[0, 0], [0.09, 1], [0.39, 2]],
+  [[0.05, 0], [0.24, 1], [0.37, 2], [0.54, 3], [0.65, 4]],
+  [[0, 0], [0.13, 1], [0.32, 2], [0.70, 3], [0.93, 4]],
 ];
 
 const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
@@ -536,9 +536,9 @@ function SectionValueProp({ hl }: { hl: number }) {
 
 function SectionWhyDifferent({ hl }: { hl: number }) {
   const items = [
-    { t: "No Memberships", s: "No subscriptions, no premium tiers" },
-    { t: "No Transaction Fees", s: "Zero cost on every deal, ever" },
-    { t: "Not Competing with MLS", s: "We're the off-market layer" },
+    { t: "Frictionless Marketplace", s: "Think of it as an off-market MLS. No memberships, no subscriptions." },
+    { t: "No Transaction Fees", s: "Zero cost on every deal, ever." },
+    { t: "Not Competing with MLS", s: "We provide tools for investor-friendly agents and their investors." },
     { t: "Connect Agents with Investors", s: "See track records. Pick your buyer. Transact transparently." },
   ];
   return (
@@ -569,7 +569,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {[
-          { n: "1", t: "We need inventory.", s: "Your agents are already transacting with investors." },
+          { n: "1", t: "We need inventory and you need more transactions.", s: "Your agents are already transacting with investors." },
           { n: "2", t: "Post properties & double-end.", s: "This is a great way for them to post properties and double-end their transactions." },
           { n: "3", t: "Source inventory to their buyers' network.", s: "They can also source inventory to their buyers' network. Win-win." },
         ].map((item, i) => (
@@ -591,7 +591,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 
 function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
-    { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+    { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
     { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
     { n: "3", t: "Agent Brings Buyers to the Marketplace", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
   ];
@@ -626,7 +626,7 @@ function SectionCredibility({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 0) }}>
-          Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller won't accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with, <b>that helps them get a listing. You guys win.</b>
+          Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with &mdash; <b>that helps them get a listing. Your team wins.</b>
         </div>
         <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 1) }}>
           In partnership with <b>local service providers who know that value first is the only way to grow</b>. Title companies and hard money lenders understand that bringing value to brokers like yourself, they get to see transactions, they win, your agent wins, the investor wins.
@@ -674,7 +674,7 @@ function SectionHowWePay({ hl }: { hl: number }) {
         Pretty simple. When our investors that are providing your agents the <b>instant cash offer</b> buy a property, <b>we get a small share</b>.
       </div>
       <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
-        We all win. Great buyers. Great agents. Title companies. Everybody's eager to participate. No friction.
+        We all win. Great buyers. Great agents. Everybody's eager to participate. No friction, no middleman.
       </div>
     </div>
   );
@@ -701,9 +701,10 @@ function SectionCTA({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{ padding: "32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center", ...hVisible(hl, 4) }}>
-        <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 16 }}>It's truly a no-brainer.</div>
+        <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Create an unfair advantage for your agents.</div>
+        <div style={{ fontSize: 14, color: "#ffffffCC", marginBottom: 16, lineHeight: 1.5 }}>The AI wave is here. Get behind great technology without the sales pitch.</div>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          {["Schedule a Meeting", "Do a Demo", "Create an Advantage"].map((t, i) => (
+          {["Schedule a Meeting", "Do a Demo", "Create an Unfair Advantage"].map((t, i) => (
             <button key={i} style={{
               padding: "12px 28px", background: "#fff", color: "#E8571A", border: "none",
               borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer",
@@ -752,16 +753,16 @@ function SectionSurvey({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 8 }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
-        Quick <span style={{ color: "#E8571A" }}>Survey</span>
+        Before we wrap up, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>...
       </h2>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 8, ...hVisible(hl, 0) }}>
-        <YesNo label="Are you flipping?" value={flipping} onChange={setFlipping} />
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, ...hVisible(hl, 1) }}>
+        <YesNo label="Are you currently flipping?" value={flipping} onChange={setFlipping} />
         <YesNo label="Are you wholesaling?" value={wholesaling} onChange={setWholesaling} />
-        <YesNo label="Do you see value in USale?" value={seeValue} onChange={setSeeValue} />
+        <YesNo label="Do you see value in what USale can offer?" value={seeValue} onChange={setSeeValue} />
       </div>
 
-      <div style={{ ...hVisible(hl, 1) }}>
+      <div style={{ ...hVisible(hl, 2) }}>
         <h3 style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", margin: "0 0 12px 0" }}>Rate your interest:</h3>
         <div style={{ borderRadius: 12, border: "1px solid #eee", overflow: "hidden", background: "#fff" }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(4, 100px)", background: "#f8f9fa", borderBottom: "1px solid #eee" }}>
@@ -817,7 +818,7 @@ function SectionSurvey({ hl }: { hl: number }) {
         </div>
       </div>
 
-      <div style={{ ...hVisible(hl, 2) }}>
+      <div style={{ ...hVisible(hl, 3) }}>
         <h3 style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", margin: "0 0 8px 0" }}>Comments</h3>
         <textarea
           placeholder="Any additional comments or feedback..."
@@ -831,7 +832,8 @@ function SectionSurvey({ hl }: { hl: number }) {
         />
       </div>
 
-      <div style={{ textAlign: "center", ...hVisible(hl, 3) }}>
+      <div style={{ textAlign: "center", ...hVisible(hl, 4) }}>
+        <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 16 }}>We're looking forward to working with you.</div>
         <a
           href="https://calendly.com/usale/broker-meeting"
           target="_blank"
@@ -852,7 +854,7 @@ function SectionSurvey({ hl }: { hl: number }) {
       <div style={{
         display: "flex", alignItems: "center", gap: 24, padding: "24px 28px",
         background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee",
-        ...hVisible(hl, 3),
+        ...hVisible(hl, 4),
       }}>
         <img src={TONY_PHOTO} alt="Tony Diaz" style={{
           width: 130, height: 130, borderRadius: 12, objectFit: "cover",
