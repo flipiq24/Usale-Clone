@@ -889,6 +889,8 @@ function useAudioNarration(onEnded?: () => void) {
   const onEndedRef = useRef(onEnded);
   onEndedRef.current = onEnded;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const progressRef = useRef(0);
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
   const preloadCache = useRef<Map<string, Blob>>(new Map());
@@ -898,25 +900,32 @@ function useAudioNarration(onEnded?: () => void) {
   }, []);
 
   const startProgressTracker = useCallback((audio: HTMLAudioElement) => {
+    stopProgressTracker();
     const tick = () => {
-      if (audio.duration && audio.duration > 0) {
-        setProgress(audio.currentTime / audio.duration);
+      if (audio.duration && audio.duration > 0 && !isNaN(audio.duration)) {
+        const p = audio.currentTime / audio.duration;
+        progressRef.current = p;
+        setProgress(p);
       }
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
-  }, []);
+  }, [stopProgressTracker]);
 
   const stop = useCallback(() => {
     if (abortRef.current) abortRef.current.abort();
     stopProgressTracker();
     if (audioRef.current) {
+      audioRef.current.onended = null;
+      audioRef.current.onerror = null;
       audioRef.current.pause();
       audioRef.current.src = "";
       audioRef.current = null;
     }
     setIsPlaying(false);
+    setIsLoading(false);
     setProgress(0);
+    progressRef.current = 0;
   }, [stopProgressTracker]);
 
   const preload = useCallback(async (text: string) => {
@@ -938,8 +947,9 @@ function useAudioNarration(onEnded?: () => void) {
     stop();
     const controller = new AbortController();
     abortRef.current = controller;
-    setIsPlaying(true);
+    setIsLoading(true);
     setProgress(0);
+    progressRef.current = 0;
     try {
       let blob: Blob;
       if (preloadCache.current.has(text)) {
@@ -955,19 +965,35 @@ function useAudioNarration(onEnded?: () => void) {
         if (!resp.ok) throw new Error("TTS failed");
         blob = await resp.blob();
       }
+      if (controller.signal.aborted) return;
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
-      startProgressTracker(audio);
-      audio.onended = () => { stopProgressTracker(); setIsPlaying(false); setProgress(1); URL.revokeObjectURL(url); onEndedRef.current?.(); };
-      audio.onerror = () => { stopProgressTracker(); setIsPlaying(false); URL.revokeObjectURL(url); };
+      audio.onended = () => {
+        stopProgressTracker();
+        setIsPlaying(false);
+        setIsLoading(false);
+        setProgress(1);
+        progressRef.current = 1;
+        URL.revokeObjectURL(url);
+        onEndedRef.current?.();
+      };
+      audio.onerror = () => {
+        stopProgressTracker();
+        setIsPlaying(false);
+        setIsLoading(false);
+        URL.revokeObjectURL(url);
+      };
       await audio.play();
+      setIsLoading(false);
+      setIsPlaying(true);
+      startProgressTracker(audio);
     } catch {
-      setIsPlaying(false);
+      stop();
     }
   }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying, progress, preload };
+  return { play, stop, isPlaying, isLoading, progress, preload };
 }
 
 function getWsBase(): string {
@@ -1090,7 +1116,7 @@ export default function BrokerPresentation() {
       return s;
     });
   }, []);
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
@@ -1122,8 +1148,10 @@ export default function BrokerPresentation() {
     }
   }, [slide, audioOn]);
 
+  const timerShouldRun = !audioOn || (!isTTSPlaying && !isTTSLoading);
+
   useEffect(() => {
-    if (audioOn) return;
+    if (!timerShouldRun) { setSilentStep(0); return; }
     setSilentStep(0);
     const maxSteps = HIGHLIGHT_COUNTS[slide];
     let step = 0;
@@ -1136,7 +1164,7 @@ export default function BrokerPresentation() {
     };
     timeout = setTimeout(advance, 300);
     return () => clearTimeout(timeout);
-  }, [slide, audioOn]);
+  }, [slide, timerShouldRun]);
 
   const toggleAudio = useCallback(() => {
     if (audioOn) {
@@ -1222,17 +1250,15 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (audioOn && slide === idx) {
-      if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
-      return 0;
-    }
-    if (!audioOn && slide === idx) return silentStep;
-    return HIGHLIGHT_COUNTS[idx] - 1;
+    if (slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
+    if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
+    if (isTTSLoading) return 0;
+    return silentStep;
   };
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={!audioOn && slide === 1} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={isTTSPlaying && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={timerShouldRun && slide === 1} />,
     <SectionValueProp key={2} hl={hlStep(2)} />,
     <SectionWhyDifferent key={3} hl={hlStep(3)} />,
     <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
@@ -1246,6 +1272,15 @@ export default function BrokerPresentation() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
+
+      <div style={{
+        position: "fixed", bottom: 80, left: 12, zIndex: 999, background: "#000c", color: "#0f0",
+        padding: "8px 12px", borderRadius: 8, fontSize: 11, fontFamily: "monospace", lineHeight: 1.6, pointerEvents: "none",
+      }}>
+        slide={slide} audioOn={audioOn ? "Y" : "N"} loading={isTTSLoading ? "Y" : "N"} playing={isTTSPlaying ? "Y" : "N"}<br />
+        ttsProgress={ttsProgress.toFixed(3)} hlStep={hlStep(slide)}<br />
+        silentStep={silentStep} maxSteps={HIGHLIGHT_COUNTS[slide]}
+      </div>
 
       <div style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
@@ -1267,7 +1302,7 @@ export default function BrokerPresentation() {
             background: audioOn ? "#E8571A10" : "#fff",
             color: audioOn ? "#E8571A" : "#adb5bd",
           }}>
-            {isTTSPlaying ? "🔊 Playing..." : audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
+            {isTTSPlaying ? "🔊 Playing..." : isTTSLoading ? "⏳ Loading..." : audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
           </button>
           <button onClick={() => setShowScript(!showScript)} style={{
             padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
