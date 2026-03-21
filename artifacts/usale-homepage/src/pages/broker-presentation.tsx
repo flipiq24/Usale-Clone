@@ -162,15 +162,31 @@ function DataRowComponent({ row, i }: { row: DataRow; i: number }) {
   );
 }
 
-function SectionWelcome() {
+const HIGHLIGHT_COUNTS = [4, 1, 3, 4, 4, 3, 3, 5, 3, 5];
+
+function hVisible(step: number, index: number): React.CSSProperties {
+  const active = index <= step;
+  return {
+    opacity: active ? 1 : 0.15,
+    transform: active ? "translateY(0)" : "translateY(12px)",
+    transition: "opacity 0.5s ease, transform 0.5s ease",
+  };
+}
+
+function getHighlightStep(progress: number, totalSteps: number): number {
+  if (progress >= 1) return totalSteps - 1;
+  return Math.floor(progress * totalSteps);
+}
+
+function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
-      <img src={USALE_LOGO} alt="USale" style={{ height: 72, marginBottom: 8 }} />
-      <p style={{ fontSize: 14, color: "#adb5bd", letterSpacing: "0.05em" }}>usale.com/broker/{BROKER.slug}</p>
-      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#0f1419", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
+      <img src={USALE_LOGO} alt="USale" style={{ height: 72, marginBottom: 8, ...hVisible(hl, 0) }} />
+      <p style={{ fontSize: 14, color: "#adb5bd", letterSpacing: "0.05em", ...hVisible(hl, 1) }}>usale.com/broker/{BROKER.slug}</p>
+      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#0f1419", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 2) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
-      <p style={{ fontSize: 17, color: "#495057", maxWidth: 540, lineHeight: 1.6, margin: 0 }}>
+      <p style={{ fontSize: 17, color: "#495057", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 3) }}>
         We're a tech company that specializes in empowering investors and the agents who transact with them.
       </p>
     </div>
@@ -211,23 +227,23 @@ function SectionDataCards({ activeTab, setActiveTab, runCounters }: { activeTab:
   );
 }
 
-function SectionTitlePartner() {
+function SectionTitlePartner({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 24 }}>
-      <div style={{ width: 64, height: 64, borderRadius: 16, background: "#2C3E5012", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ width: 64, height: 64, borderRadius: 16, background: "#2C3E5012", display: "flex", alignItems: "center", justifyContent: "center", ...hVisible(hl, 0) }}>
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2C3E50" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
       </div>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, ...hVisible(hl, 1) }}>
         We also know you have a great relationship with <span style={{ color: "#E8571A" }}>{BROKER.titlePartner}</span>.
       </h2>
-      <p style={{ fontSize: 15, color: "#495057", maxWidth: 480, lineHeight: 1.6 }}>
+      <p style={{ fontSize: 15, color: "#495057", maxWidth: 480, lineHeight: 1.6, ...hVisible(hl, 2) }}>
         We have a lot of data. Your service provider network is already aligned with what we're building.
       </p>
     </div>
   );
 }
 
-function SectionWhyDifferent() {
+function SectionWhyDifferent({ hl }: { hl: number }) {
   const items = [
     { t: "No Memberships", s: "No subscriptions, no premium tiers" },
     { t: "No Transaction Fees", s: "Zero cost on every deal, ever" },
@@ -241,7 +257,7 @@ function SectionWhyDifferent() {
       </h2>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         {items.map((item, i) => (
-          <div key={i} style={{ flex: "1 1 220px", background: "#fff", borderRadius: 12, padding: "22px 20px", border: "1px solid #eee" }}>
+          <div key={i} style={{ flex: "1 1 220px", background: "#fff", borderRadius: 12, padding: "22px 20px", border: "1px solid #eee", ...hVisible(hl, i) }}>
             <div style={{ width: 32, height: 32, borderRadius: 8, background: "#E8571A0A", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </div>
@@ -254,7 +270,7 @@ function SectionWhyDifferent() {
   );
 }
 
-function SectionWhyDoingThis() {
+function SectionWhyDoingThis({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "55vh", justifyContent: "center" }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
@@ -266,7 +282,7 @@ function SectionWhyDoingThis() {
           { n: "2", t: "Post properties & double-end.", s: "This is a great way for them to post properties and double-end their transactions." },
           { n: "3", t: "Source inventory to their buyers' network.", s: "They can also source inventory to their buyers' network. Win-win." },
         ].map((item, i) => (
-          <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee" }}>
+          <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#E8571A", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 16, flexShrink: 0 }}>{item.n}</div>
             <div>
               <div style={{ fontSize: 16, fontWeight: 650, color: "#0f1419" }}>{item.t}</div>
@@ -275,14 +291,14 @@ function SectionWhyDoingThis() {
           </div>
         ))}
       </div>
-      <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#495057", lineHeight: 1.6 }}>
+      <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#495057", lineHeight: 1.6, ...hVisible(hl, 3) }}>
         We work with <b>national title and hard money lenders</b> who want to offer services whenever you transact.
       </div>
     </div>
   );
 }
 
-function SectionWorkflow() {
+function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
     { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
     { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
@@ -295,7 +311,7 @@ function SectionWorkflow() {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {paths.map((p, i) => (
-          <div key={i} style={{ padding: "22px 24px", background: "#fff", borderRadius: 14, border: "1px solid #eee", borderLeft: "4px solid #E8571A" }}>
+          <div key={i} style={{ padding: "22px 24px", background: "#fff", borderRadius: 14, border: "1px solid #eee", borderLeft: "4px solid #E8571A", ...hVisible(hl, i) }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
               <span style={{ background: "#E8571A", color: "#fff", width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14, flexShrink: 0 }}>{p.n}</span>
               <span style={{ fontSize: 16, fontWeight: 650, color: "#0f1419" }}>{p.t}</span>
@@ -311,20 +327,20 @@ function SectionWorkflow() {
   );
 }
 
-function SectionCredibility() {
+function SectionCredibility({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
         We are the co-creators of <span style={{ color: "#E8571A" }}>iBuyer Connect</span>, a product of Cloud CMA.
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#495057", lineHeight: 1.65 }}>
+        <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#495057", lineHeight: 1.65, ...hVisible(hl, 0) }}>
           Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller won't accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 <b>that helps them get a listing. You guys win.</b>
         </div>
-        <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#495057", lineHeight: 1.65 }}>
+        <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#495057", lineHeight: 1.65, ...hVisible(hl, 1) }}>
           In partnership with <b>local service providers who know that value first is the only way to grow</b>. Title companies and hard money lenders understand that bringing value to brokers like yourself \u2014 they get to see transactions, they win, your agent wins, the investor wins.
         </div>
-        <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#2C3E50", fontWeight: 600, textAlign: "center" }}>
+        <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#2C3E50", fontWeight: 600, textAlign: "center", ...hVisible(hl, 2) }}>
           Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy 1 property out of 100 offers.
         </div>
       </div>
@@ -332,7 +348,7 @@ function SectionCredibility() {
   );
 }
 
-function SectionEverybodyWins() {
+function SectionEverybodyWins({ hl }: { hl: number }) {
   const points = [
     "We connect your agents with buyers.",
     "We provide value to brokers to help you do more business.",
@@ -347,7 +363,7 @@ function SectionEverybodyWins() {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {points.map((p, i) => (
-          <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee" }}>
+          <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" strokeWidth="2.5" style={{ flexShrink: 0, marginTop: 2 }}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             <span style={{ fontSize: 14, color: "#0f1419", lineHeight: 1.5 }}>{p}</span>
           </div>
@@ -357,23 +373,23 @@ function SectionEverybodyWins() {
   );
 }
 
-function SectionHowWePay() {
+function SectionHowWePay({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, ...hVisible(hl, 0) }}>
         How do we get paid?
       </h2>
-      <div style={{ maxWidth: 560, fontSize: 16, color: "#495057", lineHeight: 1.7 }}>
+      <div style={{ maxWidth: 560, fontSize: 16, color: "#495057", lineHeight: 1.7, ...hVisible(hl, 1) }}>
         Pretty simple. When our investors that are providing your agents the <b>instant cash offer</b> buy a property, <b>we get a small share</b>.
       </div>
-      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5 }}>
+      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
         We all win. Great buyers. Great agents. Title companies. Everybody's eager to participate. No friction.
       </div>
     </div>
   );
 }
 
-function SectionCTA() {
+function SectionCTA({ hl }: { hl: number }) {
   const steps = [
     "Set up a meeting with our team to discuss getting your agents on the waiting list",
     "Demo our technology \u2014 our data and powerful tools",
@@ -387,13 +403,13 @@ function SectionCTA() {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {steps.map((s, i) => (
-          <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee" }}>
+          <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <span style={{ width: 28, height: 28, borderRadius: "50%", background: "#E8571A", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{i + 1}</span>
             <span style={{ fontSize: 14, color: "#0f1419", lineHeight: 1.5 }}>{s}</span>
           </div>
         ))}
       </div>
-      <div style={{ padding: "32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center" }}>
+      <div style={{ padding: "32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 16 }}>It's truly a no-brainer.</div>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           {["Schedule a Meeting", "Do a Demo", "Create an Advantage"].map((t, i) => (
@@ -421,15 +437,49 @@ function useAudioNarration(onEnded?: () => void) {
   const onEndedRef = useRef(onEnded);
   onEndedRef.current = onEnded;
   const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const preloadCache = useRef<Map<string, Blob>>(new Map());
+
+  const stopProgressTracker = useCallback(() => {
+    if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
+  }, []);
+
+  const startProgressTracker = useCallback((audio: HTMLAudioElement) => {
+    const tick = () => {
+      if (audio.duration && audio.duration > 0) {
+        setProgress(audio.currentTime / audio.duration);
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
 
   const stop = useCallback(() => {
     if (abortRef.current) abortRef.current.abort();
+    stopProgressTracker();
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
       audioRef.current = null;
     }
     setIsPlaying(false);
+    setProgress(0);
+  }, [stopProgressTracker]);
+
+  const preload = useCallback(async (text: string) => {
+    if (preloadCache.current.has(text)) return;
+    try {
+      const resp = await fetch(`${API_BASE}/ai/tts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        preloadCache.current.set(text, blob);
+      }
+    } catch { /* silent preload failure */ }
   }, []);
 
   const play = useCallback(async (text: string) => {
@@ -437,27 +487,35 @@ function useAudioNarration(onEnded?: () => void) {
     const controller = new AbortController();
     abortRef.current = controller;
     setIsPlaying(true);
+    setProgress(0);
     try {
-      const resp = await fetch(`${API_BASE}/ai/tts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-        signal: controller.signal,
-      });
-      if (!resp.ok) throw new Error("TTS failed");
-      const blob = await resp.blob();
+      let blob: Blob;
+      if (preloadCache.current.has(text)) {
+        blob = preloadCache.current.get(text)!;
+        preloadCache.current.delete(text);
+      } else {
+        const resp = await fetch(`${API_BASE}/ai/tts`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+          signal: controller.signal,
+        });
+        if (!resp.ok) throw new Error("TTS failed");
+        blob = await resp.blob();
+      }
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
-      audio.onended = () => { setIsPlaying(false); URL.revokeObjectURL(url); onEndedRef.current?.(); };
-      audio.onerror = () => { setIsPlaying(false); URL.revokeObjectURL(url); };
+      startProgressTracker(audio);
+      audio.onended = () => { stopProgressTracker(); setIsPlaying(false); setProgress(1); URL.revokeObjectURL(url); onEndedRef.current?.(); };
+      audio.onerror = () => { stopProgressTracker(); setIsPlaying(false); URL.revokeObjectURL(url); };
       await audio.play();
     } catch {
       setIsPlaying(false);
     }
-  }, [stop]);
+  }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying };
+  return { play, stop, isPlaying, progress, preload };
 }
 
 function getWsBase(): string {
@@ -579,7 +637,7 @@ export default function BrokerPresentation() {
       return s;
     });
   }, []);
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying } = useAudioNarration(handleTTSEnded);
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
@@ -603,6 +661,9 @@ export default function BrokerPresentation() {
   useEffect(() => {
     if (audioOn) {
       playTTS(SCRIPTS[slide]);
+      if (slide < total - 1) {
+        preloadTTS(SCRIPTS[slide + 1]);
+      }
     } else {
       stopTTS();
     }
@@ -692,17 +753,22 @@ export default function BrokerPresentation() {
     }
   }, []);
 
+  const hlStep = (idx: number) => {
+    if (!audioOn || slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
+    return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
+  };
+
   const sections = [
-    <SectionWelcome key={0} />,
+    <SectionWelcome key={0} hl={hlStep(0)} />,
     <SectionDataCards key={1} activeTab={activeTab} setActiveTab={setActiveTab} runCounters={slide === 1} />,
-    <SectionTitlePartner key={2} />,
-    <SectionWhyDifferent key={3} />,
-    <SectionWhyDoingThis key={4} />,
-    <SectionWorkflow key={5} />,
-    <SectionCredibility key={6} />,
-    <SectionEverybodyWins key={7} />,
-    <SectionHowWePay key={8} />,
-    <SectionCTA key={9} />,
+    <SectionTitlePartner key={2} hl={hlStep(2)} />,
+    <SectionWhyDifferent key={3} hl={hlStep(3)} />,
+    <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
+    <SectionWorkflow key={5} hl={hlStep(5)} />,
+    <SectionCredibility key={6} hl={hlStep(6)} />,
+    <SectionEverybodyWins key={7} hl={hlStep(7)} />,
+    <SectionHowWePay key={8} hl={hlStep(8)} />,
+    <SectionCTA key={9} hl={hlStep(9)} />,
   ];
 
   return (
