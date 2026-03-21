@@ -1490,7 +1490,9 @@ export default function BrokerPresentation() {
         boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <img src={USALE_LOGO} alt="USale" style={{ height: 32 }} />
+          <a href="/" style={{ display: "flex", alignItems: "center" }}>
+            <img src={USALE_LOGO} alt="USale" style={{ height: 48, cursor: "pointer" }} />
+          </a>
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
