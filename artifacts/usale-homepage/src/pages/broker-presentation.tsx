@@ -147,7 +147,95 @@ const SECTION_TITLES = [
   "Next Steps",
 ];
 
-const HIGHLIGHT_COUNTS = [3, 12, 5, 4, 4, 3, 3, 5, 3, 5];
+// ── Cue-based highlight system ──────────────────────────────────────
+// Each slide gets an array of [audioProgress (0-1), highlightStepIndex] tuples.
+// When TTS progress crosses a threshold, the corresponding highlight step fires.
+// This ties each highlight EXACTLY to when the narrator mentions that data point.
+//
+// breadcrumb format:  «scriptExcerpt» → step N
+//
+const HIGHLIGHT_CUES: [number, number][][] = [
+  // ── Slide 0: Welcome ──────────────────────────────────────────────
+  // «Welcome Mike»                                      → 0  (title)
+  // «I am the founder of USale.com»                     → 1  (logo)
+  // «We are a technology company that specializes»      → 2  (tagline)
+  [[0, 0], [0.30, 1], [0.65, 2]],
+
+  // ── Slide 1: What We Know (Data Cards) ────────────────────────────
+  // «This is the data for Reimer Realty Group»          → 0  (title)
+  // «You have 18,834 total transactions»                → 1  (Total Trans.)
+  // «double-end rate of zero percent»                   → 2  (Double-end %)
+  // «average purchase price is about $2 million»        → 3  (Avg. Purchase)
+  // «average resale is about $2.2 million»              → 4  (Avg. Resale)
+  // «last property sourced was at 1321 Gates Ave»       → 5  (Last Property)
+  // «sold 2,512 listings for investors — take a look»   → 6  (Sold For → EXPAND)
+  // «sold 2,088 listings to investors»                  → 7  (Sold To → EXPAND)
+  // «re-sold 935 listings»                              → 8  (Re-Sold)
+  // «purchase-to-resale ratio of 89 percent»            → 9  (Purchase to Resale %)
+  // «4,573 unique investor relationships»               → 10 (Relationships → EXPAND)
+  // «56 investor-friendly agents — Tracy B Do leads»    → 11 (Agents → EXPAND)
+  [[0, 0], [0.04, 1], [0.08, 2], [0.12, 3], [0.15, 4], [0.18, 5],
+   [0.28, 6], [0.38, 7], [0.44, 8], [0.49, 9], [0.55, 10], [0.64, 11]],
+
+  // ── Slide 2: The Opportunity ($$$) ────────────────────────────────
+  // «let's talk dollars»                                → 0  (title)
+  // «2,088 transactions … $2 million … $82.7 million»   → 1  (stat cards)
+  // «What if I can show you how to bring this up 20%?»  → 2  (growth card)
+  // «additional $16.5 million … 418 more transactions»  → 3  (additional)
+  // «Do I have your attention, Mike?»                   → 4  (CTA)
+  [[0, 0], [0.08, 1], [0.35, 2], [0.62, 3], [0.82, 4]],
+
+  // ── Slide 3: Why USale is Different ───────────────────────────────
+  // «We are not selling you any membership»             → 0
+  // «We have no transaction fees»                       → 1
+  // «not here to compete with the MLS»                  → 2
+  // «connects your investor-friendly agents»            → 3
+  [[0, 0], [0.25, 1], [0.50, 2], [0.75, 3]],
+
+  // ── Slide 4: Why We Do This ───────────────────────────────────────
+  // «we need inventory»                                 → 0
+  // «post properties, double-end»                       → 1
+  // «source inventory to their buyers' network»         → 2
+  // «national title and hard money lenders»             → 3
+  [[0, 0], [0.20, 1], [0.50, 2], [0.78, 3]],
+
+  // ── Slide 5: Workflow ─────────────────────────────────────────────
+  // «Number one — agent cannot secure a listing»        → 0
+  // «Number two — agent has a new listing»              → 1
+  // «Number three — marketplace notifications»          → 2
+  [[0, 0], [0.33, 1], [0.66, 2]],
+
+  // ── Slide 6: Credibility ──────────────────────────────────────────
+  // «agents need a real, data-driven cash offer»        → 0
+  // «In partnership with local service providers»       → 1
+  // «we're not trying to monetize the marketplace»      → 2
+  [[0, 0], [0.35, 1], [0.72, 2]],
+
+  // ── Slide 7: Everybody Wins ───────────────────────────────────────
+  // «We connect your agents with buyers»                → 0
+  // «provide value to brokers»                          → 1
+  // «get paid without a listing»                        → 2
+  // «custom website for free»                           → 3
+  // «great data to help your agents»                    → 4
+  [[0, 0], [0.18, 1], [0.38, 2], [0.58, 3], [0.78, 4]],
+
+  // ── Slide 8: How We Get Paid ──────────────────────────────────────
+  // «Pretty simple»                                     → 0
+  // «instant cash offer … we get a small share»         → 1
+  // «We all win.»                                       → 2
+  [[0, 0], [0.30, 1], [0.65, 2]],
+
+  // ── Slide 9: Next Steps / CTA ─────────────────────────────────────
+  // «Set up a meeting»                                  → 0
+  // «Demo the technology»                               → 1
+  // «agents can get paid without a listing»             → 2
+  // «use USale to recruit»                              → 3
+  // «It's truly a no-brainer»                           → 4
+  [[0, 0], [0.15, 1], [0.35, 2], [0.55, 3], [0.75, 4]],
+];
+
+// Derived for the timer-fallback (audio-off mode) in SectionDataCards
+const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -158,9 +246,13 @@ function hVisible(step: number, index: number): React.CSSProperties {
   };
 }
 
-function getHighlightStep(progress: number, totalSteps: number): number {
-  if (progress >= 1) return totalSteps - 1;
-  return Math.floor(progress * totalSteps);
+function getHighlightStep(progress: number, cues: [number, number][]): number {
+  let step = 0;
+  for (const [threshold, s] of cues) {
+    if (progress >= threshold) step = s;
+    else break;
+  }
+  return step;
 }
 
 function introReveal(step: number, index: number): React.CSSProperties {
@@ -1023,8 +1115,10 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (!audioOn || slide !== idx || !isTTSPlaying) return HIGHLIGHT_COUNTS[idx] - 1;
-    return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
+    const cues = HIGHLIGHT_CUES[idx];
+    const maxStep = cues[cues.length - 1][1]; // last step = fully revealed
+    if (!audioOn || slide !== idx || !isTTSPlaying) return maxStep;
+    return getHighlightStep(ttsProgress, cues);
   };
 
   const sections = [
