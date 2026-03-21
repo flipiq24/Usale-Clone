@@ -735,7 +735,7 @@ const INTEREST_ITEMS = [
 ];
 const INTEREST_LEVELS = ["Very Interested", "Interested", "Somewhat", "Not Interested"];
 
-function SectionSurvey({ hl, contactId }: { hl: number; contactId?: number | null }) {
+function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: number | null; onAskTony?: () => void }) {
   const [flipping, setFlipping] = useState<boolean | null>(null);
   const [wholesaling, setWholesaling] = useState<boolean | null>(null);
   const [wantToStart, setWantToStart] = useState<boolean | null>(null);
@@ -955,6 +955,24 @@ function SectionSurvey({ hl, contactId }: { hl: number; contactId?: number | nul
           </div>
         </div>
       </div>
+
+      {onAskTony && (
+        <button
+          onClick={onAskTony}
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+            width: "100%", padding: "16px 28px",
+            background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 12,
+            fontSize: 17, fontWeight: 700, cursor: "pointer",
+            boxShadow: "0 4px 16px #E8571A30",
+            transition: "transform 0.2s, box-shadow 0.2s",
+            ...hVisible(hl, 4),
+          }}
+        >
+          💬 Ask Tony — Get Answers Now
+        </button>
+      )}
     </div>
   );
 }
@@ -1421,7 +1439,7 @@ export default function BrokerPresentation() {
     <SectionEverybodyWins key={7} hl={hlStep(7)} />,
     <SectionHowWePay key={8} hl={hlStep(8)} />,
     <SectionCTA key={9} hl={hlStep(9)} />,
-    <SectionSurvey key={10} hl={hlStep(10)} contactId={brokerData.contactId} />,
+    <SectionSurvey key={10} hl={hlStep(10)} contactId={brokerData.contactId} onAskTony={() => setChatOpen(true)} />,
   ];
 
   if (!started) {
