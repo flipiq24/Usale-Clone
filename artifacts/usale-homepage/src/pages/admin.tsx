@@ -4,6 +4,16 @@ const ORANGE = "#E8571A";
 const DARK_BLUE = "#2C3E50";
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
 
+function getAdminToken(): string {
+  return sessionStorage.getItem("admin_token") || "";
+}
+
+function adminFetch(url: string, options: RequestInit = {}): Promise<Response> {
+  const headers = new Headers(options.headers || {});
+  headers.set("x-admin-token", getAdminToken());
+  return fetch(url, { ...options, headers });
+}
+
 const CATEGORIES = [
   "Broker",
   "Agent",
@@ -93,6 +103,7 @@ function PasswordGate({ onSuccess }: { onSuccess: () => void }) {
       const data = await res.json();
       if (data.success) {
         sessionStorage.setItem("admin_auth", "true");
+        sessionStorage.setItem("admin_token", data.token);
         onSuccess();
       } else {
         setError("Invalid password");
@@ -155,6 +166,110 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
+interface TrackingEvent {
+  id: number;
+  contactId: number;
+  eventType: string;
+  slideIndex: number | null;
+  duration: number | null;
+  metadata: unknown;
+  createdAt: string;
+}
+
+function DetailModal({ contact, summary, onClose }: { contact: Contact; summary?: ContactSummary; onClose: () => void }) {
+  const [events, setEvents] = useState<TrackingEvent[]>([]);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await adminFetch(`${API_BASE}/admin/contacts/${contact.id}/events`);
+        const data = await res.json();
+        setEvents(data);
+      } catch {}
+      setLoadingEvents(false);
+    })();
+  }, [contact.id]);
+
+  return (
+    <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000 }}>
+      <div onClick={(e) => e.stopPropagation()} style={{ background: "#fff", borderRadius: 16, maxWidth: 680, width: "90%", maxHeight: "85vh", overflow: "auto", padding: "32px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, color: DARK_BLUE, margin: 0 }}>{contact.firstName} {contact.lastName}</h2>
+            {contact.company && <div style={{ fontSize: 14, color: "#6c757d" }}>{contact.company}</div>}
+          </div>
+          <button onClick={onClose} style={{ background: "none", border: "none", fontSize: 24, cursor: "pointer", color: "#6c757d" }}>&times;</button>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 24 }}>
+          <div style={{ padding: "12px 16px", background: "#f8f9fa", borderRadius: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#6c757d", textTransform: "uppercase" }}>Status</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: DARK_BLUE, marginTop: 4 }}>{summary?.status || "invited"}</div>
+          </div>
+          <div style={{ padding: "12px 16px", background: "#f8f9fa", borderRadius: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#6c757d", textTransform: "uppercase" }}>Time Spent</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: DARK_BLUE, marginTop: 4 }}>{summary ? formatTime(summary.totalTime) : "—"}</div>
+          </div>
+          <div style={{ padding: "12px 16px", background: "#f8f9fa", borderRadius: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#6c757d", textTransform: "uppercase" }}>Slides Viewed</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: DARK_BLUE, marginTop: 4 }}>{summary?.maxSlide || 0}/11</div>
+          </div>
+        </div>
+
+        {contact.email && <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 4 }}>Email: {contact.email}</div>}
+        {contact.phone && <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 4 }}>Phone: {contact.phone}</div>}
+        <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 4 }}>Category: {contact.category}</div>
+        <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 16 }}>Added: {formatDate(contact.createdAt)}</div>
+
+        {summary?.surveyData && (
+          <div style={{ marginBottom: 24, padding: "16px", background: "#f0fdf4", borderRadius: 12, border: "1px solid #bbf7d0" }}>
+            <h3 style={{ fontSize: 14, fontWeight: 700, color: "#155724", margin: "0 0 12px" }}>Survey Responses</h3>
+            <pre style={{ fontSize: 12, color: "#333", whiteSpace: "pre-wrap", margin: 0, fontFamily: "monospace" }}>
+              {JSON.stringify(summary.surveyData, null, 2)}
+            </pre>
+          </div>
+        )}
+
+        <h3 style={{ fontSize: 14, fontWeight: 700, color: DARK_BLUE, margin: "0 0 12px" }}>Event History ({events.length})</h3>
+        {loadingEvents ? (
+          <div style={{ textAlign: "center", padding: 24, color: "#6c757d" }}>Loading...</div>
+        ) : events.length === 0 ? (
+          <div style={{ textAlign: "center", padding: 24, color: "#adb5bd" }}>No events recorded yet.</div>
+        ) : (
+          <div style={{ maxHeight: 300, overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+              <thead>
+                <tr style={{ borderBottom: "2px solid #eee" }}>
+                  {["Event", "Slide", "Duration", "Time"].map((h) => (
+                    <th key={h} style={{ padding: "8px 10px", textAlign: "left", fontSize: 11, fontWeight: 700, color: "#6c757d", textTransform: "uppercase" }}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {events.map((ev) => (
+                  <tr key={ev.id} style={{ borderBottom: "1px solid #f0f0f0" }}>
+                    <td style={{ padding: "8px 10px" }}>
+                      <span style={{
+                        padding: "2px 8px", borderRadius: 12, fontSize: 11, fontWeight: 600,
+                        background: ev.eventType === "view" ? "#cce5ff" : ev.eventType === "complete" ? "#d4edda" : ev.eventType === "survey" ? "#f0fdf4" : "#f8f9fa",
+                        color: ev.eventType === "view" ? "#004085" : ev.eventType === "complete" ? "#155724" : ev.eventType === "survey" ? "#155724" : "#495057",
+                      }}>{ev.eventType}</span>
+                    </td>
+                    <td style={{ padding: "8px 10px", color: "#6c757d" }}>{ev.slideIndex != null ? ev.slideIndex + 1 : "—"}</td>
+                    <td style={{ padding: "8px 10px", color: "#6c757d" }}>{ev.duration != null ? formatTime(ev.duration) : "—"}</td>
+                    <td style={{ padding: "8px 10px", color: "#6c757d", whiteSpace: "nowrap" }}>{new Date(ev.createdAt).toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(sessionStorage.getItem("admin_auth") === "true");
   const [contacts, setContacts] = useState<Contact[]>([]);
@@ -169,11 +284,12 @@ export default function AdminPage() {
   const [lastCreated, setLastCreated] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(false);
   const [csvDragging, setCsvDragging] = useState(false);
+  const [detailContact, setDetailContact] = useState<Contact | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchContacts = useCallback(async () => {
     try {
-      const res = await fetch(`${API_BASE}/admin/contacts`);
+      const res = await adminFetch(`${API_BASE}/admin/contacts`);
       const data = await res.json();
       setContacts(data);
     } catch {}
@@ -181,7 +297,7 @@ export default function AdminPage() {
 
   const fetchStats = useCallback(async () => {
     try {
-      const res = await fetch(`${API_BASE}/admin/stats`);
+      const res = await adminFetch(`${API_BASE}/admin/stats`);
       const data = await res.json();
       setStats(data);
     } catch {}
@@ -189,7 +305,7 @@ export default function AdminPage() {
 
   const fetchSummary = useCallback(async (id: number) => {
     try {
-      const res = await fetch(`${API_BASE}/admin/contacts/${id}/summary`);
+      const res = await adminFetch(`${API_BASE}/admin/contacts/${id}/summary`);
       const data = await res.json();
       setSummaries((prev) => ({ ...prev, [id]: data }));
     } catch {}
@@ -213,7 +329,7 @@ export default function AdminPage() {
     if (!firstName.trim() || !lastName.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/admin/contacts`, {
+      const res = await adminFetch(`${API_BASE}/admin/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim() || null, company: company.trim() || null, phone: phone.trim() || null, category }),
@@ -236,7 +352,7 @@ export default function AdminPage() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      await fetch(`${API_BASE}/admin/contacts/bulk`, { method: "POST", body: formData });
+      await adminFetch(`${API_BASE}/admin/contacts/bulk`, { method: "POST", body: formData });
       fetchContacts();
       fetchStats();
     } catch {}
@@ -245,7 +361,7 @@ export default function AdminPage() {
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this contact and all tracking data?")) return;
     try {
-      await fetch(`${API_BASE}/admin/contacts/${id}`, { method: "DELETE" });
+      await adminFetch(`${API_BASE}/admin/contacts/${id}`, { method: "DELETE" });
       fetchContacts();
       fetchStats();
     } catch {}
@@ -262,7 +378,7 @@ export default function AdminPage() {
           </div>
           <span style={{ fontSize: 18, fontWeight: 700, color: "#fff" }}>USale Admin</span>
         </div>
-        <button onClick={() => { sessionStorage.removeItem("admin_auth"); setAuthenticated(false); }} style={{ padding: "6px 16px", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 8, color: "#fff", fontSize: 13, cursor: "pointer" }}>
+        <button onClick={() => { sessionStorage.removeItem("admin_auth"); sessionStorage.removeItem("admin_token"); setAuthenticated(false); }} style={{ padding: "6px 16px", background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 8, color: "#fff", fontSize: 13, cursor: "pointer" }}>
           Log Out
         </button>
       </div>
@@ -340,7 +456,7 @@ export default function AdminPage() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ borderBottom: "2px solid #eee" }}>
-                  {["Contact", "Category", "Link", "Uploaded", "Opened", "Last View", "Status", "Survey", "Interest", "Progress", ""].map((h) => (
+                  {["Contact", "Category", "Link", "Uploaded", "Opened", "Last View", "Status", "Survey", "Interest", "Progress", "Actions"].map((h) => (
                     <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontSize: 11, fontWeight: 700, color: "#6c757d", textTransform: "uppercase", whiteSpace: "nowrap" }}>{h}</th>
                   ))}
                 </tr>
@@ -388,9 +504,14 @@ export default function AdminPage() {
                         </div>
                       </td>
                       <td style={{ padding: "12px", whiteSpace: "nowrap" }}>
-                        <button onClick={() => handleDelete(c.id)} style={{ padding: "4px 12px", background: "none", border: "1px solid #dc354540", borderRadius: 6, color: "#dc3545", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
-                          Delete
-                        </button>
+                        <div style={{ display: "flex", gap: 6 }}>
+                          <button onClick={() => setDetailContact(c)} style={{ padding: "4px 12px", background: "none", border: `1px solid ${ORANGE}40`, borderRadius: 6, color: ORANGE, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                            Detail
+                          </button>
+                          <button onClick={() => handleDelete(c.id)} style={{ padding: "4px 12px", background: "none", border: "1px solid #dc354540", borderRadius: 6, color: "#dc3545", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -405,6 +526,14 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
+
+      {detailContact && (
+        <DetailModal
+          contact={detailContact}
+          summary={summaries[detailContact.id]}
+          onClose={() => setDetailContact(null)}
+        />
+      )}
     </div>
   );
 }

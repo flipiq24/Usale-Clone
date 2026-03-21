@@ -4,6 +4,8 @@ import { contacts, presentationEvents } from "@workspace/db/schema";
 import { eq, sql, desc, and } from "drizzle-orm";
 import multer from "multer";
 
+import type { Request, Response, NextFunction } from "express";
+
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -26,16 +28,25 @@ function slugify(firstName: string, lastName: string, company?: string | null): 
   return base || "contact";
 }
 
+function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers["x-admin-token"];
+  if (authHeader === ADMIN_PASSWORD) {
+    next();
+  } else {
+    res.status(401).json({ error: "Unauthorized" });
+  }
+}
+
 router.post("/admin/verify", (req, res) => {
   const { password } = req.body;
   if (password === ADMIN_PASSWORD) {
-    res.json({ success: true });
+    res.json({ success: true, token: ADMIN_PASSWORD });
   } else {
     res.status(401).json({ success: false, error: "Invalid password" });
   }
 });
 
-router.get("/admin/contacts", async (_req, res) => {
+router.get("/admin/contacts", requireAdminAuth, async (_req, res) => {
   try {
     const allContacts = await db.select().from(contacts).orderBy(desc(contacts.createdAt));
     res.json(allContacts);
@@ -44,7 +55,7 @@ router.get("/admin/contacts", async (_req, res) => {
   }
 });
 
-router.post("/admin/contacts", async (req, res) => {
+router.post("/admin/contacts", requireAdminAuth, async (req, res) => {
   try {
     const { firstName, lastName, email, company, phone, category } = req.body;
     if (!firstName || !lastName) {
@@ -75,7 +86,7 @@ router.post("/admin/contacts", async (req, res) => {
   }
 });
 
-router.post("/admin/contacts/bulk", upload.single("file"), async (req, res) => {
+router.post("/admin/contacts/bulk", requireAdminAuth, upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: "No file uploaded" });
@@ -132,7 +143,7 @@ router.post("/admin/contacts/bulk", upload.single("file"), async (req, res) => {
   }
 });
 
-router.delete("/admin/contacts/:id", async (req, res) => {
+router.delete("/admin/contacts/:id", requireAdminAuth, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     await db.delete(contacts).where(eq(contacts.id, id));
@@ -175,7 +186,7 @@ router.post("/tracking/event", async (req, res) => {
   }
 });
 
-router.get("/admin/stats", async (_req, res) => {
+router.get("/admin/stats", requireAdminAuth, async (_req, res) => {
   try {
     const allContacts = await db.select().from(contacts);
     const allEvents = await db.select().from(presentationEvents);
@@ -232,7 +243,7 @@ router.get("/admin/stats", async (_req, res) => {
   }
 });
 
-router.get("/admin/contacts/:id/events", async (req, res) => {
+router.get("/admin/contacts/:id/events", requireAdminAuth, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const events = await db.select().from(presentationEvents)
@@ -244,7 +255,7 @@ router.get("/admin/contacts/:id/events", async (req, res) => {
   }
 });
 
-router.get("/admin/contacts/:id/summary", async (req, res) => {
+router.get("/admin/contacts/:id/summary", requireAdminAuth, async (req, res) => {
   try {
     const id = parseInt(req.params.id, 10);
     const events = await db.select().from(presentationEvents)

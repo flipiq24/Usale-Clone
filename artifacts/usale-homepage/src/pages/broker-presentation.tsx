@@ -735,7 +735,7 @@ const INTEREST_ITEMS = [
 ];
 const INTEREST_LEVELS = ["Very Interested", "Interested", "Somewhat", "Not Interested"];
 
-function SectionSurvey({ hl }: { hl: number }) {
+function SectionSurvey({ hl, contactId }: { hl: number; contactId?: number | null }) {
   const [flipping, setFlipping] = useState<boolean | null>(null);
   const [wholesaling, setWholesaling] = useState<boolean | null>(null);
   const [wantToStart, setWantToStart] = useState<boolean | null>(null);
@@ -744,6 +744,27 @@ function SectionSurvey({ hl }: { hl: number }) {
   const [otherLabel, setOtherLabel] = useState("");
   const [otherInterest, setOtherInterest] = useState<string | null>(null);
   const [comment, setComment] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmitSurvey = async () => {
+    if (!contactId) return;
+    const metadata = {
+      flipping,
+      wholesaling,
+      wantToStart,
+      seeValue,
+      interest: { ...interest, ...(otherLabel && otherInterest ? { [otherLabel]: otherInterest } : {}) },
+      comment,
+    };
+    try {
+      await fetch(`${API_BASE}/tracking/event`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contactId, eventType: "survey", metadata }),
+      });
+      setSubmitted(true);
+    } catch {}
+  };
 
   const YesNo = ({ label, value, onChange }: { label: string; value: boolean | null; onChange: (v: boolean) => void }) => (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px", background: "#fff", borderRadius: 10, border: "1px solid #eee" }}>
@@ -851,6 +872,27 @@ function SectionSurvey({ hl }: { hl: number }) {
           }}
         />
       </div>
+
+      {contactId && !submitted && (
+        <div style={{ textAlign: "center", ...hVisible(hl, 3) }}>
+          <button
+            onClick={handleSubmitSurvey}
+            style={{
+              padding: "14px 48px", background: "linear-gradient(135deg, #27ae60 0%, #1e8449 100%)",
+              color: "#fff", border: "none", borderRadius: 12, fontSize: 16, fontWeight: 700,
+              cursor: "pointer", boxShadow: "0 4px 16px rgba(39,174,96,0.3)",
+              transition: "transform 0.2s",
+            }}
+          >
+            Submit Survey
+          </button>
+        </div>
+      )}
+      {submitted && (
+        <div style={{ textAlign: "center", padding: "16px 24px", background: "#d4edda", borderRadius: 12, border: "1px solid #c3e6cb" }}>
+          <span style={{ fontSize: 15, fontWeight: 600, color: "#155724" }}>Thank you for your feedback!</span>
+        </div>
+      )}
 
       <div style={{ textAlign: "center", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 16 }}>We're looking forward to working with you.</div>
@@ -1379,7 +1421,7 @@ export default function BrokerPresentation() {
     <SectionEverybodyWins key={7} hl={hlStep(7)} />,
     <SectionHowWePay key={8} hl={hlStep(8)} />,
     <SectionCTA key={9} hl={hlStep(9)} />,
-    <SectionSurvey key={10} hl={hlStep(10)} />,
+    <SectionSurvey key={10} hl={hlStep(10)} contactId={brokerData.contactId} />,
   ];
 
   if (!started) {
