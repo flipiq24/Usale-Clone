@@ -124,7 +124,7 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 const SCRIPTS = [
   `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `This is the data of the COMPASS office and what we know about you. Your office name is COMPASS. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is $1,981,255 and your average resale is $2,233,363. The last property sourced was at 1321 Gates Avenue in Manhattan Beach. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. Your office represented buyers including Jennifer Landon. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. This is really impressive data, ${BROKER.name}.`,
+  `This is the data for Reimer Realty Group and what we know about you. Your office name is COMPASS. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is $1,981,255 and your average resale is $2,233,363. The last property sourced was at 1321 Gates Avenue in Manhattan Beach. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. Your office represented buyers including Jennifer Landon. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. This is really impressive data, ${BROKER.name}.`,
   `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of $1,981,255. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
   `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
@@ -268,7 +268,7 @@ function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded:
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
       <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        This is the data of <span style={{ color: "#E8571A" }}>COMPASS</span> — here's what we know about you.
+        This is the data for <span style={{ color: "#E8571A" }}>{BROKER.brokerage}</span>!
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
         {OFFICE_METRICS.map((m, i) => {
@@ -973,7 +973,7 @@ export default function BrokerPresentation() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1060, margin: "0 auto", padding: `88px 32px ${showScript ? 180 : 110}px` }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: `88px 40px ${showScript ? 180 : 110}px` }}>
         {sections[slide]}
       </div>
 
