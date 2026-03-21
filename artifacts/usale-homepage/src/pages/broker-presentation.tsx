@@ -132,6 +132,7 @@ const SCRIPTS = [
   `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just "give me a listing." We have great data to help your agents get in front of the right sellers and provide them options.`,
   `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just "give me a listing." We all win.`,
   `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`,
+  `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. We're looking forward to working with you.`,
 ];
 
 const SECTION_TITLES = [
@@ -145,9 +146,10 @@ const SECTION_TITLES = [
   "Everybody Wins",
   "How We Get Paid",
   "Next Steps",
+  "Survey",
 ];
 
-const HIGHLIGHT_COUNTS = [3, 12, 5, 4, 4, 3, 3, 5, 3, 5];
+const HIGHLIGHT_COUNTS = [3, 12, 5, 4, 4, 3, 3, 5, 3, 5, 4];
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -694,6 +696,143 @@ function SectionCTA({ hl }: { hl: number }) {
   );
 }
 
+const INTEREST_ITEMS = [
+  "Seeing a command demo",
+  "Learning how I can do more flips",
+  "Recruiting investor-friendly agents",
+  "Train agents to get paid without a listing",
+];
+const INTEREST_LEVELS = ["Very Interested", "Interested", "Somewhat", "Not Interested"];
+
+function SectionSurvey({ hl }: { hl: number }) {
+  const [flipping, setFlipping] = useState<boolean | null>(null);
+  const [wholesaling, setWholesaling] = useState<boolean | null>(null);
+  const [seeValue, setSeeValue] = useState<boolean | null>(null);
+  const [interest, setInterest] = useState<Record<string, string>>({});
+  const [otherLabel, setOtherLabel] = useState("");
+  const [otherInterest, setOtherInterest] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
+
+  const YesNo = ({ label, value, onChange }: { label: string; value: boolean | null; onChange: (v: boolean) => void }) => (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "12px 20px", background: "#fff", borderRadius: 10, border: "1px solid #eee" }}>
+      <span style={{ fontSize: 15, fontWeight: 600, color: "#2C3E50" }}>{label}</span>
+      <div style={{ display: "flex", gap: 8 }}>
+        {[true, false].map((v) => (
+          <button key={String(v)} onClick={() => onChange(v)} style={{
+            padding: "6px 20px", borderRadius: 20, fontSize: 13, fontWeight: 600, cursor: "pointer",
+            border: value === v ? "2px solid #E8571A" : "2px solid #dee2e6",
+            background: value === v ? "#E8571A" : "#fff",
+            color: value === v ? "#fff" : "#6c757d",
+            transition: "all 0.2s",
+          }}>{v ? "Yes" : "No"}</button>
+        ))}
+      </div>
+    </div>
+  );
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 8 }}>
+      <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        Quick <span style={{ color: "#E8571A" }}>Survey</span>
+      </h2>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, ...hVisible(hl, 0) }}>
+        <YesNo label="Are you flipping?" value={flipping} onChange={setFlipping} />
+        <YesNo label="Are you wholesaling?" value={wholesaling} onChange={setWholesaling} />
+        <YesNo label="Do you see value in USale?" value={seeValue} onChange={setSeeValue} />
+      </div>
+
+      <div style={{ ...hVisible(hl, 1) }}>
+        <h3 style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", margin: "0 0 12px 0" }}>Rate your interest:</h3>
+        <div style={{ borderRadius: 12, border: "1px solid #eee", overflow: "hidden", background: "#fff" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(4, 100px)", background: "#f8f9fa", borderBottom: "1px solid #eee" }}>
+            <div style={{ padding: "10px 16px", fontSize: 12, fontWeight: 700, color: "#6c757d" }}></div>
+            {INTEREST_LEVELS.map((l) => (
+              <div key={l} style={{ padding: "10px 4px", fontSize: 11, fontWeight: 600, color: "#6c757d", textAlign: "center" }}>{l}</div>
+            ))}
+          </div>
+          {INTEREST_ITEMS.map((item, i) => (
+            <div key={item} style={{ display: "grid", gridTemplateColumns: "1fr repeat(4, 100px)", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
+              <div style={{ padding: "12px 16px", fontSize: 14, fontWeight: 500, color: "#2C3E50" }}>{item}</div>
+              {INTEREST_LEVELS.map((level) => (
+                <div key={level} style={{ display: "flex", justifyContent: "center", padding: "12px 4px" }}>
+                  <button onClick={() => setInterest((prev) => ({ ...prev, [item]: level }))} style={{
+                    width: 20, height: 20, borderRadius: "50%", cursor: "pointer",
+                    border: interest[item] === level ? "2px solid #E8571A" : "2px solid #ccc",
+                    background: interest[item] === level ? "#E8571A" : "#fff",
+                    transition: "all 0.2s",
+                  }} />
+                </div>
+              ))}
+            </div>
+          ))}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(4, 100px)", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
+            <div style={{ padding: "8px 16px" }}>
+              <input
+                type="text"
+                placeholder="Other (please specify)"
+                value={otherLabel}
+                onChange={(e) => setOtherLabel(e.target.value)}
+                style={{ width: "100%", padding: "6px 10px", border: "1px solid #dee2e6", borderRadius: 6, fontSize: 13, fontFamily: "inherit", outline: "none" }}
+              />
+            </div>
+            {INTEREST_LEVELS.map((level) => (
+              <div key={level} style={{ display: "flex", justifyContent: "center", padding: "12px 4px" }}>
+                <button onClick={() => setOtherInterest(level)} style={{
+                  width: 20, height: 20, borderRadius: "50%", cursor: "pointer",
+                  border: otherInterest === level ? "2px solid #E8571A" : "2px solid #ccc",
+                  background: otherInterest === level ? "#E8571A" : "#fff",
+                  transition: "all 0.2s",
+                }} />
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr repeat(4, 100px)", alignItems: "center" }}>
+            <div style={{ padding: "12px 16px", fontSize: 14, fontWeight: 500, color: "#adb5bd", fontStyle: "italic" }}></div>
+            {INTEREST_LEVELS.map((level) => (
+              <div key={level} style={{ display: "flex", justifyContent: "center", padding: "12px 4px" }}>
+                <div style={{ width: 20, height: 20, borderRadius: "50%", border: "2px solid #eee" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ ...hVisible(hl, 2) }}>
+        <h3 style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", margin: "0 0 8px 0" }}>Comments</h3>
+        <textarea
+          placeholder="Any additional comments or feedback..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          style={{
+            width: "100%", minHeight: 80, padding: "12px 16px", border: "1px solid #dee2e6",
+            borderRadius: 10, fontSize: 14, fontFamily: "inherit", resize: "vertical",
+            outline: "none", boxSizing: "border-box",
+          }}
+        />
+      </div>
+
+      <div style={{ textAlign: "center", ...hVisible(hl, 3) }}>
+        <a
+          href="https://calendly.com/usale/broker-meeting"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 10,
+            padding: "16px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 12, fontSize: 17, fontWeight: 700,
+            cursor: "pointer", textDecoration: "none",
+            boxShadow: "0 4px 16px #E8571A30",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}
+        >
+          📅 Schedule a Meeting
+        </a>
+      </div>
+    </div>
+  );
+}
+
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
@@ -1038,6 +1177,7 @@ export default function BrokerPresentation() {
     <SectionEverybodyWins key={7} hl={hlStep(7)} />,
     <SectionHowWePay key={8} hl={hlStep(8)} />,
     <SectionCTA key={9} hl={hlStep(9)} />,
+    <SectionSurvey key={10} hl={hlStep(10)} />,
   ];
 
   return (
