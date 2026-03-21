@@ -1127,6 +1127,7 @@ function useRealtimeVoice() {
 }
 
 export default function BrokerPresentation() {
+  const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
   const [showScript, setShowScript] = useState(false);
@@ -1172,6 +1173,7 @@ export default function BrokerPresentation() {
   }, [goNext, goPrev, chatOpen]);
 
   useEffect(() => {
+    if (!started) return;
     if (audioOn) {
       playTTS(SCRIPTS[slide]);
       if (slide < total - 1) {
@@ -1180,7 +1182,7 @@ export default function BrokerPresentation() {
     } else {
       stopTTS();
     }
-  }, [slide, audioOn]);
+  }, [slide, audioOn, started]);
 
   const timerShouldRun = !audioOn || (!isTTSPlaying && !isTTSLoading);
 
@@ -1303,6 +1305,35 @@ export default function BrokerPresentation() {
     <SectionCTA key={9} hl={hlStep(9)} />,
     <SectionSurvey key={10} hl={hlStep(10)} />,
   ];
+
+  if (!started) {
+    return (
+      <div style={{
+        minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32, padding: 40,
+      }}>
+        <img src={USALE_LOGO} alt="USale" style={{ height: 80 }} />
+        <h1 style={{ fontSize: "clamp(28px,5vw,48px)", fontWeight: 700, color: "#2C3E50", margin: 0, textAlign: "center", lineHeight: 1.2 }}>
+          Presentation for <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
+        </h1>
+        <p style={{ fontSize: 16, color: "#6c757d", margin: 0, textAlign: "center" }}>{BROKER.brokerage}</p>
+        <button
+          onClick={() => setStarted(true)}
+          style={{
+            padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
+            cursor: "pointer", boxShadow: "0 4px 20px #E8571A40",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+        >
+          ▶ Start Presentation
+        </button>
+        <p style={{ fontSize: 13, color: "#adb5bd", margin: 0 }}>Audio narration will begin automatically</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
