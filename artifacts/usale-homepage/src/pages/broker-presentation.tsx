@@ -967,7 +967,6 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
             fontSize: 17, fontWeight: 700, cursor: "pointer",
             boxShadow: "0 4px 16px #E8571A30",
             transition: "transform 0.2s, box-shadow 0.2s",
-            ...hVisible(hl, 4),
           }}
         >
           💬 Ask Tony — Get Answers Now
