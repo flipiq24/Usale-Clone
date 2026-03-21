@@ -1114,9 +1114,9 @@ export default function BrokerPresentation() {
       step++;
       if (step >= maxSteps) return;
       setSilentStep(step);
-      timeout = setTimeout(advance, 1000);
+      timeout = setTimeout(advance, 500);
     };
-    timeout = setTimeout(advance, 600);
+    timeout = setTimeout(advance, 300);
     return () => clearTimeout(timeout);
   }, [slide, audioOn, isTTSPlaying]);
 
