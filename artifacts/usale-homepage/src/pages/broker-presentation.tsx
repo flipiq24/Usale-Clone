@@ -8,9 +8,9 @@ interface BrokerData {
 }
 
 const BROKER: BrokerData = {
-  name: "Mike",
-  brokerage: "Reimer Realty Group",
-  slug: "reimer-realty",
+  name: "Bondilyn",
+  brokerage: "bCollective Agency",
+  slug: "bcollective-agency",
 };
 
 interface OfficeMetric {
@@ -140,26 +140,26 @@ const SLIDE_SEGMENTS: Segment[][] = [
   // Visual: step 0 = title, step 1 = logo, step 2 = tagline
   [
     { text: `Welcome ${BROKER.name}, my name is Tony Diaz.`, step: 0 },
-    { text: `I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips.`, step: 1 },
-    { text: `We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`, step: 2 },
+    { text: `I am the founder of USale. I've been in the business for 32 years and done over 1,100 flips.`, step: 1 },
+    { text: `We are now a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`, step: 2 },
   ],
 
   // ── Slide 1: What We Know (Data Cards) ────────────────────────────
   // Visual: step 0 = title, steps 1-11 = each metric row
   // Steps 6,7,10,11 trigger table expands via EXPAND_AT_STEP
   [
-    { text: `This is the data for ${BROKER.brokerage} and what we know about you.`, step: 0 },
+    { text: `This is the data for ${BROKER.brokerage} and what we know about your brokerage.`, step: 0 },
     { text: `You have 18,834 total transactions to investors`, step: 1 },
     { text: `with a double-end rate of zero percent.`, step: 2 },
     { text: `Your average purchase price is about $2 million`, step: 3 },
     { text: `and your average resale is about $2.2 million.`, step: 4 },
-    { text: `The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024.`, step: 5 },
-    { text: `You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there.`, step: 6 },
+    { text: `The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC.`, step: 5 },
+    { text: `You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there.`, step: 6 },
     { text: `You've also sold 2,088 listings to investors \u2014 here's that data.`, step: 7 },
     { text: `You've re-sold 935 listings to investors`, step: 8 },
     { text: `with a purchase-to-resale ratio of 89 percent.`, step: 9 },
     { text: `You have 4,573 unique investor relationships \u2014 that is incredibly strong.`, step: 10 },
-    { text: `And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? Let's get moving before I get too deep.`, step: 11 },
+    { text: `And you have 56 investor-friendly agents. Your agent Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together, whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get down to business.`, step: 11 },
   ],
 
   // ── Slide 2: The Opportunity ($$$) ────────────────────────────────
@@ -175,16 +175,16 @@ const SLIDE_SEGMENTS: Segment[][] = [
   // ── Slide 3: Why USale is Different ───────────────────────────────
   // Visual: step 0-3 = four feature cards
   [
-    { text: `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not selling you any membership.`, step: 0 },
+    { text: `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership.`, step: 0 },
     { text: `We have no transaction fees.`, step: 1 },
     { text: `We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors.`, step: 2 },
     { text: `We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`, step: 3 },
   ],
 
-  // ── Slide 4: Why We Do This ───────────────────────────────────────
+  // ── Slide 4: Why We're Doing This ─────────────────────────────────
   // Visual: step 0-2 = three numbered items, step 3 = bottom note
   [
-    { text: `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors.`, step: 0 },
+    { text: `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors.`, step: 0 },
     { text: `This is a great way for them to post properties, double-end their transactions,`, step: 1 },
     { text: `and also source inventory to their buyers' network. Win-win.`, step: 2 },
     { text: `We work with national title and hard money lenders who want to be able to offer services whenever you transact.`, step: 3 },
@@ -193,15 +193,15 @@ const SLIDE_SEGMENTS: Segment[][] = [
   // ── Slide 5: Workflow ─────────────────────────────────────────────
   // Visual: step 0-2 = three workflow paths
   [
-    { text: `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you.`, step: 0 },
+    { text: `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you.`, step: 0 },
     { text: `Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees.`, step: 1 },
-    { text: `Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`, step: 2 },
+    { text: `Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`, step: 2 },
   ],
 
   // ── Slide 6: Credibility ──────────────────────────────────────────
   // Visual: step 0-2 = three content blocks
   [
-    { text: `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. You guys win.`, step: 0 },
+    { text: `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins.`, step: 0 },
     { text: `In partnership with local service providers who know that value first is the only way to grow.`, step: 1 },
     { text: `Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`, step: 2 },
   ],
@@ -221,7 +221,7 @@ const SLIDE_SEGMENTS: Segment[][] = [
   [
     { text: `How do we get paid? Pretty simple.`, step: 0 },
     { text: `When our investors that are providing your agents the instant cash offer buy a property, we get a small share.`, step: 1 },
-    { text: `We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`, step: 2 },
+    { text: `We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`, step: 2 },
   ],
 
   // ── Slide 9: Next Steps / CTA ─────────────────────────────────────
@@ -231,7 +231,17 @@ const SLIDE_SEGMENTS: Segment[][] = [
     { text: `We'll demo the technology to show you our data and powerful tools.`, step: 1 },
     { text: `We'll explain how your agents can get paid without a listing using the white-label website.`, step: 2 },
     { text: `And we'll show you how to use USale to recruit investor-friendly agents.`, step: 3 },
-    { text: `It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`, step: 4 },
+    { text: `Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`, step: 4 },
+  ],
+
+  // ── Slide 10: Survey ──────────────────────────────────────────────
+  // Visual: step 0 = intro, 1 = questions, 2 = ratings, 3 = comments, 4 = closing
+  [
+    { text: `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback.`, step: 0 },
+    { text: `Are you currently flipping or wholesaling? Do you see value in what USale can offer?`, step: 1 },
+    { text: `Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing.`, step: 2 },
+    { text: `Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here.`, step: 3 },
+    { text: `We're looking forward to working with you.`, step: 4 },
   ],
 ];
 
@@ -243,15 +253,16 @@ const HIGHLIGHT_COUNTS = SLIDE_SEGMENTS.map(segs => segs[segs.length - 1].step +
 
 const SECTION_TITLES = [
   "Welcome",
-  "What We Know",
+  "Your Data",
   "The Opportunity",
   "Why USale",
-  "Why We Do This",
+  "Why We're Doing This",
   "Workflow",
   "Credibility",
   "Everybody Wins",
   "How We Get Paid",
   "Next Steps",
+  "Survey",
 ];
 
 function hVisible(step: number, index: number): React.CSSProperties {
@@ -280,7 +291,7 @@ function SectionWelcome({ hl }: { hl: number }) {
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 120, ...introReveal(hl, 1) }} />
       <p style={{ fontSize: 18, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...introReveal(hl, 2) }}>
-        We're a tech company that specializes in empowering investors and the investor-friendly agents who transact with them.
+        We're a technology company that specializes in empowering investors and the investor-friendly agents who transact with them.
       </p>
     </div>
   );
@@ -648,7 +659,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         {[
-          { n: "1", t: "We need inventory.", s: "Your agents are already transacting with investors." },
+          { n: "1", t: "We need inventory and you need more transactions.", s: "Your agents are already transacting with investors." },
           { n: "2", t: "Post properties & double-end.", s: "This is a great way for them to post properties and double-end their transactions." },
           { n: "3", t: "Source inventory to their buyers' network.", s: "They can also source inventory to their buyers' network. Win-win." },
         ].map((item, i) => (
@@ -670,7 +681,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 
 function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
-    { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+    { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
     { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
     { n: "3", t: "Agent Brings Buyers to the Marketplace", body: "The marketplace notifies your agents. Any investor-buyer they bring \u2014 when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
   ];
@@ -691,7 +702,7 @@ function SectionWorkflow({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{ padding: "14px 20px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 12, textAlign: "center", fontSize: 14, fontWeight: 600, color: "#1e8449" }}>
-        We're not replacing the MLS. We're giving your agents more options.
+        We're not replacing the MLS. We're giving your agents more options. No-brainer.
       </div>
     </div>
   );
@@ -705,7 +716,7 @@ function SectionCredibility({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 0) }}>
-          Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller won't accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 <b>that helps them get a listing. You guys win.</b>
+          Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller won't accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 <b>that helps them get a listing. Your team wins.</b>
         </div>
         <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 1) }}>
           In partnership with <b>local service providers who know that value first is the only way to grow</b>. Title companies and hard money lenders understand that bringing value to brokers like yourself \u2014 they get to see transactions, they win, your agent wins, the investor wins.
@@ -753,7 +764,7 @@ function SectionHowWePay({ hl }: { hl: number }) {
         Pretty simple. When our investors that are providing your agents the <b>instant cash offer</b> buy a property, <b>we get a small share</b>.
       </div>
       <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
-        We all win. Great buyers. Great agents. Title companies. Everybody's eager to participate. No friction.
+        We all win. Great buyers. Great agents. No friction, no middleman. Everybody's eager to participate.
       </div>
     </div>
   );
@@ -780,15 +791,69 @@ function SectionCTA({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{ padding: "32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center", ...hVisible(hl, 4) }}>
-        <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 16 }}>It's truly a no-brainer.</div>
+        <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Create an unfair advantage for your agents.</div>
+        <div style={{ fontSize: 14, color: "#ffffffCC", marginBottom: 16, lineHeight: 1.6 }}>The AI wave is here — this is the way to easily get behind great technology without the sales pitch.</div>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          {["Schedule a Meeting", "Do a Demo", "Create an Advantage"].map((t, i) => (
+          {["Schedule a Meeting", "Do a Demo", "Create an Unfair Advantage"].map((t, i) => (
             <button key={i} style={{
               padding: "12px 28px", background: "#fff", color: "#E8571A", border: "none",
               borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer",
             }}>{t}</button>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+function SectionSurvey({ hl }: { hl: number }) {
+  const ratingAreas = [
+    "Seeing a full demo",
+    "Learning how to do more flips",
+    "Recruiting investor-friendly agents",
+    "Training agents to get paid without a listing",
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        Before we wrap up, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>...
+      </h2>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 1) }}>
+        {["Are you currently flipping?", "Are you wholesaling?", "Do you see value in USale?"].map((q, i) => (
+          <div key={i} style={{ flex: "1 1 200px", padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", textAlign: "center" }}>
+            <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", marginBottom: 12 }}>{q}</div>
+            <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+              {["Yes", "No"].map(opt => (
+                <button key={opt} style={{ padding: "8px 24px", borderRadius: 8, border: "1px solid #E8571A30", background: "#E8571A08", color: "#E8571A", fontWeight: 600, fontSize: 13, cursor: "pointer" }}>{opt}</button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{ ...hVisible(hl, 2) }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", marginBottom: 12 }}>Rate your interest:</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {ratingAreas.map((area, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee" }}>
+              <span style={{ flex: 1, fontSize: 14, color: "#2C3E50" }}>{area}</span>
+              <div style={{ display: "flex", gap: 4 }}>
+                {[1, 2, 3, 4, 5].map(n => (
+                  <button key={n} style={{ width: 32, height: 32, borderRadius: 8, border: "1px solid #E8571A30", background: "#E8571A08", color: "#E8571A", fontWeight: 700, fontSize: 13, cursor: "pointer" }}>{n}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ ...hVisible(hl, 3) }}>
+        <div style={{ padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee" }}>
+          <div style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", marginBottom: 8 }}>Comments or questions?</div>
+          <div style={{ width: "100%", minHeight: 60, padding: "12px", background: "#f8f9fa", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 14, color: "#adb5bd" }}>Type your feedback here...</div>
+        </div>
+      </div>
+      <div style={{ padding: "24px 32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center", ...hVisible(hl, 4) }}>
+        <div style={{ fontSize: 22, fontWeight: 700, color: "#fff", marginBottom: 8 }}>We're looking forward to working with you.</div>
+        <button style={{ padding: "12px 32px", background: "#fff", color: "#E8571A", border: "none", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Schedule a Follow-Up</button>
       </div>
     </div>
   );
@@ -1172,6 +1237,7 @@ export default function BrokerPresentation() {
     <SectionEverybodyWins key={7} hl={hlStep(7)} />,
     <SectionHowWePay key={8} hl={hlStep(8)} />,
     <SectionCTA key={9} hl={hlStep(9)} />,
+    <SectionSurvey key={10} hl={hlStep(10)} />,
   ];
 
   return (
