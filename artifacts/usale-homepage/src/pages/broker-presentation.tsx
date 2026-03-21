@@ -459,6 +459,102 @@ function useAudioNarration() {
   return { play, stop, isPlaying };
 }
 
+function getWsBase(): string {
+  const proto = window.location.protocol === "https:" ? "wss:" : "ws:";
+  return `${proto}//${window.location.host}/api`;
+}
+
+function useRealtimeVoice() {
+  const wsRef = useRef<WebSocket | null>(null);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const processorRef = useRef<ScriptProcessorNode | null>(null);
+  const [isLive, setIsLive] = useState(false);
+  const [status, setStatus] = useState<string>("");
+
+  const stop = useCallback(() => {
+    if (processorRef.current) { processorRef.current.disconnect(); processorRef.current = null; }
+    if (streamRef.current) { streamRef.current.getTracks().forEach(t => t.stop()); streamRef.current = null; }
+    if (audioCtxRef.current) { audioCtxRef.current.close(); audioCtxRef.current = null; }
+    if (wsRef.current) { wsRef.current.close(); wsRef.current = null; }
+    setIsLive(false);
+    setStatus("");
+  }, []);
+
+  const start = useCallback(async () => {
+    try {
+      setStatus("Connecting...");
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: { sampleRate: 24000, channelCount: 1, echoCancellation: true } });
+      streamRef.current = stream;
+
+      const audioCtx = new AudioContext({ sampleRate: 24000 });
+      audioCtxRef.current = audioCtx;
+
+      const ws = new WebSocket(`${getWsBase()}/ai/realtime/ws`);
+      wsRef.current = ws;
+
+      ws.onopen = () => {
+        setIsLive(true);
+        setStatus("Live");
+
+        const source = audioCtx.createMediaStreamSource(stream);
+        const processor = audioCtx.createScriptProcessor(4096, 1, 1);
+        processorRef.current = processor;
+
+        processor.onaudioprocess = (e) => {
+          if (ws.readyState !== WebSocket.OPEN) return;
+          const input = e.inputBuffer.getChannelData(0);
+          const pcm16 = new Int16Array(input.length);
+          for (let i = 0; i < input.length; i++) {
+            const s = Math.max(-1, Math.min(1, input[i]));
+            pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+          }
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(pcm16.buffer)));
+          ws.send(JSON.stringify({
+            type: "input_audio_buffer.append",
+            audio: base64,
+          }));
+        };
+
+        source.connect(processor);
+        processor.connect(audioCtx.destination);
+      };
+
+      ws.onmessage = async (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          if (msg.type === "response.audio.delta" && msg.delta) {
+            const binary = atob(msg.delta);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            const pcm16 = new Int16Array(bytes.buffer);
+            const float32 = new Float32Array(pcm16.length);
+            for (let i = 0; i < pcm16.length; i++) {
+              float32[i] = pcm16[i] / 0x8000;
+            }
+            if (audioCtxRef.current) {
+              const buffer = audioCtxRef.current.createBuffer(1, float32.length, 24000);
+              buffer.copyToChannel(float32, 0);
+              const bufferSource = audioCtxRef.current.createBufferSource();
+              bufferSource.buffer = buffer;
+              bufferSource.connect(audioCtxRef.current.destination);
+              bufferSource.start();
+            }
+          }
+        } catch { /* ignore parse errors */ }
+      };
+
+      ws.onclose = () => { stop(); };
+      ws.onerror = () => { setStatus("Connection failed"); setTimeout(stop, 2000); };
+    } catch {
+      setStatus("Microphone access denied");
+      setTimeout(stop, 2000);
+    }
+  }, [stop]);
+
+  return { start, stop, isLive, status };
+}
+
 export default function BrokerPresentation() {
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(false);
@@ -474,6 +570,7 @@ export default function BrokerPresentation() {
   const chatInputRef = useRef<HTMLInputElement>(null);
   const total = SCRIPTS.length;
   const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying } = useAudioNarration();
+  const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
     if (slide < total - 1) { setSlide(s => s + 1); setActiveTab(0); }
@@ -637,6 +734,15 @@ export default function BrokerPresentation() {
             color: chatOpen ? "#E8571A" : "#adb5bd",
           }}>
             💬 Ask AI
+          </button>
+          <button onClick={isRealtimeLive ? stopRealtime : startRealtime} style={{
+            padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
+            border: `1px solid ${isRealtimeLive ? "#27ae6040" : "#dee2e6"}`,
+            background: isRealtimeLive ? "#27ae6010" : "#fff",
+            color: isRealtimeLive ? "#27ae60" : "#adb5bd",
+            position: "relative",
+          }}>
+            {isRealtimeLive ? `🟢 ${realtimeStatus}` : "🎙️ Live Voice"}
           </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (

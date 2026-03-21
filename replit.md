@@ -117,12 +117,14 @@ AI Conversation Features (integrated into Broker Presentation):
 - **Audio On/Off** button triggers ElevenLabs TTS narration of the current slide's script
 - **Ask AI** chat panel slides in from right, connects to ChatGPT for contextual Q&A about broker data
 - **Voice input** via microphone button uses Whisper STT → ChatGPT
-- **Realtime API** session endpoint available for live voice conversations
+- **Realtime API** WebSocket proxy at `/api/ai/realtime/ws` for live bidirectional voice conversations via OpenAI Realtime API
+- **Live Voice** button in top nav connects to WebSocket, streams PCM16 audio bidirectionally for real-time conversational AI
 
 API Endpoints (Express server at `/api`):
 - `POST /api/ai/chat` — ChatGPT text conversation with broker context
 - `POST /api/ai/tts` — ElevenLabs text-to-speech (returns audio/mpeg stream)
 - `POST /api/ai/stt` — Whisper speech-to-text (accepts multipart audio upload)
-- `GET /api/ai/realtime/session` — Creates OpenAI Realtime API session
+- `GET /api/ai/realtime/session` — Creates OpenAI Realtime API session token
+- `WS /api/ai/realtime/ws` — WebSocket proxy to OpenAI Realtime API (bidirectional audio relay, server-side VAD)
 
 Required secrets: `OPENAI_API_KEY`, `ELEVENLABS_API_KEY`
