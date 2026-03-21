@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
-import TONY_PHOTO from "@assets/image_1774069249990.png";
+import TONY_PHOTO from "@assets/image_1774069888966.png";
 
 interface BrokerData {
   name: string;
