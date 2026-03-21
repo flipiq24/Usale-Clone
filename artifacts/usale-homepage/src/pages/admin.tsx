@@ -222,7 +222,7 @@ function DetailModal({ contact, summary, onClose }: { contact: Contact; summary?
         <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 4 }}>Category: {contact.category}</div>
         <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 16 }}>Added: {formatDate(contact.createdAt)}</div>
 
-        {summary?.surveyData && (
+        {summary?.surveyData != null && (
           <div style={{ marginBottom: 24, padding: "16px", background: "#f0fdf4", borderRadius: 12, border: "1px solid #bbf7d0" }}>
             <h3 style={{ fontSize: 14, fontWeight: 700, color: "#155724", margin: "0 0 12px" }}>Survey Responses</h3>
             <pre style={{ fontSize: 12, color: "#333", whiteSpace: "pre-wrap", margin: 0, fontFamily: "monospace" }}>

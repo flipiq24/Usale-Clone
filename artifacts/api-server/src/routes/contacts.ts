@@ -145,7 +145,7 @@ router.post("/admin/contacts/bulk", requireAdminAuth, upload.single("file"), asy
 
 router.delete("/admin/contacts/:id", requireAdminAuth, async (req, res) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(String(req.params.id), 10);
     await db.delete(contacts).where(eq(contacts.id, id));
     res.json({ success: true });
   } catch (err) {
@@ -155,7 +155,7 @@ router.delete("/admin/contacts/:id", requireAdminAuth, async (req, res) => {
 
 router.get("/contacts/by-slug/:slug", async (req, res) => {
   try {
-    const [contact] = await db.select().from(contacts).where(eq(contacts.slug, req.params.slug));
+    const [contact] = await db.select().from(contacts).where(eq(contacts.slug, String(req.params.slug)));
     if (!contact) {
       res.status(404).json({ error: "Contact not found" });
       return;
@@ -245,7 +245,7 @@ router.get("/admin/stats", requireAdminAuth, async (_req, res) => {
 
 router.get("/admin/contacts/:id/events", requireAdminAuth, async (req, res) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(String(req.params.id), 10);
     const events = await db.select().from(presentationEvents)
       .where(eq(presentationEvents.contactId, id))
       .orderBy(desc(presentationEvents.createdAt));
@@ -257,7 +257,7 @@ router.get("/admin/contacts/:id/events", requireAdminAuth, async (req, res) => {
 
 router.get("/admin/contacts/:id/summary", requireAdminAuth, async (req, res) => {
   try {
-    const id = parseInt(req.params.id, 10);
+    const id = parseInt(String(req.params.id), 10);
     const events = await db.select().from(presentationEvents)
       .where(eq(presentationEvents.contactId, id));
 
