@@ -409,12 +409,71 @@ function SectionCTA() {
   );
 }
 
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
+
+function useAudioNarration() {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const stop = useCallback(() => {
+    if (abortRef.current) abortRef.current.abort();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+      audioRef.current = null;
+    }
+    setIsPlaying(false);
+  }, []);
+
+  const play = useCallback(async (text: string) => {
+    stop();
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setIsPlaying(true);
+    try {
+      const resp = await fetch(`${API_BASE}/ai/tts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+        signal: controller.signal,
+      });
+      if (!resp.ok) throw new Error("TTS failed");
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      audioRef.current = audio;
+      audio.onended = () => { setIsPlaying(false); URL.revokeObjectURL(url); };
+      audio.onerror = () => { setIsPlaying(false); URL.revokeObjectURL(url); };
+      await audio.play();
+    } catch {
+      setIsPlaying(false);
+    }
+  }, [stop]);
+
+  return { play, stop, isPlaying };
+}
+
 export default function BrokerPresentation() {
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(false);
   const [showScript, setShowScript] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState("");
+  const [chatLoading, setChatLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatInputRef = useRef<HTMLInputElement>(null);
   const total = SCRIPTS.length;
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying } = useAudioNarration();
 
   const goNext = useCallback(() => {
     if (slide < total - 1) { setSlide(s => s + 1); setActiveTab(0); }
@@ -426,12 +485,105 @@ export default function BrokerPresentation() {
 
   useEffect(() => {
     const h = (e: KeyboardEvent) => {
+      if (chatOpen) return;
       if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); goNext(); }
       if (e.key === "ArrowLeft") { e.preventDefault(); goPrev(); }
     };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
-  }, [goNext, goPrev]);
+  }, [goNext, goPrev, chatOpen]);
+
+  useEffect(() => {
+    if (audioOn) {
+      playTTS(SCRIPTS[slide]);
+    } else {
+      stopTTS();
+    }
+  }, [slide, audioOn]);
+
+  const toggleAudio = useCallback(() => {
+    if (audioOn) {
+      stopTTS();
+      setAudioOn(false);
+    } else {
+      setAudioOn(true);
+    }
+  }, [audioOn, stopTTS]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chatMessages]);
+
+  const sendChat = useCallback(async (message: string) => {
+    if (!message.trim()) return;
+    const userMsg: ChatMessage = { role: "user", content: message.trim() };
+    setChatMessages(prev => [...prev, userMsg]);
+    setChatInput("");
+    setChatLoading(true);
+    try {
+      const resp = await fetch(`${API_BASE}/ai/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: message.trim(),
+          brokerContext: {
+            brokerName: BROKER.name,
+            brokerage: BROKER.brokerage,
+            titlePartner: BROKER.titlePartner,
+            currentSlide: SECTION_TITLES[slide],
+            currentScript: SCRIPTS[slide],
+            dataTabs: DATA_TABS.map(t => ({ label: t.label, value: t.value })),
+          },
+          conversationHistory: chatMessages.slice(-10),
+        }),
+      });
+      const data = await resp.json();
+      if (data.reply) {
+        setChatMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+      }
+    } catch {
+      setChatMessages(prev => [...prev, { role: "assistant", content: "Sorry, I couldn't process your request. Please try again." }]);
+    } finally {
+      setChatLoading(false);
+    }
+  }, [chatMessages, slide]);
+
+  const startRecording = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream, { mimeType: "audio/webm" });
+      const chunks: Blob[] = [];
+      mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      mediaRecorder.onstop = async () => {
+        stream.getTracks().forEach(t => t.stop());
+        const blob = new Blob(chunks, { type: "audio/webm" });
+        const formData = new FormData();
+        formData.append("audio", blob, "recording.webm");
+        setIsRecording(false);
+        setChatLoading(true);
+        try {
+          const resp = await fetch(`${API_BASE}/ai/stt`, { method: "POST", body: formData });
+          const data = await resp.json();
+          if (data.text) {
+            sendChat(data.text);
+          }
+        } catch {
+          setChatLoading(false);
+        }
+      };
+      mediaRecorderRef.current = mediaRecorder;
+      mediaRecorder.start();
+      setIsRecording(true);
+    } catch {
+      setIsRecording(false);
+    }
+  }, [sendChat]);
+
+  const stopRecording = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+      mediaRecorderRef.current.stop();
+    }
+  }, []);
 
   const sections = [
     <SectionWelcome key={0} />,
@@ -462,13 +614,13 @@ export default function BrokerPresentation() {
           <span style={{ fontSize: 13, color: "#adb5bd" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <button onClick={() => setAudioOn(!audioOn)} style={{
+          <button onClick={toggleAudio} style={{
             padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
             border: `1px solid ${audioOn ? "#E8571A40" : "#dee2e6"}`,
             background: audioOn ? "#E8571A10" : "#fff",
             color: audioOn ? "#E8571A" : "#adb5bd",
           }}>
-            {audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
+            {isTTSPlaying ? "🔊 Playing..." : audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
           </button>
           <button onClick={() => setShowScript(!showScript)} style={{
             padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
@@ -477,6 +629,14 @@ export default function BrokerPresentation() {
             color: showScript ? "#2C3E50" : "#adb5bd",
           }}>
             📝 Script
+          </button>
+          <button onClick={() => setChatOpen(!chatOpen)} style={{
+            padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
+            border: `1px solid ${chatOpen ? "#E8571A40" : "#dee2e6"}`,
+            background: chatOpen ? "#E8571A10" : "#fff",
+            color: chatOpen ? "#E8571A" : "#adb5bd",
+          }}>
+            💬 Ask AI
           </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
@@ -490,11 +650,101 @@ export default function BrokerPresentation() {
         {sections[slide]}
       </div>
 
+      {chatOpen && (
+        <div style={{
+          position: "fixed", top: 56, right: 0, bottom: 56, width: 380, zIndex: 150,
+          background: "#fff", borderLeft: "1px solid #eee", display: "flex", flexDirection: "column",
+          boxShadow: "-4px 0 20px rgba(0,0,0,0.08)",
+        }}>
+          <div style={{ padding: "14px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "#0f1419" }}>Ask AI about this presentation</span>
+            <button onClick={() => setChatOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#adb5bd", padding: 4 }}>&times;</button>
+          </div>
+
+          <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
+            {chatMessages.length === 0 && (
+              <div style={{ textAlign: "center", padding: "40px 20px", color: "#adb5bd" }}>
+                <div style={{ fontSize: 32, marginBottom: 8 }}>💬</div>
+                <p style={{ fontSize: 13, lineHeight: 1.5, margin: 0 }}>Ask questions about the broker data, USale's platform, or anything in this presentation.</p>
+                <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 6 }}>
+                  {["What does USale offer brokers?", "Tell me about the investor data", "How does the workflow work?"].map((q, i) => (
+                    <button key={i} onClick={() => sendChat(q)} style={{
+                      padding: "8px 12px", background: "#f8f9fa", border: "1px solid #eee", borderRadius: 8,
+                      fontSize: 12, color: "#495057", cursor: "pointer", textAlign: "left",
+                    }}>{q}</button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {chatMessages.map((msg, i) => (
+              <div key={i} style={{
+                alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
+                maxWidth: "85%", padding: "10px 14px", borderRadius: 12,
+                background: msg.role === "user" ? "#E8571A" : "#f1f3f5",
+                color: msg.role === "user" ? "#fff" : "#0f1419",
+                fontSize: 13, lineHeight: 1.5,
+                borderBottomRightRadius: msg.role === "user" ? 4 : 12,
+                borderBottomLeftRadius: msg.role === "assistant" ? 4 : 12,
+              }}>
+                {msg.content}
+              </div>
+            ))}
+            {chatLoading && (
+              <div style={{ alignSelf: "flex-start", padding: "10px 14px", background: "#f1f3f5", borderRadius: 12, borderBottomLeftRadius: 4, fontSize: 13, color: "#adb5bd" }}>
+                Thinking...
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          <div style={{ padding: "12px 16px", borderTop: "1px solid #eee", display: "flex", gap: 8, alignItems: "center" }}>
+            <button
+              onClick={isRecording ? stopRecording : startRecording}
+              style={{
+                width: 36, height: 36, borderRadius: "50%", border: "none", cursor: "pointer",
+                background: isRecording ? "#e74c3c" : "#f1f3f5", color: isRecording ? "#fff" : "#495057",
+                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                fontSize: 16,
+              }}
+              title={isRecording ? "Stop recording" : "Voice input"}
+            >
+              🎤
+            </button>
+            <input
+              ref={chatInputRef}
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(chatInput); } }}
+              placeholder="Ask a question..."
+              style={{
+                flex: 1, padding: "8px 12px", border: "1px solid #dee2e6", borderRadius: 8,
+                fontSize: 13, outline: "none", background: "#f8f9fa",
+              }}
+              disabled={chatLoading}
+            />
+            <button
+              onClick={() => sendChat(chatInput)}
+              disabled={chatLoading || !chatInput.trim()}
+              style={{
+                width: 36, height: 36, borderRadius: "50%", border: "none", cursor: chatInput.trim() ? "pointer" : "default",
+                background: chatInput.trim() ? "#E8571A" : "#dee2e6", color: "#fff",
+                display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                fontSize: 14, fontWeight: 700,
+              }}
+            >
+              ↑
+            </button>
+          </div>
+        </div>
+      )}
+
       {showScript && (
         <div style={{
           position: "fixed", bottom: 64, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-          width: "92%", maxWidth: 780, background: "#fff", border: "1px solid #eee",
+          width: chatOpen ? "55%" : "92%", maxWidth: 780, background: "#fff", border: "1px solid #eee",
           borderRadius: 14, padding: "14px 20px", boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
+          transition: "width 0.3s",
         }}>
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
             <span style={{ background: "#E8571A10", borderRadius: 4, padding: "2px 8px", fontSize: 10, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", flexShrink: 0, marginTop: 3 }}>Script</span>
@@ -504,10 +754,10 @@ export default function BrokerPresentation() {
       )}
 
       <div style={{
-        position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 100,
+        position: "fixed", bottom: 0, left: 0, right: chatOpen ? 380 : 0, zIndex: 100,
         padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center",
         background: "rgba(248,249,250,0.95)", backdropFilter: "blur(16px)",
-        borderTop: "1px solid #eee",
+        borderTop: "1px solid #eee", transition: "right 0.3s",
       }}>
         <button onClick={goPrev} disabled={slide === 0} style={{
           padding: "10px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: slide === 0 ? "default" : "pointer",

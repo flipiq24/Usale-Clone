@@ -5,18 +5,30 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus } from "./api.schemas";
+import type {
+  AiChatRequest,
+  AiChatResponse,
+  AiRealtimeSessionResponse,
+  AiSttBody,
+  AiSttResponse,
+  AiTtsRequest,
+  ErrorResponse,
+  HealthStatus,
+} from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
-import type { ErrorType } from "../custom-fetch";
+import type { ErrorType, BodyType } from "../custom-fetch";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -92,6 +104,345 @@ export function useHealthCheck<
   request?: SecondParameter<typeof customFetch>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getHealthCheckQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Send a message and receive an AI response via ChatGPT
+ * @summary AI text chat
+ */
+export const getAiChatUrl = () => {
+  return `/api/ai/chat`;
+};
+
+export const aiChat = async (
+  aiChatRequest: AiChatRequest,
+  options?: RequestInit,
+): Promise<AiChatResponse> => {
+  return customFetch<AiChatResponse>(getAiChatUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(aiChatRequest),
+  });
+};
+
+export const getAiChatMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiChat>>,
+    TError,
+    { data: BodyType<AiChatRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof aiChat>>,
+  TError,
+  { data: BodyType<AiChatRequest> },
+  TContext
+> => {
+  const mutationKey = ["aiChat"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof aiChat>>,
+    { data: BodyType<AiChatRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return aiChat(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AiChatMutationResult = NonNullable<
+  Awaited<ReturnType<typeof aiChat>>
+>;
+export type AiChatMutationBody = BodyType<AiChatRequest>;
+export type AiChatMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary AI text chat
+ */
+export const useAiChat = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiChat>>,
+    TError,
+    { data: BodyType<AiChatRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof aiChat>>,
+  TError,
+  { data: BodyType<AiChatRequest> },
+  TContext
+> => {
+  return useMutation(getAiChatMutationOptions(options));
+};
+
+/**
+ * Convert text to speech audio via ElevenLabs
+ * @summary Text-to-speech
+ */
+export const getAiTtsUrl = () => {
+  return `/api/ai/tts`;
+};
+
+export const aiTts = async (
+  aiTtsRequest: AiTtsRequest,
+  options?: RequestInit,
+): Promise<Blob> => {
+  return customFetch<Blob>(getAiTtsUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(aiTtsRequest),
+  });
+};
+
+export const getAiTtsMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiTts>>,
+    TError,
+    { data: BodyType<AiTtsRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof aiTts>>,
+  TError,
+  { data: BodyType<AiTtsRequest> },
+  TContext
+> => {
+  const mutationKey = ["aiTts"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof aiTts>>,
+    { data: BodyType<AiTtsRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return aiTts(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AiTtsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof aiTts>>
+>;
+export type AiTtsMutationBody = BodyType<AiTtsRequest>;
+export type AiTtsMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Text-to-speech
+ */
+export const useAiTts = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiTts>>,
+    TError,
+    { data: BodyType<AiTtsRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof aiTts>>,
+  TError,
+  { data: BodyType<AiTtsRequest> },
+  TContext
+> => {
+  return useMutation(getAiTtsMutationOptions(options));
+};
+
+/**
+ * Transcribe audio to text via Whisper
+ * @summary Speech-to-text
+ */
+export const getAiSttUrl = () => {
+  return `/api/ai/stt`;
+};
+
+export const aiStt = async (
+  aiSttBody: AiSttBody,
+  options?: RequestInit,
+): Promise<AiSttResponse> => {
+  const formData = new FormData();
+  formData.append(`audio`, aiSttBody.audio);
+
+  return customFetch<AiSttResponse>(getAiSttUrl(), {
+    ...options,
+    method: "POST",
+    body: formData,
+  });
+};
+
+export const getAiSttMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiStt>>,
+    TError,
+    { data: BodyType<AiSttBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof aiStt>>,
+  TError,
+  { data: BodyType<AiSttBody> },
+  TContext
+> => {
+  const mutationKey = ["aiStt"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof aiStt>>,
+    { data: BodyType<AiSttBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return aiStt(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AiSttMutationResult = NonNullable<
+  Awaited<ReturnType<typeof aiStt>>
+>;
+export type AiSttMutationBody = BodyType<AiSttBody>;
+export type AiSttMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Speech-to-text
+ */
+export const useAiStt = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof aiStt>>,
+    TError,
+    { data: BodyType<AiSttBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof aiStt>>,
+  TError,
+  { data: BodyType<AiSttBody> },
+  TContext
+> => {
+  return useMutation(getAiSttMutationOptions(options));
+};
+
+/**
+ * Create an OpenAI Realtime API session for live voice conversation
+ * @summary Create realtime voice session
+ */
+export const getAiRealtimeSessionUrl = () => {
+  return `/api/ai/realtime/session`;
+};
+
+export const aiRealtimeSession = async (
+  options?: RequestInit,
+): Promise<AiRealtimeSessionResponse> => {
+  return customFetch<AiRealtimeSessionResponse>(getAiRealtimeSessionUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getAiRealtimeSessionQueryKey = () => {
+  return [`/api/ai/realtime/session`] as const;
+};
+
+export const getAiRealtimeSessionQueryOptions = <
+  TData = Awaited<ReturnType<typeof aiRealtimeSession>>,
+  TError = ErrorType<ErrorResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof aiRealtimeSession>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getAiRealtimeSessionQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof aiRealtimeSession>>
+  > = ({ signal }) => aiRealtimeSession({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof aiRealtimeSession>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type AiRealtimeSessionQueryResult = NonNullable<
+  Awaited<ReturnType<typeof aiRealtimeSession>>
+>;
+export type AiRealtimeSessionQueryError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Create realtime voice session
+ */
+
+export function useAiRealtimeSession<
+  TData = Awaited<ReturnType<typeof aiRealtimeSession>>,
+  TError = ErrorType<ErrorResponse>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof aiRealtimeSession>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getAiRealtimeSessionQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;

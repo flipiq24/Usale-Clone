@@ -8,3 +8,47 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface ErrorResponse {
+  error: string;
+}
+
+export type AiChatRequestBrokerContext = { [key: string]: unknown };
+
+export type AiChatRequestConversationHistoryItem = {
+  role: string;
+  content: string;
+};
+
+export interface AiChatRequest {
+  message: string;
+  brokerContext?: AiChatRequestBrokerContext;
+  conversationHistory?: AiChatRequestConversationHistoryItem[];
+}
+
+export interface AiChatResponse {
+  reply: string;
+  model?: string;
+}
+
+export interface AiTtsRequest {
+  text: string;
+  voiceId?: string;
+}
+
+export interface AiSttResponse {
+  text: string;
+}
+
+export type AiRealtimeSessionResponseClientSecret = {
+  value: string;
+};
+
+export interface AiRealtimeSessionResponse {
+  id: string;
+  client_secret: AiRealtimeSessionResponseClientSecret;
+}
+
+export type AiSttBody = {
+  audio: Blob;
+};

@@ -109,3 +109,20 @@ Sections:
 - Footer with copyright, links
 
 Brand colors: orange `#E8571A`, dark blue `#2C3E50`
+
+Additional routes:
+- `/broker/:slug` — Broker Presentation page (10-slide sales deck with demo data, keyboard nav, script panel, progress dots)
+
+AI Conversation Features (integrated into Broker Presentation):
+- **Audio On/Off** button triggers ElevenLabs TTS narration of the current slide's script
+- **Ask AI** chat panel slides in from right, connects to ChatGPT for contextual Q&A about broker data
+- **Voice input** via microphone button uses Whisper STT → ChatGPT
+- **Realtime API** session endpoint available for live voice conversations
+
+API Endpoints (Express server at `/api`):
+- `POST /api/ai/chat` — ChatGPT text conversation with broker context
+- `POST /api/ai/tts` — ElevenLabs text-to-speech (returns audio/mpeg stream)
+- `POST /api/ai/stt` — Whisper speech-to-text (accepts multipart audio upload)
+- `GET /api/ai/realtime/session` — Creates OpenAI Realtime API session
+
+Required secrets: `OPENAI_API_KEY`, `ELEVENLABS_API_KEY`

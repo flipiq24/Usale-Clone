@@ -14,3 +14,57 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Send a message and receive an AI response via ChatGPT
+ * @summary AI text chat
+ */
+export const AiChatBody = zod.object({
+  message: zod.string(),
+  brokerContext: zod.object({}).passthrough().optional(),
+  conversationHistory: zod
+    .array(
+      zod.object({
+        role: zod.string(),
+        content: zod.string(),
+      }),
+    )
+    .optional(),
+});
+
+export const AiChatResponse = zod.object({
+  reply: zod.string(),
+  model: zod.string().optional(),
+});
+
+/**
+ * Convert text to speech audio via ElevenLabs
+ * @summary Text-to-speech
+ */
+export const AiTtsBody = zod.object({
+  text: zod.string(),
+  voiceId: zod.string().optional(),
+});
+
+/**
+ * Transcribe audio to text via Whisper
+ * @summary Speech-to-text
+ */
+export const AiSttBody = zod.object({
+  audio: zod.instanceof(File),
+});
+
+export const AiSttResponse = zod.object({
+  text: zod.string(),
+});
+
+/**
+ * Create an OpenAI Realtime API session for live voice conversation
+ * @summary Create realtime voice session
+ */
+export const AiRealtimeSessionResponse = zod.object({
+  id: zod.string(),
+  client_secret: zod.object({
+    value: zod.string(),
+  }),
+});

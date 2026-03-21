@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: ai
+    description: AI conversation operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,125 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /ai/chat:
+    post:
+      operationId: aiChat
+      tags: [ai]
+      summary: AI text chat
+      description: Send a message and receive an AI response via ChatGPT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiChatRequest"
+      responses:
+        "200":
+          description: AI response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiChatResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /ai/tts:
+    post:
+      operationId: aiTts
+      tags: [ai]
+      summary: Text-to-speech
+      description: Convert text to speech audio via ElevenLabs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiTtsRequest"
+      responses:
+        "200":
+          description: Audio stream
+          content:
+            audio/mpeg:
+              schema:
+                type: string
+                format: binary
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /ai/stt:
+    post:
+      operationId: aiStt
+      tags: [ai]
+      summary: Speech-to-text
+      description: Transcribe audio to text via Whisper
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  type: string
+                  format: binary
+              required:
+                - audio
+      responses:
+        "200":
+          description: Transcription result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiSttResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /ai/realtime/session:
+    get:
+      operationId: aiRealtimeSession
+      tags: [ai]
+      summary: Create realtime voice session
+      description: Create an OpenAI Realtime API session for live voice conversation
+      responses:
+        "200":
+          description: Session created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiRealtimeSessionResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +154,71 @@ components:
           type: string
       required:
         - status
-
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    AiChatRequest:
+      type: object
+      properties:
+        message:
+          type: string
+        brokerContext:
+          type: object
+        conversationHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+              content:
+                type: string
+            required:
+              - role
+              - content
+      required:
+        - message
+    AiChatResponse:
+      type: object
+      properties:
+        reply:
+          type: string
+        model:
+          type: string
+      required:
+        - reply
+    AiTtsRequest:
+      type: object
+      properties:
+        text:
+          type: string
+        voiceId:
+          type: string
+      required:
+        - text
+    AiSttResponse:
+      type: object
+      properties:
+        text:
+          type: string
+      required:
+        - text
+    AiRealtimeSessionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        client_secret:
+          type: object
+          properties:
+            value:
+              type: string
+          required:
+            - value
+      required:
+        - id
+        - client_secret

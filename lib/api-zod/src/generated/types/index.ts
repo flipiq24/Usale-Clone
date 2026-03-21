@@ -6,4 +6,14 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./aiChatRequest";
+export * from "./aiChatRequestBrokerContext";
+export * from "./aiChatRequestConversationHistoryItem";
+export * from "./aiChatResponse";
+export * from "./aiRealtimeSessionResponse";
+export * from "./aiRealtimeSessionResponseClientSecret";
+export * from "./aiSttBody";
+export * from "./aiSttResponse";
+export * from "./aiTtsRequest";
+export * from "./errorResponse";
 export * from "./healthStatus";
