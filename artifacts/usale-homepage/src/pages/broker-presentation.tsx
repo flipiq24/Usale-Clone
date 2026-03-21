@@ -22,8 +22,8 @@ interface OfficeMetric {
 const OFFICE_METRICS: OfficeMetric[] = [
   { label: "Total Trans. to Investors", value: "18,834" },
   { label: "Double-end Trans. %", value: "0.0%" },
-  { label: "Avg. Purchase", value: "$1,981,255" },
-  { label: "Avg. Resale", value: "$2,233,363" },
+  { label: "Avg. Purchase", value: "$1.98M" },
+  { label: "Avg. Resale", value: "$2.23M" },
   { label: "Last Property Sourced", value: "1321 GATES AVE, MANHATTAN BEACH" },
   { label: "Listings Sold for Investors", value: "2,512", expandKey: "sold-for" },
   { label: "Listings Sold to Investors", value: "2,088", expandKey: "sold-to" },
@@ -47,16 +47,16 @@ interface AgentRow {
 }
 
 const AGENT_DATA: AgentRow[] = [
-  { name: "TRACY B DO", totalTrans: 203, doubleEnd: "9.8%", avgPurchase: "$1,357,904", avgResale: "$1,373,613", lastPropertySourced: "3601 ARROYO SECO AVE, LOS ANGELES", soldFor: 85, soldTo: 9, uniqueRelationships: 49, recentBuyer: "CAROLINE PURVIS" },
-  { name: "SALLY FORSTER JONES", totalTrans: 138, doubleEnd: "17.0%", avgPurchase: "$3,172,932", avgResale: "$2,771,515", lastPropertySourced: "12377 RIDGE CIR, LOS ANGELES", soldFor: 43, soldTo: 32, uniqueRelationships: 74, recentBuyer: "DAVID FINDLEY" },
-  { name: "STEPHANIE YOUNGER", totalTrans: 119, doubleEnd: "12.3%", avgPurchase: "$1,873,102", avgResale: "$1,889,880", lastPropertySourced: "8000 STEWART AVE, LOS ANGELES", soldFor: 23, soldTo: 19, uniqueRelationships: 46, recentBuyer: "NIKKI BALDWIN" },
-  { name: "GARY DOSS", totalTrans: 105, doubleEnd: "12.5%", avgPurchase: "$690,218", avgResale: "$970,487", lastPropertySourced: "1030 WILDERNESS DR, BIG BEAR CITY", soldFor: 9, soldTo: 6, uniqueRelationships: 21, recentBuyer: "ISABEL ALVAREZ" },
-  { name: "RON WYNN", totalTrans: 98, doubleEnd: "11.8%", avgPurchase: "$2,372,009", avgResale: "$3,840,710", lastPropertySourced: "12548 EVERGLADE ST, LOS ANGELES", soldFor: 27, soldTo: 24, uniqueRelationships: 44, recentBuyer: "DAVI NOGUEIRA" },
-  { name: "VALERY NEUMAN", totalTrans: 93, doubleEnd: "30.2%", avgPurchase: "$3,055,362", avgResale: "$4,239,033", lastPropertySourced: "53374 VIA DONA, LA QUINTA", soldFor: 7, soldTo: 8, uniqueRelationships: 23, recentBuyer: "VALERY NEUMAN" },
-  { name: "DAVID BERG", totalTrans: 90, doubleEnd: "0.0%", avgPurchase: "$3,140,519", avgResale: "$2,879,949", lastPropertySourced: "1871 STANLEY AVE, LOS ANGELES", soldFor: 39, soldTo: 7, uniqueRelationships: 37, recentBuyer: "STEPHEN SWEENEY" },
-  { name: "SANDI PHILLIPS AND ASSO...", totalTrans: 87, doubleEnd: "20.8%", avgPurchase: "$958,981", avgResale: "$1,062,266", lastPropertySourced: "54817 RIVIERA, LA QUINTA", soldFor: 7, soldTo: 5, uniqueRelationships: 18, recentBuyer: "RICK PARNELL" },
-  { name: "CRAIG STRONG", totalTrans: 76, doubleEnd: "15.9%", avgPurchase: "$2,197,909", avgResale: "$1,972,490", lastPropertySourced: "4546 STROHM AVE, TOLUCA LAKE", soldFor: 15, soldTo: 8, uniqueRelationships: 21, recentBuyer: "JENNIFER LANDON" },
-  { name: "JEFF BRANDOLINO", totalTrans: 68, doubleEnd: "2.3%", avgPurchase: "$767,968", avgResale: "$981,911", lastPropertySourced: "22096 BARRINGTON WAY, SANTA CLARITA", soldFor: 42, soldTo: 1, uniqueRelationships: 12, recentBuyer: "JOEL KALMUS" },
+  { name: "TRACY B DO", totalTrans: 203, doubleEnd: "9.8%", avgPurchase: "$1.36M", avgResale: "$1.37M", lastPropertySourced: "3601 ARROYO SECO AVE, LOS ANGELES", soldFor: 85, soldTo: 9, uniqueRelationships: 49, recentBuyer: "CAROLINE PURVIS" },
+  { name: "SALLY FORSTER JONES", totalTrans: 138, doubleEnd: "17.0%", avgPurchase: "$3.17M", avgResale: "$2.77M", lastPropertySourced: "12377 RIDGE CIR, LOS ANGELES", soldFor: 43, soldTo: 32, uniqueRelationships: 74, recentBuyer: "DAVID FINDLEY" },
+  { name: "STEPHANIE YOUNGER", totalTrans: 119, doubleEnd: "12.3%", avgPurchase: "$1.87M", avgResale: "$1.89M", lastPropertySourced: "8000 STEWART AVE, LOS ANGELES", soldFor: 23, soldTo: 19, uniqueRelationships: 46, recentBuyer: "NIKKI BALDWIN" },
+  { name: "GARY DOSS", totalTrans: 105, doubleEnd: "12.5%", avgPurchase: "$690K", avgResale: "$970K", lastPropertySourced: "1030 WILDERNESS DR, BIG BEAR CITY", soldFor: 9, soldTo: 6, uniqueRelationships: 21, recentBuyer: "ISABEL ALVAREZ" },
+  { name: "RON WYNN", totalTrans: 98, doubleEnd: "11.8%", avgPurchase: "$2.37M", avgResale: "$3.84M", lastPropertySourced: "12548 EVERGLADE ST, LOS ANGELES", soldFor: 27, soldTo: 24, uniqueRelationships: 44, recentBuyer: "DAVI NOGUEIRA" },
+  { name: "VALERY NEUMAN", totalTrans: 93, doubleEnd: "30.2%", avgPurchase: "$3.06M", avgResale: "$4.24M", lastPropertySourced: "53374 VIA DONA, LA QUINTA", soldFor: 7, soldTo: 8, uniqueRelationships: 23, recentBuyer: "VALERY NEUMAN" },
+  { name: "DAVID BERG", totalTrans: 90, doubleEnd: "0.0%", avgPurchase: "$3.14M", avgResale: "$2.88M", lastPropertySourced: "1871 STANLEY AVE, LOS ANGELES", soldFor: 39, soldTo: 7, uniqueRelationships: 37, recentBuyer: "STEPHEN SWEENEY" },
+  { name: "SANDI PHILLIPS AND ASSO...", totalTrans: 87, doubleEnd: "20.8%", avgPurchase: "$959K", avgResale: "$1.06M", lastPropertySourced: "54817 RIVIERA, LA QUINTA", soldFor: 7, soldTo: 5, uniqueRelationships: 18, recentBuyer: "RICK PARNELL" },
+  { name: "CRAIG STRONG", totalTrans: 76, doubleEnd: "15.9%", avgPurchase: "$2.20M", avgResale: "$1.97M", lastPropertySourced: "4546 STROHM AVE, TOLUCA LAKE", soldFor: 15, soldTo: 8, uniqueRelationships: 21, recentBuyer: "JENNIFER LANDON" },
+  { name: "JEFF BRANDOLINO", totalTrans: 68, doubleEnd: "2.3%", avgPurchase: "$768K", avgResale: "$982K", lastPropertySourced: "22096 BARRINGTON WAY, SANTA CLARITA", soldFor: 42, soldTo: 1, uniqueRelationships: 12, recentBuyer: "JOEL KALMUS" },
 ];
 
 interface ListingRow {
@@ -73,25 +73,25 @@ interface ListingRow {
 }
 
 const LISTINGS_SOLD_FOR: ListingRow[] = [
-  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/15/2024", totalTrans: "3467", avgPurchase: "$699,387", avgResale: "$716,471", pfvRatio: "91.9%", listSoldRatio: "116.6%", pmRatio: "38 days", purchaseResale: 158 },
-  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "01/23/2022", totalTrans: "1470", avgPurchase: "$702,438", avgResale: "$705,706", pfvRatio: "95.0%", listSoldRatio: "99.6%", pmRatio: "34 days", purchaseResale: 108 },
-  { entityName: "D R HORTON LOS ANGELES HOLDING CO INC", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1180", avgPurchase: "$5,949,841", avgResale: "$571,071", pfvRatio: "56.5%", listSoldRatio: "1065.9%", pmRatio: "406 days", purchaseResale: 416 },
-  { entityName: "LENNAR HOMES OF CALIFORNIA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "761", avgPurchase: "$2,024,026", avgResale: "$816,303", pfvRatio: "53.8%", listSoldRatio: "297.6%", pmRatio: "87 days", purchaseResale: 120 },
-  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "758", avgPurchase: "$6,227,327", avgResale: "$919,477", pfvRatio: "79.2%", listSoldRatio: "687.9%", pmRatio: "444 days", purchaseResale: 420 },
-  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "744", avgPurchase: "$656,305", avgResale: "$719,469", pfvRatio: "89.1%", listSoldRatio: "93.3%", pmRatio: "52 days", purchaseResale: 96 },
-  { entityName: "D R HORTON LA HOLDING COMPANY I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554", avgPurchase: "$4,787,133", avgResale: "$482,508", pfvRatio: "", listSoldRatio: "1055.4%", pmRatio: "582 days", purchaseResale: 495 },
-  { entityName: "LENNAR HOMES OF CALIFORNIA INC", hometown: "CORONA, CA", lastPurchase: "08/14/2022", totalTrans: "487", avgPurchase: "$7,680,095", avgResale: "$1,947,064", pfvRatio: "72.3%", listSoldRatio: "969.4%", pmRatio: "645 days", purchaseResale: 464 },
+  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/15/2024", totalTrans: "3,467", avgPurchase: "$699K", avgResale: "$716K", pfvRatio: "91.9%", listSoldRatio: "116.6%", pmRatio: "38 days", purchaseResale: 158 },
+  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "01/23/2022", totalTrans: "1,470", avgPurchase: "$702K", avgResale: "$706K", pfvRatio: "95.0%", listSoldRatio: "99.6%", pmRatio: "34 days", purchaseResale: 108 },
+  { entityName: "D R HORTON LA HOLDING CO", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1,180", avgPurchase: "$5.95M", avgResale: "$571K", pfvRatio: "56.5%", listSoldRatio: "1065.9%", pmRatio: "406 days", purchaseResale: 416 },
+  { entityName: "LENNAR HOMES OF CA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "761", avgPurchase: "$2.02M", avgResale: "$816K", pfvRatio: "53.8%", listSoldRatio: "297.6%", pmRatio: "87 days", purchaseResale: 120 },
+  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "758", avgPurchase: "$6.23M", avgResale: "$919K", pfvRatio: "79.2%", listSoldRatio: "687.9%", pmRatio: "444 days", purchaseResale: 420 },
+  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "744", avgPurchase: "$656K", avgResale: "$719K", pfvRatio: "89.1%", listSoldRatio: "93.3%", pmRatio: "52 days", purchaseResale: 96 },
+  { entityName: "D R HORTON LA HOLDING CO I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554", avgPurchase: "$4.79M", avgResale: "$483K", pfvRatio: "", listSoldRatio: "1055.4%", pmRatio: "582 days", purchaseResale: 495 },
+  { entityName: "LENNAR HOMES OF CA INC", hometown: "CORONA, CA", lastPurchase: "08/14/2022", totalTrans: "487", avgPurchase: "$7.68M", avgResale: "$1.95M", pfvRatio: "72.3%", listSoldRatio: "969.4%", pmRatio: "645 days", purchaseResale: 464 },
 ];
 
 const LISTINGS_SOLD_TO: ListingRow[] = [
-  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/17/2024", totalTrans: "3913/4611", avgPurchase: "$686,980", avgResale: "$701,089", pfvRatio: "97.40%", listSoldRatio: "118.72%", pmRatio: "93 days", purchaseResale: 155 },
-  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "03/13/2022", totalTrans: "1889/5924", avgPurchase: "$678,811", avgResale: "$681,375", pfvRatio: "99.57%", listSoldRatio: "100.78%", pmRatio: "118 days", purchaseResale: 107 },
-  { entityName: "D R HORTON LOS ANGELES HOLDING CO INC", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1134/2058", avgPurchase: "$6,121,067", avgResale: "$574,313", pfvRatio: "1077.82%", listSoldRatio: "99.86%", pmRatio: "484 days", purchaseResale: 422 },
-  { entityName: "LENNAR HOMES OF CALIFORNIA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "1257/2074", avgPurchase: "$4,217,361", avgResale: "$2,028,461", pfvRatio: "396.05%", listSoldRatio: "142.90%", pmRatio: "211 days", purchaseResale: 111 },
-  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "691/782", avgPurchase: "$6,655,208", avgResale: "$968,890", pfvRatio: "731.23%", listSoldRatio: "99.91%", pmRatio: "577 days", purchaseResale: 372 },
-  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "804/967", avgPurchase: "$646,565", avgResale: "$708,682", pfvRatio: "91.20%", listSoldRatio: "102.33%", pmRatio: "133 days", purchaseResale: 95 },
-  { entityName: "D R HORTON LA HOLDING COMPANY I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554/2044", avgPurchase: "$4,787,133", avgResale: "$482,508", pfvRatio: "1029.10%", listSoldRatio: "94.72%", pmRatio: "766 days", purchaseResale: 487 },
-  { entityName: "LENNAR HOMES OF CALIFORNIA INC", hometown: "CORONA, CA", lastPurchase: "05/22/2023", totalTrans: "640/1943", avgPurchase: "$6,973,280", avgResale: "$2,351,985", pfvRatio: "807.57%", listSoldRatio: "484.70%", pmRatio: "750 days", purchaseResale: 367 },
+  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/17/2024", totalTrans: "3,913 / 4,611", avgPurchase: "$687K", avgResale: "$701K", pfvRatio: "97.4%", listSoldRatio: "118.7%", pmRatio: "93 days", purchaseResale: 155 },
+  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "03/13/2022", totalTrans: "1,889 / 5,924", avgPurchase: "$679K", avgResale: "$681K", pfvRatio: "99.6%", listSoldRatio: "100.8%", pmRatio: "118 days", purchaseResale: 107 },
+  { entityName: "D R HORTON LA HOLDING CO", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1,134 / 2,058", avgPurchase: "$6.12M", avgResale: "$574K", pfvRatio: "1077.8%", listSoldRatio: "99.9%", pmRatio: "484 days", purchaseResale: 422 },
+  { entityName: "LENNAR HOMES OF CA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "1,257 / 2,074", avgPurchase: "$4.22M", avgResale: "$2.03M", pfvRatio: "396.1%", listSoldRatio: "142.9%", pmRatio: "211 days", purchaseResale: 111 },
+  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "691 / 782", avgPurchase: "$6.66M", avgResale: "$969K", pfvRatio: "731.2%", listSoldRatio: "99.9%", pmRatio: "577 days", purchaseResale: 372 },
+  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "804 / 967", avgPurchase: "$647K", avgResale: "$709K", pfvRatio: "91.2%", listSoldRatio: "102.3%", pmRatio: "133 days", purchaseResale: 95 },
+  { entityName: "D R HORTON LA HOLDING CO I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554 / 2,044", avgPurchase: "$4.79M", avgResale: "$483K", pfvRatio: "1029.1%", listSoldRatio: "94.7%", pmRatio: "766 days", purchaseResale: 487 },
+  { entityName: "LENNAR HOMES OF CA INC", hometown: "CORONA, CA", lastPurchase: "05/22/2023", totalTrans: "640 / 1,943", avgPurchase: "$6.97M", avgResale: "$2.35M", pfvRatio: "807.6%", listSoldRatio: "484.7%", pmRatio: "750 days", purchaseResale: 367 },
 ];
 
 interface RelationshipRow {
@@ -106,24 +106,24 @@ interface RelationshipRow {
 }
 
 const RELATIONSHIPS_DATA: RelationshipRow[] = [
-  { entityName: "LOYOLA MARYMOUNT UNIVERSITY INC", entityRating: "3 Units - Low", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $2,803,333", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1,125,000", futureValue: "Avg. 100%" },
-  { entityName: "TJH RE PROPERTIES III LLC", entityRating: "2 Units - Low", investorRating: "5 Units - Mid", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1,122,500", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1,125,000", futureValue: "Avg. 100%" },
-  { entityName: "8833 RAMSGATE LLC", entityRating: "2 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $934,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "DABINKOS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $3,132,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "APX INSTMENTS INC", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "LONG BEACH, CA", purchasePrice: "Avg. $1,300,000", holdTime: "Avg. 205 Days", resalePurchase: "Avg. $1,400,000", futureValue: "Avg. 93%" },
-  { entityName: "MANASARA BLUFFS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1,855,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "AHNMP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "VENICE, CA", purchasePrice: "Avg. $4,200,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "AN4 PROPERTIES LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1,405,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "KENTWOOD LIVING LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1,125,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "3866 COOLIDGE LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1,835,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "THE ESTATES GROUP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $854,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
-  { entityName: "433 HILL ST LP", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1,650,000", holdTime: "Avg. 511 Days", resalePurchase: "Avg. $1,775,000", futureValue: "Avg. 93%" },
+  { entityName: "LOYOLA MARYMOUNT UNIVERSITY INC", entityRating: "3 Units - Low", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $2.80M", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1.13M", futureValue: "Avg. 100%" },
+  { entityName: "TJH RE PROPERTIES III LLC", entityRating: "2 Units - Low", investorRating: "5 Units - Mid", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1.12M", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1.13M", futureValue: "Avg. 100%" },
+  { entityName: "8833 RAMSGATE LLC", entityRating: "2 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $934K", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "DABINKOS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $3.13M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "APX INSTMENTS INC", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "LONG BEACH, CA", purchasePrice: "Avg. $1.30M", holdTime: "Avg. 205 Days", resalePurchase: "Avg. $1.40M", futureValue: "Avg. 93%" },
+  { entityName: "MANASARA BLUFFS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1.86M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "AHNMP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "VENICE, CA", purchasePrice: "Avg. $4.20M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "AN4 PROPERTIES LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1.41M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "KENTWOOD LIVING LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1.13M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "3866 COOLIDGE LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1.84M", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "THE ESTATES GROUP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $854K", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "433 HILL ST LP", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1.65M", holdTime: "Avg. 511 Days", resalePurchase: "Avg. $1.78M", futureValue: "Avg. 93%" },
 ];
 
 const SCRIPTS = [
   `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `This is the data for Reimer Realty Group and what we know about you. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is $1,981,255 and your average resale is $2,233,363. The last property sourced was at 1321 Gates Avenue in Manhattan Beach. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. This is really impressive data, ${BROKER.name}.`,
-  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of $1,981,255. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
+  `This is the data for Reimer Realty Group and what we know about you. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. This is really impressive data, ${BROKER.name}.`,
+  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
   `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
   `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`,
@@ -387,12 +387,13 @@ function AnimatedNumber({ target, run, prefix = "", suffix = "", dur = 1400 }: {
 }
 
 const CURRENT_TRANS = 2088;
-const AVG_PURCHASE = 1981255;
+const AVG_PURCHASE_RAW = 1981255;
+const AVG_PURCHASE_DISPLAY = 1.98;
 const COMMISSION_RATE = 0.02;
-const CURRENT_COMMISSIONS = CURRENT_TRANS * AVG_PURCHASE * COMMISSION_RATE;
+const CURRENT_COMMISSIONS_M = Math.round((CURRENT_TRANS * AVG_PURCHASE_RAW * COMMISSION_RATE) / 1e6 * 10) / 10;
 const GROWTH_RATE = 0.20;
-const PROJECTED_COMMISSIONS = CURRENT_COMMISSIONS * (1 + GROWTH_RATE);
-const ADDITIONAL_COMMISSIONS = PROJECTED_COMMISSIONS - CURRENT_COMMISSIONS;
+const PROJECTED_COMMISSIONS_M = Math.round(CURRENT_COMMISSIONS_M * (1 + GROWTH_RATE) * 10) / 10;
+const ADDITIONAL_COMMISSIONS_M = Math.round((PROJECTED_COMMISSIONS_M - CURRENT_COMMISSIONS_M) * 10) / 10;
 const ADDITIONAL_TRANS = Math.round(CURRENT_TRANS * GROWTH_RATE);
 
 function SectionValueProp({ hl }: { hl: number }) {
@@ -409,18 +410,18 @@ function SectionValueProp({ hl }: { hl: number }) {
         </div>
         <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Avg. Purchase Price</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={AVG_PURCHASE} run={hl >= 1} prefix="$" /></div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}>$1.98M</div>
         </div>
         <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>At 2% Commission</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={Math.round(CURRENT_COMMISSIONS)} run={hl >= 1} prefix="$" /></div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}>${CURRENT_COMMISSIONS_M}M</div>
         </div>
       </div>
 
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 2) }}>
         <div style={{ flex: "1 1 300px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, padding: "28px 24px", textAlign: "center", color: "#fff" }}>
           <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.03em", marginBottom: 6 }}>What if we bring this up by 20%?</div>
-          <div style={{ fontSize: 42, fontWeight: 800 }}><AnimatedNumber target={Math.round(PROJECTED_COMMISSIONS)} run={hl >= 2} prefix="$" /></div>
+          <div style={{ fontSize: 42, fontWeight: 800 }}>${PROJECTED_COMMISSIONS_M}M</div>
           <div style={{ fontSize: 13, marginTop: 8, opacity: 0.9 }}>Not because you work harder — because you <b>control more buyers</b></div>
         </div>
       </div>
@@ -428,7 +429,7 @@ function SectionValueProp({ hl }: { hl: number }) {
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 3) }}>
         <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Additional Revenue</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+<AnimatedNumber target={Math.round(ADDITIONAL_COMMISSIONS)} run={hl >= 3} prefix="$" /></div>
+          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+${ADDITIONAL_COMMISSIONS_M}M</div>
         </div>
         <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
           <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>More Transactions</div>
