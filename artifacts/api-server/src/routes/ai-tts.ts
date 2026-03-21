@@ -29,11 +29,13 @@ router.post("/ai/tts", async (req, res) => {
         },
         body: JSON.stringify({
           text,
-          model_id: "eleven_monolingual_v1",
+          model_id: "eleven_turbo_v2_5",
           voice_settings: {
             stability: 0.5,
             similarity_boost: 0.75,
+            use_speaker_boost: true,
           },
+          optimize_streaming_latency: 3,
         }),
       }
     );
@@ -47,6 +49,7 @@ router.post("/ai/tts", async (req, res) => {
 
     res.setHeader("Content-Type", "audio/mpeg");
     res.setHeader("Transfer-Encoding", "chunked");
+    res.setHeader("Cache-Control", "no-cache");
 
     const reader = response.body?.getReader();
     if (!reader) {

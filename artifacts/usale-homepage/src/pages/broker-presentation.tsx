@@ -1174,8 +1174,8 @@ export default function BrokerPresentation() {
   useEffect(() => {
     if (audioOn) {
       playTTS(SCRIPTS[slide]);
-      if (slide < total - 1) {
-        preloadTTS(SCRIPTS[slide + 1]);
+      for (let i = 1; i <= 3; i++) {
+        if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
       }
     } else {
       stopTTS();
