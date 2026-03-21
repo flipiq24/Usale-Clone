@@ -383,7 +383,7 @@ export default function AdminPage() {
         </button>
       </div>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 20px" }}>
+      <div style={{ margin: "0 auto", padding: "24px 32px" }}>
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 32 }}>
           <StatCard label="Total" value={stats.total} />
           <StatCard label="Viewed" value={stats.viewed} />
