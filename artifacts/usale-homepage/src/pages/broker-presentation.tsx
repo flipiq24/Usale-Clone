@@ -142,7 +142,7 @@ function DataRowComponent({ row, i }: { row: DataRow; i: number }) {
   return (
     <div style={{
       display: "grid",
-      gridTemplateColumns: "60px 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr",
+      gridTemplateColumns: "60px 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
       gap: 8,
       padding: "12px 16px",
       background: i % 2 === 0 ? "#fafaf5" : "#fff",
@@ -158,6 +158,7 @@ function DataRowComponent({ row, i }: { row: DataRow; i: number }) {
       <span><b style={{ color: "#E8571A" }}>Purchase Price</b><br />{row.purchasePrice}</span>
       <span><b style={{ color: "#E8571A" }}>Hold Time</b><br />{row.holdTime}</span>
       <span><b style={{ color: "#E8571A" }}>Resale Purchase</b><br />{row.resalePrice}</span>
+      <span><b style={{ color: "#E8571A" }}>Future Value</b><br />{row.futureValue}</span>
     </div>
   );
 }
@@ -177,7 +178,7 @@ function SectionWelcome() {
   );
 }
 
-function SectionDataCards({ activeTab, setActiveTab }: { activeTab: number; setActiveTab: (i: number) => void }) {
+function SectionDataCards({ activeTab, setActiveTab, runCounters }: { activeTab: number; setActiveTab: (i: number) => void; runCounters: boolean }) {
   const tab = DATA_TABS[activeTab] || DATA_TABS[0];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
@@ -194,7 +195,7 @@ function SectionDataCards({ activeTab, setActiveTab }: { activeTab: number; setA
             transition: "all 0.2s",
             textAlign: "center", lineHeight: 1.3,
           }}>
-            <div style={{ fontSize: 22, fontWeight: 700 }}>{t.value}</div>
+            <div style={{ fontSize: 22, fontWeight: 700 }}><Counter target={t.value} run={runCounters} /></div>
             {t.label}
           </button>
         ))}
@@ -434,7 +435,7 @@ export default function BrokerPresentation() {
 
   const sections = [
     <SectionWelcome key={0} />,
-    <SectionDataCards key={1} activeTab={activeTab} setActiveTab={setActiveTab} />,
+    <SectionDataCards key={1} activeTab={activeTab} setActiveTab={setActiveTab} runCounters={slide === 1} />,
     <SectionTitlePartner key={2} />,
     <SectionWhyDifferent key={3} />,
     <SectionWhyDoingThis key={4} />,
