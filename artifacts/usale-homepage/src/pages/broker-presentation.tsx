@@ -183,10 +183,10 @@ function SectionWelcome({ hl }: { hl: number }) {
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
       <img src={USALE_LOGO} alt="USale" style={{ height: 72, marginBottom: 8, ...hVisible(hl, 0) }} />
       <p style={{ fontSize: 14, color: "#adb5bd", letterSpacing: "0.05em", ...hVisible(hl, 1) }}>usale.com/broker/{BROKER.slug}</p>
-      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#0f1419", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 2) }}>
+      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 2) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
-      <p style={{ fontSize: 17, color: "#495057", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 3) }}>
+      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 3) }}>
         We're a tech company that specializes in empowering investors and the agents who transact with them.
       </p>
     </div>
@@ -197,7 +197,7 @@ function SectionDataCards({ activeTab, setActiveTab, runCounters }: { activeTab:
   const tab = DATA_TABS[activeTab] || DATA_TABS[0];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, letterSpacing: "-0.02em" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         Here's what we know about <span style={{ color: "#E8571A" }}>you</span>.
       </h2>
       <div style={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
@@ -233,10 +233,10 @@ function SectionTitlePartner({ hl }: { hl: number }) {
       <div style={{ width: 64, height: 64, borderRadius: 16, background: "#2C3E5012", display: "flex", alignItems: "center", justifyContent: "center", ...hVisible(hl, 0) }}>
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2C3E50" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
       </div>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, ...hVisible(hl, 1) }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 1) }}>
         We also know you have a great relationship with <span style={{ color: "#E8571A" }}>{BROKER.titlePartner}</span>.
       </h2>
-      <p style={{ fontSize: 15, color: "#495057", maxWidth: 480, lineHeight: 1.6, ...hVisible(hl, 2) }}>
+      <p style={{ fontSize: 15, color: "#2C3E50", maxWidth: 480, lineHeight: 1.6, ...hVisible(hl, 2) }}>
         We have a lot of data. Your service provider network is already aligned with what we're building.
       </p>
     </div>
@@ -252,7 +252,7 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, letterSpacing: "-0.02em" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         A frictionless marketplace. <span style={{ color: "#E8571A" }}>Think of it as an off-market MLS.</span>
       </h2>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
@@ -261,8 +261,8 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
             <div style={{ width: 32, height: 32, borderRadius: 8, background: "#E8571A0A", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </div>
-            <div style={{ fontSize: 15, fontWeight: 650, color: "#0f1419", marginBottom: 4 }}>{item.t}</div>
-            <div style={{ fontSize: 13, color: "#6c757d", lineHeight: 1.5 }}>{item.s}</div>
+            <div style={{ fontSize: 15, fontWeight: 650, color: "#2C3E50", marginBottom: 4 }}>{item.t}</div>
+            <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{item.s}</div>
           </div>
         ))}
       </div>
@@ -273,7 +273,7 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
 function SectionWhyDoingThis({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "55vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
         So why are we doing this?
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -285,13 +285,13 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
           <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#E8571A", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 16, flexShrink: 0 }}>{item.n}</div>
             <div>
-              <div style={{ fontSize: 16, fontWeight: 650, color: "#0f1419" }}>{item.t}</div>
-              <div style={{ fontSize: 14, color: "#495057", marginTop: 4, lineHeight: 1.5 }}>{item.s}</div>
+              <div style={{ fontSize: 16, fontWeight: 650, color: "#2C3E50" }}>{item.t}</div>
+              <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 4, lineHeight: 1.5 }}>{item.s}</div>
             </div>
           </div>
         ))}
       </div>
-      <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#495057", lineHeight: 1.6, ...hVisible(hl, 3) }}>
+      <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#2C3E50", lineHeight: 1.6, ...hVisible(hl, 3) }}>
         We work with <b>national title and hard money lenders</b> who want to offer services whenever you transact.
       </div>
     </div>
@@ -306,7 +306,7 @@ function SectionWorkflow({ hl }: { hl: number }) {
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, letterSpacing: "-0.02em" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         How the <span style={{ color: "#E8571A" }}>workflow</span> works.
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -314,9 +314,9 @@ function SectionWorkflow({ hl }: { hl: number }) {
           <div key={i} style={{ padding: "22px 24px", background: "#fff", borderRadius: 14, border: "1px solid #eee", borderLeft: "4px solid #E8571A", ...hVisible(hl, i) }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
               <span style={{ background: "#E8571A", color: "#fff", width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 14, flexShrink: 0 }}>{p.n}</span>
-              <span style={{ fontSize: 16, fontWeight: 650, color: "#0f1419" }}>{p.t}</span>
+              <span style={{ fontSize: 16, fontWeight: 650, color: "#2C3E50" }}>{p.t}</span>
             </div>
-            <div style={{ fontSize: 14, color: "#495057", lineHeight: 1.65, paddingLeft: 38 }}>{p.body}</div>
+            <div style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.65, paddingLeft: 38 }}>{p.body}</div>
           </div>
         ))}
       </div>
@@ -330,14 +330,14 @@ function SectionWorkflow({ hl }: { hl: number }) {
 function SectionCredibility({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
         We are the co-creators of <span style={{ color: "#E8571A" }}>iBuyer Connect</span>, a product of Cloud CMA.
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#495057", lineHeight: 1.65, ...hVisible(hl, 0) }}>
+        <div style={{ padding: "20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 0) }}>
           Agents need to provide their sellers with a <b>real, data-driven cash offer</b>. Most of the time the seller won't accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 <b>that helps them get a listing. You guys win.</b>
         </div>
-        <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#495057", lineHeight: 1.65, ...hVisible(hl, 1) }}>
+        <div style={{ padding: "20px", background: "#E8571A08", borderRadius: 12, border: "1px solid #E8571A18", fontSize: 14, color: "#2C3E50", lineHeight: 1.65, ...hVisible(hl, 1) }}>
           In partnership with <b>local service providers who know that value first is the only way to grow</b>. Title companies and hard money lenders understand that bringing value to brokers like yourself \u2014 they get to see transactions, they win, your agent wins, the investor wins.
         </div>
         <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#2C3E50", fontWeight: 600, textAlign: "center", ...hVisible(hl, 2) }}>
@@ -358,14 +358,14 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "55vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
         Everybody <span style={{ color: "#E8571A" }}>wins</span>.
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {points.map((p, i) => (
           <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#27ae60" strokeWidth="2.5" style={{ flexShrink: 0, marginTop: 2 }}><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span style={{ fontSize: 14, color: "#0f1419", lineHeight: 1.5 }}>{p}</span>
+            <span style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.5 }}>{p}</span>
           </div>
         ))}
       </div>
@@ -376,10 +376,10 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
 function SectionHowWePay({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0, ...hVisible(hl, 0) }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
         How do we get paid?
       </h2>
-      <div style={{ maxWidth: 560, fontSize: 16, color: "#495057", lineHeight: 1.7, ...hVisible(hl, 1) }}>
+      <div style={{ maxWidth: 560, fontSize: 16, color: "#2C3E50", lineHeight: 1.7, ...hVisible(hl, 1) }}>
         Pretty simple. When our investors that are providing your agents the <b>instant cash offer</b> buy a property, <b>we get a small share</b>.
       </div>
       <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
@@ -398,14 +398,14 @@ function SectionCTA({ hl }: { hl: number }) {
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#0f1419", margin: 0 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
         What do we need from <span style={{ color: "#E8571A" }}>you</span>?
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {steps.map((s, i) => (
           <div key={i} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #eee", ...hVisible(hl, i) }}>
             <span style={{ width: 28, height: 28, borderRadius: "50%", background: "#E8571A", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 13, flexShrink: 0 }}>{i + 1}</span>
-            <span style={{ fontSize: 14, color: "#0f1419", lineHeight: 1.5 }}>{s}</span>
+            <span style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.5 }}>{s}</span>
           </div>
         ))}
       </div>
@@ -772,19 +772,18 @@ export default function BrokerPresentation() {
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif", position: "relative" }}>
-      <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
 
       <div style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center",
-        background: "rgba(248,249,250,0.9)", backdropFilter: "blur(16px)",
-        borderBottom: "1px solid #eee",
+        background: "white",
+        boxShadow: "0 2px 16px rgba(0,0,0,0.08)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <img src={USALE_LOGO} alt="USale" style={{ height: 32 }} />
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
-          <span style={{ fontSize: 13, color: "#adb5bd" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
+          <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={toggleAudio} style={{
@@ -822,7 +821,7 @@ export default function BrokerPresentation() {
           </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
-              <div key={i} style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, background: i === slide ? "#E8571A" : "#0f141915", transition: "all 0.3s" }} />
+              <div key={i} style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, background: i === slide ? "#E8571A" : "#2C3E5020", transition: "all 0.3s" }} />
             ))}
           </div>
         </div>
@@ -839,7 +838,7 @@ export default function BrokerPresentation() {
           boxShadow: "-4px 0 20px rgba(0,0,0,0.08)",
         }}>
           <div style={{ padding: "14px 16px", borderBottom: "1px solid #eee", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: "#0f1419" }}>Ask AI about this presentation</span>
+            <span style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50" }}>Ask AI about this presentation</span>
             <button onClick={() => setChatOpen(false)} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 18, color: "#adb5bd", padding: 4 }}>&times;</button>
           </div>
 
@@ -852,7 +851,7 @@ export default function BrokerPresentation() {
                   {["What does USale offer brokers?", "Tell me about the investor data", "How does the workflow work?"].map((q, i) => (
                     <button key={i} onClick={() => sendChat(q)} style={{
                       padding: "8px 12px", background: "#f8f9fa", border: "1px solid #eee", borderRadius: 8,
-                      fontSize: 12, color: "#495057", cursor: "pointer", textAlign: "left",
+                      fontSize: 12, color: "#2C3E50", cursor: "pointer", textAlign: "left",
                     }}>{q}</button>
                   ))}
                 </div>
@@ -863,7 +862,7 @@ export default function BrokerPresentation() {
                 alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
                 maxWidth: "85%", padding: "10px 14px", borderRadius: 12,
                 background: msg.role === "user" ? "#E8571A" : "#f1f3f5",
-                color: msg.role === "user" ? "#fff" : "#0f1419",
+                color: msg.role === "user" ? "#fff" : "#2C3E50",
                 fontSize: 13, lineHeight: 1.5,
                 borderBottomRightRadius: msg.role === "user" ? 4 : 12,
                 borderBottomLeftRadius: msg.role === "assistant" ? 4 : 12,
@@ -930,7 +929,7 @@ export default function BrokerPresentation() {
         }}>
           <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
             <span style={{ background: "#E8571A10", borderRadius: 4, padding: "2px 8px", fontSize: 10, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", flexShrink: 0, marginTop: 3 }}>Script</span>
-            <p style={{ fontSize: 13, color: "#495057", lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>{SCRIPTS[slide]}</p>
+            <p style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>{SCRIPTS[slide]}</p>
           </div>
         </div>
       )}
@@ -943,7 +942,7 @@ export default function BrokerPresentation() {
       }}>
         <button onClick={goPrev} disabled={slide === 0} style={{
           padding: "10px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: slide === 0 ? "default" : "pointer",
-          border: "1px solid #dee2e6", background: "#fff", color: slide === 0 ? "#adb5bd" : "#0f1419",
+          border: "1px solid #dee2e6", background: "#fff", color: slide === 0 ? "#adb5bd" : "#2C3E50",
           opacity: slide === 0 ? 0.5 : 1,
         }}>
           ← Previous
