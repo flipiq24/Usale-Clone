@@ -155,9 +155,9 @@ const HIGHLIGHT_COUNTS = [3, 12, 5, 4, 4, 3, 3, 5, 3, 5, 4];
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
   return {
-    opacity: active ? 1 : 0.15,
+    opacity: active ? 1 : 0,
     transform: active ? "translateY(0)" : "translateY(12px)",
-    transition: "opacity 0.5s ease, transform 0.5s ease",
+    transition: "opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1)",
   };
 }
 
@@ -1059,6 +1059,7 @@ export default function BrokerPresentation() {
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
+  const [silentStep, setSilentStep] = useState(0);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
@@ -1103,6 +1104,22 @@ export default function BrokerPresentation() {
       stopTTS();
     }
   }, [slide, audioOn]);
+
+  useEffect(() => {
+    if (audioOn && isTTSPlaying) return;
+    setSilentStep(0);
+    const maxSteps = HIGHLIGHT_COUNTS[slide];
+    let step = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    const advance = () => {
+      step++;
+      if (step >= maxSteps) return;
+      setSilentStep(step);
+      timeout = setTimeout(advance, 1000);
+    };
+    timeout = setTimeout(advance, 600);
+    return () => clearTimeout(timeout);
+  }, [slide, audioOn, isTTSPlaying]);
 
   const toggleAudio = useCallback(() => {
     if (audioOn) {
@@ -1188,8 +1205,11 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (!audioOn || slide !== idx || !isTTSPlaying) return HIGHLIGHT_COUNTS[idx] - 1;
-    return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
+    if (audioOn && isTTSPlaying && slide === idx) {
+      return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
+    }
+    if (slide === idx) return silentStep;
+    return HIGHLIGHT_COUNTS[idx] - 1;
   };
 
   const sections = [
