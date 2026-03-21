@@ -837,8 +837,7 @@ function SectionSurvey({ hl }: { hl: number }) {
         ...hVisible(hl, 3),
       }}>
         <img src={TONY_PHOTO} alt="Tony Diaz" style={{
-          width: 90, height: 90, borderRadius: "50%", objectFit: "cover",
-          border: "3px solid #E8571A",
+          width: 130, height: 130, borderRadius: 12, objectFit: "cover",
         }} />
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
           <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
