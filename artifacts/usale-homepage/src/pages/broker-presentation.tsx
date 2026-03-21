@@ -150,7 +150,21 @@ const SECTION_TITLES = [
   "Survey",
 ];
 
-const HIGHLIGHT_COUNTS = [3, 12, 5, 4, 4, 3, 3, 5, 3, 5, 4];
+const HIGHLIGHT_CUES: [number, number][][] = [
+  [[0, 0], [0.3, 1], [0.65, 2]],
+  [[0, 0], [0.03, 1], [0.07, 2], [0.10, 3], [0.13, 4], [0.16, 5], [0.28, 6], [0.38, 7], [0.45, 8], [0.50, 9], [0.55, 10], [0.65, 11]],
+  [[0, 0], [0.10, 1], [0.35, 2], [0.60, 3], [0.80, 4]],
+  [[0, 0], [0.20, 1], [0.45, 2], [0.70, 3]],
+  [[0, 0], [0.25, 1], [0.50, 2], [0.80, 3]],
+  [[0, 0], [0.33, 1], [0.66, 2]],
+  [[0, 0], [0.35, 1], [0.70, 2]],
+  [[0, 0], [0.20, 1], [0.40, 2], [0.60, 3], [0.80, 4]],
+  [[0, 0], [0.30, 1], [0.65, 2]],
+  [[0, 0], [0.15, 1], [0.35, 2], [0.55, 3], [0.75, 4]],
+  [[0, 0], [0.25, 1], [0.50, 2], [0.75, 3]],
+];
+
+const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -161,9 +175,13 @@ function hVisible(step: number, index: number): React.CSSProperties {
   };
 }
 
-function getHighlightStep(progress: number, totalSteps: number): number {
-  if (progress >= 1) return totalSteps - 1;
-  return Math.floor(progress * totalSteps);
+function getHighlightStep(progress: number, cues: [number, number][]): number {
+  let step = 0;
+  for (const [threshold, s] of cues) {
+    if (progress >= threshold) step = s;
+    else break;
+  }
+  return step;
 }
 
 function introReveal(step: number, index: number): React.CSSProperties {
@@ -1205,7 +1223,7 @@ export default function BrokerPresentation() {
 
   const hlStep = (idx: number) => {
     if (audioOn && isTTSPlaying && slide === idx) {
-      return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
+      return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
     }
     if (slide === idx) return silentStep;
     return HIGHLIGHT_COUNTS[idx] - 1;

@@ -1,0 +1,127 @@
+The Core Problem
+Your highlight system is broken because it's tied to TTS audio progress as a single linear number (ttsProgress = 0→1), but each slide has different numbers of elements to highlight, and the script doesn't spend equal time on each data point. The getHighlightStep function just divides progress evenly — so if Slide 2 has 12 highlight steps but the narrator spends 70% of the time on the first 3 data points, the highlights race ahead or lag behind.
+
+Here's what needs to change:
+
+1. Time-stamped highlight cues per slide (not linear progress)
+Each script mentions specific data points at specific moments. You need a HIGHLIGHT_CUES array that maps percentage of audio progress → which highlight step to be on, so highlights sync to what's actually being spoken.
+
+2. The hlStep function needs to use cue-based lookup
+Instead of Math.floor(progress * totalSteps), it should find the correct step from the cue timeline.
+
+3. SectionDataCards auto-expand timing is disconnected
+The EXPAND_AT_STEP map (step 6 = "sold-for", step 7 = "sold-to", etc.) works for the timer fallback but doesn't sync with audio narration progress properly.
+
+Detailed Replit Prompt
+Here's the exact prompt to give Replit:
+
+PROMPT FOR REPLIT:
+
+I need you to fix the highlight/narration synchronization system in `artifacts/usale-homepage/src/pages/broker-presentation.tsx`. The presentation is a 10-slide automated "ghost presenter" — TTS narrates each slide while elements highlight progressively as they're mentioned. Right now it's broken because highlights are calculated from linear audio progress (0-1) divided evenly across highlight steps, but the narration doesn't mention each element at evenly-spaced intervals.
+
+HERE IS EXACTLY WHAT TO CHANGE:
+
+## 1. Replace the linear highlight calculation with cue-based timing
+
+Replace `HIGHLIGHT_COUNTS` (line 150) with a `HIGHLIGHT_CUES` array. Each slide gets an array of `[progressThreshold, highlightStep]` tuples that map audio progress (0.0 to 1.0) to which highlight step should be active. This means highlights fire when the narrator actually mentions that data point.
+
+Here are the cue maps for each slide based on when the script text mentions each element:
+
+```typescript
+// Each entry: [progress_when_narrator_reaches_this_point, highlight_step_index]
+const HIGHLIGHT_CUES: [number, number][][] = [
+  // Slide 0: Welcome (3 elements: title, logo, description)
+  [[0, 0], [0.3, 1], [0.65, 2]],
+  
+  // Slide 1: Data Cards (12 elements: title + 11 metrics)
+  // Script mentions: title(0), total trans(0.03), double-end(0.07), avg purchase(0.10), avg resale(0.13),
+  // last property(0.16), sold-for(0.28), sold-to(0.38), re-sold(0.45), purchase-resale(0.50),
+  // unique relationships(0.55), investor-friendly agents(0.65)
+  [[0, 0], [0.03, 1], [0.07, 2], [0.10, 3], [0.13, 4], [0.16, 5], [0.28, 6], [0.38, 7], [0.45, 8], [0.50, 9], [0.55, 10], [0.65, 11]],
+  
+  // Slide 2: Value Prop / The Opportunity (5 elements)
+  // Script: title(0), transaction cards(0.10), 20% growth card(0.35), additional revenue(0.60), "do I have your attention"(0.80)
+  [[0, 0], [0.10, 1], [0.35, 2], [0.60, 3], [0.80, 4]],
+  
+  // Slide 3: Why USale / Different (4 elements: no memberships, no fees, not competing, connect agents)
+  [[0, 0], [0.20, 1], [0.45, 2], [0.70, 3]],
+  
+  // Slide 4: Why We Do This (4 elements)
+  [[0, 0], [0.25, 1], [0.50, 2], [0.80, 3]],
+  
+  // Slide 5: Workflow (3 paths)
+  [[0, 0], [0.33, 1], [0.66, 2]],
+  
+  // Slide 6: Credibility (3 elements)
+  [[0, 0], [0.35, 1], [0.70, 2]],
+  
+  // Slide 7: Everybody Wins (5 elements)
+  [[0, 0], [0.20, 1], [0.40, 2], [0.60, 3], [0.80, 4]],
+  
+  // Slide 8: How We Get Paid (3 elements)
+  [[0, 0], [0.30, 1], [0.65, 2]],
+  
+  // Slide 9: Next Steps / CTA (5 elements)
+  [[0, 0], [0.15, 1], [0.35, 2], [0.55, 3], [0.75, 4]],
+];
+
+2. Replace getHighlightStep function (line 161) with:
+function getHighlightStep(progress: number, cues: [number, number][]): number {
+  let step = 0;
+  for (const [threshold, s] of cues) {
+    if (progress >= threshold) step = s;
+    else break;
+  }
+  return step;
+}
+
+3. Update hlStep (line 1025) to use cues instead of counts:
+const hlStep = (idx: number) => {
+  const cues = HIGHLIGHT_CUES[idx];
+  const maxStep = cues[cues.length - 1][1];
+  if (!audioOn || slide !== idx || !isTTSPlaying) return maxStep;
+  return getHighlightStep(ttsProgress, cues);
+};
+
+4. Update SectionDataCards to sync expands with narration cues
+The EXPAND_AT_STEP map should trigger based on the highlight step reaching the correct value during narration. Currently it uses hardcoded step numbers that may not match. Make sure:
+
+When effectiveHl reaches step 6 → expand "sold-for"
+When effectiveHl reaches step 7 → expand "sold-to"
+When effectiveHl reaches step 10 → expand "relationships"
+When effectiveHl reaches step 11 → expand "agents"
+This already works via EXPAND_AT_STEP, just make sure the step numbers still match with the new cue system. They should since we're keeping the same step indices.
+
+5. Also keep HIGHLIGHT_COUNTS as a derived value for the timer fallback in SectionDataCards:
+const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
+
+This way the timerActive fallback (when audio is off) still works using the same total step count.
+
+6. Add a visual "currently speaking" indicator
+When TTS is playing and a highlight step is active, add a subtle pulsing glow animation to the currently-highlighted element. This is the "ghost presenter" effect. The current code already has isCurrent styling in SectionDataCards — make sure ALL section components have similar treatment:
+
+The currently-highlighted element should have a subtle orange glow/pulse
+Previously-revealed elements should be fully visible but without the glow
+Not-yet-revealed elements should be at opacity 0.15 with translateY(12px)
+This is already mostly working via hVisible() and introReveal() — just make sure the timing is now driven by the cue-based system instead of linear division.
+
+IMPORTANT CONTEXT:
+All data (BROKER, OFFICE_METRICS, AGENT_DATA, etc.) will eventually be dynamic per user — they're placeholders. The script text in SCRIPTS[] references this data with template literals.
+The TTS narrates SCRIPTS[slide], and the highlight system must sync with the narration so elements appear exactly when the narrator mentions them.
+The useAudioNarration hook tracks progress (0-1) via audio.currentTime / audio.duration — this is the value we use to look up cue positions.
+When audio finishes, handleTTSEnded auto-advances to next slide.
+When audio is OFF, the timer fallback in SectionDataCards auto-reveals elements on a timer. Keep this working.
+DO NOT change the TTS system, the WebSocket realtime voice, the chat panel, or the slide navigation. Only fix the highlight synchronization system.
+
+
+---
+
+## Summary of What This Fixes
+
+| Problem | Fix |
+|---------|-----|
+| Highlights advance at wrong time | Cue-based timing instead of linear division |
+| Data tables expand too early/late | Expand triggers tied to actual narration position |
+| Elements don't match what's being spoken | Each cue point maps to when the script mentions that element |
+| "Ghost presenter" effect is choppy | Smooth transitions with proper timing |
+| Timer fallback breaks | `HIGHLIGHT_COUNTS` derived from cues automatically |
