@@ -747,7 +747,6 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmitSurvey = async () => {
-    if (!contactId) return;
     const metadata = {
       flipping,
       wholesaling,
@@ -757,13 +756,17 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
       comment,
     };
     try {
-      await fetch(`${API_BASE}/tracking/event`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contactId, eventType: "survey", metadata }),
-      });
+      if (contactId) {
+        await fetch(`${API_BASE}/tracking/event`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contactId, eventType: "survey", metadata }),
+        });
+      }
       setSubmitted(true);
-    } catch {}
+    } catch {
+      setSubmitted(true);
+    }
   };
 
   const YesNo = ({ label, value, onChange }: { label: string; value: boolean | null; onChange: (v: boolean) => void }) => (
@@ -859,7 +862,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
         </div>
       </div>
 
-      <div style={{ ...hVisible(hl, 3) }}>
+      <div>
         <h3 style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", margin: "0 0 8px 0" }}>Comments</h3>
         <textarea
           placeholder="Any additional comments or feedback..."
@@ -873,8 +876,8 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
         />
       </div>
 
-      {contactId && !submitted && (
-        <div style={{ textAlign: "center", ...hVisible(hl, 3) }}>
+      {!submitted && (
+        <div style={{ textAlign: "center" }}>
           <button
             onClick={handleSubmitSurvey}
             style={{
