@@ -1259,14 +1259,6 @@ export default function BrokerPresentation() {
           }}>
             📝 Script
           </button>
-          <button onClick={() => setChatOpen(!chatOpen)} style={{
-            padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
-            border: `1px solid ${chatOpen ? "#E8571A40" : "#dee2e6"}`,
-            background: chatOpen ? "#E8571A10" : "#fff",
-            color: chatOpen ? "#E8571A" : "#adb5bd",
-          }}>
-            💬 Ask AI
-          </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
               <div key={i} style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, background: i === slide ? "#E8571A" : "#2C3E5020", transition: "all 0.3s" }} />
