@@ -263,7 +263,6 @@ const EXPAND_AT_STEP: Record<number, string> = {
 };
 
 function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -279,9 +278,11 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
   useEffect(() => {
     if (!isNarrating || hl < 1) return;
     const row = rowRefs.current[hl - 1];
-    if (row) {
-      row.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
+    if (!row) return;
+    const t = setTimeout(() => {
+      row.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 120);
+    return () => clearTimeout(t);
   }, [hl, isNarrating]);
 
   return (
@@ -289,7 +290,7 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
       <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
         This is the data for <span style={{ color: "#E8571A" }}>{BROKER.brokerage}</span>!
       </h2>
-      <div ref={scrollRef} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {OFFICE_METRICS.map((m, i) => {
           const isExpandable = !!m.expandKey;
           const isExpanded = expanded === m.expandKey;
@@ -303,50 +304,68 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
               ref={(el) => { rowRefs.current[i] = el; }}
               style={{
                 opacity: reached ? 1 : (isNarrating ? 0 : 1),
-                transform: reached ? "translateY(0)" : (isNarrating ? "translateY(8px)" : "translateY(0)"),
-                transition: "opacity 0.4s ease, transform 0.4s ease",
+                transform: reached
+                  ? (isCurrent ? "translateY(-1px)" : "translateY(0)")
+                  : (isNarrating ? "translateY(10px)" : "translateY(0)"),
+                transition: "opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1)",
               }}
             >
               <div
                 onClick={isExpandable ? () => setExpanded(isExpanded ? null : m.expandKey!) : undefined}
                 style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
-                  padding: "14px 20px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
-                  background: isExpanded ? "#E8571A" : (isCurrent ? "#E8571A15" : "#fff"),
-                  border: `2px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : (isPast ? "#E8571A40" : "#E8571A20"))}`,
+                  padding: "14px 20px", borderRadius: isExpanded ? "12px 12px 0 0" : 12,
+                  background: isExpanded
+                    ? "linear-gradient(135deg, #E8571A 0%, #d14e15 100%)"
+                    : (isCurrent ? "#E8571A12" : "#fff"),
+                  borderLeft: `4px solid ${isCurrent || isExpanded ? "#E8571A" : (isPast ? "#E8571A30" : "transparent")}`,
+                  borderRight: `2px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : (isPast ? "#E8571A30" : "#E8571A15"))}`,
+                  borderTop: `2px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : (isPast ? "#E8571A30" : "#E8571A15"))}`,
+                  borderBottom: isExpanded ? "none" : `2px solid ${isCurrent ? "#E8571A" : (isPast ? "#E8571A30" : "#E8571A15")}`,
                   cursor: isExpandable ? "pointer" : "default",
-                  transition: "all 0.35s ease",
-                  boxShadow: isCurrent && !isExpanded ? "0 0 0 4px #E8571A20, 0 4px 12px #E8571A15" : "none",
+                  transition: "all 0.35s cubic-bezier(0.16,1,0.3,1)",
+                  boxShadow: isCurrent && !isExpanded
+                    ? "0 0 0 4px #E8571A18, 0 6px 20px #E8571A12"
+                    : (isExpanded ? "0 4px 16px #E8571A20" : "none"),
                 }}
               >
                 <span style={{
-                  fontSize: isCurrent ? 15 : 14,
-                  fontWeight: isCurrent ? 700 : 600,
-                  color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : (isPast ? "#2C3E50" : "#2C3E50")),
-                  letterSpacing: "0.02em",
+                  fontSize: isCurrent ? 16 : 14,
+                  fontWeight: isCurrent || isExpanded ? 700 : 600,
+                  color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : "#2C3E50"),
+                  letterSpacing: isCurrent ? "0.01em" : "0.02em",
                   transition: "all 0.3s",
                 }}>{m.label}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <span style={{
-                    fontSize: isCurrent ? 18 : 16,
+                    fontSize: isCurrent ? 19 : 16,
                     fontWeight: 700,
-                    color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : "#E8571A"),
+                    color: isExpanded ? "#fff" : "#E8571A",
                     transition: "all 0.3s",
                   }}>{m.value}</span>
                   {isExpandable && <span style={{
-                    fontSize: 12,
+                    fontSize: 13,
                     color: isExpanded ? "#fff" : "#E8571A",
-                    transition: "transform 0.3s",
+                    transition: "transform 0.3s cubic-bezier(0.16,1,0.3,1)",
                     transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                    display: "inline-flex",
                   }}>▼</span>}
                 </div>
               </div>
               {isExpanded && (
                 <div style={{
-                  border: "2px solid #E8571A30", borderTop: "none",
-                  borderRadius: "0 0 10px 10px", background: "#fff",
-                  maxHeight: 500, overflow: "auto",
-                  animation: "slideDown 0.35s ease",
+                  borderLeft: "4px solid #E8571A",
+                  borderRight: "2px solid #E8571A",
+                  borderBottom: "2px solid #E8571A",
+                  borderTop: "none",
+                  borderRadius: "0 0 12px 12px",
+                  background: "#fff",
+                  maxHeight: 500,
+                  overflow: "auto",
+                  animation: "dataSlideDown 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  boxShadow: isCurrent
+                    ? "0 4px 24px #E8571A15, inset 0 1px 0 #E8571A10"
+                    : "0 2px 8px #E8571A08",
                 }}>
                   {m.expandKey === "agents" && <AgentTable />}
                   {m.expandKey === "sold-for" && <ListingsTable data={LISTINGS_SOLD_FOR} />}
@@ -359,9 +378,9 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
         })}
       </div>
       <style>{`
-        @keyframes slideDown {
-          from { max-height: 0; opacity: 0; }
-          to { max-height: 500px; opacity: 1; }
+        @keyframes dataSlideDown {
+          from { max-height: 0; opacity: 0; transform: translateY(-8px); }
+          to { max-height: 500px; opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </div>
