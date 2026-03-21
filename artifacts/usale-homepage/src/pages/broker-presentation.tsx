@@ -415,9 +415,11 @@ interface ChatMessage {
 
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
 
-function useAudioNarration() {
+function useAudioNarration(onEnded?: () => void) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const onEndedRef = useRef(onEnded);
+  onEndedRef.current = onEnded;
   const [isPlaying, setIsPlaying] = useState(false);
 
   const stop = useCallback(() => {
@@ -447,7 +449,7 @@ function useAudioNarration() {
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
-      audio.onended = () => { setIsPlaying(false); URL.revokeObjectURL(url); };
+      audio.onended = () => { setIsPlaying(false); URL.revokeObjectURL(url); onEndedRef.current?.(); };
       audio.onerror = () => { setIsPlaying(false); URL.revokeObjectURL(url); };
       await audio.play();
     } catch {
@@ -557,7 +559,7 @@ function useRealtimeVoice() {
 export default function BrokerPresentation() {
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
-  const [showScript, setShowScript] = useState(true);
+  const [showScript, setShowScript] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
@@ -568,7 +570,16 @@ export default function BrokerPresentation() {
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
   const total = SCRIPTS.length;
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying } = useAudioNarration();
+  const handleTTSEnded = useCallback(() => {
+    setSlide(s => {
+      if (s < SCRIPTS.length - 1) {
+        setActiveTab(0);
+        return s + 1;
+      }
+      return s;
+    });
+  }, []);
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying } = useAudioNarration(handleTTSEnded);
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
