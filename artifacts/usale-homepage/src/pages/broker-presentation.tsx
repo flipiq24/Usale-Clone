@@ -164,14 +164,23 @@ function getHighlightStep(progress: number, totalSteps: number): number {
   return Math.floor(progress * totalSteps);
 }
 
+function introReveal(step: number, index: number): React.CSSProperties {
+  const active = index <= step;
+  return {
+    opacity: active ? 1 : 0,
+    transform: active ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)",
+    transition: "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+  };
+}
+
 function SectionWelcome({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
-      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
+      <h1 style={{ fontSize: "clamp(40px,6.5vw,72px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em", ...introReveal(hl, 0) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
-      <img src={USALE_LOGO} alt="USale" style={{ height: 120, marginBottom: 8, ...hVisible(hl, 1) }} />
-      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 2) }}>
+      <img src={USALE_LOGO} alt="USale" style={{ height: 120, ...introReveal(hl, 1) }} />
+      <p style={{ fontSize: 18, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...introReveal(hl, 2) }}>
         We're a tech company that specializes in empowering investors and the investor-friendly agents who transact with them.
       </p>
     </div>
