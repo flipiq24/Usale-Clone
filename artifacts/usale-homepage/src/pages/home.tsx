@@ -449,6 +449,9 @@ export default function Home() {
                   <li>
                     <a href="/terms-and-conditions" className="text-sm text-white/70 hover:text-white transition-colors" onClick={(e) => e.preventDefault()}>Terms and Conditions</a>
                   </li>
+                  <li>
+                    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/admin`} className="text-sm text-white/40 hover:text-white/60 transition-colors">Admin</a>
+                  </li>
                 </ul>
               </div>
             </div>

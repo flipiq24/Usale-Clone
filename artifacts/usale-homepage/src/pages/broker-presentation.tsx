@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useParams } from "wouter";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
 import TONY_PHOTO from "@assets/image_1774069888966.png";
 
@@ -6,13 +7,17 @@ interface BrokerData {
   name: string;
   brokerage: string;
   slug: string;
+  contactId?: number | null;
 }
 
-const BROKER: BrokerData = {
+const DEFAULT_BROKER: BrokerData = {
   name: "Bondilyn",
   brokerage: "bCollective Agency",
   slug: "bcollective-agency",
+  contactId: null,
 };
+
+let BROKER: BrokerData = DEFAULT_BROKER;
 
 interface OfficeMetric {
   label: string;
@@ -122,19 +127,21 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
   { entityName: "433 HILL ST LP", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1.65M", holdTime: "Avg. 511 Days", resalePurchase: "Avg. $1.78M", futureValue: "Avg. 93%" },
 ];
 
-const SCRIPTS = [
-  `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale. I've been in the business for 32 years and done over 1,100 flips. We are now a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
-  `This is the data for ${BROKER.brokerage} and what we know about your brokerage. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents. Your agent Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together \u2014 whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get moving before I get too deep.`,
-  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
-  `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership. We have no transaction fees. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
-  `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
-  `Let me explain how the workflow works. Number one \u2014 we're not asking you to change your process \u2014 we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. This is a game changer! Number two \u2014 your agent has a new listing. They post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
-  `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
-  `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
-  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
-  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
-  `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. And make sure to download the USale Broker Playbook \u2014 it's got everything we covered today and more. We're looking forward to working with you.`,
-];
+function getScripts(broker: BrokerData) {
+  return [
+    `Welcome ${broker.name}, my name is Tony Diaz. I am the founder of USale. I've been in the business for 32 years and done over 1,100 flips. We are now a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
+    `This is the data for ${broker.brokerage} and what we know about your brokerage. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024, and the buyer was Fairtrade, LLC. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents. Your agent Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${broker.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together \u2014 whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get moving before I get too deep.`,
+    `Alright ${broker.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${broker.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${broker.name}?`,
+    `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership. We have no transaction fees. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
+    `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
+    `Let me explain how the workflow works. Number one \u2014 we're not asking you to change your process \u2014 we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. This is a game changer! Number two \u2014 your agent has a new listing. They post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
+    `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
+    `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
+    `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
+    `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
+    `Before we wrap up, ${broker.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. And make sure to download the USale Broker Playbook \u2014 it's got everything we covered today and more. We're looking forward to working with you.`,
+  ];
+}
 
 const SECTION_TITLES = [
   "Welcome",
@@ -1127,6 +1134,9 @@ function useRealtimeVoice() {
 }
 
 export default function BrokerPresentation() {
+  const params = useParams<{ slug: string }>();
+  const [brokerData, setBrokerData] = useState<BrokerData>(DEFAULT_BROKER);
+  const [brokerLoaded, setBrokerLoaded] = useState(false);
   const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
@@ -1141,7 +1151,67 @@ export default function BrokerPresentation() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
+  const heartbeatRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const startTimeRef = useRef<number>(Date.now());
+  const SCRIPTS = getScripts(brokerData);
   const total = SCRIPTS.length;
+
+  useEffect(() => {
+    const slug = params?.slug;
+    if (!slug) { setBrokerLoaded(true); return; }
+    (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/contacts/by-slug/${slug}`);
+        if (res.ok) {
+          const contact = await res.json();
+          const bd: BrokerData = {
+            name: contact.firstName,
+            brokerage: contact.company || `${contact.firstName} ${contact.lastName}`,
+            slug: contact.slug,
+            contactId: contact.id,
+          };
+          setBrokerData(bd);
+          BROKER = bd;
+          await fetch(`${API_BASE}/tracking/event`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contactId: contact.id, eventType: "view" }),
+          });
+        }
+      } catch {}
+      setBrokerLoaded(true);
+    })();
+  }, [params?.slug]);
+
+  useEffect(() => {
+    if (!brokerData.contactId || !started) return;
+    startTimeRef.current = Date.now();
+    heartbeatRef.current = setInterval(() => {
+      const elapsed = Math.round((Date.now() - startTimeRef.current) / 1000);
+      fetch(`${API_BASE}/tracking/event`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contactId: brokerData.contactId, eventType: "heartbeat", duration: elapsed, slideIndex: slide }),
+      }).catch(() => {});
+    }, 30000);
+    return () => { if (heartbeatRef.current) clearInterval(heartbeatRef.current); };
+  }, [brokerData.contactId, started]);
+
+  useEffect(() => {
+    if (!brokerData.contactId || !started) return;
+    fetch(`${API_BASE}/tracking/event`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contactId: brokerData.contactId, eventType: "slide_change", slideIndex: slide }),
+    }).catch(() => {});
+    if (slide === total - 1) {
+      fetch(`${API_BASE}/tracking/event`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contactId: brokerData.contactId, eventType: "complete" }),
+      }).catch(() => {});
+    }
+  }, [slide, brokerData.contactId, started]);
   const handleTTSEnded = useCallback(() => {
     setSlide(s => {
       if (s < SCRIPTS.length - 1) {

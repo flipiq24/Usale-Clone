@@ -111,7 +111,13 @@ Sections:
 Brand colors: orange `#E8571A`, dark blue `#2C3E50`
 
 Additional routes:
-- `/broker/:slug` — Broker Presentation page (10-slide sales deck with demo data, keyboard nav, script panel, progress dots)
+- `/broker/:slug` — Broker Presentation page (11-slide sales deck with demo data, keyboard nav, script panel, progress dots). Now dynamically loads contact name/company from the database if a matching slug exists; falls back to hardcoded Bondilyn/bCollective Agency data otherwise.
+- `/admin` — Password-protected admin dashboard (password: `winwin`). Features: contact management with category-based link generation, bulk CSV upload, tracking stats, contacts table with status/progress/survey data.
+- `/agent/:slug`, `/title/:slug`, `/escrow/:slug`, `/hard-money/:slug`, `/technology-partner/:slug`, `/service-provider/:slug` — Coming Soon placeholder pages for future category-specific presentations. Still records a "view" tracking event when accessed.
+
+Database Schema (lib/db/src/schema/index.ts):
+- `contacts` table — id, first_name, last_name, email, company, phone, category, slug (unique), created_at
+- `presentation_events` table — id, contact_id (FK to contacts), event_type, slide_index, duration, metadata (jsonb), created_at
 
 AI Conversation Features (integrated into Broker Presentation):
 - **Audio On/Off** button triggers ElevenLabs TTS narration of the current slide's script
@@ -126,5 +132,15 @@ API Endpoints (Express server at `/api`):
 - `POST /api/ai/stt` — Whisper speech-to-text (accepts multipart audio upload)
 - `GET /api/ai/realtime/session` — Creates OpenAI Realtime API session token
 - `WS /api/ai/realtime/ws` — WebSocket proxy to OpenAI Realtime API (bidirectional audio relay, server-side VAD)
+- `POST /api/admin/verify` — Password verification for admin dashboard
+- `GET /api/admin/contacts` — List all contacts
+- `POST /api/admin/contacts` — Create a new contact (generates unique slug)
+- `POST /api/admin/contacts/bulk` — Bulk create contacts from CSV upload
+- `DELETE /api/admin/contacts/:id` — Delete a contact and its events
+- `GET /api/contacts/by-slug/:slug` — Look up a contact by slug (used by presentation pages)
+- `POST /api/tracking/event` — Record a presentation tracking event (view, slide_change, heartbeat, complete, survey)
+- `GET /api/admin/stats` — Aggregate dashboard stats (total, viewed, completed, surveyed, avgTime, avgSlides)
+- `GET /api/admin/contacts/:id/summary` — Per-contact tracking summary
+- `GET /api/admin/contacts/:id/events` — Full event history for a contact
 
 Required secrets: `OPENAI_API_KEY`, `ELEVENLABS_API_KEY`
