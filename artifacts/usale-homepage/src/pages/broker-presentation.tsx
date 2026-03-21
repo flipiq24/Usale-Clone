@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
+import TONY_PHOTO from "@assets/image_1774069249990.png";
 
 interface BrokerData {
   name: string;
@@ -828,6 +829,31 @@ function SectionSurvey({ hl }: { hl: number }) {
         >
           📅 Schedule a Meeting
         </a>
+      </div>
+
+      <div style={{
+        display: "flex", alignItems: "center", gap: 24, padding: "24px 28px",
+        background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee",
+        ...hVisible(hl, 3),
+      }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{
+          width: 90, height: 90, borderRadius: "50%", objectFit: "cover",
+          border: "3px solid #E8571A",
+        }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale.com &amp; Flip IQ</div>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
+            <a href="tel:714-581-7805" style={{
+              fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
+              display: "inline-flex", alignItems: "center", gap: 6,
+            }}>📱 714-581-7805</a>
+            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{
+              fontSize: 14, fontWeight: 600, color: "#0077B5", textDecoration: "none",
+              display: "inline-flex", alignItems: "center", gap: 6,
+            }}>🔗 LinkedIn</a>
+          </div>
+        </div>
       </div>
     </div>
   );
