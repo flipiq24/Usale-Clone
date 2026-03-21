@@ -162,7 +162,7 @@ function DataRowComponent({ row, i }: { row: DataRow; i: number }) {
   );
 }
 
-const HIGHLIGHT_COUNTS = [4, 1, 3, 4, 4, 3, 3, 5, 3, 5];
+const HIGHLIGHT_COUNTS = [3, 1, 3, 4, 4, 3, 3, 5, 3, 5];
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -182,11 +182,10 @@ function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
       <img src={USALE_LOGO} alt="USale" style={{ height: 72, marginBottom: 8, ...hVisible(hl, 0) }} />
-      <p style={{ fontSize: 14, color: "#adb5bd", letterSpacing: "0.05em", ...hVisible(hl, 1) }}>usale.com/broker/{BROKER.slug}</p>
-      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 2) }}>
+      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 1) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
-      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 3) }}>
+      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 2) }}>
         We're a tech company that specializes in empowering investors and the agents who transact with them.
       </p>
     </div>
@@ -784,6 +783,8 @@ export default function BrokerPresentation() {
           <img src={USALE_LOGO} alt="USale" style={{ height: 32 }} />
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
+          <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
+          <span style={{ fontSize: 12, color: "#adb5bd", letterSpacing: "0.03em" }}>usale.com/broker/{BROKER.slug}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={toggleAudio} style={{
