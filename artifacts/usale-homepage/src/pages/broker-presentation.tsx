@@ -362,9 +362,11 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
                   background: "#fff",
                   maxHeight: 500,
                   overflow: "auto",
-                  animation: "dataSlideDown 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  animation: isCurrent
+                    ? "dataSlideDown 0.4s cubic-bezier(0.16,1,0.3,1), dataPulseGlow 2s ease-in-out infinite"
+                    : "dataSlideDown 0.4s cubic-bezier(0.16,1,0.3,1)",
                   boxShadow: isCurrent
-                    ? "0 4px 24px #E8571A15, inset 0 1px 0 #E8571A10"
+                    ? "0 4px 24px #E8571A20, inset 0 1px 0 #E8571A10"
                     : "0 2px 8px #E8571A08",
                 }}>
                   {m.expandKey === "agents" && <AgentTable />}
@@ -381,6 +383,10 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
         @keyframes dataSlideDown {
           from { max-height: 0; opacity: 0; transform: translateY(-8px); }
           to { max-height: 500px; opacity: 1; transform: translateY(0); }
+        }
+        @keyframes dataPulseGlow {
+          0%, 100% { box-shadow: 0 4px 24px #E8571A20, inset 0 1px 0 #E8571A10; }
+          50% { box-shadow: 0 4px 32px #E8571A35, inset 0 1px 0 #E8571A15; }
         }
       `}</style>
     </div>
