@@ -17,7 +17,7 @@ router.post("/ai/tts", async (req, res) => {
       return;
     }
 
-    const voice = voiceId || "21m00Tcm4TlvDq8ikWAM";
+    const voice = voiceId || "hx3a4sOlCGJb16SPtV2d";
 
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${voice}/stream`,
