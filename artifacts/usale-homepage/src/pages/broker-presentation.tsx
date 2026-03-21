@@ -1123,7 +1123,7 @@ export default function BrokerPresentation() {
   }, [slide, audioOn]);
 
   useEffect(() => {
-    if (audioOn && isTTSPlaying) return;
+    if (audioOn) return;
     setSilentStep(0);
     const maxSteps = HIGHLIGHT_COUNTS[slide];
     let step = 0;
@@ -1136,7 +1136,7 @@ export default function BrokerPresentation() {
     };
     timeout = setTimeout(advance, 300);
     return () => clearTimeout(timeout);
-  }, [slide, audioOn, isTTSPlaying]);
+  }, [slide, audioOn]);
 
   const toggleAudio = useCallback(() => {
     if (audioOn) {
@@ -1222,16 +1222,17 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (audioOn && isTTSPlaying && slide === idx) {
-      return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
+    if (audioOn && slide === idx) {
+      if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
+      return 0;
     }
-    if (slide === idx) return silentStep;
+    if (!audioOn && slide === idx) return silentStep;
     return HIGHLIGHT_COUNTS[idx] - 1;
   };
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1 && isTTSPlaying} expanded={expanded} setExpanded={setExpanded} isActive={slide === 1} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={!audioOn && slide === 1} />,
     <SectionValueProp key={2} hl={hlStep(2)} />,
     <SectionWhyDifferent key={3} hl={hlStep(3)} />,
     <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
