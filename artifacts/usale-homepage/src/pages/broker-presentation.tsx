@@ -1127,6 +1127,7 @@ function useRealtimeVoice() {
 }
 
 export default function BrokerPresentation() {
+  const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
   const [showScript, setShowScript] = useState(false);
@@ -1172,6 +1173,13 @@ export default function BrokerPresentation() {
   }, [goNext, goPrev, chatOpen]);
 
   useEffect(() => {
+    preloadTTS(SCRIPTS[0]);
+    preloadTTS(SCRIPTS[1]);
+    preloadTTS(SCRIPTS[2]);
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
     if (audioOn) {
       playTTS(SCRIPTS[slide]);
       for (let i = 1; i <= 3; i++) {
@@ -1180,7 +1188,7 @@ export default function BrokerPresentation() {
     } else {
       stopTTS();
     }
-  }, [slide, audioOn]);
+  }, [slide, audioOn, started]);
 
   const timerShouldRun = !audioOn || (!isTTSPlaying && !isTTSLoading);
 
@@ -1303,6 +1311,35 @@ export default function BrokerPresentation() {
     <SectionCTA key={9} hl={hlStep(9)} />,
     <SectionSurvey key={10} hl={hlStep(10)} />,
   ];
+
+  if (!started) {
+    return (
+      <div style={{
+        minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32,
+      }}>
+        <img src={USALE_LOGO} alt="USale" style={{ height: 100 }} />
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 28, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>
+            Prepared for <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
+          </div>
+          <div style={{ fontSize: 16, color: "#6c757d" }}>{BROKER.brokerage}</div>
+        </div>
+        <button
+          onClick={() => setStarted(true)}
+          style={{
+            padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
+            cursor: "pointer", boxShadow: "0 6px 24px #E8571A40",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}
+        >
+          ▶ Start Presentation
+        </button>
+        <div style={{ fontSize: 13, color: "#adb5bd" }}>Audio narration will begin automatically</div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
