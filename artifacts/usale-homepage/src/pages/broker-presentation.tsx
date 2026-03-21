@@ -753,7 +753,7 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (!audioOn || slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
+    if (!audioOn || slide !== idx || !isTTSPlaying) return HIGHLIGHT_COUNTS[idx] - 1;
     return getHighlightStep(ttsProgress, HIGHLIGHT_COUNTS[idx]);
   };
 
