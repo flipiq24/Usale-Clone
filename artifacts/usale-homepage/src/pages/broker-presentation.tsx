@@ -263,28 +263,50 @@ const EXPAND_AT_STEP: Record<number, string> = {
   11: "agents",
 };
 
-function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void }) {
+function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void; isActive: boolean }) {
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [timerStep, setTimerStep] = useState(-1);
+  const timerActive = isActive && !isNarrating;
 
   useEffect(() => {
-    if (!isNarrating) return;
-    const key = EXPAND_AT_STEP[hl];
+    if (!timerActive) { setTimerStep(-1); return; }
+    setTimerStep(0);
+    const expandSteps = new Set(Object.keys(EXPAND_AT_STEP).map(Number));
+    let step = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    const advance = () => {
+      step++;
+      if (step > OFFICE_METRICS.length) return;
+      setTimerStep(step);
+      const delay = expandSteps.has(step) ? 2800 : 1200;
+      timeout = setTimeout(advance, delay);
+    };
+    timeout = setTimeout(advance, 800);
+    return () => clearTimeout(timeout);
+  }, [timerActive]);
+
+  const effectiveHl = timerActive ? timerStep : hl;
+  const effectiveNarrating = isNarrating || timerActive;
+
+  useEffect(() => {
+    if (!effectiveNarrating) return;
+    const key = EXPAND_AT_STEP[effectiveHl];
     if (key) {
       setExpanded(key);
     } else {
       setExpanded(null);
     }
-  }, [hl, isNarrating, setExpanded]);
+  }, [effectiveHl, effectiveNarrating, setExpanded]);
 
   useEffect(() => {
-    if (!isNarrating || hl < 1) return;
-    const row = rowRefs.current[hl - 1];
+    if (!effectiveNarrating || effectiveHl < 1) return;
+    const row = rowRefs.current[effectiveHl - 1];
     if (!row) return;
     const t = setTimeout(() => {
       row.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 120);
     return () => clearTimeout(t);
-  }, [hl, isNarrating]);
+  }, [effectiveHl, effectiveNarrating]);
 
   useEffect(() => {
     if (!expanded) return;
@@ -300,7 +322,7 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
-      <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(effectiveHl, 0) }}>
         This is the data for <span style={{ color: "#E8571A" }}>{BROKER.brokerage}</span>!
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -308,18 +330,18 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
           const isExpandable = !!m.expandKey;
           const isExpanded = expanded === m.expandKey;
           const metricStep = i + 1;
-          const reached = metricStep <= hl;
-          const isCurrent = isNarrating && metricStep === hl;
+          const reached = metricStep <= effectiveHl;
+          const isCurrent = effectiveNarrating && metricStep === effectiveHl;
           const isPast = reached && !isCurrent;
           return (
             <div
               key={m.label}
               ref={(el) => { rowRefs.current[i] = el; }}
               style={{
-                opacity: reached ? 1 : (isNarrating ? 0 : 1),
+                opacity: reached ? 1 : (effectiveNarrating ? 0 : 1),
                 transform: reached
                   ? (isCurrent ? "translateY(-1px)" : "translateY(0)")
-                  : (isNarrating ? "translateY(10px)" : "translateY(0)"),
+                  : (effectiveNarrating ? "translateY(10px)" : "translateY(0)"),
                 transition: "opacity 0.45s cubic-bezier(0.16,1,0.3,1), transform 0.45s cubic-bezier(0.16,1,0.3,1)",
               }}
             >
@@ -1007,7 +1029,7 @@ export default function BrokerPresentation() {
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1 && isTTSPlaying} expanded={expanded} setExpanded={setExpanded} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1 && isTTSPlaying} expanded={expanded} setExpanded={setExpanded} isActive={slide === 1} />,
     <SectionValueProp key={2} hl={hlStep(2)} />,
     <SectionWhyDifferent key={3} hl={hlStep(3)} />,
     <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
