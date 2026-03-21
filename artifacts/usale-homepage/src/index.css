@@ -205,3 +205,33 @@
     inset: -1px;
   }
 }
+
+@keyframes askTonyPulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes askTonyGlow {
+  0%, 100% { box-shadow: 0 6px 24px #E8571A40; }
+  50% { box-shadow: 0 8px 32px #E8571A60, 0 0 20px #E8571A30; }
+}
+
+.ask-tony-btn {
+  animation: askTonyGlow 2s ease-in-out infinite;
+}
+
+.ask-tony-btn:hover {
+  transform: scale(1.03);
+}
+
+.ask-tony-pulse {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  animation: askTonyPulse 2s ease-in-out infinite;
+}

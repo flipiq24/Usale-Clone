@@ -897,7 +897,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
         </div>
       )}
 
-      <div style={{ textAlign: "center", ...hVisible(hl, 4) }}>
+      <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 16 }}>We're looking forward to working with you.</div>
         <a
           href="https://calendly.com/usale/broker-meeting"
@@ -923,7 +923,6 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           display: "flex", alignItems: "center", gap: 16, padding: "18px 22px",
           background: "#2C3E50", borderRadius: 14, textDecoration: "none",
           boxShadow: "0 4px 16px rgba(44,62,80,0.15)",
-          ...hVisible(hl, 4),
         }}
       >
         <div style={{ width: 44, height: 44, borderRadius: 10, background: "#E8571A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -936,45 +935,53 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
       </a>
 
       <div style={{
-        display: "flex", alignItems: "center", gap: 24, padding: "24px 28px",
-        background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee",
-        ...hVisible(hl, 4),
+        display: "flex", alignItems: "stretch", gap: 20, flexWrap: "wrap",
       }}>
-        <img src={TONY_PHOTO} alt="Tony Diaz" style={{
-          width: 130, height: 130, borderRadius: 12, objectFit: "cover",
-        }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale.com &amp; Flip IQ</div>
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
-            <a href="tel:714-581-7805" style={{
-              fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
-              display: "inline-flex", alignItems: "center", gap: 6,
-            }}>📱 714-581-7805</a>
-            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{
-              fontSize: 14, fontWeight: 600, color: "#0077B5", textDecoration: "none",
-              display: "inline-flex", alignItems: "center", gap: 6,
-            }}>🔗 LinkedIn</a>
+        <div style={{
+          flex: "1 1 280px", display: "flex", alignItems: "center", gap: 20, padding: "24px 28px",
+          background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee",
+        }}>
+          <img src={TONY_PHOTO} alt="Tony Diaz" style={{
+            width: 100, height: 100, borderRadius: 12, objectFit: "cover", flexShrink: 0,
+          }} />
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale.com &amp; Flip IQ</div>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
+              <a href="tel:714-581-7805" style={{
+                fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
+                display: "inline-flex", alignItems: "center", gap: 6,
+              }}>📱 714-581-7805</a>
+              <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{
+                fontSize: 14, fontWeight: 600, color: "#0077B5", textDecoration: "none",
+                display: "inline-flex", alignItems: "center", gap: 6,
+              }}>🔗 LinkedIn</a>
+            </div>
           </div>
         </div>
-      </div>
 
-      {onAskTony && (
-        <button
-          onClick={onAskTony}
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
-            width: "100%", padding: "16px 28px",
-            background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
-            color: "#fff", border: "none", borderRadius: 12,
-            fontSize: 17, fontWeight: 700, cursor: "pointer",
-            boxShadow: "0 4px 16px #E8571A30",
-            transition: "transform 0.2s, box-shadow 0.2s",
-          }}
-        >
-          💬 Ask Tony — Get Answers Now
-        </button>
-      )}
+        {onAskTony && (
+          <button
+            onClick={onAskTony}
+            className="ask-tony-btn"
+            style={{
+              flex: "1 1 220px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12,
+              padding: "28px 24px",
+              background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+              color: "#fff", border: "none", borderRadius: 14,
+              cursor: "pointer",
+              boxShadow: "0 6px 24px #E8571A40",
+              transition: "transform 0.2s, box-shadow 0.2s",
+              position: "relative", overflow: "hidden",
+            }}
+          >
+            <div style={{ fontSize: 36 }}>💬</div>
+            <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.2, textAlign: "center" }}>Ask Me Any<br/>Question Now</div>
+            <div style={{ fontSize: 13, opacity: 0.85, textAlign: "center" }}>Get instant answers from Tony's AI</div>
+            <div className="ask-tony-pulse" />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
