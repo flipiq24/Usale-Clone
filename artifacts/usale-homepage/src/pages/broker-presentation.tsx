@@ -124,7 +124,8 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 const SCRIPTS = [
   `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `This is the data of COMPASS on top of what we know about you. You have 18,834 total transactions to investors. Your office has 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. You've sold 2,512 listings for investors and 2,088 listings to investors. You have 4,573 unique investor relationships \u2014 that's incredibly strong. Your average purchase is nearly 2 million dollars and average resale is over 2.2 million. This is really impressive data, ${BROKER.name}.`,
+  `This is the data of the COMPASS office and what we know about you. Your office name is COMPASS. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is $1,981,255 and your average resale is $2,233,363. The last property sourced was at 1321 Gates Avenue in Manhattan Beach. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. Your office represented buyers including Jennifer Landon. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. This is really impressive data, ${BROKER.name}.`,
+  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of $1,981,255. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
   `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
   `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`,
@@ -137,6 +138,7 @@ const SCRIPTS = [
 const SECTION_TITLES = [
   "Welcome",
   "What We Know",
+  "The Opportunity",
   "Why USale",
   "Why We Do This",
   "Workflow",
@@ -146,7 +148,7 @@ const SECTION_TITLES = [
   "Next Steps",
 ];
 
-const HIGHLIGHT_COUNTS = [3, 14, 4, 4, 3, 3, 5, 3, 5];
+const HIGHLIGHT_COUNTS = [3, 14, 5, 4, 4, 3, 3, 5, 3, 5];
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -165,12 +167,12 @@ function getHighlightStep(progress: number, totalSteps: number): number {
 function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
-      <img src={USALE_LOGO} alt="USale" style={{ height: 120, marginBottom: 8, ...hVisible(hl, 0) }} />
-      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 1) }}>
+      <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
+      <img src={USALE_LOGO} alt="USale" style={{ height: 120, marginBottom: 8, ...hVisible(hl, 1) }} />
       <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 540, lineHeight: 1.6, margin: 0, ...hVisible(hl, 2) }}>
-        We're a tech company that specializes in empowering investors and the agents who transact with them.
+        We're a tech company that specializes in empowering investors and the investor-friendly agents who transact with them.
       </p>
     </div>
   );
@@ -246,27 +248,46 @@ function RelationshipsTable() {
   );
 }
 
+const EXPAND_AT_STEP: Record<number, string> = {
+  7: "sold-for",
+  8: "sold-to",
+  12: "relationships",
+  13: "agents",
+};
+
 function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded: string | null; setExpanded: (k: string | null) => void }) {
+  useEffect(() => {
+    const key = EXPAND_AT_STEP[hl];
+    if (key) {
+      setExpanded(key);
+    } else if (hl < 7) {
+      setExpanded(null);
+    }
+  }, [hl, setExpanded]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
       <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        This is the data of <span style={{ color: "#E8571A" }}>COMPASS</span> on top of what we know about you!
+        This is the data of <span style={{ color: "#E8571A" }}>COMPASS</span> — here's what we know about you.
       </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
         {OFFICE_METRICS.map((m, i) => {
           const isExpandable = !!m.expandKey;
           const isExpanded = expanded === m.expandKey;
+          const metricStep = i + 1;
+          const isHighlighted = metricStep <= hl;
           return (
-            <div key={m.label} style={{ ...hVisible(hl, i + 1) }}>
+            <div key={m.label} style={{ ...hVisible(hl, metricStep) }}>
               <div
                 onClick={isExpandable ? () => setExpanded(isExpanded ? null : m.expandKey!) : undefined}
                 style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   padding: "12px 18px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
-                  background: isExpandable ? (isExpanded ? "#E8571A" : "#fff") : "#fff",
-                  border: `1px solid ${isExpanded ? "#E8571A" : "#E8571A30"}`,
+                  background: isExpandable ? (isExpanded ? "#E8571A" : "#fff") : (isHighlighted && metricStep === hl ? "#E8571A08" : "#fff"),
+                  border: `1px solid ${isExpanded ? "#E8571A" : (isHighlighted && metricStep === hl ? "#E8571A60" : "#E8571A30")}`,
                   cursor: isExpandable ? "pointer" : "default",
-                  transition: "all 0.2s",
+                  transition: "all 0.3s",
+                  boxShadow: isHighlighted && metricStep === hl && !isExpanded ? "0 0 0 2px #E8571A20" : "none",
                 }}
               >
                 <span style={{ fontSize: 13, fontWeight: 600, color: isExpanded ? "#fff" : "#2C3E50", letterSpacing: "0.02em" }}>{m.label}</span>
@@ -286,6 +307,82 @@ function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded:
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function AnimatedNumber({ target, run, prefix = "", suffix = "", dur = 1400 }: { target: number; run: boolean; prefix?: string; suffix?: string; dur?: number }) {
+  const [v, setV] = useState(0);
+  const r = useRef<number | null>(null);
+  useEffect(() => {
+    if (!run) { setV(0); return; }
+    let s: number | null = null;
+    const step = (t: number) => {
+      if (!s) s = t;
+      const p = Math.min((t - s) / dur, 1);
+      setV(Math.round((1 - Math.pow(1 - p, 3)) * target));
+      if (p < 1) r.current = requestAnimationFrame(step);
+    };
+    r.current = requestAnimationFrame(step);
+    return () => { if (r.current) cancelAnimationFrame(r.current); };
+  }, [run, target, dur]);
+  return <>{prefix}{v.toLocaleString()}{suffix}</>;
+}
+
+const CURRENT_TRANS = 2088;
+const AVG_PURCHASE = 1981255;
+const COMMISSION_RATE = 0.02;
+const CURRENT_COMMISSIONS = CURRENT_TRANS * AVG_PURCHASE * COMMISSION_RATE;
+const GROWTH_RATE = 0.20;
+const PROJECTED_COMMISSIONS = CURRENT_COMMISSIONS * (1 + GROWTH_RATE);
+const ADDITIONAL_COMMISSIONS = PROJECTED_COMMISSIONS - CURRENT_COMMISSIONS;
+const ADDITIONAL_TRANS = Math.round(CURRENT_TRANS * GROWTH_RATE);
+
+function SectionValueProp({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
+      <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
+        Alright {BROKER.name}, let's talk <span style={{ color: "#E8571A" }}>dollars</span>.
+      </h2>
+
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 1) }}>
+        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Transactions to Investors</div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={CURRENT_TRANS} run={hl >= 1} /></div>
+        </div>
+        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Avg. Purchase Price</div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={AVG_PURCHASE} run={hl >= 1} prefix="$" /></div>
+        </div>
+        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>At 2% Commission</div>
+          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={Math.round(CURRENT_COMMISSIONS)} run={hl >= 1} prefix="$" /></div>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 2) }}>
+        <div style={{ flex: "1 1 300px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, padding: "28px 24px", textAlign: "center", color: "#fff" }}>
+          <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.03em", marginBottom: 6 }}>What if we bring this up by 20%?</div>
+          <div style={{ fontSize: 42, fontWeight: 800 }}><AnimatedNumber target={Math.round(PROJECTED_COMMISSIONS)} run={hl >= 2} prefix="$" /></div>
+          <div style={{ fontSize: 13, marginTop: 8, opacity: 0.9 }}>Not because you work harder — because you <b>control more buyers</b></div>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 3) }}>
+        <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Additional Revenue</div>
+          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+<AnimatedNumber target={Math.round(ADDITIONAL_COMMISSIONS)} run={hl >= 3} prefix="$" /></div>
+        </div>
+        <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>More Transactions</div>
+          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+<AnimatedNumber target={ADDITIONAL_TRANS} run={hl >= 3} /></div>
+        </div>
+      </div>
+
+      <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
+        <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Do I have your attention, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
+        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>We're just providing you tools and ways to make money. You don't have to do much more outside of what you're already doing.</div>
       </div>
     </div>
   );
@@ -808,13 +905,14 @@ export default function BrokerPresentation() {
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
     <SectionDataCards key={1} hl={hlStep(1)} expanded={expanded} setExpanded={setExpanded} />,
-    <SectionWhyDifferent key={2} hl={hlStep(2)} />,
-    <SectionWhyDoingThis key={3} hl={hlStep(3)} />,
-    <SectionWorkflow key={4} hl={hlStep(4)} />,
-    <SectionCredibility key={5} hl={hlStep(5)} />,
-    <SectionEverybodyWins key={6} hl={hlStep(6)} />,
-    <SectionHowWePay key={7} hl={hlStep(7)} />,
-    <SectionCTA key={8} hl={hlStep(8)} />,
+    <SectionValueProp key={2} hl={hlStep(2)} />,
+    <SectionWhyDifferent key={3} hl={hlStep(3)} />,
+    <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
+    <SectionWorkflow key={5} hl={hlStep(5)} />,
+    <SectionCredibility key={6} hl={hlStep(6)} />,
+    <SectionEverybodyWins key={7} hl={hlStep(7)} />,
+    <SectionHowWePay key={8} hl={hlStep(8)} />,
+    <SectionCTA key={9} hl={hlStep(9)} />,
   ];
 
   return (
