@@ -121,18 +121,125 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
   { entityName: "433 HILL ST LP", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1.65M", holdTime: "Avg. 511 Days", resalePurchase: "Avg. $1.78M", futureValue: "Avg. 93%" },
 ];
 
-const SCRIPTS = [
-  `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `This is the data for Reimer Realty Group and what we know about you. You have 18,834 total transactions to investors with a double-end rate of zero percent. Your average purchase price is about $2 million and your average resale is about $2.2 million. The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024. You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there. You've also sold 2,088 listings to investors \u2014 here's that data. You've re-sold 935 listings to investors with a purchase-to-resale ratio of 89 percent. You have 4,573 unique investor relationships \u2014 that is incredibly strong. And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? Let's get moving before I get too deep.`,
-  `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
-  `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
-  `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
-  `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`,
-  `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. You guys win. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
-  `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just "give me a listing." We have great data to help your agents get in front of the right sellers and provide them options.`,
-  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just "give me a listing." We all win.`,
-  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`,
+// ── Segment-based narration system ──────────────────────────────────
+// Each slide is split into SEGMENTS. Each segment = one TTS call + one highlight step.
+// When segment N finishes playing → highlight step advances to segment N+1.
+// This gives PERFECT sync because the highlight is EVENT-DRIVEN (segment ended),
+// not guessed from audio progress percentages.
+//
+// When you swap broker data, the text changes but the structure stays the same.
+// Just update the template literals — the sync is automatic.
+
+interface Segment {
+  text: string;
+  step: number;
+}
+
+const SLIDE_SEGMENTS: Segment[][] = [
+  // ── Slide 0: Welcome ──────────────────────────────────────────────
+  // Visual: step 0 = title, step 1 = logo, step 2 = tagline
+  [
+    { text: `Welcome ${BROKER.name}, my name is Tony Diaz.`, step: 0 },
+    { text: `I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips.`, step: 1 },
+    { text: `We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`, step: 2 },
+  ],
+
+  // ── Slide 1: What We Know (Data Cards) ────────────────────────────
+  // Visual: step 0 = title, steps 1-11 = each metric row
+  // Steps 6,7,10,11 trigger table expands via EXPAND_AT_STEP
+  [
+    { text: `This is the data for ${BROKER.brokerage} and what we know about you.`, step: 0 },
+    { text: `You have 18,834 total transactions to investors`, step: 1 },
+    { text: `with a double-end rate of zero percent.`, step: 2 },
+    { text: `Your average purchase price is about $2 million`, step: 3 },
+    { text: `and your average resale is about $2.2 million.`, step: 4 },
+    { text: `The last property sourced was at 1321 Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, $2.45 million, December 2024.`, step: 5 },
+    { text: `You've sold 2,512 listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton and Lennar are all in there.`, step: 6 },
+    { text: `You've also sold 2,088 listings to investors \u2014 here's that data.`, step: 7 },
+    { text: `You've re-sold 935 listings to investors`, step: 8 },
+    { text: `with a purchase-to-resale ratio of 89 percent.`, step: 9 },
+    { text: `You have 4,573 unique investor relationships \u2014 that is incredibly strong.`, step: 10 },
+    { text: `And you have 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. ${BROKER.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? Let's get moving before I get too deep.`, step: 11 },
+  ],
+
+  // ── Slide 2: The Opportunity ($$$) ────────────────────────────────
+  // Visual: step 0 = title, 1 = stat cards, 2 = growth card, 3 = additional, 4 = CTA
+  [
+    { text: `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars.`, step: 0 },
+    { text: `Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone.`, step: 1 },
+    { text: `Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money.`, step: 2 },
+    { text: `So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture.`, step: 3 },
+    { text: `Do I have your attention, ${BROKER.name}?`, step: 4 },
+  ],
+
+  // ── Slide 3: Why USale is Different ───────────────────────────────
+  // Visual: step 0-3 = four feature cards
+  [
+    { text: `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not selling you any membership.`, step: 0 },
+    { text: `We have no transaction fees.`, step: 1 },
+    { text: `We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors.`, step: 2 },
+    { text: `We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`, step: 3 },
+  ],
+
+  // ── Slide 4: Why We Do This ───────────────────────────────────────
+  // Visual: step 0-2 = three numbered items, step 3 = bottom note
+  [
+    { text: `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors.`, step: 0 },
+    { text: `This is a great way for them to post properties, double-end their transactions,`, step: 1 },
+    { text: `and also source inventory to their buyers' network. Win-win.`, step: 2 },
+    { text: `We work with national title and hard money lenders who want to be able to offer services whenever you transact.`, step: 3 },
+  ],
+
+  // ── Slide 5: Workflow ─────────────────────────────────────────────
+  // Visual: step 0-2 = three workflow paths
+  [
+    { text: `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you.`, step: 0 },
+    { text: `Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees.`, step: 1 },
+    { text: `Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`, step: 2 },
+  ],
+
+  // ── Slide 6: Credibility ──────────────────────────────────────────
+  // Visual: step 0-2 = three content blocks
+  [
+    { text: `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. You guys win.`, step: 0 },
+    { text: `In partnership with local service providers who know that value first is the only way to grow.`, step: 1 },
+    { text: `Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`, step: 2 },
+  ],
+
+  // ── Slide 7: Everybody Wins ───────────────────────────────────────
+  // Visual: step 0-4 = five checkmark items
+  [
+    { text: `We connect your agents with buyers.`, step: 0 },
+    { text: `We provide value to brokers to help you do more business.`, step: 1 },
+    { text: `Your agents can get paid without a listing.`, step: 2 },
+    { text: `They get a custom website for free to help them provide more value to sellers than just give me a listing.`, step: 3 },
+    { text: `We have great data to help your agents get in front of the right sellers and provide them options.`, step: 4 },
+  ],
+
+  // ── Slide 8: How We Get Paid ──────────────────────────────────────
+  // Visual: step 0 = title, 1 = explanation, 2 = summary
+  [
+    { text: `How do we get paid? Pretty simple.`, step: 0 },
+    { text: `When our investors that are providing your agents the instant cash offer buy a property, we get a small share.`, step: 1 },
+    { text: `We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`, step: 2 },
+  ],
+
+  // ── Slide 9: Next Steps / CTA ─────────────────────────────────────
+  // Visual: step 0-3 = four action items, step 4 = big CTA
+  [
+    { text: `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list.`, step: 0 },
+    { text: `We'll demo the technology to show you our data and powerful tools.`, step: 1 },
+    { text: `We'll explain how your agents can get paid without a listing using the white-label website.`, step: 2 },
+    { text: `And we'll show you how to use USale to recruit investor-friendly agents.`, step: 3 },
+    { text: `It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`, step: 4 },
+  ],
 ];
+
+// Derived: full script text per slide (for script panel display + chat context)
+const SCRIPTS = SLIDE_SEGMENTS.map(segs => segs.map(s => s.text).join(" "));
+
+// Derived: total highlight steps per slide (for timer-fallback when audio is off)
+const HIGHLIGHT_COUNTS = SLIDE_SEGMENTS.map(segs => segs[segs.length - 1].step + 1);
 
 const SECTION_TITLES = [
   "Welcome",
@@ -147,96 +254,6 @@ const SECTION_TITLES = [
   "Next Steps",
 ];
 
-// ── Cue-based highlight system ──────────────────────────────────────
-// Each slide gets an array of [audioProgress (0-1), highlightStepIndex] tuples.
-// When TTS progress crosses a threshold, the corresponding highlight step fires.
-// This ties each highlight EXACTLY to when the narrator mentions that data point.
-//
-// breadcrumb format:  «scriptExcerpt» → step N
-//
-const HIGHLIGHT_CUES: [number, number][][] = [
-  // ── Slide 0: Welcome ──────────────────────────────────────────────
-  // «Welcome Mike»                                      → 0  (title)
-  // «I am the founder of USale.com»                     → 1  (logo)
-  // «We are a technology company that specializes»      → 2  (tagline)
-  [[0, 0], [0.30, 1], [0.65, 2]],
-
-  // ── Slide 1: What We Know (Data Cards) ────────────────────────────
-  // «This is the data for Reimer Realty Group»          → 0  (title)
-  // «You have 18,834 total transactions»                → 1  (Total Trans.)
-  // «double-end rate of zero percent»                   → 2  (Double-end %)
-  // «average purchase price is about $2 million»        → 3  (Avg. Purchase)
-  // «average resale is about $2.2 million»              → 4  (Avg. Resale)
-  // «last property sourced was at 1321 Gates Ave»       → 5  (Last Property)
-  // «sold 2,512 listings for investors — take a look»   → 6  (Sold For → EXPAND)
-  // «sold 2,088 listings to investors»                  → 7  (Sold To → EXPAND)
-  // «re-sold 935 listings»                              → 8  (Re-Sold)
-  // «purchase-to-resale ratio of 89 percent»            → 9  (Purchase to Resale %)
-  // «4,573 unique investor relationships»               → 10 (Relationships → EXPAND)
-  // «56 investor-friendly agents — Tracy B Do leads»    → 11 (Agents → EXPAND)
-  [[0, 0], [0.04, 1], [0.08, 2], [0.12, 3], [0.15, 4], [0.18, 5],
-   [0.28, 6], [0.38, 7], [0.44, 8], [0.49, 9], [0.55, 10], [0.64, 11]],
-
-  // ── Slide 2: The Opportunity ($$$) ────────────────────────────────
-  // «let's talk dollars»                                → 0  (title)
-  // «2,088 transactions … $2 million … $82.7 million»   → 1  (stat cards)
-  // «What if I can show you how to bring this up 20%?»  → 2  (growth card)
-  // «additional $16.5 million … 418 more transactions»  → 3  (additional)
-  // «Do I have your attention, Mike?»                   → 4  (CTA)
-  [[0, 0], [0.08, 1], [0.35, 2], [0.62, 3], [0.82, 4]],
-
-  // ── Slide 3: Why USale is Different ───────────────────────────────
-  // «We are not selling you any membership»             → 0
-  // «We have no transaction fees»                       → 1
-  // «not here to compete with the MLS»                  → 2
-  // «connects your investor-friendly agents»            → 3
-  [[0, 0], [0.25, 1], [0.50, 2], [0.75, 3]],
-
-  // ── Slide 4: Why We Do This ───────────────────────────────────────
-  // «we need inventory»                                 → 0
-  // «post properties, double-end»                       → 1
-  // «source inventory to their buyers' network»         → 2
-  // «national title and hard money lenders»             → 3
-  [[0, 0], [0.20, 1], [0.50, 2], [0.78, 3]],
-
-  // ── Slide 5: Workflow ─────────────────────────────────────────────
-  // «Number one — agent cannot secure a listing»        → 0
-  // «Number two — agent has a new listing»              → 1
-  // «Number three — marketplace notifications»          → 2
-  [[0, 0], [0.33, 1], [0.66, 2]],
-
-  // ── Slide 6: Credibility ──────────────────────────────────────────
-  // «agents need a real, data-driven cash offer»        → 0
-  // «In partnership with local service providers»       → 1
-  // «we're not trying to monetize the marketplace»      → 2
-  [[0, 0], [0.35, 1], [0.72, 2]],
-
-  // ── Slide 7: Everybody Wins ───────────────────────────────────────
-  // «We connect your agents with buyers»                → 0
-  // «provide value to brokers»                          → 1
-  // «get paid without a listing»                        → 2
-  // «custom website for free»                           → 3
-  // «great data to help your agents»                    → 4
-  [[0, 0], [0.18, 1], [0.38, 2], [0.58, 3], [0.78, 4]],
-
-  // ── Slide 8: How We Get Paid ──────────────────────────────────────
-  // «Pretty simple»                                     → 0
-  // «instant cash offer … we get a small share»         → 1
-  // «We all win.»                                       → 2
-  [[0, 0], [0.30, 1], [0.65, 2]],
-
-  // ── Slide 9: Next Steps / CTA ─────────────────────────────────────
-  // «Set up a meeting»                                  → 0
-  // «Demo the technology»                               → 1
-  // «agents can get paid without a listing»             → 2
-  // «use USale to recruit»                              → 3
-  // «It's truly a no-brainer»                           → 4
-  [[0, 0], [0.15, 1], [0.35, 2], [0.55, 3], [0.75, 4]],
-];
-
-// Derived for the timer-fallback (audio-off mode) in SectionDataCards
-const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
-
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
   return {
@@ -244,15 +261,6 @@ function hVisible(step: number, index: number): React.CSSProperties {
     transform: active ? "translateY(0)" : "translateY(12px)",
     transition: "opacity 0.5s ease, transform 0.5s ease",
   };
-}
-
-function getHighlightStep(progress: number, cues: [number, number][]): number {
-  let step = 0;
-  for (const [threshold, s] of cues) {
-    if (progress >= threshold) step = s;
-    else break;
-  }
-  return step;
 }
 
 function introReveal(step: number, index: number): React.CSSProperties {
@@ -793,91 +801,122 @@ interface ChatMessage {
 
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
 
-function useAudioNarration(onEnded?: () => void) {
+// ── Segment narration hook ──────────────────────────────────────────
+// Plays an array of Segments one after another via TTS.
+// Each time a segment ENDS, currentStep advances to the next segment's step.
+// This means highlights are EVENT-DRIVEN — no guessing at progress %.
+// When the last segment finishes, onAllEnded fires (→ auto-advance slide).
+//
+function useSegmentNarration(onAllEnded?: () => void) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
-  const onEndedRef = useRef(onEnded);
-  onEndedRef.current = onEnded;
+  const segmentsRef = useRef<Segment[]>([]);
+  const segIndexRef = useRef(0);
+  const stoppedRef = useRef(false);
+  const onAllEndedRef = useRef(onAllEnded);
+  onAllEndedRef.current = onAllEnded;
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
+  const [currentStep, setCurrentStep] = useState(-1);
   const preloadCache = useRef<Map<string, Blob>>(new Map());
 
-  const stopProgressTracker = useCallback(() => {
-    if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
-  }, []);
-
-  const startProgressTracker = useCallback((audio: HTMLAudioElement) => {
-    const tick = () => {
-      if (audio.duration && audio.duration > 0) {
-        setProgress(audio.currentTime / audio.duration);
-      }
-      rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-  }, []);
-
   const stop = useCallback(() => {
+    stoppedRef.current = true;
     if (abortRef.current) abortRef.current.abort();
-    stopProgressTracker();
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = "";
       audioRef.current = null;
     }
     setIsPlaying(false);
-    setProgress(0);
-  }, [stopProgressTracker]);
-
-  const preload = useCallback(async (text: string) => {
-    if (preloadCache.current.has(text)) return;
-    try {
-      const resp = await fetch(`${API_BASE}/ai/tts`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
-      });
-      if (resp.ok) {
-        const blob = await resp.blob();
-        preloadCache.current.set(text, blob);
-      }
-    } catch { /* silent preload failure */ }
   }, []);
 
-  const play = useCallback(async (text: string) => {
-    stop();
+  const fetchBlob = useCallback(async (text: string, signal?: AbortSignal): Promise<Blob> => {
+    if (preloadCache.current.has(text)) {
+      const blob = preloadCache.current.get(text)!;
+      preloadCache.current.delete(text);
+      return blob;
+    }
+    const resp = await fetch(`${API_BASE}/ai/tts`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+      signal,
+    });
+    if (!resp.ok) throw new Error("TTS failed");
+    return resp.blob();
+  }, []);
+
+  const playSegmentAt = useCallback(async (index: number) => {
+    const segments = segmentsRef.current;
+    if (stoppedRef.current || index >= segments.length) {
+      setIsPlaying(false);
+      if (index >= segments.length) onAllEndedRef.current?.();
+      return;
+    }
+    const seg = segments[index];
+    segIndexRef.current = index;
+    setCurrentStep(seg.step);
+
+    // Preload the NEXT segment while this one plays (no gap)
+    if (index + 1 < segments.length) {
+      const nextText = segments[index + 1].text;
+      if (!preloadCache.current.has(nextText)) {
+        fetchBlob(nextText).then(blob => {
+          preloadCache.current.set(nextText, blob);
+        }).catch(() => {});
+      }
+    }
+
     const controller = new AbortController();
     abortRef.current = controller;
-    setIsPlaying(true);
-    setProgress(0);
     try {
-      let blob: Blob;
-      if (preloadCache.current.has(text)) {
-        blob = preloadCache.current.get(text)!;
-        preloadCache.current.delete(text);
-      } else {
-        const resp = await fetch(`${API_BASE}/ai/tts`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text }),
-          signal: controller.signal,
-        });
-        if (!resp.ok) throw new Error("TTS failed");
-        blob = await resp.blob();
-      }
+      const blob = await fetchBlob(seg.text, controller.signal);
+      if (stoppedRef.current) return;
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       audioRef.current = audio;
-      startProgressTracker(audio);
-      audio.onended = () => { stopProgressTracker(); setIsPlaying(false); setProgress(1); URL.revokeObjectURL(url); onEndedRef.current?.(); };
-      audio.onerror = () => { stopProgressTracker(); setIsPlaying(false); URL.revokeObjectURL(url); };
+      audio.onended = () => {
+        URL.revokeObjectURL(url);
+        playSegmentAt(index + 1);
+      };
+      audio.onerror = () => {
+        URL.revokeObjectURL(url);
+        setIsPlaying(false);
+      };
       await audio.play();
     } catch {
-      setIsPlaying(false);
+      if (!stoppedRef.current) setIsPlaying(false);
     }
-  }, [stop, startProgressTracker, stopProgressTracker]);
+  }, [fetchBlob]);
 
-  return { play, stop, isPlaying, progress, preload };
+  const playSlide = useCallback((segments: Segment[]) => {
+    stop();
+    stoppedRef.current = false;
+    segmentsRef.current = segments;
+    segIndexRef.current = 0;
+    setIsPlaying(true);
+    setCurrentStep(segments.length > 0 ? segments[0].step : -1);
+    playSegmentAt(0);
+  }, [stop, playSegmentAt]);
+
+  const preload = useCallback(async (segments: Segment[]) => {
+    for (const seg of segments) {
+      if (preloadCache.current.has(seg.text)) continue;
+      try {
+        const resp = await fetch(`${API_BASE}/ai/tts`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: seg.text }),
+        });
+        if (resp.ok) {
+          const blob = await resp.blob();
+          preloadCache.current.set(seg.text, blob);
+        }
+      } catch { /* silent */ }
+    }
+  }, []);
+
+  return { playSlide, stop, isPlaying, currentStep, preload };
 }
 
 function getWsBase(): string {
@@ -989,17 +1028,17 @@ export default function BrokerPresentation() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
-  const total = SCRIPTS.length;
-  const handleTTSEnded = useCallback(() => {
+  const total = SLIDE_SEGMENTS.length;
+  const handleSlideEnded = useCallback(() => {
     setSlide(s => {
-      if (s < SCRIPTS.length - 1) {
+      if (s < SLIDE_SEGMENTS.length - 1) {
         setExpanded(null);
         return s + 1;
       }
       return s;
     });
   }, []);
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
+  const { playSlide, stop: stopTTS, isPlaying: isTTSPlaying, currentStep: narrationStep, preload: preloadSegments } = useSegmentNarration(handleSlideEnded);
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
@@ -1022,9 +1061,9 @@ export default function BrokerPresentation() {
 
   useEffect(() => {
     if (audioOn) {
-      playTTS(SCRIPTS[slide]);
+      playSlide(SLIDE_SEGMENTS[slide]);
       if (slide < total - 1) {
-        preloadTTS(SCRIPTS[slide + 1]);
+        preloadSegments(SLIDE_SEGMENTS[slide + 1]);
       }
     } else {
       stopTTS();
@@ -1115,10 +1154,11 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    const cues = HIGHLIGHT_CUES[idx];
-    const maxStep = cues[cues.length - 1][1]; // last step = fully revealed
+    const maxStep = SLIDE_SEGMENTS[idx][SLIDE_SEGMENTS[idx].length - 1].step;
+    // If not narrating this slide, show everything revealed
     if (!audioOn || slide !== idx || !isTTSPlaying) return maxStep;
-    return getHighlightStep(ttsProgress, cues);
+    // Otherwise, narrationStep is set by the segment hook — exact sync
+    return narrationStep;
   };
 
   const sections = [
