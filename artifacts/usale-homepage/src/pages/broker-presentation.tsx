@@ -132,7 +132,7 @@ const SCRIPTS = [
   `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
   `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
   `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
-  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
+  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. By the way, make sure to download the USale Broker Playbook \u2014 it's got everything we've covered today and more, including recruiting scripts, the 90-day plan, and all four income channels. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
   `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. We're looking forward to working with you.`,
 ];
 
@@ -160,7 +160,7 @@ const HIGHLIGHT_CUES: [number, number][][] = [
   [[0.17, 0], [0.65, 1], [0.78, 2]],
   [[0, 0], [0.10, 1], [0.31, 2], [0.43, 3], [0.74, 4]],
   [[0, 0], [0.09, 1], [0.39, 2]],
-  [[0.05, 0], [0.24, 1], [0.37, 2], [0.54, 3], [0.65, 4]],
+  [[0.04, 0], [0.18, 1], [0.27, 2], [0.40, 3], [0.52, 4]],
   [[0, 0], [0.13, 1], [0.32, 2], [0.70, 3], [0.93, 4]],
 ];
 
@@ -700,11 +700,30 @@ function SectionCTA({ hl }: { hl: number }) {
           </div>
         ))}
       </div>
+      <a
+        href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`}
+        download="USale_Broker_Playbook.pdf"
+        style={{
+          display: "flex", alignItems: "center", gap: 16, padding: "20px 24px",
+          background: "#2C3E50", borderRadius: 14, textDecoration: "none",
+          transition: "transform 0.2s, box-shadow 0.2s",
+          boxShadow: "0 4px 16px rgba(44,62,80,0.15)",
+          ...hVisible(hl, 4),
+        }}
+      >
+        <div style={{ width: 48, height: 48, borderRadius: 12, background: "#E8571A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>Download the USale Broker Playbook</div>
+          <div style={{ fontSize: 13, color: "#ffffffAA", marginTop: 2 }}>Recruiting scripts, 90-day plan, income channels & more</div>
+        </div>
+      </a>
       <div style={{ padding: "32px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, textAlign: "center", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 28, fontWeight: 700, color: "#fff", marginBottom: 8 }}>Create an unfair advantage for your agents.</div>
         <div style={{ fontSize: 14, color: "#ffffffCC", marginBottom: 16, lineHeight: 1.5 }}>The AI wave is here. Get behind great technology without the sales pitch.</div>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          {["Schedule a Meeting", "Do a Demo", "Create an Unfair Advantage"].map((t, i) => (
+          {["Schedule a Meeting", "Do a Demo"].map((t, i) => (
             <button key={i} style={{
               padding: "12px 28px", background: "#fff", color: "#E8571A", border: "none",
               borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer",
