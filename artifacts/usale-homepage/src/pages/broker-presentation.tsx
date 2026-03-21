@@ -444,6 +444,10 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive }: 
         })}
       </div>
       <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-6px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         @keyframes dataSlideDown {
           from { max-height: 0; opacity: 0; transform: translateY(-8px); }
           to { max-height: 500px; opacity: 1; transform: translateY(0); }
@@ -727,6 +731,7 @@ const INTEREST_LEVELS = ["Very Interested", "Interested", "Somewhat", "Not Inter
 function SectionSurvey({ hl }: { hl: number }) {
   const [flipping, setFlipping] = useState<boolean | null>(null);
   const [wholesaling, setWholesaling] = useState<boolean | null>(null);
+  const [wantToStart, setWantToStart] = useState<boolean | null>(null);
   const [seeValue, setSeeValue] = useState<boolean | null>(null);
   const [interest, setInterest] = useState<Record<string, string>>({});
   const [otherLabel, setOtherLabel] = useState("");
@@ -759,6 +764,14 @@ function SectionSurvey({ hl }: { hl: number }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 8, ...hVisible(hl, 1) }}>
         <YesNo label="Are you currently flipping?" value={flipping} onChange={setFlipping} />
         <YesNo label="Are you wholesaling?" value={wholesaling} onChange={setWholesaling} />
+        {flipping === false && wholesaling === false && (
+          <div style={{
+            padding: "14px 18px", background: "#FFF8F4", borderRadius: 12,
+            border: "1px solid #E8571A33", animation: "fadeIn 0.3s ease",
+          }}>
+            <YesNo label="Would you like to start flipping or wholesaling (ethically)?" value={wantToStart} onChange={setWantToStart} />
+          </div>
+        )}
         <YesNo label="Do you see value in what USale can offer?" value={seeValue} onChange={setSeeValue} />
       </div>
 
