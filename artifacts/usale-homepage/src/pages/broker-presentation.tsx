@@ -5,111 +5,138 @@ interface BrokerData {
   name: string;
   brokerage: string;
   slug: string;
-  titlePartner: string;
-}
-
-interface DataRow {
-  count: number;
-  entity: string;
-  entityRating: string;
-  investorRating: string;
-  homeTown: string;
-  purchasePrice: string;
-  holdTime: string;
-  resalePrice: string;
-  futureValue: string;
-}
-
-interface DataTab {
-  id: string;
-  label: string;
-  value: number;
-  active?: boolean;
-  rows: DataRow[];
 }
 
 const BROKER: BrokerData = {
   name: "Mike",
   brokerage: "Reimer Realty Group",
   slug: "reimer-realty",
-  titlePartner: "Fidelity Title",
 };
 
-const DATA_TABS: DataTab[] = [
-  {
-    id: "investor-agents",
-    label: "Investor-Friendly Agents",
-    value: 56,
-    active: true,
-    rows: [
-      { count: 23, entity: "Fernando Perez", entityRating: "23 Txns - High", investorRating: "Active", homeTown: "UPLAND, CA", purchasePrice: "Avg. $485,000", holdTime: "Avg. 180 Days", resalePrice: "Avg. $542,000", futureValue: "Avg. 72%" },
-      { count: 18, entity: "Lisa Chen", entityRating: "18 Txns - High", investorRating: "Active", homeTown: "RANCHO CUCAMONGA, CA", purchasePrice: "Avg. $410,000", holdTime: "Avg. 210 Days", resalePrice: "Avg. $498,000", futureValue: "Avg. 68%" },
-      { count: 15, entity: "Marcus Johnson", entityRating: "15 Txns - Mid", investorRating: "Active", homeTown: "ONTARIO, CA", purchasePrice: "Avg. $362,000", holdTime: "Avg. 245 Days", resalePrice: "Avg. $425,000", futureValue: "Avg. 70%" },
-      { count: 12, entity: "Sarah Kim", entityRating: "12 Txns - Mid", investorRating: "Active", homeTown: "FONTANA, CA", purchasePrice: "Avg. $395,000", holdTime: "Avg. 195 Days", resalePrice: "Avg. $460,000", futureValue: "Avg. 74%" },
-      { count: 9, entity: "David Reyes", entityRating: "9 Txns - Mid", investorRating: "Active", homeTown: "POMONA, CA", purchasePrice: "Avg. $348,000", holdTime: "Avg. 160 Days", resalePrice: "Avg. $410,000", futureValue: "Avg. 71%" },
-    ],
-  },
-  {
-    id: "sold-for",
-    label: "Listings Sold for Investors",
-    value: 45,
-    rows: [
-      { count: 58, entity: "2018 1 IH BORROWER LP", entityRating: "58 Units - Very High", investorRating: "5 Units - Mid", homeTown: "PALMDALE, CA", purchasePrice: "Avg. $621,655", holdTime: "Avg. 499 Days", resalePrice: "Avg. $537,400", futureValue: "Avg. 74%" },
-      { count: 31, entity: "SRPS LP", entityRating: "31 Units - High", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $654,097", holdTime: "Avg. 695 Days", resalePrice: "Avg. $799,417", futureValue: "Avg. 62%" },
-      { count: 29, entity: "2018 4 IH BORROWER LP", entityRating: "29 Units - High", investorRating: "5 Units - Mid", homeTown: "EL CAJON, CA", purchasePrice: "Avg. $610,172", holdTime: "Avg. 332 Days", resalePrice: "Avg. $714,479", futureValue: "Avg. 76%" },
-      { count: 26, entity: "2017 2 IH BORROWER LP", entityRating: "26 Units - High", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $705,288", holdTime: "Avg. 227 Days", resalePrice: "Avg. $954,178", futureValue: "Avg. 65%" },
-      { count: 23, entity: "THR CALIFORNIA LP", entityRating: "23 Units - High", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $687,913", holdTime: "Avg. 219 Days", resalePrice: "Avg. $690,750", futureValue: "Avg. 77%" },
-    ],
-  },
-  {
-    id: "sold-to",
-    label: "Listings Sold to Investors",
-    value: 45,
-    rows: [
-      { count: 19, entity: "SFR 2012 1 US WEST LLC", entityRating: "19 Units - High", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $655,237", holdTime: "Avg. 204 Days", resalePrice: "Avg. $545,000", futureValue: "Avg. 75%" },
-      { count: 18, entity: "2018 3 IH BORROWER LP", entityRating: "18 Units - High", investorRating: "5 Units - Mid", homeTown: "GRANADA HILLS, CA", purchasePrice: "Avg. $718,583", holdTime: "Avg. 302 Days", resalePrice: "Avg. $1,037,500", futureValue: "Avg. 62%" },
-      { count: 14, entity: "DALLIN LLC", entityRating: "14 Units - High", investorRating: "5 Units - Mid", homeTown: "LANCASTER, CA", purchasePrice: "Avg. $374,214", holdTime: "Avg. 91 Days", resalePrice: "Avg. $500,000", futureValue: "Avg. 75%" },
-      { count: 12, entity: "SFR 2012 1 U S WEST LLC", entityRating: "12 Units - High", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $554,083", holdTime: "Avg. 197 Days", resalePrice: "Avg. $698,190", futureValue: "Avg. 74%" },
-    ],
-  },
-  {
-    id: "relationships",
-    label: "Unique Investor Relationships",
-    value: 51,
-    rows: [
-      { count: 34, entity: "ABC Holdings LLC", entityRating: "34 Txns - Very High", investorRating: "Active", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $580,000", holdTime: "Avg. 210 Days", resalePrice: "Avg. $690,000", futureValue: "Avg. 71%" },
-      { count: 21, entity: "123 Properties LLC", entityRating: "21 Txns - High", investorRating: "Active", homeTown: "RIVERSIDE, CA", purchasePrice: "Avg. $420,000", holdTime: "Avg. 180 Days", resalePrice: "Avg. $510,000", futureValue: "Avg. 68%" },
-      { count: 18, entity: "Westside Capital", entityRating: "18 Txns - High", investorRating: "Active", homeTown: "SANTA MONICA, CA", purchasePrice: "Avg. $890,000", holdTime: "Avg. 250 Days", resalePrice: "Avg. $1,050,000", futureValue: "Avg. 65%" },
-      { count: 12, entity: "Pacific Flip Co", entityRating: "12 Txns - Mid", investorRating: "Growing", homeTown: "LONG BEACH, CA", purchasePrice: "Avg. $510,000", holdTime: "Avg. 165 Days", resalePrice: "Avg. $620,000", futureValue: "Avg. 73%" },
-    ],
-  },
-  {
-    id: "title",
-    label: "Title Companies",
-    value: 16,
-    rows: [
-      { count: 45, entity: "Fidelity National Title", entityRating: "Primary", investorRating: "\u2014", homeTown: "UPLAND, CA", purchasePrice: "\u2014", holdTime: "\u2014", resalePrice: "\u2014", futureValue: "\u2014" },
-    ],
-  },
+interface OfficeMetric {
+  label: string;
+  value: string;
+  expandKey?: string;
+}
+
+const OFFICE_METRICS: OfficeMetric[] = [
+  { label: "Office Name", value: "COMPASS" },
+  { label: "Total Trans. to Investors", value: "18,834" },
+  { label: "Double-end Trans. %", value: "0.0%" },
+  { label: "Avg. Purchase", value: "$1,981,255" },
+  { label: "Avg. Resale", value: "$2,233,363" },
+  { label: "Last Property Sourced", value: "1321 GATES AVE, MANHATTAN BEACH" },
+  { label: "Listings Sold for Investors", value: "2,512", expandKey: "sold-for" },
+  { label: "Listings Sold to Investors", value: "2,088", expandKey: "sold-to" },
+  { label: "Office Represented Buyers", value: "JENNIFER LANDON" },
+  { label: "Listings Re-Sold to Investors", value: "935" },
+  { label: "Purchase to Resale %", value: "89.0%" },
+  { label: "Unique Investor Relationships", value: "4,573", expandKey: "relationships" },
+  { label: "Investor Friendly Agents", value: "56", expandKey: "agents" },
+];
+
+interface AgentRow {
+  name: string;
+  totalTrans: number;
+  doubleEnd: string;
+  avgPurchase: string;
+  avgResale: string;
+  lastPropertySourced: string;
+  soldFor: number;
+  soldTo: number;
+  uniqueRelationships: number;
+  recentBuyer: string;
+}
+
+const AGENT_DATA: AgentRow[] = [
+  { name: "TRACY B DO", totalTrans: 203, doubleEnd: "9.8%", avgPurchase: "$1,357,904", avgResale: "$1,373,613", lastPropertySourced: "3601 ARROYO SECO AVE, LOS ANGELES", soldFor: 85, soldTo: 9, uniqueRelationships: 49, recentBuyer: "CAROLINE PURVIS" },
+  { name: "SALLY FORSTER JONES", totalTrans: 138, doubleEnd: "17.0%", avgPurchase: "$3,172,932", avgResale: "$2,771,515", lastPropertySourced: "12377 RIDGE CIR, LOS ANGELES", soldFor: 43, soldTo: 32, uniqueRelationships: 74, recentBuyer: "DAVID FINDLEY" },
+  { name: "STEPHANIE YOUNGER", totalTrans: 119, doubleEnd: "12.3%", avgPurchase: "$1,873,102", avgResale: "$1,889,880", lastPropertySourced: "8000 STEWART AVE, LOS ANGELES", soldFor: 23, soldTo: 19, uniqueRelationships: 46, recentBuyer: "NIKKI BALDWIN" },
+  { name: "GARY DOSS", totalTrans: 105, doubleEnd: "12.5%", avgPurchase: "$690,218", avgResale: "$970,487", lastPropertySourced: "1030 WILDERNESS DR, BIG BEAR CITY", soldFor: 9, soldTo: 6, uniqueRelationships: 21, recentBuyer: "ISABEL ALVAREZ" },
+  { name: "RON WYNN", totalTrans: 98, doubleEnd: "11.8%", avgPurchase: "$2,372,009", avgResale: "$3,840,710", lastPropertySourced: "12548 EVERGLADE ST, LOS ANGELES", soldFor: 27, soldTo: 24, uniqueRelationships: 44, recentBuyer: "DAVI NOGUEIRA" },
+  { name: "VALERY NEUMAN", totalTrans: 93, doubleEnd: "30.2%", avgPurchase: "$3,055,362", avgResale: "$4,239,033", lastPropertySourced: "53374 VIA DONA, LA QUINTA", soldFor: 7, soldTo: 8, uniqueRelationships: 23, recentBuyer: "VALERY NEUMAN" },
+  { name: "DAVID BERG", totalTrans: 90, doubleEnd: "0.0%", avgPurchase: "$3,140,519", avgResale: "$2,879,949", lastPropertySourced: "1871 STANLEY AVE, LOS ANGELES", soldFor: 39, soldTo: 7, uniqueRelationships: 37, recentBuyer: "STEPHEN SWEENEY" },
+  { name: "SANDI PHILLIPS AND ASSO...", totalTrans: 87, doubleEnd: "20.8%", avgPurchase: "$958,981", avgResale: "$1,062,266", lastPropertySourced: "54817 RIVIERA, LA QUINTA", soldFor: 7, soldTo: 5, uniqueRelationships: 18, recentBuyer: "RICK PARNELL" },
+  { name: "CRAIG STRONG", totalTrans: 76, doubleEnd: "15.9%", avgPurchase: "$2,197,909", avgResale: "$1,972,490", lastPropertySourced: "4546 STROHM AVE, TOLUCA LAKE", soldFor: 15, soldTo: 8, uniqueRelationships: 21, recentBuyer: "JENNIFER LANDON" },
+  { name: "JEFF BRANDOLINO", totalTrans: 68, doubleEnd: "2.3%", avgPurchase: "$767,968", avgResale: "$981,911", lastPropertySourced: "22096 BARRINGTON WAY, SANTA CLARITA", soldFor: 42, soldTo: 1, uniqueRelationships: 12, recentBuyer: "JOEL KALMUS" },
+];
+
+interface ListingRow {
+  entityName: string;
+  hometown: string;
+  lastPurchase: string;
+  totalTrans: string;
+  avgPurchase: string;
+  avgResale: string;
+  pfvRatio: string;
+  listSoldRatio: string;
+  pmRatio: string;
+  purchaseResale: number;
+}
+
+const LISTINGS_SOLD_FOR: ListingRow[] = [
+  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/15/2024", totalTrans: "3467", avgPurchase: "$699,387", avgResale: "$716,471", pfvRatio: "91.9%", listSoldRatio: "116.6%", pmRatio: "38 days", purchaseResale: 158 },
+  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "01/23/2022", totalTrans: "1470", avgPurchase: "$702,438", avgResale: "$705,706", pfvRatio: "95.0%", listSoldRatio: "99.6%", pmRatio: "34 days", purchaseResale: 108 },
+  { entityName: "D R HORTON LOS ANGELES HOLDING CO INC", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1180", avgPurchase: "$5,949,841", avgResale: "$571,071", pfvRatio: "56.5%", listSoldRatio: "1065.9%", pmRatio: "406 days", purchaseResale: 416 },
+  { entityName: "LENNAR HOMES OF CALIFORNIA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "761", avgPurchase: "$2,024,026", avgResale: "$816,303", pfvRatio: "53.8%", listSoldRatio: "297.6%", pmRatio: "87 days", purchaseResale: 120 },
+  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "758", avgPurchase: "$6,227,327", avgResale: "$919,477", pfvRatio: "79.2%", listSoldRatio: "687.9%", pmRatio: "444 days", purchaseResale: 420 },
+  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "744", avgPurchase: "$656,305", avgResale: "$719,469", pfvRatio: "89.1%", listSoldRatio: "93.3%", pmRatio: "52 days", purchaseResale: 96 },
+  { entityName: "D R HORTON LA HOLDING COMPANY I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554", avgPurchase: "$4,787,133", avgResale: "$482,508", pfvRatio: "", listSoldRatio: "1055.4%", pmRatio: "582 days", purchaseResale: 495 },
+  { entityName: "LENNAR HOMES OF CALIFORNIA INC", hometown: "CORONA, CA", lastPurchase: "08/14/2022", totalTrans: "487", avgPurchase: "$7,680,095", avgResale: "$1,947,064", pfvRatio: "72.3%", listSoldRatio: "969.4%", pmRatio: "645 days", purchaseResale: 464 },
+];
+
+const LISTINGS_SOLD_TO: ListingRow[] = [
+  { entityName: "OPENDOOR PROPERTY TRUST I", hometown: "TEMPE, AZ", lastPurchase: "04/17/2024", totalTrans: "3913/4611", avgPurchase: "$686,980", avgResale: "$701,089", pfvRatio: "97.40%", listSoldRatio: "118.72%", pmRatio: "93 days", purchaseResale: 155 },
+  { entityName: "ZILLOW HOMES PROPERTY TRUST", hometown: "SEATTLE, WA", lastPurchase: "03/13/2022", totalTrans: "1889/5924", avgPurchase: "$678,811", avgResale: "$681,375", pfvRatio: "99.57%", listSoldRatio: "100.78%", pmRatio: "118 days", purchaseResale: 107 },
+  { entityName: "D R HORTON LOS ANGELES HOLDING CO INC", hometown: "CORONA, CA", lastPurchase: "03/27/2024", totalTrans: "1134/2058", avgPurchase: "$6,121,067", avgResale: "$574,313", pfvRatio: "1077.82%", listSoldRatio: "99.86%", pmRatio: "484 days", purchaseResale: 422 },
+  { entityName: "LENNAR HOMES OF CALIFORNIA LLC", hometown: "CORONA, CA", lastPurchase: "04/14/2024", totalTrans: "1257/2074", avgPurchase: "$4,217,361", avgResale: "$2,028,461", pfvRatio: "396.05%", listSoldRatio: "142.90%", pmRatio: "211 days", purchaseResale: 111 },
+  { entityName: "KB HOME COASTAL INC", hometown: "WILDOMAR, CA", lastPurchase: "11/28/2023", totalTrans: "691/782", avgPurchase: "$6,655,208", avgResale: "$968,890", pfvRatio: "731.23%", listSoldRatio: "99.91%", pmRatio: "577 days", purchaseResale: 372 },
+  { entityName: "REDFINNOW BORROWER LLC", hometown: "FRISCO, TX", lastPurchase: "11/27/2022", totalTrans: "804/967", avgPurchase: "$646,565", avgResale: "$708,682", pfvRatio: "91.20%", listSoldRatio: "102.33%", pmRatio: "133 days", purchaseResale: 95 },
+  { entityName: "D R HORTON LA HOLDING COMPANY I", hometown: "CORONA, CA", lastPurchase: "12/19/2023", totalTrans: "554/2044", avgPurchase: "$4,787,133", avgResale: "$482,508", pfvRatio: "1029.10%", listSoldRatio: "94.72%", pmRatio: "766 days", purchaseResale: 487 },
+  { entityName: "LENNAR HOMES OF CALIFORNIA INC", hometown: "CORONA, CA", lastPurchase: "05/22/2023", totalTrans: "640/1943", avgPurchase: "$6,973,280", avgResale: "$2,351,985", pfvRatio: "807.57%", listSoldRatio: "484.70%", pmRatio: "750 days", purchaseResale: 367 },
+];
+
+interface RelationshipRow {
+  entityName: string;
+  entityRating: string;
+  investorRating: string;
+  homeTown: string;
+  purchasePrice: string;
+  holdTime: string;
+  resalePurchase: string;
+  futureValue: string;
+}
+
+const RELATIONSHIPS_DATA: RelationshipRow[] = [
+  { entityName: "LOYOLA MARYMOUNT UNIVERSITY INC", entityRating: "3 Units - Low", investorRating: "5 Units - Mid", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $2,803,333", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1,125,000", futureValue: "Avg. 100%" },
+  { entityName: "TJH RE PROPERTIES III LLC", entityRating: "2 Units - Low", investorRating: "5 Units - Mid", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1,122,500", holdTime: "Avg. 132 Days", resalePurchase: "Avg. $1,125,000", futureValue: "Avg. 100%" },
+  { entityName: "8833 RAMSGATE LLC", entityRating: "2 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $934,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "DABINKOS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $3,132,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "APX INSTMENTS INC", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "LONG BEACH, CA", purchasePrice: "Avg. $1,300,000", holdTime: "Avg. 205 Days", resalePurchase: "Avg. $1,400,000", futureValue: "Avg. 93%" },
+  { entityName: "MANASARA BLUFFS LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1,855,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "AHNMP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "VENICE, CA", purchasePrice: "Avg. $4,200,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "AN4 PROPERTIES LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1,405,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "KENTWOOD LIVING LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "MANHATTAN BEACH, CA", purchasePrice: "Avg. $1,125,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "3866 COOLIDGE LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $1,835,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "THE ESTATES GROUP LLC", entityRating: "1 Units - Low", investorRating: "1 Units - Low", homeTown: "LOS ANGELES, CA", purchasePrice: "Avg. $854,000", holdTime: "\u2014", resalePurchase: "\u2014", futureValue: "\u2014" },
+  { entityName: "433 HILL ST LP", entityRating: "1 Units - Low", investorRating: "5 Units - Mid", homeTown: "EL SEGUNDO, CA", purchasePrice: "Avg. $1,650,000", holdTime: "Avg. 511 Days", resalePurchase: "Avg. $1,775,000", futureValue: "Avg. 93%" },
 ];
 
 const SCRIPTS = [
   `Welcome ${BROKER.name}, my name is Tony Diaz. I am the founder of USale.com. I've been in the business for 32 years and done over 1,100 flips. We are a technology company that specializes in empowering investors and the investor-friendly agents who transact with them. I'm excited to show you our data and how we can empower you.`,
-  `Let's start with what we know about you. You have ${DATA_TABS[0].value} investor-friendly agents. Fernando Perez is doing a great job sourcing deals to investors like ABC LLC \u2014 he's done quite a few transactions. You've also sold ${DATA_TABS[1].value} properties for investors \u2014 that means a property is owned by an investor and one of your agents sold it. We also noticed some of your agents are finding distressed sellers and selling them to investors. And you have ${DATA_TABS[3].value} unique investor relationships \u2014 that's pretty healthy. I'm sure you know you guys have a really strong relationship with ABC LLC and 123 LLC.`,
-  `We have a lot of data. We also know you have a great relationship with ${BROKER.titlePartner}.`,
+  `This is the data of COMPASS on top of what we know about you. You have 18,834 total transactions to investors. Your office has 56 investor-friendly agents \u2014 Tracy B Do leads with 203 transactions, Sally Forster Jones with 138, Stephanie Younger with 119. You've sold 2,512 listings for investors and 2,088 listings to investors. You have 4,573 unique investor relationships \u2014 that's incredibly strong. Your average purchase is nearly 2 million dollars and average resale is over 2.2 million. This is really impressive data, ${BROKER.name}.`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're not selling you any membership. We have no transaction fees. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
   `So why are we doing this? Well, we need inventory. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
   `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer. We're not replacing the MLS. We're giving your agents more options.`,
   `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept \u2014 we all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. You guys win. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
   `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just "give me a listing." We have great data to help your agents get in front of the right sellers and provide them options.`,
-  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Title companies \u2014 everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just "give me a listing." We all win.`,
+  `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction. We help your agents get in front of sellers, provide more value than just "give me a listing." We all win.`,
   `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. It's truly a no-brainer. Schedule a meeting. Do a demo. Create an advantage.`,
 ];
 
 const SECTION_TITLES = [
   "Welcome",
   "What We Know",
-  "Title Partner",
   "Why USale",
   "Why We Do This",
   "Workflow",
@@ -119,50 +146,7 @@ const SECTION_TITLES = [
   "Next Steps",
 ];
 
-function Counter({ target, run, dur = 1400 }: { target: number; run: boolean; dur?: number }) {
-  const [v, setV] = useState(0);
-  const r = useRef<number | null>(null);
-  useEffect(() => {
-    if (!run) { setV(0); return; }
-    let s: number | null = null;
-    const step = (t: number) => {
-      if (!s) s = t;
-      const p = Math.min((t - s) / dur, 1);
-      setV(Math.round((1 - Math.pow(1 - p, 3)) * target));
-      if (p < 1) r.current = requestAnimationFrame(step);
-    };
-    r.current = requestAnimationFrame(step);
-    return () => { if (r.current) cancelAnimationFrame(r.current); };
-  }, [run, target, dur]);
-  return <>{v}</>;
-}
-
-function DataRowComponent({ row, i }: { row: DataRow; i: number }) {
-  return (
-    <div style={{
-      display: "grid",
-      gridTemplateColumns: "60px 1.2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
-      gap: 8,
-      padding: "12px 16px",
-      background: i % 2 === 0 ? "#fafaf5" : "#fff",
-      borderBottom: "1px solid #eee",
-      fontSize: 12,
-      alignItems: "center",
-    }}>
-      <span style={{ fontWeight: 700, fontSize: 15 }}>{row.count}\u2013</span>
-      <span style={{ fontWeight: 600, color: "#2C3E50", textDecoration: "underline", cursor: "pointer" }}>{row.entity}</span>
-      <span><b style={{ color: "#E8571A" }}>Entity Rating</b><br />{row.entityRating}</span>
-      <span><b style={{ color: "#E8571A" }}>Investor Rating</b><br />{row.investorRating}</span>
-      <span><b style={{ color: "#E8571A" }}>Home Town</b><br />{row.homeTown}</span>
-      <span><b style={{ color: "#E8571A" }}>Purchase Price</b><br />{row.purchasePrice}</span>
-      <span><b style={{ color: "#E8571A" }}>Hold Time</b><br />{row.holdTime}</span>
-      <span><b style={{ color: "#E8571A" }}>Resale Purchase</b><br />{row.resalePrice}</span>
-      <span><b style={{ color: "#E8571A" }}>Future Value</b><br />{row.futureValue}</span>
-    </div>
-  );
-}
-
-const HIGHLIGHT_COUNTS = [3, 1, 3, 4, 4, 3, 3, 5, 3, 5];
+const HIGHLIGHT_COUNTS = [3, 14, 4, 4, 3, 3, 5, 3, 5];
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -192,52 +176,117 @@ function SectionWelcome({ hl }: { hl: number }) {
   );
 }
 
-function SectionDataCards({ activeTab, setActiveTab, runCounters }: { activeTab: number; setActiveTab: (i: number) => void; runCounters: boolean }) {
-  const tab = DATA_TABS[activeTab] || DATA_TABS[0];
+function AgentTable() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
-        Here's what we know about <span style={{ color: "#E8571A" }}>you</span>.
-      </h2>
-      <div style={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-        {DATA_TABS.map((t, i) => (
-          <button key={t.id} onClick={() => setActiveTab(i)} style={{
-            flex: "1 1 150px", padding: "14px 12px", border: "1px solid #e0e0d8",
-            background: activeTab === i ? "#E8571A" : "#f5f5ef",
-            color: activeTab === i ? "#fff" : "#2C3E50",
-            fontWeight: 600, fontSize: 13, cursor: "pointer", borderRadius: 0,
-            transition: "all 0.2s",
-            textAlign: "center", lineHeight: 1.3,
-          }}>
-            <div style={{ fontSize: 22, fontWeight: 700 }}><Counter target={t.value} run={runCounters} /></div>
-            {t.label}
-          </button>
-        ))}
+    <div style={{ overflowX: "auto", marginTop: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 900 }}>
+        <span>Agent Name</span><span>Total Trans.</span><span>Dbl-End %</span><span>Avg. Purchase</span><span>Avg. Resale</span><span>Last Property</span><span>Sold For</span><span>Sold To</span><span>Relationships</span><span>Recent Buyer</span>
       </div>
-      <div style={{ background: "#f9f9f3", border: "1px solid #e0e0d8", borderRadius: 4, overflow: "hidden" }}>
-        <div style={{ padding: "16px", borderBottom: "1px solid #e0e0d8", fontWeight: 700, fontSize: 16, color: "#2C3E50" }}>
-          {tab.value} {tab.label}
+      {AGENT_DATA.map((a, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 900, color: "#2C3E50" }}>
+          <span style={{ fontWeight: 600, color: "#E8571A" }}>{a.name}</span>
+          <span style={{ fontWeight: 700 }}>{a.totalTrans}</span>
+          <span>{a.doubleEnd}</span>
+          <span>{a.avgPurchase}</span>
+          <span>{a.avgResale}</span>
+          <span style={{ fontSize: 11 }}>{a.lastPropertySourced}</span>
+          <span>{a.soldFor}</span>
+          <span>{a.soldTo}</span>
+          <span>{a.uniqueRelationships}</span>
+          <span style={{ fontSize: 11 }}>{a.recentBuyer}</span>
         </div>
-        <div style={{ overflowX: "auto" }}>
-          {tab.rows.map((row, i) => <DataRowComponent key={i} row={row} i={i} />)}
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
 
-function SectionTitlePartner({ hl }: { hl: number }) {
+function ListingsTable({ data }: { data: ListingRow[] }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 24 }}>
-      <div style={{ width: 64, height: 64, borderRadius: 16, background: "#2C3E5012", display: "flex", alignItems: "center", justifyContent: "center", ...hVisible(hl, 0) }}>
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2C3E50" strokeWidth="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+    <div style={{ overflowX: "auto", marginTop: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 900 }}>
+        <span>Entity Name</span><span>Hometown</span><span>Last Purch.</span><span>Total Trans.</span><span>Avg. Purchase</span><span>Avg. Resale</span><span>P/FV</span><span>List/Sold</span><span>P/M</span><span>Purch. Resale</span>
       </div>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 1) }}>
-        We also know you have a great relationship with <span style={{ color: "#E8571A" }}>{BROKER.titlePartner}</span>.
+      {data.map((r, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 900, color: "#2C3E50" }}>
+          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 11 }}>{r.entityName}</span>
+          <span style={{ fontSize: 11 }}>{r.hometown}</span>
+          <span>{r.lastPurchase}</span>
+          <span style={{ fontWeight: 700 }}>{r.totalTrans}</span>
+          <span>{r.avgPurchase}</span>
+          <span>{r.avgResale}</span>
+          <span>{r.pfvRatio}</span>
+          <span>{r.listSoldRatio}</span>
+          <span>{r.pmRatio}</span>
+          <span>{r.purchaseResale}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function RelationshipsTable() {
+  return (
+    <div style={{ overflowX: "auto", marginTop: 8 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 800 }}>
+        <span>Entity Name</span><span>Entity Rating</span><span>Inv. Rating</span><span>Home Town</span><span>Purchase Price</span><span>Hold Time</span><span>Resale Purchase</span><span>Future Value</span>
+      </div>
+      {RELATIONSHIPS_DATA.map((r, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 800, color: "#2C3E50" }}>
+          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 11 }}>{r.entityName}</span>
+          <span style={{ fontSize: 11 }}>{r.entityRating}</span>
+          <span style={{ fontSize: 11 }}>{r.investorRating}</span>
+          <span style={{ fontSize: 11 }}>{r.homeTown}</span>
+          <span style={{ fontWeight: 600 }}>{r.purchasePrice}</span>
+          <span>{r.holdTime}</span>
+          <span>{r.resalePurchase}</span>
+          <span>{r.futureValue}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded: string | null; setExpanded: (k: string | null) => void }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
+        This is the data of <span style={{ color: "#E8571A" }}>COMPASS</span> on top of what we know about you!
       </h2>
-      <p style={{ fontSize: 15, color: "#2C3E50", maxWidth: 480, lineHeight: 1.6, ...hVisible(hl, 2) }}>
-        We have a lot of data. Your service provider network is already aligned with what we're building.
-      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+        {OFFICE_METRICS.map((m, i) => {
+          const isExpandable = !!m.expandKey;
+          const isExpanded = expanded === m.expandKey;
+          return (
+            <div key={m.label} style={{ ...hVisible(hl, i + 1) }}>
+              <div
+                onClick={isExpandable ? () => setExpanded(isExpanded ? null : m.expandKey!) : undefined}
+                style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "12px 18px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
+                  background: isExpandable ? (isExpanded ? "#E8571A" : "#fff") : "#fff",
+                  border: `1px solid ${isExpanded ? "#E8571A" : "#E8571A30"}`,
+                  cursor: isExpandable ? "pointer" : "default",
+                  transition: "all 0.2s",
+                }}
+              >
+                <span style={{ fontSize: 13, fontWeight: 600, color: isExpanded ? "#fff" : "#2C3E50", letterSpacing: "0.02em" }}>{m.label}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 15, fontWeight: 700, color: isExpanded ? "#fff" : "#E8571A" }}>{m.value}</span>
+                  {isExpandable && <span style={{ fontSize: 12, color: isExpanded ? "#fff" : "#E8571A", transition: "transform 0.2s", transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>}
+                </div>
+              </div>
+              {isExpanded && (
+                <div style={{ border: "1px solid #E8571A30", borderTop: "none", borderRadius: "0 0 10px 10px", background: "#fff", maxHeight: 400, overflow: "auto" }}>
+                  {m.expandKey === "agents" && <AgentTable />}
+                  {m.expandKey === "sold-for" && <ListingsTable data={LISTINGS_SOLD_FOR} />}
+                  {m.expandKey === "sold-to" && <ListingsTable data={LISTINGS_SOLD_TO} />}
+                  {m.expandKey === "relationships" && <RelationshipsTable />}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -617,7 +666,7 @@ export default function BrokerPresentation() {
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
   const [showScript, setShowScript] = useState(false);
-  const [activeTab, setActiveTab] = useState(0);
+  const [expanded, setExpanded] = useState<string | null>(null);
   const [chatOpen, setChatOpen] = useState(false);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [chatInput, setChatInput] = useState("");
@@ -630,7 +679,7 @@ export default function BrokerPresentation() {
   const handleTTSEnded = useCallback(() => {
     setSlide(s => {
       if (s < SCRIPTS.length - 1) {
-        setActiveTab(0);
+        setExpanded(null);
         return s + 1;
       }
       return s;
@@ -640,11 +689,11 @@ export default function BrokerPresentation() {
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
-    if (slide < total - 1) { setSlide(s => s + 1); setActiveTab(0); }
+    if (slide < total - 1) { setSlide(s => s + 1); setExpanded(null); }
   }, [slide, total]);
 
   const goPrev = useCallback(() => {
-    if (slide > 0) { setSlide(s => s - 1); setActiveTab(0); }
+    if (slide > 0) { setSlide(s => s - 1); setExpanded(null); }
   }, [slide]);
 
   useEffect(() => {
@@ -696,10 +745,9 @@ export default function BrokerPresentation() {
           brokerContext: {
             brokerName: BROKER.name,
             brokerage: BROKER.brokerage,
-            titlePartner: BROKER.titlePartner,
             currentSlide: SECTION_TITLES[slide],
             currentScript: SCRIPTS[slide],
-            dataTabs: DATA_TABS.map(t => ({ label: t.label, value: t.value })),
+            officeMetrics: OFFICE_METRICS.map(m => ({ label: m.label, value: m.value })),
           },
           conversationHistory: chatMessages.slice(-10),
         }),
@@ -759,15 +807,14 @@ export default function BrokerPresentation() {
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} activeTab={activeTab} setActiveTab={setActiveTab} runCounters={slide === 1} />,
-    <SectionTitlePartner key={2} hl={hlStep(2)} />,
-    <SectionWhyDifferent key={3} hl={hlStep(3)} />,
-    <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
-    <SectionWorkflow key={5} hl={hlStep(5)} />,
-    <SectionCredibility key={6} hl={hlStep(6)} />,
-    <SectionEverybodyWins key={7} hl={hlStep(7)} />,
-    <SectionHowWePay key={8} hl={hlStep(8)} />,
-    <SectionCTA key={9} hl={hlStep(9)} />,
+    <SectionDataCards key={1} hl={hlStep(1)} expanded={expanded} setExpanded={setExpanded} />,
+    <SectionWhyDifferent key={2} hl={hlStep(2)} />,
+    <SectionWhyDoingThis key={3} hl={hlStep(3)} />,
+    <SectionWorkflow key={4} hl={hlStep(4)} />,
+    <SectionCredibility key={5} hl={hlStep(5)} />,
+    <SectionEverybodyWins key={6} hl={hlStep(6)} />,
+    <SectionHowWePay key={7} hl={hlStep(7)} />,
+    <SectionCTA key={8} hl={hlStep(8)} />,
   ];
 
   return (
