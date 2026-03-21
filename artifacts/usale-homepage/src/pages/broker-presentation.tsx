@@ -686,7 +686,7 @@ function SectionHowWePay({ hl }: { hl: number }) {
 
 function SectionCTA({ hl }: { hl: number }) {
   const steps = [
-    "Set up a meeting with our team to discuss getting your agents on the waiting list",
+    "Set up a meeting with our team to discuss getting your agents on the waiting list to become an early adopter in USale",
     "Demo our technology, our data and powerful tools",
     "Explain how your agents can get paid without a listing using the white-label website",
     "Show you how to use USale to recruit investor-friendly agents",
