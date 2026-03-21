@@ -152,7 +152,7 @@ const SECTION_TITLES = [
 
 const HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.3, 1], [0.65, 2]],
-  [[0, 0], [0.03, 1], [0.07, 2], [0.10, 3], [0.13, 4], [0.16, 5], [0.28, 6], [0.38, 7], [0.45, 8], [0.50, 9], [0.55, 10], [0.65, 11]],
+  [[0, 0], [0.03, 1], [0.06, 2], [0.09, 3], [0.12, 4], [0.15, 5], [0.30, 6], [0.42, 7], [0.52, 8], [0.58, 9], [0.65, 10], [0.75, 11]],
   [[0, 0], [0.10, 1], [0.35, 2], [0.60, 3], [0.80, 4]],
   [[0, 0], [0.20, 1], [0.45, 2], [0.70, 3]],
   [[0, 0], [0.25, 1], [0.50, 2], [0.80, 3]],
@@ -299,10 +299,10 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive }: 
       step++;
       if (step > OFFICE_METRICS.length) return;
       setTimerStep(step);
-      const delay = expandSteps.has(step) ? 2800 : 1200;
+      const delay = expandSteps.has(step) ? 3500 : 1500;
       timeout = setTimeout(advance, delay);
     };
-    timeout = setTimeout(advance, 800);
+    timeout = setTimeout(advance, 1000);
     return () => clearTimeout(timeout);
   }, [timerActive]);
 
