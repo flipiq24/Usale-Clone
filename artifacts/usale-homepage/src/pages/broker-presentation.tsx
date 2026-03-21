@@ -128,11 +128,11 @@ const SCRIPTS = [
   `Alright ${BROKER.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging 2% commission and you've done 2,088 transactions to investors at an average purchase price of about $2 million. That means your office has generated approximately $82.7 million in commissions from investor transactions alone. Now, what if I can show you how to bring this up by 20%? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${BROKER.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made $82.7 million \u2014 imagine that times 1.2. That's $99.3 million. An additional $16.5 million. That's about 418 more transactions you could capture. Do I have your attention, ${BROKER.name}?`,
   `Let's explain why USale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership. We have no transaction fees. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
   `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
-  `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale and coming soon in MLS. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
+  `Let me explain how the workflow works. Number one \u2014 if your agent cannot secure a listing, they invite the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 your agent has a new listing. They post it coming soon on USale. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
   `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of 100 offers. I'm sure you know that.`,
   `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
   `How do we get paid? Pretty simple. When our investors that are providing your agents the instant cash offer buy a property, we get a small share. We all win. We have great buyers. You have great agents. Everybody's eager to participate. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
-  `So what do we need from you? Set up a meeting with our team to discuss getting your agents on the waiting list to become an early adopter in USale. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
+  `So what do we need from you? Set up a meeting with our team to discuss how we can get your agents signed up to the waiting list. We'll demo the technology to show you our data and powerful tools. We'll explain how your agents can get paid without a listing using the white-label website. And we'll show you how to use USale to recruit investor-friendly agents. Schedule a meeting. Do a demo. Create an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
   `Before we wrap up, ${BROKER.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what USale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and if you'd like to schedule a follow-up meeting, you can do that right here. And make sure to download the USale Broker Playbook \u2014 it's got everything we covered today and more. We're looking forward to working with you.`,
 ];
 
@@ -152,7 +152,7 @@ const SECTION_TITLES = [
 
 const HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.11, 1], [0.37, 2]],
-  [[0, 0], [0.05, 1], [0.09, 2], [0.15, 3], [0.18, 4], [0.29, 5], [0.39, 6], [0.43, 7], [0.49, 8], [0.54, 9], [0.57, 10], [0.64, 11]],
+  [[0, 0], [0.09, 1], [0.12, 2], [0.15, 3], [0.18, 4], [0.29, 5], [0.39, 6], [0.43, 7], [0.49, 8], [0.54, 9], [0.57, 10], [0.64, 11]],
   [[0, 0], [0.09, 1], [0.35, 2], [0.80, 3], [0.96, 4]],
   [[0.09, 0], [0.33, 1], [0.38, 2], [0.61, 3]],
   [[0.08, 0], [0.43, 1], [0.58, 2], [0.75, 3]],
@@ -596,7 +596,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
     { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
-    { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale and coming soon in MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
+    { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
     { n: "3", t: "Agent Brings Buyers to the Marketplace", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
   ];
   return (
@@ -1127,7 +1127,6 @@ function useRealtimeVoice() {
 }
 
 export default function BrokerPresentation() {
-  const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
   const [showScript, setShowScript] = useState(false);
@@ -1173,7 +1172,6 @@ export default function BrokerPresentation() {
   }, [goNext, goPrev, chatOpen]);
 
   useEffect(() => {
-    if (!started) return;
     if (audioOn) {
       playTTS(SCRIPTS[slide]);
       if (slide < total - 1) {
@@ -1182,7 +1180,7 @@ export default function BrokerPresentation() {
     } else {
       stopTTS();
     }
-  }, [slide, audioOn, started]);
+  }, [slide, audioOn]);
 
   const timerShouldRun = !audioOn || (!isTTSPlaying && !isTTSLoading);
 
@@ -1306,35 +1304,6 @@ export default function BrokerPresentation() {
     <SectionSurvey key={10} hl={hlStep(10)} />,
   ];
 
-  if (!started) {
-    return (
-      <div style={{
-        minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif",
-        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32, padding: 40,
-      }}>
-        <img src={USALE_LOGO} alt="USale" style={{ height: 80 }} />
-        <h1 style={{ fontSize: "clamp(28px,5vw,48px)", fontWeight: 700, color: "#2C3E50", margin: 0, textAlign: "center", lineHeight: 1.2 }}>
-          Presentation for <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
-        </h1>
-        <p style={{ fontSize: 16, color: "#6c757d", margin: 0, textAlign: "center" }}>{BROKER.brokerage}</p>
-        <button
-          onClick={() => setStarted(true)}
-          style={{
-            padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
-            color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
-            cursor: "pointer", boxShadow: "0 4px 20px #E8571A40",
-            transition: "transform 0.2s, box-shadow 0.2s",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-        >
-          ▶ Start Presentation
-        </button>
-        <p style={{ fontSize: 13, color: "#adb5bd", margin: 0 }}>Audio narration will begin automatically</p>
-      </div>
-    );
-  }
-
   return (
     <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
 
@@ -1348,6 +1317,8 @@ export default function BrokerPresentation() {
           <img src={USALE_LOGO} alt="USale" style={{ height: 32 }} />
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
+          <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
+          <span style={{ fontSize: 12, color: "#adb5bd", letterSpacing: "0.03em" }}>usale.com/broker/{BROKER.slug}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={toggleAudio} style={{

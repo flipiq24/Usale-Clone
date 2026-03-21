@@ -82,16 +82,16 @@ export default function Home() {
                     onMouseLeave={() => setWhoWeServeOpen(false)}
                   >
                     {[
-                      { label: "Real Estate Investors", href: "/real-estate-investors", live: false },
-                      { label: "Real Estate Agents", href: "https://usale.replit.app/broker/bcollective-agency", live: true },
-                      { label: "Strategic Partners", href: "/strategic-partners", live: false },
+                      { label: "Real Estate Investors", href: "/real-estate-investors" },
+                      { label: "Real Estate Agents", href: "/real-estate-agents" },
+                      { label: "Strategic Partners", href: "/strategic-partners" },
                     ].map((item) => (
                       <a
                         key={item.href}
                         href={item.href}
                         className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
                         style={{ color: DARK_BLUE }}
-                        onClick={item.live ? undefined : (e) => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         {item.label}
                       </a>
@@ -150,7 +150,7 @@ export default function Home() {
               <div className="px-3 py-1">
                 <p className="text-xs uppercase tracking-wider text-gray-400 mb-1">Who We Serve</p>
                 <a href="/real-estate-investors" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Real Estate Investors</a>
-                <a href="https://usale.replit.app/broker/bcollective-agency" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }}>Real Estate Agents</a>
+                <a href="/real-estate-agents" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Real Estate Agents</a>
                 <a href="/strategic-partners" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Strategic Partners</a>
               </div>
               <a href="/about-us" className="block px-3 py-2 text-sm" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>About Us</a>
