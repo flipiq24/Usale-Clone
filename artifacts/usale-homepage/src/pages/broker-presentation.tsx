@@ -285,6 +285,18 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
     return () => clearTimeout(t);
   }, [hl, isNarrating]);
 
+  useEffect(() => {
+    if (!expanded) return;
+    const idx = OFFICE_METRICS.findIndex((m) => m.expandKey === expanded);
+    if (idx < 0) return;
+    const row = rowRefs.current[idx];
+    if (!row) return;
+    const t = setTimeout(() => {
+      row.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+    return () => clearTimeout(t);
+  }, [expanded]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
       <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
@@ -357,7 +369,7 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
                   borderLeft: "4px solid #E8571A",
                   borderRight: "2px solid #E8571A",
                   borderBottom: "2px solid #E8571A",
-                  borderTop: "none",
+                  borderTop: "2px solid #E8571A40",
                   borderRadius: "0 0 12px 12px",
                   background: "#fff",
                   maxHeight: 500,
