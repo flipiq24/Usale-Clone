@@ -706,7 +706,7 @@ export default function BrokerPresentation() {
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#F8F9FA", fontFamily: "'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif", position: "relative" }}>
+    <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif", position: "relative" }}>
       <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
       <div style={{
