@@ -263,6 +263,9 @@ const EXPAND_AT_STEP: Record<number, string> = {
 };
 
 function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   useEffect(() => {
     if (!isNarrating) return;
     const key = EXPAND_AT_STEP[hl];
@@ -273,40 +276,78 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
     }
   }, [hl, isNarrating, setExpanded]);
 
+  useEffect(() => {
+    if (!isNarrating || hl < 1) return;
+    const row = rowRefs.current[hl - 1];
+    if (row) {
+      row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [hl, isNarrating]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
       <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
         This is the data for <span style={{ color: "#E8571A" }}>{BROKER.brokerage}</span>!
       </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <div ref={scrollRef} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
         {OFFICE_METRICS.map((m, i) => {
           const isExpandable = !!m.expandKey;
           const isExpanded = expanded === m.expandKey;
           const metricStep = i + 1;
-          const isHighlighted = metricStep <= hl;
+          const reached = metricStep <= hl;
           const isCurrent = isNarrating && metricStep === hl;
+          const isPast = reached && !isCurrent;
           return (
-            <div key={m.label} style={{ ...hVisible(hl, metricStep) }}>
+            <div
+              key={m.label}
+              ref={(el) => { rowRefs.current[i] = el; }}
+              style={{
+                opacity: reached ? 1 : (isNarrating ? 0 : 1),
+                transform: reached ? "translateY(0)" : (isNarrating ? "translateY(8px)" : "translateY(0)"),
+                transition: "opacity 0.4s ease, transform 0.4s ease",
+              }}
+            >
               <div
                 onClick={isExpandable ? () => setExpanded(isExpanded ? null : m.expandKey!) : undefined}
                 style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
                   padding: "14px 20px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
-                  background: isExpanded ? "#E8571A" : (isCurrent ? "#E8571A0C" : "#fff"),
-                  border: `1px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : "#E8571A25")}`,
+                  background: isExpanded ? "#E8571A" : (isCurrent ? "#E8571A15" : "#fff"),
+                  border: `2px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : (isPast ? "#E8571A40" : "#E8571A20"))}`,
                   cursor: isExpandable ? "pointer" : "default",
-                  transition: "all 0.3s",
-                  boxShadow: isCurrent && !isExpanded ? "0 0 0 3px #E8571A15" : "none",
+                  transition: "all 0.35s ease",
+                  boxShadow: isCurrent && !isExpanded ? "0 0 0 4px #E8571A20, 0 4px 12px #E8571A15" : "none",
                 }}
               >
-                <span style={{ fontSize: 14, fontWeight: 600, color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : "#2C3E50"), letterSpacing: "0.02em" }}>{m.label}</span>
+                <span style={{
+                  fontSize: isCurrent ? 15 : 14,
+                  fontWeight: isCurrent ? 700 : 600,
+                  color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : (isPast ? "#2C3E50" : "#2C3E50")),
+                  letterSpacing: "0.02em",
+                  transition: "all 0.3s",
+                }}>{m.label}</span>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: isExpanded ? "#fff" : "#E8571A" }}>{m.value}</span>
-                  {isExpandable && <span style={{ fontSize: 12, color: isExpanded ? "#fff" : "#E8571A", transition: "transform 0.2s", transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>}
+                  <span style={{
+                    fontSize: isCurrent ? 18 : 16,
+                    fontWeight: 700,
+                    color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : "#E8571A"),
+                    transition: "all 0.3s",
+                  }}>{m.value}</span>
+                  {isExpandable && <span style={{
+                    fontSize: 12,
+                    color: isExpanded ? "#fff" : "#E8571A",
+                    transition: "transform 0.3s",
+                    transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                  }}>▼</span>}
                 </div>
               </div>
               {isExpanded && (
-                <div style={{ border: "1px solid #E8571A30", borderTop: "none", borderRadius: "0 0 10px 10px", background: "#fff", maxHeight: 500, overflow: "auto" }}>
+                <div style={{
+                  border: "2px solid #E8571A30", borderTop: "none",
+                  borderRadius: "0 0 10px 10px", background: "#fff",
+                  maxHeight: 500, overflow: "auto",
+                  animation: "slideDown 0.35s ease",
+                }}>
                   {m.expandKey === "agents" && <AgentTable />}
                   {m.expandKey === "sold-for" && <ListingsTable data={LISTINGS_SOLD_FOR} />}
                   {m.expandKey === "sold-to" && <ListingsTable data={LISTINGS_SOLD_TO} />}
@@ -317,6 +358,12 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: numb
           );
         })}
       </div>
+      <style>{`
+        @keyframes slideDown {
+          from { max-height: 0; opacity: 0; }
+          to { max-height: 500px; opacity: 1; }
+        }
+      `}</style>
     </div>
   );
 }
