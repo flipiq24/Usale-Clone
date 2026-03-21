@@ -181,7 +181,7 @@ function getHighlightStep(progress: number, totalSteps: number): number {
 function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 24 }}>
-      <img src={USALE_LOGO} alt="USale" style={{ height: 72, marginBottom: 8, ...hVisible(hl, 0) }} />
+      <img src={USALE_LOGO} alt="USale" style={{ height: 120, marginBottom: 8, ...hVisible(hl, 0) }} />
       <h1 style={{ fontSize: "clamp(36px,6vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.02em", ...hVisible(hl, 1) }}>
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
