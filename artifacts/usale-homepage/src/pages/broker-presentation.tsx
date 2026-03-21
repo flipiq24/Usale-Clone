@@ -152,14 +152,14 @@ const SECTION_TITLES = [
 
 const HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.11, 1], [0.37, 2]],
-  [[0, 0], [0.05, 1], [0.09, 2], [0.12, 3], [0.15, 4], [0.18, 5], [0.29, 6], [0.39, 7], [0.43, 8], [0.46, 9], [0.49, 10], [0.54, 11]],
-  [[0, 0], [0.08, 1], [0.35, 2], [0.80, 3], [0.96, 4]],
-  [[0, 0], [0.33, 1], [0.38, 2], [0.59, 3]],
-  [[0, 0], [0.37, 1], [0.58, 2], [0.75, 3]],
+  [[0, 0], [0.09, 1], [0.12, 2], [0.15, 3], [0.18, 4], [0.29, 5], [0.39, 6], [0.43, 7], [0.49, 8], [0.54, 9], [0.57, 10], [0.64, 11]],
+  [[0, 0], [0.09, 1], [0.35, 2], [0.80, 3], [0.96, 4]],
+  [[0.09, 0], [0.33, 1], [0.38, 2], [0.61, 3]],
+  [[0.08, 0], [0.43, 1], [0.58, 2], [0.75, 3]],
   [[0.05, 0], [0.41, 1], [0.65, 2]],
   [[0.17, 0], [0.65, 1], [0.78, 2]],
   [[0, 0], [0.10, 1], [0.31, 2], [0.43, 3], [0.74, 4]],
-  [[0, 0], [0.09, 1], [0.39, 2]],
+  [[0, 0], [0.05, 1], [0.39, 2]],
   [[0.05, 0], [0.24, 1], [0.37, 2], [0.54, 3], [0.65, 4]],
   [[0, 0], [0.11, 1], [0.26, 2], [0.58, 3], [0.76, 4]],
 ];
@@ -176,7 +176,7 @@ function hVisible(step: number, index: number): React.CSSProperties {
 }
 
 function getHighlightStep(progress: number, cues: [number, number][]): number {
-  let step = 0;
+  let step = -1;
   for (const [threshold, s] of cues) {
     if (progress >= threshold) step = s;
     else break;
@@ -1286,7 +1286,7 @@ export default function BrokerPresentation() {
   const hlStep = (idx: number) => {
     if (slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
     if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
-    if (isTTSLoading) return 0;
+    if (isTTSLoading) return HIGHLIGHT_CUES[idx][0][0] === 0 ? 0 : -1;
     return silentStep;
   };
 
