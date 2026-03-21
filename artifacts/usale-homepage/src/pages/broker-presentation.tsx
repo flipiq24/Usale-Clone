@@ -1348,8 +1348,6 @@ export default function BrokerPresentation() {
           <img src={USALE_LOGO} alt="USale" style={{ height: 32 }} />
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
-          <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
-          <span style={{ fontSize: 12, color: "#adb5bd", letterSpacing: "0.03em" }}>usale.com/broker/{BROKER.slug}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={toggleAudio} style={{
