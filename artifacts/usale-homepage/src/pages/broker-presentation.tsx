@@ -1274,15 +1274,6 @@ export default function BrokerPresentation() {
     <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
 
       <div style={{
-        position: "fixed", bottom: 80, left: 12, zIndex: 999, background: "#000c", color: "#0f0",
-        padding: "8px 12px", borderRadius: 8, fontSize: 11, fontFamily: "monospace", lineHeight: 1.6, pointerEvents: "none",
-      }}>
-        slide={slide} audioOn={audioOn ? "Y" : "N"} loading={isTTSLoading ? "Y" : "N"} playing={isTTSPlaying ? "Y" : "N"}<br />
-        ttsProgress={ttsProgress.toFixed(3)} hlStep={hlStep(slide)}<br />
-        silentStep={silentStep} maxSteps={HIGHLIGHT_COUNTS[slide]}
-      </div>
-
-      <div style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center",
         background: "white",
