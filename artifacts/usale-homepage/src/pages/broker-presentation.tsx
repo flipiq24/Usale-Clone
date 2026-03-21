@@ -595,7 +595,7 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 
 function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
-    { n: "1", t: "Agent Can't Secure a Listing", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+    { n: "1", t: "Agent Can't Secure a Listing", body: "We're not asking you to change your process — we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you. This is a game changer!" },
     { n: "2", t: "Agent Has a New Listing", body: "Post it coming soon on USale. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
     { n: "3", t: "Agent Brings Buyers to the Marketplace", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
   ];
