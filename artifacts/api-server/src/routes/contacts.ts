@@ -217,8 +217,8 @@ router.get("/admin/stats", requireAdminAuth, async (_req, res) => {
 
       const heartbeats = events.filter((e) => e.eventType === "heartbeat");
       if (heartbeats.length > 0) {
-        const t = heartbeats.reduce((sum, h) => sum + (h.duration || 0), 0);
-        totalTime += t;
+        const maxDuration = heartbeats.reduce((max, h) => Math.max(max, h.duration || 0), 0);
+        totalTime += maxDuration;
         timeCount++;
       }
 
@@ -269,7 +269,7 @@ router.get("/admin/contacts/:id/summary", requireAdminAuth, async (req, res) => 
     const lastEvent = events.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
 
     const heartbeats = events.filter((e) => e.eventType === "heartbeat");
-    const totalTime = heartbeats.reduce((sum, h) => sum + (h.duration || 0), 0);
+    const totalTime = heartbeats.reduce((max, h) => Math.max(max, h.duration || 0), 0);
 
     const slideEvents = events.filter((e) => e.eventType === "slide_change");
     const maxSlide = slideEvents.reduce((max, e) => Math.max(max, (e.slideIndex ?? 0) + 1), 0);
