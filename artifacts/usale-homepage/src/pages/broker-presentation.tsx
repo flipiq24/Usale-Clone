@@ -1081,15 +1081,6 @@ export default function BrokerPresentation() {
           }}>
             💬 Ask AI
           </button>
-          <button onClick={isRealtimeLive ? stopRealtime : startRealtime} style={{
-            padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
-            border: `1px solid ${isRealtimeLive ? "#27ae6040" : "#dee2e6"}`,
-            background: isRealtimeLive ? "#27ae6010" : "#fff",
-            color: isRealtimeLive ? "#27ae60" : "#adb5bd",
-            position: "relative",
-          }}>
-            {isRealtimeLive ? `🟢 ${realtimeStatus}` : "🎙️ Live Voice"}
-          </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
               <div key={i} style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, background: i === slide ? "#E8571A" : "#2C3E5020", transition: "all 0.3s" }} />
