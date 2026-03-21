@@ -15,14 +15,18 @@ router.post("/ai/stt", upload.single("audio"), async (req, res) => {
       return;
     }
 
-    const transcription = await openai.audio.transcriptions.create({
-      file: fs.createReadStream(file.path),
-      model: "whisper-1",
-    });
+    let transcriptionText: string;
+    try {
+      const transcription = await openai.audio.transcriptions.create({
+        file: fs.createReadStream(file.path),
+        model: "whisper-1",
+      });
+      transcriptionText = transcription.text;
+    } finally {
+      fs.unlink(file.path, () => {});
+    }
 
-    fs.unlink(file.path, () => {});
-
-    res.json({ text: transcription.text });
+    res.json({ text: transcriptionText });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
     console.error("STT error:", errorMessage);
