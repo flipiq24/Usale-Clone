@@ -9,9 +9,9 @@ interface BrokerData {
 }
 
 const BROKER: BrokerData = {
-  name: "Mike",
-  brokerage: "Reimer Realty Group",
-  slug: "reimer-realty",
+  name: "Bondilyn",
+  brokerage: "bCollective Agency",
+  slug: "bcollective-agency",
 };
 
 interface OfficeMetric {
