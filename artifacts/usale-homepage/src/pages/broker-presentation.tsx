@@ -189,22 +189,22 @@ function SectionWelcome({ hl }: { hl: number }) {
 
 function AgentTable() {
   return (
-    <div style={{ overflowX: "auto", marginTop: 8 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 900 }}>
+    <div style={{ overflowX: "auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.5fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "12px 16px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30" }}>
         <span>Agent Name</span><span>Total Trans.</span><span>Dbl-End %</span><span>Avg. Purchase</span><span>Avg. Resale</span><span>Last Property</span><span>Sold For</span><span>Sold To</span><span>Relationships</span><span>Recent Buyer</span>
       </div>
       {AGENT_DATA.map((a, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.4fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 900, color: "#2C3E50" }}>
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 0.8fr 0.7fr 0.9fr 0.9fr 1.6fr 0.7fr 0.7fr 0.7fr 1fr", gap: 0, padding: "12px 16px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 13, alignItems: "center", color: "#2C3E50" }}>
           <span style={{ fontWeight: 600, color: "#E8571A" }}>{a.name}</span>
           <span style={{ fontWeight: 700 }}>{a.totalTrans}</span>
           <span>{a.doubleEnd}</span>
           <span>{a.avgPurchase}</span>
           <span>{a.avgResale}</span>
-          <span style={{ fontSize: 11 }}>{a.lastPropertySourced}</span>
+          <span style={{ fontSize: 12 }}>{a.lastPropertySourced}</span>
           <span>{a.soldFor}</span>
           <span>{a.soldTo}</span>
           <span>{a.uniqueRelationships}</span>
-          <span style={{ fontSize: 11 }}>{a.recentBuyer}</span>
+          <span style={{ fontSize: 12 }}>{a.recentBuyer}</span>
         </div>
       ))}
     </div>
@@ -213,14 +213,14 @@ function AgentTable() {
 
 function ListingsTable({ data }: { data: ListingRow[] }) {
   return (
-    <div style={{ overflowX: "auto", marginTop: 8 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 900 }}>
+    <div style={{ overflowX: "auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "12px 16px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30" }}>
         <span>Entity Name</span><span>Hometown</span><span>Last Purch.</span><span>Total Trans.</span><span>Avg. Purchase</span><span>Avg. Resale</span><span>P/FV</span><span>List/Sold</span><span>P/M</span><span>Purch. Resale</span>
       </div>
       {data.map((r, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 900, color: "#2C3E50" }}>
-          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 11 }}>{r.entityName}</span>
-          <span style={{ fontSize: 11 }}>{r.hometown}</span>
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 1fr 0.8fr 0.7fr 0.9fr 0.9fr 0.6fr 0.7fr 0.6fr 0.6fr", gap: 0, padding: "12px 16px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 13, alignItems: "center", color: "#2C3E50" }}>
+          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 12 }}>{r.entityName}</span>
+          <span style={{ fontSize: 12 }}>{r.hometown}</span>
           <span>{r.lastPurchase}</span>
           <span style={{ fontWeight: 700 }}>{r.totalTrans}</span>
           <span>{r.avgPurchase}</span>
@@ -237,16 +237,16 @@ function ListingsTable({ data }: { data: ListingRow[] }) {
 
 function RelationshipsTable() {
   return (
-    <div style={{ overflowX: "auto", marginTop: 8 }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "10px 12px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30", minWidth: 800 }}>
+    <div style={{ overflowX: "auto" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, fontSize: 11, fontWeight: 700, color: "#2C3E50", textTransform: "uppercase", padding: "12px 16px", background: "#E8571A0A", borderBottom: "2px solid #E8571A30" }}>
         <span>Entity Name</span><span>Entity Rating</span><span>Inv. Rating</span><span>Home Town</span><span>Purchase Price</span><span>Hold Time</span><span>Resale Purchase</span><span>Future Value</span>
       </div>
       {RELATIONSHIPS_DATA.map((r, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, padding: "10px 12px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 12, alignItems: "center", minWidth: 800, color: "#2C3E50" }}>
-          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 11 }}>{r.entityName}</span>
-          <span style={{ fontSize: 11 }}>{r.entityRating}</span>
-          <span style={{ fontSize: 11 }}>{r.investorRating}</span>
-          <span style={{ fontSize: 11 }}>{r.homeTown}</span>
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.8fr 0.8fr 0.8fr 1fr 1fr 0.8fr 0.9fr 0.7fr", gap: 0, padding: "12px 16px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", fontSize: 13, alignItems: "center", color: "#2C3E50" }}>
+          <span style={{ fontWeight: 600, color: "#E8571A", fontSize: 12 }}>{r.entityName}</span>
+          <span style={{ fontSize: 12 }}>{r.entityRating}</span>
+          <span style={{ fontSize: 12 }}>{r.investorRating}</span>
+          <span style={{ fontSize: 12 }}>{r.homeTown}</span>
           <span style={{ fontWeight: 600 }}>{r.purchasePrice}</span>
           <span>{r.holdTime}</span>
           <span>{r.resalePurchase}</span>
@@ -264,15 +264,16 @@ const EXPAND_AT_STEP: Record<number, string> = {
   13: "agents",
 };
 
-function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded: string | null; setExpanded: (k: string | null) => void }) {
+function SectionDataCards({ hl, isNarrating, expanded, setExpanded }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void }) {
   useEffect(() => {
+    if (!isNarrating) return;
     const key = EXPAND_AT_STEP[hl];
     if (key) {
       setExpanded(key);
-    } else if (hl < 7) {
+    } else {
       setExpanded(null);
     }
-  }, [hl, setExpanded]);
+  }, [hl, isNarrating, setExpanded]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
@@ -285,28 +286,29 @@ function SectionDataCards({ hl, expanded, setExpanded }: { hl: number; expanded:
           const isExpanded = expanded === m.expandKey;
           const metricStep = i + 1;
           const isHighlighted = metricStep <= hl;
+          const isCurrent = isNarrating && metricStep === hl;
           return (
             <div key={m.label} style={{ ...hVisible(hl, metricStep) }}>
               <div
                 onClick={isExpandable ? () => setExpanded(isExpanded ? null : m.expandKey!) : undefined}
                 style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
-                  padding: "12px 18px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
-                  background: isExpandable ? (isExpanded ? "#E8571A" : "#fff") : (isHighlighted && metricStep === hl ? "#E8571A08" : "#fff"),
-                  border: `1px solid ${isExpanded ? "#E8571A" : (isHighlighted && metricStep === hl ? "#E8571A60" : "#E8571A30")}`,
+                  padding: "14px 20px", borderRadius: isExpanded ? "10px 10px 0 0" : 10,
+                  background: isExpanded ? "#E8571A" : (isCurrent ? "#E8571A0C" : "#fff"),
+                  border: `1px solid ${isExpanded ? "#E8571A" : (isCurrent ? "#E8571A" : "#E8571A25")}`,
                   cursor: isExpandable ? "pointer" : "default",
                   transition: "all 0.3s",
-                  boxShadow: isHighlighted && metricStep === hl && !isExpanded ? "0 0 0 2px #E8571A20" : "none",
+                  boxShadow: isCurrent && !isExpanded ? "0 0 0 3px #E8571A15" : "none",
                 }}
               >
-                <span style={{ fontSize: 13, fontWeight: 600, color: isExpanded ? "#fff" : "#2C3E50", letterSpacing: "0.02em" }}>{m.label}</span>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: 15, fontWeight: 700, color: isExpanded ? "#fff" : "#E8571A" }}>{m.value}</span>
+                <span style={{ fontSize: 14, fontWeight: 600, color: isExpanded ? "#fff" : (isCurrent ? "#E8571A" : "#2C3E50"), letterSpacing: "0.02em" }}>{m.label}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: isExpanded ? "#fff" : "#E8571A" }}>{m.value}</span>
                   {isExpandable && <span style={{ fontSize: 12, color: isExpanded ? "#fff" : "#E8571A", transition: "transform 0.2s", transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>}
                 </div>
               </div>
               {isExpanded && (
-                <div style={{ border: "1px solid #E8571A30", borderTop: "none", borderRadius: "0 0 10px 10px", background: "#fff", maxHeight: 400, overflow: "auto" }}>
+                <div style={{ border: "1px solid #E8571A30", borderTop: "none", borderRadius: "0 0 10px 10px", background: "#fff", maxHeight: 500, overflow: "auto" }}>
                   {m.expandKey === "agents" && <AgentTable />}
                   {m.expandKey === "sold-for" && <ListingsTable data={LISTINGS_SOLD_FOR} />}
                   {m.expandKey === "sold-to" && <ListingsTable data={LISTINGS_SOLD_TO} />}
@@ -913,7 +915,7 @@ export default function BrokerPresentation() {
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} hl={hlStep(1)} expanded={expanded} setExpanded={setExpanded} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={audioOn && slide === 1 && isTTSPlaying} expanded={expanded} setExpanded={setExpanded} />,
     <SectionValueProp key={2} hl={hlStep(2)} />,
     <SectionWhyDifferent key={3} hl={hlStep(3)} />,
     <SectionWhyDoingThis key={4} hl={hlStep(4)} />,
