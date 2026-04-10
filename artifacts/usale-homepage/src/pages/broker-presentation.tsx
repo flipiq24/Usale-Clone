@@ -129,16 +129,16 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 function getScripts(broker: BrokerData) {
   return [
-    `Welcome ${broker.name}, my name is Tony Diaz. I am the founder of You-Sale. I've been in the business for thirty-two years and done over eleven hundred flips. We are now a technology company that connects off-market deals with credible buyers — and everyone wins. No commitment, no cost, just access. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
+    `Welcome ${broker.name}, my name is Tony Diaz. I am the founder of You-Sale dot com, the online marketplace where off-market deals meet credible buyers. We are a technology company that specializes in empowering investor-friendly brokers and agents with a trusted source to list and negotiate off-market opportunities with vetted, finance-backed investors. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
     `This is the data for ${broker.brokerage} and what we know about your brokerage. You have eighteen thousand eight hundred and thirty-four total transactions to investors with a double-end rate of zero percent. Your average purchase price is about two million dollars and your average resale is about two point two million dollars. The last property sourced was at thirteen twenty-one Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, two point four five million dollars, December twenty twenty-four, and the buyer was Fairtrade, LLC. You've sold two thousand five hundred and twelve listings for investors \u2014 let's take a look at those. Companies like Opendoor, Zillow, D.R. Horton, and Lennar are all in there. You've also sold two thousand and eighty-eight listings to investors \u2014 here's that data. You've re-sold nine hundred and thirty-five listings to investors with a purchase-to-resale ratio of eighty-nine percent. You have four thousand five hundred and seventy-three unique investor relationships \u2014 that is incredibly strong. And you have fifty-six investor-friendly agents. Your agent Tracy B Do leads with two hundred and three transactions, Sally Forster Jones with one hundred and thirty-eight, Stephanie Younger with one hundred and nineteen. ${broker.name}, bottom line \u2014 we have all your brokers' and agents' information. And not just for you, but for every broker and every investor, every lender and every title company. We have it all. Imagine what you can do with it \u2014 for recruiting investor-friendly agents? And by the way, we also know you're working with Fidelity Title. We'd love to see how we can all work together \u2014 whether it's Fidelity or any title company of your choice, including escrow and any services that would help your business. Let's get moving before I get too deep.`,
     `Alright ${broker.name}, let's talk about what we're looking at here in dollars. Let's say you're averaging two percent commission and you've done two thousand and eighty-eight transactions to investors at an average purchase price of about two million dollars. That means your office has generated approximately eighty-two point seven million dollars in commissions from investor transactions alone. Now, what if I can show you how to bring this up by twenty percent? Not necessarily because you're going to do more work \u2014 it's because you're going to be able to control more buyers. That alone will bring you that. Not counting the ability for you to get paid without listings. This is a game changer, ${broker.name}, and you don't have to do much more outside of what you're already doing. We're just providing you tools and ways for you to make money. So you made eighty-two point seven million dollars \u2014 imagine that times one point two. That's ninety-nine point three million dollars. An additional sixteen point five million dollars. That's about four hundred and eighteen more transactions you could capture. Ready to learn more, ${broker.name}?`,
     `Let's explain why You-Sale is different. We are a frictionless marketplace \u2014 think of it as an off-market MLS. Let me be very clear \u2014 we're not selling you any membership. We have no transaction fees. We're not here to compete with the MLS. We're here to provide tools for investor-friendly agents and their investors. We're simply a marketplace that connects your investor-friendly agents with every investor that's active. You get to see their track record, you get to pick your buyer. We make it easy to transact and make it very transparent.`,
     `So why are we doing this? Well, we need inventory and you need more transactions. Your agents are already transacting with investors. This is a great way for them to post properties, double-end their transactions, and also source inventory to their buyers' network. Win-win. We work with national title and hard money lenders who want to be able to offer services whenever you transact.`,
-    `Let me explain how the workflow works. Number one \u2014 we're not asking you to change your process \u2014 we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent two and a half percent. No listing, no contracts \u2014 the buyer pays you. This is a game changer! Number two \u2014 your agent has a new listing. They post it on You-Sale and coming soon on the MLS. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 the marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
+    `Let me explain how the workflow works. Number one \u2014 what happens when your agent can't secure a listing? We're not asking you to change your process \u2014 we're bringing you tools. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent two and a half percent. No listing, no contracts \u2014 the buyer pays you. Number two \u2014 what if your agent has a new listing? They post it on You-Sale and coming soon on the MLS. Hundreds of local, active investors see it. They pick the buyer based on track record. Double-end. No fees. Number three \u2014 how do your agents get re-lists? The marketplace is designed to give notifications to your agents. Any investor-buyer they bring to the marketplace \u2014 when that buyer accepts an offer, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer.`,
     `Let's be clear on why we're doing this. We are the co-creators of iBuyer Connect, a product of Cloud CMA. We understand that agents need to provide their sellers with a real, data-driven cash offer. Most of the time the seller is not going to accept. We all know only particular sellers in particular situations need to sell immediately for cash. That's what we're trying to capture. Meanwhile, your agents get a cash offer they can walk in with \u2014 that helps them get a listing. Your team wins. In partnership with local service providers who know that value first is the only way to grow. Why is this magical? Because we're not trying to monetize the marketplace. This is a numbers game \u2014 we may buy one property out of a hundred offers. I'm sure you know that.`,
     `We connect your agents with buyers. We provide value to brokers to help you do more business. Your agents can get paid without a listing. They get a custom website for free to help them provide more value to sellers than just give me a listing. We have great data to help your agents get in front of the right sellers and provide them options.`,
     `How do we get paid? Pretty simple. Step one — your agents provide sellers with an instant cash offer from our investors. Step two — when a property sells, we receive a small share from the investor. Step three — your agents earn their commission, your brokerage grows, and we all win. There's no friction, no middleman. We help your agents get in front of sellers, provide more value than just give me a listing. We all win.`,
-    `Here's your advantage, ${broker.name}. You can schedule a personalized demo where we'll walk you through our technology, our data, and show you exactly how your agents can get paid without a listing. Or you can download the You-Sale Broker Playbook right now \u2014 it covers recruiting scripts, a ninety-day plan, income channels, and more. Either way, you're creating an unfair advantage for your agents. I know you know the AI wave is here \u2014 this is the way to easily get behind great technology without the sales pitch.`,
+    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that\u2019s a serious edge. If you\u2019re ready to learn more, here\u2019s the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use You-Sale to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what\u2019s already possible with what you've already built. Schedule your demo today. And make sure to download the You-Sale Broker Playbook \u2014 it's got everything we covered today and more.`,
     `Before we wrap up, ${broker.name}, I'd love to get your quick feedback. Are you currently flipping or wholesaling? Do you see value in what You-Sale can offer? Please rate your interest on a few key areas \u2014 seeing a full demo, learning how to do more flips, recruiting investor-friendly agents, and training your agents to get paid without a listing. Drop any comments you have, and make sure to download the You-Sale Broker Playbook \u2014 it's got everything we covered today and more. We're looking forward to working with you.`,
   ];
 }
@@ -207,12 +207,14 @@ function SectionWelcome({ hl }: { hl: number }) {
         Welcome, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>.
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 120, ...introReveal(hl, 1) }} />
-      <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 620, lineHeight: 1.7, margin: 0, fontStyle: "italic", ...introReveal(hl, 2) }}>
-        Where off-market deals meet credible buyers…and everyone wins.
-      </p>
-      <p style={{ fontSize: 15, color: "#6c757d", margin: 0, letterSpacing: "0.04em", ...introReveal(hl, 2) }}>
-        No commitment. No cost. Just access.
-      </p>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, ...introReveal(hl, 2) }}>
+        <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 560, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+          Where off-market deals meet credible buyers…and everyone wins.
+        </p>
+        <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
+          No commitment. No cost. Just access.
+        </p>
+      </div>
     </div>
   );
 }
@@ -542,7 +544,7 @@ function SectionValueProp({ hl }: { hl: number }) {
 
       <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
-        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let us show you exactly how — with tools and strategies you can start using today.</div>
+        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to USale.com and how it works.</div>
       </div>
     </div>
   );
@@ -605,9 +607,9 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 
 function SectionWorkflow({ hl }: { hl: number }) {
   const paths = [
-    { n: "🏠", t: "What if your agent can't secure a listing?", body: "We're not asking you to change your process — we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you. This is a game changer!" },
-    { n: "📋", t: "What if your agent has a new listing?", body: "Post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
-    { n: "🔔", t: "How do your agents get re-lists?", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
+    { n: "🏠", t: "No Listing? Invite to the Marketplace", body: "We're not asking you to change your process — we're bringing you tools whenever your agents cannot secure a listing. Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+    { n: "📋", t: "New Listing? Post Coming Soon on USale", body: "Post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
+    { n: "🔔", t: "Buyer Goes Under Contract? Your Agent Gets the Re-List", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
@@ -654,30 +656,25 @@ function SectionCredibility({ hl }: { hl: number }) {
 }
 
 function SectionEverybodyWins({ hl }: { hl: number }) {
-  const cards = [
-    { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, title: "Agent-Buyer Connection", desc: "We connect your agents with active, credible buyers." },
-    { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>, title: "Broker Growth", desc: "We provide value to brokers to help you do more business." },
-    { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>, title: "Paid Without a Listing", desc: "Your agents can earn commission even without the listing." },
-    { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>, title: "Free Custom Website", desc: "Agents get a branded website to provide more value to sellers." },
-    { icon: <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>, title: "Powerful Data", desc: "Great data to get in front of the right sellers with real options." },
+  const points = [
+    { text: "We connect your agents with buyers.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+    { text: "We provide value to brokers to help you do more business.", icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' },
+    { text: "Your agents can get paid without a listing.", icon: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>' },
+    { text: "They get a custom website for free to help them provide more value to sellers.", icon: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>' },
+    { text: "We have great data to help your agents get in front of the right sellers and provide them options.", icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>' },
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "55vh", justifyContent: "center" }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
-        Everybody <span style={{ color: "#E8571A" }}>wins</span>.
+        A marketplace where <span style={{ color: "#E8571A" }}>everyone wins</span>.
       </h2>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-        {cards.map((c, i) => (
-          <div key={i} style={{
-            flex: "1 1 180px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
-            padding: "28px 18px", background: "#fff", borderRadius: 16, border: "1px solid #eee",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)", ...hVisible(hl, i),
-          }}>
-            <div style={{ width: 52, height: 52, borderRadius: 14, background: "#E8571A0A", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}>
-              {c.icon}
+      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        {points.map((p, i) => (
+          <div key={i} style={{ flex: "1 1 180px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", gap: 12, ...hVisible(hl, i) }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#E8571A0A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: p.icon }} />
             </div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>{c.title}</div>
-            <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{c.desc}</div>
+            <span style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.5 }}>{p.text}</span>
           </div>
         ))}
       </div>
@@ -686,37 +683,29 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
 }
 
 function SectionHowWePay({ hl }: { hl: number }) {
-  const steps = [
-    { num: "1", icon: "🏷️", title: "Instant Cash Offer", desc: "Your agents provide sellers with an instant cash offer from our investors." },
-    { num: "2", icon: "🏠", title: "Property Sells", desc: "When a property sells, we receive a small share from the investor." },
-    { num: "3", icon: "🎉", title: "Everybody Wins", desc: "Your agents earn their commission, your brokerage grows, and we all win." },
-  ];
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 32 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
         How do we get paid?
       </h2>
-      <div style={{ display: "flex", gap: 0, alignItems: "stretch", flexWrap: "wrap", justifyContent: "center", width: "100%", maxWidth: 900, ...hVisible(hl, 1) }}>
-        {steps.map((s, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center" }}>
-            <div style={{
-              flex: "1 1 220px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center",
-              padding: "28px 22px", background: "#fff", borderRadius: 16, border: "1px solid #eee",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.04)", minWidth: 200,
-            }}>
-              <div style={{ fontSize: 36, marginBottom: 10 }}>{s.icon}</div>
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#E8571A", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 15, marginBottom: 10 }}>{s.num}</div>
-              <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>{s.title}</div>
-              <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{s.desc}</div>
-            </div>
-            {i < steps.length - 1 && (
-              <div style={{ padding: "0 8px", fontSize: 28, color: "#E8571A", fontWeight: 700 }}>→</div>
-            )}
-          </div>
-        ))}
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🏠</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Your agent brings a seller</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>💰</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Our investor makes a cash offer</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#E8571A08", borderRadius: 14, border: "1px solid #E8571A20", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🤝</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#E8571A" }}>If they buy, we take a small share</div>
+        </div>
       </div>
-      <div style={{ padding: "18px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 16, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
-        No friction. No middleman. Just results.
+      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
+        Everybody wins. No friction. No middleman.
       </div>
     </div>
   );
@@ -724,82 +713,37 @@ function SectionHowWePay({ hl }: { hl: number }) {
 
 function SectionCTA({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
-        Your <span style={{ color: "#E8571A" }}>Advantage</span>
+        Your Unfair Advantage Starts Here, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
       </h2>
-      <p style={{ fontSize: 16, color: "#2C3E50", lineHeight: 1.6, margin: 0, maxWidth: 700, ...hVisible(hl, 0) }}>
-        The AI wave is here. Create an unfair advantage for your agents with tools and technology that work.
+      <p style={{ fontSize: 16, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...hVisible(hl, 1) }}>
+        You already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge.
       </p>
-
-      <div style={{ display: "flex", gap: 20, flexWrap: "wrap", ...hVisible(hl, 1) }}>
-        <a
-          href="https://calendly.com/usale/broker-demo"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            flex: "1 1 280px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12,
-            padding: "32px 24px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
-            borderRadius: 16, textDecoration: "none", textAlign: "center",
-            boxShadow: "0 6px 24px #E8571A40",
-          }}
-        >
-          <div style={{ fontSize: 36 }}>📅</div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>Schedule Your Demo</div>
-          <div style={{ fontSize: 13, color: "#ffffffCC", lineHeight: 1.4 }}>We'll walk you through our technology, data, and show exactly how your agents can get paid without a listing.</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 480, ...hVisible(hl, 2) }}>
+        <a href="https://calendly.com/usale/broker-demo" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", textDecoration: "none", boxShadow: "0 6px 24px #E8571A40" }}>
+          Schedule Your Demo
         </a>
-
-        <a
-          href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`}
-          download="USale_Broker_Playbook.pdf"
-          style={{
-            flex: "1 1 280px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12,
-            padding: "32px 24px", background: "#2C3E50",
-            borderRadius: 16, textDecoration: "none", textAlign: "center",
-            boxShadow: "0 6px 24px rgba(44,62,80,0.2)",
-          }}
-        >
-          <div style={{ fontSize: 36 }}>📘</div>
-          <div style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>Download the Playbook</div>
-          <div style={{ fontSize: 13, color: "#ffffffAA", lineHeight: 1.4 }}>Recruiting scripts, 90-day plan, income channels & more.</div>
+        <a href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`} download="USale_Broker_Playbook.pdf" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none", boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700 }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download the Broker Playbook
         </a>
+        <div style={{ fontSize: 12, color: "#adb5bd", marginTop: 4 }}>No sales pitch. No friction. Just a demonstration of what's already possible.</div>
       </div>
-
-      <div style={{
-        display: "flex", alignItems: "center", gap: 20, padding: "24px 28px",
-        background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 2),
-      }}>
-        <img src={TONY_PHOTO} alt="Tony Diaz" style={{
-          width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0,
-        }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale.com & Flip IQ</div>
+      <div style={{ display: "flex", gap: 14, alignItems: "center", ...hVisible(hl, 3) }}>
+        <span style={{ fontSize: 14, color: "#6c757d" }}>Questions? Contact me directly:</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "20px 28px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4) }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder & CEO, USale.com & FlipiQ</div>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
-            <a href="tel:714-581-7805" style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>📱 714-581-7805</a>
-            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 600, color: "#0077B5", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}>🔗 LinkedIn</a>
+            <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
+            <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
+            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
           </div>
         </div>
-      </div>
-
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 3) }}>
-        {[
-          { icon: "🎯", text: "See our data & powerful tools" },
-          { icon: "💰", text: "Learn how agents get paid without listings" },
-          { icon: "🧲", text: "Recruit investor-friendly agents with USale" },
-        ].map((item, i) => (
-          <div key={i} style={{
-            flex: "1 1 180px", padding: "16px 18px", background: "#fff", borderRadius: 12,
-            border: "1px solid #eee", display: "flex", gap: 10, alignItems: "center",
-          }}>
-            <span style={{ fontSize: 22 }}>{item.icon}</span>
-            <span style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", lineHeight: 1.4 }}>{item.text}</span>
-          </div>
-        ))}
-      </div>
-
-      <div style={{ textAlign: "center", padding: "18px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 14, ...hVisible(hl, 4) }}>
-        <div style={{ fontSize: 18, fontWeight: 700, color: "#1e8449" }}>Get behind great technology — without the sales pitch.</div>
       </div>
     </div>
   );

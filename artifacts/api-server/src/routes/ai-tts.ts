@@ -20,7 +20,7 @@ router.post("/ai/tts", async (req, res) => {
     const voice = voiceId || "hx3a4sOlCGJb16SPtV2d";
 
     const response = await fetch(
-      `https://api.elevenlabs.io/v3/text-to-speech/${voice}/stream`,
+      `https://api.elevenlabs.io/v1/text-to-speech/${voice}/stream`,
       {
         method: "POST",
         headers: {
@@ -35,8 +35,8 @@ router.post("/ai/tts", async (req, res) => {
             similarity_boost: 0.8,
             style: 0.15,
             use_speaker_boost: true,
-            speed: 0.85,
           },
+          speed: 0.85,
         }),
       }
     );
