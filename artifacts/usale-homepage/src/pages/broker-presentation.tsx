@@ -1087,6 +1087,19 @@ interface ChatMessage {
 
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
 
+let globalAudioCtx: AudioContext | null = null;
+function unlockAudioContext() {
+  if (!globalAudioCtx) {
+    globalAudioCtx = new AudioContext();
+  }
+  if (globalAudioCtx.state === "suspended") {
+    globalAudioCtx.resume().catch(() => {});
+  }
+  const silent = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
+  silent.volume = 0;
+  silent.play().catch(() => {});
+}
+
 function useAudioNarration(onEnded?: () => void) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -1207,7 +1220,21 @@ function useAudioNarration(onEnded?: () => void) {
         setIsLoading(false);
         URL.revokeObjectURL(url);
       };
-      await audio.play();
+      try {
+        await audio.play();
+      } catch (playErr) {
+        console.warn("Autoplay blocked, retrying:", playErr);
+        try {
+          if (globalAudioCtx && globalAudioCtx.state === "suspended") {
+            await globalAudioCtx.resume();
+          }
+          await audio.play();
+        } catch (retryErr) {
+          console.error("Audio play retry also failed:", retryErr);
+          stop();
+          return;
+        }
+      }
       setIsLoading(false);
       setIsPlaying(true);
       startProgressTracker(audio);
@@ -1435,9 +1462,15 @@ export default function BrokerPresentation() {
     preloadTTS(SCRIPTS[2]);
   }, []);
 
+  const initialPlayDone = useRef(false);
   useEffect(() => {
     if (!started) return;
+    if (!initialPlayDone.current) {
+      initialPlayDone.current = true;
+      return;
+    }
     if (audioOn) {
+      unlockAudioContext();
       playTTS(SCRIPTS[slide]);
       for (let i = 1; i <= 3; i++) {
         if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
@@ -1585,7 +1618,16 @@ export default function BrokerPresentation() {
           <div style={{ fontSize: 16, color: "#6c757d" }}>{BROKER.brokerage}</div>
         </div>
         <button
-          onClick={() => setStarted(true)}
+          onClick={() => {
+            unlockAudioContext();
+            setStarted(true);
+            if (audioOn) {
+              playTTS(SCRIPTS[0]);
+              for (let i = 1; i <= 3; i++) {
+                if (i < total) preloadTTS(SCRIPTS[i]);
+              }
+            }
+          }}
           style={{
             padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
             color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
