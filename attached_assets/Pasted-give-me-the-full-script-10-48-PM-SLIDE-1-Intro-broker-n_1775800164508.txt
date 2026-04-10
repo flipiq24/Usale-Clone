@@ -1,0 +1,34 @@
+give me the full script
+
+10:48 PM
+SLIDE 1 — Intro
+
+{broker.name} — Tony Diaz, founder of YOU SALE. Quick background — thirty-two years in the business, over eleven hundred flips, and I'm also the co-creator of Cloud CMA's iBuyer Connect. But I'm not here to talk about me. I'm here because we pulled all your transactions with investors — and what we found is impressive. We put together a detailed report showing what your brokerage has already accomplished with investor transactions, and how YOU SALE can help you do even more. This takes about five minutes. Let's get into it.
+
+SLIDE 2 — Brokerage Data
+
+Here's what we know about {broker.brokerage}. Eighteen thousand eight hundred and thirty-four total transactions to investors. Average purchase price — about two million. Average resale — two point two million. Your last property sourced was thirteen twenty-one Gates Avenue in Manhattan Beach — Tracy B Do, two point four five million, December twenty twenty-four, buyer was Fairtrade LLC. You've sold two thousand five hundred and twelve listings FOR investors and two thousand eighty-eight listings TO investors. Click the drop-downs and you'll see exactly who — Opendoor, Zillow, D.R. Horton, Lennar — they're all in there. Nine hundred thirty-five resales to investors. Eighty-nine percent purchase-to-resale ratio. Four thousand five hundred and seventy-three unique investor relationships — that is a powerful network, {broker.name}. And fifty-six investor-friendly agents. Tracy B Do leading with two hundred three transactions, Sally Forster Jones at one hundred thirty-eight, Stephanie Younger at one hundred nineteen. Now — what does all of this actually mean in dollars? Because that's where it gets interesting.
+
+SLIDE 3 — Commission Opportunity
+
+At a 2% average commission across two thousand eighty-eight transactions — your office has generated over $82.7 million in investor commissions. That's real money. Now here's the question — what if you could increase that by 20%? Not by working harder. Not by hiring more agents. Just by giving your agents access to a marketplace that puts more active investor buyers in front of their deals. That's an additional $16.5 million. And it costs you nothing. Zero. Let me show you how.
+
+SLIDE 4 — Introducing USale
+
+YOU SALE is a frictionless, off-market marketplace. Think of it as an investor-focused MLS. No membership fees — ever. No transaction fees — ever. We don't compete with the MLS. We complement it. We simply connect your investor-friendly agents with every active, verified investor in the market. Full transparency — your agents can see track records, choose their buyer, and transact with confidence. That's it. It's really that simple, {broker.name}.
+
+SLIDE 5 — How USale Works
+
+Here's how your agents actually use it. Scenario one — your agent can't secure a listing. Instead of walking away empty-handed, they invite the seller to YOU SALE. When any investor makes an offer and the seller accepts, the buyer pays your agent 2.5%. No listing needed. No contract needed. Your agent gets paid simply by inviting the seller to YOU SALE. Scenario two — your agent HAS a listing. They post it on YOU SALE alongside the MLS. Hundreds of local investors see it immediately. Your agent picks the best buyer based on their track record and how they transact, double-ends the deal. No extra fees. No cost. Scenario three — your agent invites an investor buyer to the marketplace. When that buyer goes under contract on ANY property — your agent gets notified and can request to list the property after it's fixed. Three ways to win. Zero downside.
+
+SLIDE 6 — Everyone Wins
+
+This works because everyone gets what they need. YOU SALE needs inventory. You need transactions. Investors need access to properties in your market — and we deliver it. Everybody wins.
+
+SLIDE 7 — How We Get Paid
+
+So how does YOU SALE make money? We don't charge you or your agents anything. We don't monetize the marketplace. Here's what happens — your agent walks into a seller appointment with a real, data-backed cash offer from one of our local investors. That gets the seller's attention. Most of the time, the seller says no to the cash offer — and our data-driven offers help move the seller away from the cash offer over to a listing. When the seller DOES accept the cash offer, our preferred agent network that provides the instant offer pays us a small share of the transaction. That's it. Your agent gets a FREE white-label site with tools that help them win more listings — or even get paid without a listing.
+
+SLIDE 8 — CTA
+
+{broker.name} — you already have the investor-friendly agents and the transaction history. We have the active investor buyer network and the technology that creates transparency, efficiency, and trust. Put those together and you have an edge. If you're ready to see this in action — schedule a demo. Takes fifteen minutes. We'll walk you through the platform, show you your agents' data live, and show you exactly how that $16.5 million opportunity works. You can also download the YOU SALE Broker Playbook. It's got everything we covered today plus recruiting scripts to help your brokerage grow your investor-friendly agent team, income projections, and a 90-day rollout plan. Either way, {broker.name} — this is yours. We're not selling anything. No pitch. Just a better way to do what you're already doing. Thanks for your time.
