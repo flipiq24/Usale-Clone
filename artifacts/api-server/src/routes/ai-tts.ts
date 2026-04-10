@@ -11,7 +11,7 @@ router.post("/ai/tts", async (req, res) => {
       return;
     }
 
-    const apiKey = process.env.ELEVENLABS_API_KEY;
+    const apiKey = process.env.ELEVEN_LABS_TOKEN;
     if (!apiKey) {
       res.status(500).json({ error: "ElevenLabs API key not configured" });
       return;
