@@ -129,14 +129,22 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 function getScripts(broker: BrokerData) {
   return [
-    `Welcome ${broker.name}, my name is Tony Diaz. I am the Founder of You-Sale dot com, the online marketplace where off-market deals meet credible buyers. I've been in the real estate business for thirty-two years and have done over eleven hundred flips. It's our goal at You-Sale dot com to empower investor-friendly brokers and agents with a trusted source to list and negotiate off-market fix or flip or quick close opportunities with vetted, finance-backed investors. In our analysis of the MLS data in your market, we were impressed to see your brokerage's performance to date, and put together a special report for you to see what you've accomplished to date with your investor-friendly relationships, and a peek at how You-Sale dot com can help increase your revenue, all in less than 5-minutes.`,
+    // Slide 0: Welcome
+    `Welcome ${broker.name}, my name is Tony Diaz. I am the Founder of U Sale dot com, the online marketplace where off-market deals meet credible buyers. I've been in the real estate business for thirty-two years and have done over eleven hundred flips. It's our goal at U Sale dot com to empower investor-friendly brokers and agents with a trusted source to list and negotiate off-market fix or flip or quick close opportunities with vetted, finance-backed investors. In our analysis of the MLS data in your market, we were impressed to see your brokerage's performance to date, and put together a special report for you to see what you've accomplished to date with your investor-friendly relationships, and a peek at how U Sale dot com can help increase your revenue, all in less than 5-minutes.`,
+    // Slide 1: Your Data
     `Here's the investor-friendly data that matters for ${broker.brokerage}. You have eighteen thousand eight hundred and thirty-four total transactions to investors with a double-end rate of zero percent. Your average purchase price is about two million dollars and your average resale is about two point two million dollars. The last property sourced was at thirteen twenty-one Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, two point four five million dollars, December twenty twenty-four, and the buyer was Fairtrade, LLC. You've sold two thousand five hundred and twelve listings for investors and sold two thousand and eighty-eight listings to investors. If you click the drop-downs on these headers, you'll see detailed breakdowns of each investor's data points, which really helps give insight into your key relationships and the ROI they produce. Other points of interest include the nine hundred and thirty-five resales to investors with a purchase-to-resale ratio of eighty-nine percent. Also, you have four thousand five hundred and seventy-three unique investor relationships \u2014 which is incredibly strong. The last data of interest is looking at your fifty-six investor-friendly agents. Tracy B Do leads with two hundred and three transactions, followed by Sally Forster Jones with one hundred and thirty-eight, and Stephanie Younger with one hundred and nineteen. So, ${broker.name}, how does all of this data translate to your bottom line? This is where it gets even more exciting, so let's talk dollars.`,
-    `${broker.name}, with an average two percent commission rate and two thousand and eighty-eight transactions, your office has generated over eighty-two point seven million dollars in commissions from investor transactions alone. Now, here's where things get exciting. What if You-Sale dot com could increase your investor revenue line by twenty percent at no additional cost to you or your agents? That's an additional sixteen point five million dollars in revenue! Ready to learn more? Let me give you a quick introduction to You-Sale dot com and how it works.`,
-    `You-Sale is a frictionless, off-market marketplace \u2014 think of it as an investor-focused MLS. No membership fees. No transaction fees. No competition with the MLS. We simply connect your investor-friendly agents with every active investor in the market \u2014 with full transparency into track records so your agents can pick their buyer. It's really that easy, ${broker.name}.`,
-    `We're all about creating win-win scenarios for your agents. No listing? Invite your seller to the You-Sale dot com marketplace. If they accept an offer, the buyer pays your agent two and a half percent. No listing, no contract \u2014 you still get paid. New listing? Post it on You-Sale dot com alongside the MLS. Hundreds of active investors see it, and your agent picks the best buyer and double-ends it. Buyer goes under contract elsewhere? Your agent gets notified automatically and earns the re-list.`,
-    `You-Sale dot com works because the market needs inventory, you need transactions, and investors want first opportunities to acquire properties in your market. It's a win, win, win deal all around.`,
-    `So, you may be asking how we make money at You-Sale dot com? It's pretty simple. We're not monetizing the marketplace. When our investors buy a property through a cash offer, we take a small share. That's it. Your agents walk into seller appointments with a real, data-driven cash offer \u2014 that gets listings. And when the seller doesn't take the cash offer, your agent lists it. Everybody wins.`,
-    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use You-Sale dot com to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built.`,
+    // Slide 2: The Opportunity
+    `${broker.name}, with an average two percent commission rate and two thousand and eighty-eight transactions, your office has generated over eighty-two point seven million dollars in commissions from investor transactions alone. Now, here's where things get exciting. What if U Sale dot com could increase your investor revenue line by twenty percent at no additional cost to you or your agents? That's an additional sixteen point five million dollars in revenue! Ready to learn more? Let me give you a quick introduction to U Sale dot com and how it works.`,
+    // Slide 3: Introducing USale
+    `U Sale is a frictionless, off-market marketplace \u2014 think of it as an investor-focused MLS. No membership fees. No transaction fees. No competition with the MLS. We simply connect your investor-friendly agents with every active investor in the market \u2014 with full transparency into track records so your agents can pick their buyer. It's really that easy, ${broker.name}.`,
+    // Slide 4: How USale Works
+    `We're all about creating win-win scenarios for your agents. No listing? Invite your seller to the U Sale dot com marketplace. If they accept an offer, the buyer pays your agent two and a half percent. No listing, no contract \u2014 you still get paid. New listing? Post it on U Sale dot com alongside the MLS. Hundreds of active investors see it, and your agent picks the best buyer and double-ends it. Buyer goes under contract elsewhere? Your agent gets notified automatically and earns the re-list.`,
+    // Slide 5: Everyone Wins
+    `U Sale dot com works because the market needs inventory, you need transactions, and investors want first opportunities to acquire properties in your market. It's a win, win, win deal all around.`,
+    // Slide 6: How We Get Paid
+    `So, you may be asking how we make money at U Sale dot com? It's pretty simple. We're not monetizing the marketplace. When our investors buy a property through a cash offer, we take a small share. That's it. Your agents walk into seller appointments with a real, data-driven cash offer \u2014 that gets listings. And when the seller doesn't take the cash offer, your agent lists it. Everybody wins.`,
+    // Slide 7: CTA
+    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use U Sale dot com to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built.`,
   ];
 }
 
@@ -536,7 +544,6 @@ function SectionValueProp({ hl }: { hl: number }) {
       <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
         <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to USale.com and how it works.</div>
-
       </div>
     </div>
   );
@@ -544,27 +551,34 @@ function SectionValueProp({ hl }: { hl: number }) {
 
 function SectionWhyDifferent({ hl }: { hl: number }) {
   const items = [
-    { t: "Frictionless Marketplace", s: "Think of it as an off-market MLS. No memberships, no subscriptions." },
-    { t: "No Transaction Fees", s: "Zero cost on every deal, ever." },
-    { t: "Not Competing with MLS", s: "We provide tools for investor-friendly agents and their investors." },
-    { t: "Connect Agents with Investors", s: "See track records. Pick your buyer. Transact transparently." },
+    { icon: "✓", t: "No Membership Fees", s: "Free for every agent. Always." },
+    { icon: "✓", t: "No Transaction Fees", s: "Zero cost on every deal, ever." },
+    { icon: "✓", t: "No Competition with the MLS", s: "We complement it — not compete with it." },
+    { icon: "✓", t: "Full Transparency", s: "See track records. Pick your buyer. Transact with confidence." },
   ];
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
       <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         Introducing <span style={{ color: "#E8571A" }}>USale.com</span>
       </h2>
-      <p style={{ fontSize: 16, color: "#6c757d", margin: 0, lineHeight: 1.6 }}>A frictionless, off-market marketplace — think of it as an investor-focused MLS.</p>
+      <p style={{ fontSize: 18, color: "#2C3E50", margin: 0, lineHeight: 1.6, maxWidth: 600 }}>
+        A frictionless, off-market marketplace — think of it as an <b>investor-focused MLS</b>.
+      </p>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
         {items.map((item, i) => (
-          <div key={i} style={{ flex: "1 1 220px", background: "#fff", borderRadius: 12, padding: "22px 20px", border: "1px solid #eee", ...hVisible(hl, i) }}>
-            <div style={{ width: 32, height: 32, borderRadius: 8, background: "#27ae600D", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27ae60" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div key={i} style={{ flex: "1 1 220px", background: "#fff", borderRadius: 14, padding: "24px 20px", border: "1px solid #eee", display: "flex", gap: 14, alignItems: "flex-start", ...hVisible(hl, i) }}>
+            <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#27ae600D", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 18, color: "#27ae60", fontWeight: 700 }}>
+              {item.icon}
             </div>
-            <div style={{ fontSize: 15, fontWeight: 650, color: "#2C3E50", marginBottom: 4 }}>{item.t}</div>
-            <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{item.s}</div>
+            <div>
+              <div style={{ fontSize: 15, fontWeight: 650, color: "#2C3E50", marginBottom: 4 }}>{item.t}</div>
+              <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{item.s}</div>
+            </div>
           </div>
         ))}
+      </div>
+      <div style={{ fontSize: 15, color: "#6c757d", fontStyle: "italic", ...hVisible(hl, 3) }}>
+        It's really that easy, {BROKER.name}.
       </div>
     </div>
   );
@@ -716,21 +730,50 @@ function SectionCTA({ hl }: { hl: number }) {
       <p style={{ fontSize: 16, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...hVisible(hl, 1) }}>
         You already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge.
       </p>
+
       <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 480, ...hVisible(hl, 2) }}>
-        <a href="https://calendly.com/usale/broker-demo" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", textDecoration: "none", boxShadow: "0 6px 24px #E8571A40" }}>
+        <a
+          href="https://calendly.com/usale/broker-demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 12,
+            padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
+            cursor: "pointer", textDecoration: "none",
+            boxShadow: "0 6px 24px #E8571A40",
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}
+        >
           Schedule Your Demo
         </a>
-        <a href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`} download="USale_Broker_Playbook.pdf" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none", boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700 }}>
+        <a
+          href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`}
+          download="USale_Broker_Playbook.pdf"
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 14,
+            padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none",
+            boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700,
+            transition: "transform 0.2s, box-shadow 0.2s",
+          }}
+        >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download the Broker Playbook
         </a>
         <div style={{ fontSize: 12, color: "#adb5bd", marginTop: 4 }}>No sales pitch. No friction. Just a demonstration of what's already possible.</div>
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "20px 28px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4) }}>
+
+      <div style={{ display: "flex", gap: 14, alignItems: "center", ...hVisible(hl, 3) }}>
+        <span style={{ fontSize: 14, color: "#6c757d" }}>Questions? Contact me directly:</span>
+      </div>
+      <div style={{
+        display: "flex", alignItems: "center", gap: 20, padding: "20px 28px",
+        background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4)
+      }}>
         <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
         <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
           <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder & CEO, USale.com & FlipiQ</div>
+          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale.com &amp; FlipiQ</div>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
             <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
             <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
