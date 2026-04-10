@@ -1006,7 +1006,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
             transition: "transform 0.2s, box-shadow 0.2s",
           }}
         >
-          📅 Schedule Your Demo
+          Schedule Your Demo
         </a>
       </div>
 
@@ -1681,7 +1681,7 @@ export default function BrokerPresentation() {
             background: audioOn ? "#E8571A10" : "#fff",
             color: audioOn ? "#E8571A" : "#adb5bd",
           }}>
-            {isTTSPlaying ? "🔊 Playing..." : isTTSLoading ? "⏳ Loading..." : audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
+            {isTTSPlaying ? "Playing..." : isTTSLoading ? "Loading..." : audioOn ? "Audio On" : "Audio Off"}
           </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
