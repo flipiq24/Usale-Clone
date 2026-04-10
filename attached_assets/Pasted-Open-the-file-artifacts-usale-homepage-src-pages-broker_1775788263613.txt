@@ -1,0 +1,127 @@
+Open the file artifacts/usale-homepage/src/pages/broker-presentation.tsx and make these changes:
+1. In the getScripts function (around line 132), replace the first script (Welcome) with:
+`Welcome ${broker.name}, my name is Tony Diaz. I am the founder of You-Sale dot com, the online marketplace where off-market deals meet credible buyers. We are a technology company that specializes in empowering investor-friendly brokers and agents with a trusted source to list and negotiate off-market opportunities with vetted, finance-backed investors. I'm excited to show you our powerful data and how we can empower your brokerage and your agents!`,
+2. In the Opportunity script (slide index 2), change the last sentence from "Do I have your attention" to "Ready to learn more":
+Find: Do I have your attention, ${broker.name}?
+Replace with: Ready to learn more, ${broker.name}?
+3. Replace the CTA script (slide index 9) entirely with:
+`${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use You-Sale to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built. Schedule your demo today. And make sure to download the You-Sale Broker Playbook \u2014 it's got everything we covered today and more.`,
+4. In the Survey script (slide index 10), remove the phrase ", and if you'd like to schedule a follow-up meeting, you can do that right here" — just delete that phrase.
+5. In SECTION_TITLES array, change "Next Steps" to "Your Advantage"
+6. In SectionWelcome, replace the paragraph tag that says "We're a tech company that specializes in empowering investors and the investor-friendly agents who transact with them." with this:
+tsx<div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, ...introReveal(hl, 2) }}>
+  <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 560, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+    Where off-market deals meet credible buyers…and everyone wins.
+  </p>
+  <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
+    No commitment. No cost. Just access.
+  </p>
+</div>
+7. In SectionValueProp, find "Do I have your attention" and replace with "Ready to learn more". Change the subtext below it from "We're just providing you tools and ways to make money. You don't have to do much more outside of what you're already doing." to "Let me give you a quick introduction to USale.com and how it works."
+8. In SectionWhyDifferent, the cards have red X SVG icons. Replace the X icon SVG with a green checkmark:
+Find: stroke="#E8571A" and the X lines (<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>)
+Replace with: stroke="#27ae60" and <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+Also change the icon background from #E8571A0A to #27ae600D
+9. In SectionWorkflow, change the path titles and add icons. Replace the paths array with:
+tsxconst paths = [
+  { n: "1", icon: "🏠", t: "No Listing? Invite to the Marketplace", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+  { n: "2", icon: "📋", t: "New Listing? Post Coming Soon on USale", body: "Post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
+  { n: "3", icon: "🔔", t: "Buyer Goes Under Contract? Your Agent Gets the Re-List", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
+];
+Then in the card rendering, replace the orange numbered circle (<span style={{ background: "#E8571A"...}}>{p.n}</span>) with: <span style={{ fontSize: 24 }}>{p.icon}</span>
+10. Replace the entire SectionCTA function with this:
+tsxfunction SectionCTA({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        Your Unfair Advantage Starts Here, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
+      </h2>
+      <p style={{ fontSize: 16, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...hVisible(hl, 1) }}>
+        You already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 480, ...hVisible(hl, 2) }}>
+        <a href="https://calendly.com/usale/broker-demo" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", textDecoration: "none", boxShadow: "0 6px 24px #E8571A40" }}>
+          Schedule Your Demo
+        </a>
+        <a href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`} download="USale_Broker_Playbook.pdf" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none", boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700 }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download the Broker Playbook
+        </a>
+        <div style={{ fontSize: 12, color: "#adb5bd", marginTop: 4 }}>No sales pitch. No friction. Just a demonstration of what's already possible.</div>
+      </div>
+      <div style={{ display: "flex", gap: 14, alignItems: "center", ...hVisible(hl, 3) }}>
+        <span style={{ fontSize: 14, color: "#6c757d" }}>Questions? Contact me directly:</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "20px 28px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4) }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder & CEO, USale.com & FlipiQ</div>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
+            <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
+            <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
+            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+11. In SectionSurvey, find the Calendly link https://calendly.com/usale/broker-meeting and change it to https://calendly.com/usale/broker-demo. Also change the button text from "📅 Schedule a Meeting" to "📅 Schedule Your Demo".
+12. Replace SectionHowWePay with this more visual version:
+tsxfunction SectionHowWePay({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        How do we get paid?
+      </h2>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🏠</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Your agent brings a seller</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>💰</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Our investor makes a cash offer</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#E8571A08", borderRadius: 14, border: "1px solid #E8571A20", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🤝</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#E8571A" }}>If they buy, we take a small share</div>
+        </div>
+      </div>
+      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
+        Everybody wins. No friction. No middleman.
+      </div>
+    </div>
+  );
+}
+13. Replace SectionEverybodyWins with this icon-card version:
+tsxfunction SectionEverybodyWins({ hl }: { hl: number }) {
+  const points = [
+    { text: "We connect your agents with buyers.", icon: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+    { text: "We provide value to brokers to help you do more business.", icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>' },
+    { text: "Your agents can get paid without a listing.", icon: '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>' },
+    { text: "They get a custom website for free to help them provide more value to sellers.", icon: '<rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>' },
+    { text: "We have great data to help your agents get in front of the right sellers and provide them options.", icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>' },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "55vh", justifyContent: "center" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
+        A marketplace where <span style={{ color: "#E8571A" }}>everyone wins</span>.
+      </h2>
+      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+        {points.map((p, i) => (
+          <div key={i} style={{ flex: "1 1 180px", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", gap: 12, ...hVisible(hl, i) }}>
+            <div style={{ width: 48, height: 48, borderRadius: "50%", background: "#E8571A0A", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" dangerouslySetInnerHTML={{ __html: p.icon }} />
+            </div>
+            <span style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.5 }}>{p.text}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+Make all these changes, save the file, and run the project.

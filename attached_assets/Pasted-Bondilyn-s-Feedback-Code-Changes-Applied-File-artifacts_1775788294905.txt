@@ -1,0 +1,75 @@
+Bondilyn's Feedback → Code Changes Applied
+File: artifacts/usale-homepage/src/pages/broker-presentation.tsx
+
+1. Welcome Slide (SectionWelcome)
+
+Added tagline: "Where off-market deals meet credible buyers…and everyone wins."
+Added subline: "No commitment. No cost. Just access."
+Removed the generic "We're a tech company…" line
+
+2. Opportunity Slide (SectionValueProp)
+
+Replaced "Do I have your attention, Bondilyn?" → "Ready to learn more, Bondilyn?"
+Updated subtext to: "Let me give you a quick introduction to USale.com and how it works."
+Audio script updated to match
+
+3. Why USale Slide (SectionWhyDifferent)
+
+Killed the red X icons — Bondilyn said "these look like negatives!"
+Replaced with green checkmark icons on a light green background
+Same card content, completely different visual tone
+
+4. Workflow Slide (SectionWorkflow)
+
+Added visual icons (🏠 📋 🔔) to each workflow path
+Renamed paths to question format per Bondilyn's script:
+
+"No Listing? Invite to the Marketplace"
+"New Listing? Post Coming Soon on USale"
+"Buyer Goes Under Contract? Your Agent Gets the Re-List"
+
+
+Removed the "This is a game changer!" text from path 1
+
+5. Everybody Wins Slide (SectionEverybodyWins)
+
+Redesigned from vertical checklist → horizontal icon cards
+Each point now has a unique SVG icon (people, dollar, credit card, monitor, pulse)
+Headline changed: "Everybody wins" → "A marketplace where everyone wins"
+More visual, less "death by PowerPoint"
+
+6. How We Get Paid Slide (SectionHowWePay)
+
+Redesigned from text paragraph → visual 3-step flow diagram
+Shows: 🏠 Agent brings seller → 💰 Investor makes cash offer → 🤝 If they buy, we take a small share
+Simplified closing: "Everybody wins. No friction. No middleman."
+
+7. CTA Slide (SectionCTA) — MAJOR REWRITE
+
+Removed the 4-step numbered list ("Set up a meeting, Demo, Explain, Show")
+Removed the "Schedule a Meeting" / "Do a Demo" two-button split
+New design: Two clear paths only:
+
+Primary (orange): "Schedule Your Demo" → Calendly link
+Secondary (navy): "Download the Broker Playbook" → PDF download
+
+
+Added Tony's contact card (headshot, email, phone, LinkedIn)
+Added "No sales pitch. No friction. Just a demonstration of what's already possible."
+
+8. Survey Slide (SectionSurvey)
+
+Updated Calendly link from /broker-meeting → /broker-demo
+Updated button text from "Schedule a Meeting" → "Schedule Your Demo"
+Script simplified — removed "schedule a follow-up meeting" reference
+
+9. Audio Scripts (getScripts function)
+
+Welcome: Aligned with new tagline, removed "32 years / 1,100 flips"
+Opportunity: "Do I have your attention?" → "Ready to learn more?"
+CTA: Rewritten for two-path approach — one demo, one playbook
+Survey: Simplified closing, removed meeting scheduling mention
+
+10. Section Title
+
+"Next Steps" → "Your Advantage" in bottom nav
