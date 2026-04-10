@@ -179,11 +179,11 @@ const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.09, 1], [0.3, 2]],
   [],
   [[0, 0], [0.07, 1], [0.29, 2], [0.66, 3], [0.79, 4]],
-  [[0.07, 0], [0.27, 1], [0.31, 2], [0.5, 3]],
-  [[0.03, 0], [0.39, 1], [0.57, 2]],
+  [[0, 0], [0.27, 1], [0.31, 2], [0.5, 3]],
+  [[0, 0], [0.39, 1], [0.57, 2]],
   [[0, 0], [0.3, 1]],
   [[0, 0], [0.04, 1], [0.32, 2]],
-  [[0.04, 0], [0.3, 1], [0.6, 2]],
+  [[0, 0], [0.3, 1], [0.6, 2]],
 ];
 
 function getHighlightCues(scripts: string[]): [number, number][][] {
@@ -1556,7 +1556,7 @@ export default function BrokerPresentation() {
   const hlStep = (idx: number) => {
     if (slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
     if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
-    if (isTTSLoading) return HIGHLIGHT_CUES[idx][0][0] === 0 ? 0 : -1;
+    if (isTTSLoading) return 0;
     return silentStep;
   };
 
