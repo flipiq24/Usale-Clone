@@ -1161,8 +1161,14 @@ function useAudioNarration(onEnded?: () => void) {
     preloadingKeys.current.delete(text);
   }, []);
 
+  const fallbackAudioRef = useRef<HTMLAudioElement | null>(null);
+
   const play = useCallback(async (text: string) => {
     stop();
+    if (fallbackAudioRef.current) {
+      fallbackAudioRef.current.pause();
+      fallbackAudioRef.current = null;
+    }
     const controller = new AbortController();
     abortRef.current = controller;
     setIsLoading(true);
@@ -1185,17 +1191,8 @@ function useAudioNarration(onEnded?: () => void) {
         arrayBuf = await resp.arrayBuffer();
       }
       if (controller.signal.aborted) return;
-      const ctx = getAudioCtx();
-      if (ctx.state === "suspended") await ctx.resume();
-      const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
-      if (controller.signal.aborted) return;
-      const source = ctx.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(ctx.destination);
-      sourceRef.current = source;
-      durationRef.current = audioBuffer.duration;
-      startTimeRef.current = ctx.currentTime;
-      source.onended = () => {
+
+      const onDone = () => {
         stopProgressTracker();
         setIsPlaying(false);
         setIsLoading(false);
@@ -1204,7 +1201,56 @@ function useAudioNarration(onEnded?: () => void) {
         sourceRef.current = null;
         onEndedRef.current?.();
       };
-      source.start(0);
+
+      let played = false;
+
+      try {
+        const ctx = getAudioCtx();
+        if (ctx.state === "suspended") await ctx.resume();
+        const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+        if (controller.signal.aborted) return;
+        const source = ctx.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(ctx.destination);
+        sourceRef.current = source;
+        durationRef.current = audioBuffer.duration;
+        startTimeRef.current = ctx.currentTime;
+        source.onended = onDone;
+        source.start(0);
+        played = true;
+      } catch (webAudioErr) {
+        console.warn("Web Audio failed, trying HTML Audio:", webAudioErr);
+      }
+
+      if (!played) {
+        try {
+          const blob = new Blob([arrayBuf], { type: "audio/mpeg" });
+          const url = URL.createObjectURL(blob);
+          const audio = new Audio(url);
+          fallbackAudioRef.current = audio;
+          audio.onended = () => { URL.revokeObjectURL(url); onDone(); };
+          audio.onerror = () => { URL.revokeObjectURL(url); stop(); };
+          const dur = await new Promise<number>((resolve) => {
+            audio.onloadedmetadata = () => resolve(audio.duration);
+            audio.load();
+            setTimeout(() => resolve(30), 2000);
+          });
+          durationRef.current = dur;
+          startTimeRef.current = getAudioCtx().currentTime;
+          await audio.play();
+          played = true;
+        } catch (htmlAudioErr) {
+          console.warn("HTML Audio also failed:", htmlAudioErr);
+        }
+      }
+
+      if (!played) {
+        console.error("All audio playback methods failed");
+        stop();
+        return;
+      }
+
+      if (controller.signal.aborted) return;
       setIsLoading(false);
       setIsPlaying(true);
       startProgressTracker();
@@ -1557,10 +1603,9 @@ export default function BrokerPresentation() {
   }, []);
 
   const hlStep = (idx: number) => {
-    if (slide !== idx) return HIGHLIGHT_COUNTS[idx] - 1;
-    if (isTTSPlaying) return getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]);
-    if (isTTSLoading) return 0;
-    return silentStep;
+    if (slide !== idx) return 99;
+    if (isTTSPlaying) return Math.max(0, getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]));
+    return Math.max(0, silentStep);
   };
 
   const sections = [
