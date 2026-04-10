@@ -557,13 +557,13 @@ function SectionValueProp({ hl }: { hl: number }) {
       </div>
 
       <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 3) }}>
-        <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Additional Revenue</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+${ADDITIONAL_COMMISSIONS_M}M</div>
+        <div style={{ flex: "1 1 220px", background: "#E8571A0D", border: "2px solid #E8571A30", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Additional Revenue</div>
+          <div style={{ fontSize: 30, fontWeight: 800, color: "#E8571A" }}>+${ADDITIONAL_COMMISSIONS_M}M</div>
         </div>
-        <div style={{ flex: "1 1 220px", background: "#27ae600D", border: "2px solid #27ae6030", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#1e8449", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>More Transactions</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: "#1e8449" }}>+<AnimatedNumber target={ADDITIONAL_TRANS} run={hl >= 3} /></div>
+        <div style={{ flex: "1 1 220px", background: "#E8571A0D", border: "2px solid #E8571A30", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
+          <div style={{ fontSize: 12, fontWeight: 600, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>More Transactions</div>
+          <div style={{ fontSize: 30, fontWeight: 800, color: "#E8571A" }}>+<AnimatedNumber target={ADDITIONAL_TRANS} run={hl >= 3} /></div>
         </div>
       </div>
 
@@ -654,7 +654,7 @@ function SectionWorkflow({ hl }: { hl: number }) {
         {[
           { icon: "1", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A", hasUsale: true },
           { icon: "2", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50", hasUsale: true },
-          { icon: "3", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#1e8449" },
+          { icon: "3", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#2C3E50" },
         ].map((item, i) => (
           <div key={i} style={{
             flex: "1 1 220px", maxWidth: 240, display: "flex", flexDirection: "column", alignItems: "center",
@@ -670,8 +670,8 @@ function SectionWorkflow({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{
-        padding: "16px 28px", background: "#27ae600D", border: "1px solid #27ae6025",
-        borderRadius: 14, fontSize: 15, fontWeight: 600, color: "#1e8449", textAlign: "center", ...hVisible(hl, 2)
+        padding: "16px 28px", background: "#E8571A0D", border: "1px solid #E8571A25",
+        borderRadius: 14, fontSize: 15, fontWeight: 600, color: "#E8571A", textAlign: "center", ...hVisible(hl, 2)
       }}>
         Win-win scenarios for your agents — every time.
       </div>
@@ -710,7 +710,7 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
         {[
           { letter: "M", who: "The Market", need: "Needs inventory", gradient: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#6c757d" },
           { letter: "B", who: "You", need: "Need transactions", gradient: "linear-gradient(145deg, #FFF5F0, #FFE8DB)", accent: "#E8571A" },
-          { letter: "I", who: "Investors", need: "Want first opportunities", gradient: "linear-gradient(145deg, #f0fdf4, #dcfce7)", accent: "#1e8449" },
+          { letter: "I", who: "Investors", need: "Want first opportunities", gradient: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#2C3E50" },
         ].map((card, i) => (
           <div key={i} style={{
             flex: "1 1 200px", maxWidth: 260, padding: "40px 28px", background: card.gradient,
@@ -723,9 +723,9 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{
-        padding: "24px 48px", background: "linear-gradient(135deg, #27ae6010, #27ae6020)",
-        borderRadius: 20, fontSize: 24, fontWeight: 700, color: "#1e8449",
-        border: "1px solid #27ae6030", ...hVisible(hl, 1)
+        padding: "24px 48px", background: "linear-gradient(135deg, #E8571A10, #E8571A20)",
+        borderRadius: 20, fontSize: 24, fontWeight: 700, color: "#E8571A",
+        border: "1px solid #E8571A30", ...hVisible(hl, 1)
       }}>
         Win, win, win — all around.
       </div>
@@ -746,7 +746,7 @@ function SectionHowWePay({ hl }: { hl: number }) {
         {[
           { icon: "1", label: "Your agent brings a seller", bg: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#6c757d" },
           { icon: "2", label: "Investor makes a cash offer", bg: "linear-gradient(145deg, #FFF5F0, #FFE8DB)", accent: "#E8571A" },
-          { icon: "3", label: "If they buy, we take a small share", bg: "linear-gradient(145deg, #f0fdf4, #dcfce7)", accent: "#1e8449" },
+          { icon: "3", label: "If they buy, we take a small share", bg: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#2C3E50" },
         ].map((step, i) => (
           <React.Fragment key={i}>
             {i > 0 && <div style={{ fontSize: 28, color: "#E8571A", fontWeight: 700 }}>→</div>}
@@ -761,9 +761,9 @@ function SectionHowWePay({ hl }: { hl: number }) {
         ))}
       </div>
       <div style={{
-        padding: "24px 40px", background: "linear-gradient(135deg, #27ae6010, #27ae6020)",
-        borderRadius: 20, maxWidth: 520, fontSize: 20, fontWeight: 700, color: "#1e8449",
-        lineHeight: 1.5, border: "1px solid #27ae6030", ...hVisible(hl, 2)
+        padding: "24px 40px", background: "linear-gradient(135deg, #E8571A10, #E8571A20)",
+        borderRadius: 20, maxWidth: 520, fontSize: 20, fontWeight: 700, color: "#E8571A",
+        lineHeight: 1.5, border: "1px solid #E8571A30", ...hVisible(hl, 2)
       }}>
         Your agents get a data-driven cash offer that gets listings. Everybody wins.
       </div>
@@ -984,9 +984,9 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           <button
             onClick={handleSubmitSurvey}
             style={{
-              padding: "14px 48px", background: "linear-gradient(135deg, #27ae60 0%, #1e8449 100%)",
+              padding: "14px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
               color: "#fff", border: "none", borderRadius: 12, fontSize: 16, fontWeight: 700,
-              cursor: "pointer", boxShadow: "0 4px 16px rgba(39,174,96,0.3)",
+              cursor: "pointer", boxShadow: "0 4px 16px #E8571A30",
               transition: "transform 0.2s",
             }}
           >
@@ -995,8 +995,8 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
         </div>
       )}
       {submitted && (
-        <div style={{ textAlign: "center", padding: "16px 24px", background: "#d4edda", borderRadius: 12, border: "1px solid #c3e6cb" }}>
-          <span style={{ fontSize: 15, fontWeight: 600, color: "#155724" }}>Thank you for your feedback!</span>
+        <div style={{ textAlign: "center", padding: "16px 24px", background: "#FFF5F0", borderRadius: 12, border: "1px solid #E8571A30" }}>
+          <span style={{ fontSize: 15, fontWeight: 600, color: "#E8571A" }}>Thank you for your feedback!</span>
         </div>
       )}
 
