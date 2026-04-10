@@ -1098,6 +1098,7 @@ function useAudioNarration(onEnded?: () => void) {
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
   const preloadCache = useRef<Map<string, Blob>>(new Map());
+  const audioUnlocked = useRef(false);
 
   const stopProgressTracker = useCallback(() => {
     if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
@@ -1197,7 +1198,19 @@ function useAudioNarration(onEnded?: () => void) {
     }
   }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying, isLoading, progress, preload };
+  const unlock = useCallback(() => {
+    if (audioUnlocked.current) return;
+    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const buf = ctx.createBuffer(1, 1, 22050);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.connect(ctx.destination);
+    src.start(0);
+    ctx.resume();
+    audioUnlocked.current = true;
+  }, []);
+
+  return { play, stop, isPlaying, isLoading, progress, preload, unlock };
 }
 
 function getWsBase(): string {
@@ -1388,7 +1401,7 @@ export default function BrokerPresentation() {
       return s;
     });
   }, []);
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, progress: ttsProgress, preload: preloadTTS, unlock: unlockAudio } = useAudioNarration(handleTTSEnded);
   const { start: startRealtime, stop: stopRealtime, isLive: isRealtimeLive, status: realtimeStatus } = useRealtimeVoice();
 
   const goNext = useCallback(() => {
@@ -1415,10 +1428,14 @@ export default function BrokerPresentation() {
     preloadTTS(SCRIPTS[2]);
   }, []);
 
+  const initialPlayDone = useRef(false);
   useEffect(() => {
     if (!started) return;
     if (audioOn) {
-      playTTS(SCRIPTS[slide]);
+      if (initialPlayDone.current || slide > 0) {
+        playTTS(SCRIPTS[slide]);
+      }
+      initialPlayDone.current = true;
       for (let i = 1; i <= 3; i++) {
         if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
       }
@@ -1565,7 +1582,7 @@ export default function BrokerPresentation() {
           <div style={{ fontSize: 16, color: "#6c757d" }}>{BROKER.brokerage}</div>
         </div>
         <button
-          onClick={() => setStarted(true)}
+          onClick={() => { unlockAudio(); setStarted(true); playTTS(SCRIPTS[0]); }}
           style={{
             padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
             color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
