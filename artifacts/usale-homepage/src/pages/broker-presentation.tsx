@@ -1281,6 +1281,7 @@ export default function BrokerPresentation() {
   const [chatLoading, setChatLoading] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const [silentStep, setSilentStep] = useState(0);
+  const narratedSlidesRef = useRef<Set<number>>(new Set());
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const chatInputRef = useRef<HTMLInputElement>(null);
@@ -1347,6 +1348,7 @@ export default function BrokerPresentation() {
   }, [slide, brokerData.contactId, started]);
   const handleTTSEnded = useCallback(() => {
     setSlide(s => {
+      narratedSlidesRef.current.add(s);
       if (s < SCRIPTS.length - 1) {
         setExpanded(null);
         return s + 1;

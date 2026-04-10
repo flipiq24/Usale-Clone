@@ -29,14 +29,14 @@ router.post("/ai/tts", async (req, res) => {
         },
         body: JSON.stringify({
           text,
-          model_id: "eleven_turbo_v2_5",
+          model_id: "eleven_multilingual_v2",
           voice_settings: {
-            stability: 0.78,
-            similarity_boost: 0.85,
-            style: 0.05,
-            use_speaker_boost: false,
+            stability: 0.6,
+            similarity_boost: 0.8,
+            style: 0.15,
+            use_speaker_boost: true,
           },
-          speed: 1.1,
+          speed: 1.0,
         }),
       }
     );
