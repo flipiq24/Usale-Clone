@@ -1097,7 +1097,9 @@ function useAudioNarration(onEnded?: () => void) {
   const progressRef = useRef(0);
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
-  const preloadCache = useRef<Map<string, Blob>>(new Map());
+  const preloadCache = useRef<Map<string, { audio: HTMLAudioElement; url: string }>>(new Map());
+  const preloadingKeys = useRef<Set<string>>(new Set());
+  const [preloadReady, setPreloadReady] = useState(false);
 
   const stopProgressTracker = useCallback(() => {
     if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
@@ -1123,7 +1125,7 @@ function useAudioNarration(onEnded?: () => void) {
       audioRef.current.onended = null;
       audioRef.current.onerror = null;
       audioRef.current.pause();
-      audioRef.current.src = "";
+      audioRef.current.currentTime = 0;
       audioRef.current = null;
     }
     setIsPlaying(false);
@@ -1132,8 +1134,9 @@ function useAudioNarration(onEnded?: () => void) {
     progressRef.current = 0;
   }, [stopProgressTracker]);
 
-  const preload = useCallback(async (text: string) => {
-    if (preloadCache.current.has(text)) return;
+  const preload = useCallback(async (text: string, markReady?: boolean) => {
+    if (preloadCache.current.has(text) || preloadingKeys.current.has(text)) return;
+    preloadingKeys.current.add(text);
     try {
       const resp = await fetch(`${API_BASE}/ai/tts`, {
         method: "POST",
@@ -1142,9 +1145,20 @@ function useAudioNarration(onEnded?: () => void) {
       });
       if (resp.ok) {
         const blob = await resp.blob();
-        preloadCache.current.set(text, blob);
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        audio.preload = "auto";
+        await new Promise<void>((resolve) => {
+          audio.oncanplaythrough = () => resolve();
+          audio.onerror = () => resolve();
+          audio.load();
+          setTimeout(resolve, 3000);
+        });
+        preloadCache.current.set(text, { audio, url });
+        if (markReady) setPreloadReady(true);
       }
-    } catch { /* silent preload failure */ }
+    } catch { /* silent */ }
+    preloadingKeys.current.delete(text);
   }, []);
 
   const play = useCallback(async (text: string) => {
@@ -1155,9 +1169,12 @@ function useAudioNarration(onEnded?: () => void) {
     setProgress(0);
     progressRef.current = 0;
     try {
-      let blob: Blob;
-      if (preloadCache.current.has(text)) {
-        blob = preloadCache.current.get(text)!;
+      let audio: HTMLAudioElement;
+      let url: string;
+      const cached = preloadCache.current.get(text);
+      if (cached) {
+        audio = cached.audio;
+        url = cached.url;
         preloadCache.current.delete(text);
       } else {
         const resp = await fetch(`${API_BASE}/ai/tts`, {
@@ -1167,11 +1184,12 @@ function useAudioNarration(onEnded?: () => void) {
           signal: controller.signal,
         });
         if (!resp.ok) throw new Error("TTS failed");
-        blob = await resp.blob();
+        const blob = await resp.blob();
+        if (controller.signal.aborted) return;
+        url = URL.createObjectURL(blob);
+        audio = new Audio(url);
       }
       if (controller.signal.aborted) return;
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
       audioRef.current = audio;
       audio.onended = () => {
         stopProgressTracker();
@@ -1189,14 +1207,7 @@ function useAudioNarration(onEnded?: () => void) {
         setIsLoading(false);
         URL.revokeObjectURL(url);
       };
-      try {
-        await audio.play();
-      } catch (playErr) {
-        console.warn("Autoplay blocked, retrying with user gesture workaround:", playErr);
-        audio.muted = true;
-        await audio.play();
-        audio.muted = false;
-      }
+      await audio.play();
       setIsLoading(false);
       setIsPlaying(true);
       startProgressTracker(audio);
@@ -1206,7 +1217,7 @@ function useAudioNarration(onEnded?: () => void) {
     }
   }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying, isLoading, progress, preload };
+  return { play, stop, isPlaying, isLoading, progress, preload, preloadReady };
 }
 
 function getWsBase(): string {
