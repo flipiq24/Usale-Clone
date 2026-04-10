@@ -1615,14 +1615,6 @@ export default function BrokerPresentation() {
           }}>
             {isTTSPlaying ? "🔊 Playing..." : isTTSLoading ? "⏳ Loading..." : audioOn ? "🔊 Audio On" : "🔇 Audio Off"}
           </button>
-          <button onClick={() => setShowScript(!showScript)} style={{
-            padding: "6px 14px", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer",
-            border: `1px solid ${showScript ? "#2C3E5030" : "#dee2e6"}`,
-            background: showScript ? "#2C3E500A" : "#fff",
-            color: showScript ? "#2C3E50" : "#adb5bd",
-          }}>
-            📝 Script
-          </button>
           <div style={{ display: "flex", gap: 4, marginLeft: 8 }}>
             {Array.from({ length: total }, (_, i) => (
               <div key={i} style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, background: i === slide ? "#E8571A" : "#2C3E5020", transition: "all 0.3s" }} />
@@ -1631,7 +1623,7 @@ export default function BrokerPresentation() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: `88px 40px ${showScript ? 180 : 110}px` }}>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "88px 40px 110px" }}>
         {sections[slide]}
       </div>
 
@@ -1724,19 +1716,6 @@ export default function BrokerPresentation() {
         </div>
       )}
 
-      {showScript && (
-        <div style={{
-          position: "fixed", bottom: 64, left: "50%", transform: "translateX(-50%)", zIndex: 100,
-          width: chatOpen ? "55%" : "92%", maxWidth: 780, background: "#fff", border: "1px solid #eee",
-          borderRadius: 14, padding: "14px 20px", boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
-          transition: "width 0.3s",
-        }}>
-          <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-            <span style={{ background: "#E8571A10", borderRadius: 4, padding: "2px 8px", fontSize: 10, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", flexShrink: 0, marginTop: 3 }}>Script</span>
-            <p style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.7, margin: 0, fontStyle: "italic" }}>{SCRIPTS[slide]}</p>
-          </div>
-        </div>
-      )}
 
       <div style={{
         position: "fixed", bottom: 0, left: 0, right: chatOpen ? 380 : 0, zIndex: 100,
