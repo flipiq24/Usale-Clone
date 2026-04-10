@@ -129,22 +129,14 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 function getScripts(broker: BrokerData) {
   return [
-    // Slide 0: Welcome
-    `Welcome ${broker.name}, my name is Tony Diaz. I am the Founder of U Sale dot com, the online marketplace where off-market deals meet credible buyers. I've been in the real estate business for thirty-two years and have done over eleven hundred flips. It's our goal at U Sale dot com to empower investor-friendly brokers and agents with a trusted source to list and negotiate off-market fix or flip or quick close opportunities with vetted, finance-backed investors. In our analysis of the MLS data in your market, we were impressed to see your brokerage's performance to date, and put together a special report for you to see what you've accomplished to date with your investor-friendly relationships, and a peek at how U Sale dot com can help increase your revenue, all in less than 5-minutes.`,
-    // Slide 1: Your Data
+    `Welcome ${broker.name}, my name is Tony Diaz. I am the Founder of U Sale dot com, the online marketplace where off-market deals meet credible buyers. I've been in the real estate business for thirty-two years and have done over eleven hundred flips. It's our goal at U Sale to empower investor-friendly brokers and agents with a trusted source to list and negotiate off-market fix and flip or quick close opportunities with vetted, finance-backed investors. In our analysis of the MLS data in your market, we were impressed to see your brokerage's performance to date, and put together a special report for you to see what you've accomplished to date with your investor-friendly relationships, and a peek at how U Sale dot com can help increase your revenue, all in less than 5-minutes.`,
     `Here's the investor-friendly data that matters for ${broker.brokerage}. You have eighteen thousand eight hundred and thirty-four total transactions to investors with a double-end rate of zero percent. Your average purchase price is about two million dollars and your average resale is about two point two million dollars. The last property sourced was at thirteen twenty-one Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, two point four five million dollars, December twenty twenty-four, and the buyer was Fairtrade, LLC. You've sold two thousand five hundred and twelve listings for investors and sold two thousand and eighty-eight listings to investors. If you click the drop-downs on these headers, you'll see detailed breakdowns of each investor's data points, which really helps give insight into your key relationships and the ROI they produce. Other points of interest include the nine hundred and thirty-five resales to investors with a purchase-to-resale ratio of eighty-nine percent. Also, you have four thousand five hundred and seventy-three unique investor relationships \u2014 which is incredibly strong. The last data of interest is looking at your fifty-six investor-friendly agents. Tracy B Do leads with two hundred and three transactions, followed by Sally Forster Jones with one hundred and thirty-eight, and Stephanie Younger with one hundred and nineteen. So, ${broker.name}, how does all of this data translate to your bottom line? This is where it gets even more exciting, so let's talk dollars.`,
-    // Slide 2: The Opportunity
     `${broker.name}, with an average two percent commission rate and two thousand and eighty-eight transactions, your office has generated over eighty-two point seven million dollars in commissions from investor transactions alone. Now, here's where things get exciting. What if U Sale dot com could increase your investor revenue line by twenty percent at no additional cost to you or your agents? That's an additional sixteen point five million dollars in revenue! Ready to learn more? Let me give you a quick introduction to U Sale dot com and how it works.`,
-    // Slide 3: Introducing USale
     `U Sale is a frictionless, off-market marketplace \u2014 think of it as an investor-focused MLS. No membership fees. No transaction fees. No competition with the MLS. We simply connect your investor-friendly agents with every active investor in the market \u2014 with full transparency into track records so your agents can pick their buyer. It's really that easy, ${broker.name}.`,
-    // Slide 4: How USale Works
     `We're all about creating win-win scenarios for your agents. No listing? Invite your seller to the U Sale dot com marketplace. If they accept an offer, the buyer pays your agent two and a half percent. No listing, no contract \u2014 you still get paid. New listing? Post it on U Sale dot com alongside the MLS. Hundreds of active investors see it, and your agent picks the best buyer and double-ends it. Buyer goes under contract elsewhere? Your agent gets notified automatically and earns the re-list.`,
-    // Slide 5: Everyone Wins
     `U Sale dot com works because the market needs inventory, you need transactions, and investors want first opportunities to acquire properties in your market. It's a win, win, win deal all around.`,
-    // Slide 6: How We Get Paid
     `So, you may be asking how we make money at U Sale dot com? It's pretty simple. We're not monetizing the marketplace. When our investors buy a property through a cash offer, we take a small share. That's it. Your agents walk into seller appointments with a real, data-driven cash offer \u2014 that gets listings. And when the seller doesn't take the cash offer, your agent lists it. Everybody wins.`,
-    // Slide 7: CTA
-    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use U Sale dot com to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built.`,
+    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one meeting, one demo. We'll show you exactly how your agents get paid without a listing, how to use U Sale dot com to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built.`,
   ];
 }
 
@@ -167,7 +159,7 @@ const HIGHLIGHT_CUES: [number, number][][] = [
   [[0.03, 0], [0.39, 1], [0.57, 2]],
   [[0, 0], [0.3, 1]],
   [[0, 0], [0.04, 1], [0.32, 2]],
-  [[0.04, 0], [0.2, 1], [0.3, 2], [0.44, 3], [0.53, 4]],
+  [[0.04, 0], [0.3, 1], [0.6, 2]],
 ];
 
 const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
@@ -550,34 +542,36 @@ function SectionValueProp({ hl }: { hl: number }) {
 }
 
 function SectionWhyDifferent({ hl }: { hl: number }) {
-  const items = [
-    { icon: "✓", t: "No Membership Fees", s: "Free for every agent. Always." },
-    { icon: "✓", t: "No Transaction Fees", s: "Zero cost on every deal, ever." },
-    { icon: "✓", t: "No Competition with the MLS", s: "We complement it — not compete with it." },
-    { icon: "✓", t: "Full Transparency", s: "See track records. Pick your buyer. Transact with confidence." },
-  ];
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
         Introducing <span style={{ color: "#E8571A" }}>USale.com</span>
       </h2>
-      <p style={{ fontSize: 18, color: "#2C3E50", margin: 0, lineHeight: 1.6, maxWidth: 600 }}>
-        A frictionless, off-market marketplace — think of it as an <b>investor-focused MLS</b>.
+      <p style={{ fontSize: 20, color: "#6c757d", margin: 0, lineHeight: 1.6, maxWidth: 540, ...hVisible(hl, 0) }}>
+        A frictionless, off-market marketplace — think of it as an <b style={{ color: "#2C3E50" }}>investor-focused MLS</b>.
       </p>
-      <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-        {items.map((item, i) => (
-          <div key={i} style={{ flex: "1 1 220px", background: "#fff", borderRadius: 14, padding: "24px 20px", border: "1px solid #eee", display: "flex", gap: 14, alignItems: "flex-start", ...hVisible(hl, i) }}>
-            <div style={{ width: 36, height: 36, borderRadius: "50%", background: "#27ae600D", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, fontSize: 18, color: "#27ae60", fontWeight: 700 }}>
-              {item.icon}
-            </div>
-            <div>
-              <div style={{ fontSize: 15, fontWeight: 650, color: "#2C3E50", marginBottom: 4 }}>{item.t}</div>
-              <div style={{ fontSize: 13, color: "#2C3E50CC", lineHeight: 1.5 }}>{item.s}</div>
-            </div>
+      <div style={{ display: "flex", gap: 0, flexWrap: "wrap", justifyContent: "center", maxWidth: 700, width: "100%", ...hVisible(hl, 1) }}>
+        {[
+          { icon: "🆓", label: "No Membership Fees" },
+          { icon: "💸", label: "No Transaction Fees" },
+          { icon: "🤝", label: "No Competition with MLS" },
+          { icon: "🔍", label: "Full Transparency" },
+        ].map((item, i) => (
+          <div key={i} style={{ flex: "1 1 140px", padding: "28px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+            <div style={{ fontSize: 44, lineHeight: 1 }}>{item.icon}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", lineHeight: 1.3 }}>{item.label}</div>
           </div>
         ))}
       </div>
-      <div style={{ fontSize: 15, color: "#6c757d", fontStyle: "italic", ...hVisible(hl, 3) }}>
+      <div style={{
+        padding: "20px 40px", background: "linear-gradient(135deg, #E8571A08 0%, #E8571A15 100%)",
+        borderRadius: 20, border: "1px solid #E8571A20", maxWidth: 500, ...hVisible(hl, 2)
+      }}>
+        <div style={{ fontSize: 18, fontWeight: 600, color: "#2C3E50", lineHeight: 1.5 }}>
+          Connect your agents with <span style={{ color: "#E8571A", fontWeight: 700 }}>every active investor</span> in the market.
+        </div>
+      </div>
+      <div style={{ fontSize: 16, color: "#6c757d", fontStyle: "italic", ...hVisible(hl, 3) }}>
         It's really that easy, {BROKER.name}.
       </div>
     </div>
@@ -613,29 +607,35 @@ function SectionWhyDoingThis({ hl }: { hl: number }) {
 }
 
 function SectionWorkflow({ hl }: { hl: number }) {
-  const paths = [
-    { n: "1", icon: "🏠", t: "No Listing? Invite to the Marketplace", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
-    { n: "2", icon: "📋", t: "New Listing? Post Coming Soon on USale", body: "Post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
-    { n: "3", icon: "🔔", t: "Buyer Goes Under Contract? Your Agent Gets the Re-List", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
-  ];
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
-        How the <span style={{ color: "#E8571A" }}>workflow</span> works.
+    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center" }}>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", textAlign: "center", ...hVisible(hl, 0) }}>
+        How <span style={{ color: "#E8571A" }}>USale.com</span> Works
       </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-        {paths.map((p, i) => (
-          <div key={i} style={{ padding: "22px 24px", background: "#fff", borderRadius: 14, border: "1px solid #eee", borderLeft: "4px solid #E8571A", ...hVisible(hl, i) }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-              <span style={{ fontSize: 24 }}>{p.icon}</span>
-              <span style={{ fontSize: 16, fontWeight: 650, color: "#2C3E50" }}>{p.t}</span>
-            </div>
-            <div style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.65, paddingLeft: 38 }}>{p.body}</div>
+      <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", maxWidth: 800, width: "100%" }}>
+        {[
+          { icon: "🏠", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A" },
+          { icon: "📋", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50" },
+          { icon: "🔔", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#1e8449" },
+        ].map((item, i) => (
+          <div key={i} style={{
+            flex: "1 1 220px", maxWidth: 240, display: "flex", flexDirection: "column", alignItems: "center",
+            textAlign: "center", gap: 12, ...hVisible(hl, i)
+          }}>
+            <div style={{
+              width: 90, height: 90, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 44, background: `${item.color}10`, border: `2px solid ${item.color}30`,
+            }}>{item.icon}</div>
+            <div style={{ fontSize: 20, fontWeight: 700, color: item.color }}>{item.title}</div>
+            <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>{item.subtitle}</div>
           </div>
         ))}
       </div>
-      <div style={{ padding: "14px 20px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 12, textAlign: "center", fontSize: 14, fontWeight: 600, color: "#1e8449" }}>
-        We're not replacing the MLS. We're giving your agents more options.
+      <div style={{
+        padding: "16px 28px", background: "#27ae600D", border: "1px solid #27ae6025",
+        borderRadius: 14, fontSize: 15, fontWeight: 600, color: "#1e8449", textAlign: "center", ...hVisible(hl, 2)
+      }}>
+        Win-win scenarios for your agents — every time.
       </div>
     </div>
   );
@@ -664,28 +664,31 @@ function SectionCredibility({ hl }: { hl: number }) {
 
 function SectionEverybodyWins({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "55vh", textAlign: "center", gap: 32 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "55vh", textAlign: "center", gap: 36 }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,48px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
         A Marketplace Where <span style={{ color: "#E8571A" }}>Everyone Wins</span>
       </h2>
-      <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
-        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
-          <div style={{ fontSize: 48, marginBottom: 12 }}>🏠</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>The Market</div>
-          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Needs inventory</div>
-        </div>
-        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
-          <div style={{ fontSize: 48, marginBottom: 12 }}>📈</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>You</div>
-          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Need transactions</div>
-        </div>
-        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
-          <div style={{ fontSize: 48, marginBottom: 12 }}>💰</div>
-          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>Investors</div>
-          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Want first opportunities</div>
-        </div>
+      <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
+        {[
+          { emoji: "🏠", who: "The Market", need: "Needs inventory", gradient: "linear-gradient(145deg, #f8f9fa, #e9ecef)" },
+          { emoji: "👤", who: "You", need: "Need transactions", gradient: "linear-gradient(145deg, #FFF5F0, #FFE8DB)" },
+          { emoji: "💰", who: "Investors", need: "Want first opportunities", gradient: "linear-gradient(145deg, #f0fdf4, #dcfce7)" },
+        ].map((card, i) => (
+          <div key={i} style={{
+            flex: "1 1 200px", maxWidth: 260, padding: "40px 28px", background: card.gradient,
+            borderRadius: 20, textAlign: "center", position: "relative", overflow: "hidden",
+          }}>
+            <div style={{ fontSize: 56, marginBottom: 16 }}>{card.emoji}</div>
+            <div style={{ fontSize: 20, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>{card.who}</div>
+            <div style={{ fontSize: 15, color: "#6c757d", lineHeight: 1.5 }}>{card.need}</div>
+          </div>
+        ))}
       </div>
-      <div style={{ padding: "20px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, fontSize: 20, fontWeight: 700, color: "#1e8449" }}>
+      <div style={{
+        padding: "24px 48px", background: "linear-gradient(135deg, #27ae6010, #27ae6020)",
+        borderRadius: 20, fontSize: 24, fontWeight: 700, color: "#1e8449",
+        border: "1px solid #27ae6030", ...hVisible(hl, 1)
+      }}>
         Win, win, win — all around.
       </div>
     </div>
@@ -694,28 +697,37 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
 
 function SectionHowWePay({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
-        How do we get paid?
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 32 }}>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        How Do We <span style={{ color: "#E8571A" }}>Get Paid</span>?
       </h2>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
-        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
-          <div style={{ fontSize: 32, marginBottom: 8 }}>🏠</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Your agent brings a seller</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
-        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
-          <div style={{ fontSize: 32, marginBottom: 8 }}>💰</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Our investor makes a cash offer</div>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
-        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#E8571A08", borderRadius: 14, border: "1px solid #E8571A20", textAlign: "center" }}>
-          <div style={{ fontSize: 32, marginBottom: 8 }}>🤝</div>
-          <div style={{ fontSize: 14, fontWeight: 600, color: "#E8571A" }}>If they buy, we take a small share</div>
-        </div>
+      <p style={{ fontSize: 18, color: "#6c757d", margin: 0, maxWidth: 460, lineHeight: 1.5, ...hVisible(hl, 0) }}>
+        We're not monetizing the marketplace.
+      </p>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", alignItems: "center", ...hVisible(hl, 1) }}>
+        {[
+          { icon: "🏠", label: "Your agent brings a seller", bg: "linear-gradient(145deg, #f8f9fa, #e9ecef)" },
+          { icon: "💰", label: "Investor makes a cash offer", bg: "linear-gradient(145deg, #FFF5F0, #FFE8DB)" },
+          { icon: "🤝", label: "If they buy, we take a small share", bg: "linear-gradient(145deg, #f0fdf4, #dcfce7)" },
+        ].map((step, i) => (
+          <React.Fragment key={i}>
+            {i > 0 && <div style={{ fontSize: 28, color: "#E8571A", fontWeight: 700 }}>→</div>}
+            <div style={{
+              flex: "0 0 180px", padding: "28px 16px", background: step.bg,
+              borderRadius: 18, textAlign: "center",
+            }}>
+              <div style={{ fontSize: 40, marginBottom: 10 }}>{step.icon}</div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", lineHeight: 1.4 }}>{step.label}</div>
+            </div>
+          </React.Fragment>
+        ))}
       </div>
-      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
-        Everybody wins. No friction. No middleman.
+      <div style={{
+        padding: "24px 40px", background: "linear-gradient(135deg, #27ae6010, #27ae6020)",
+        borderRadius: 20, maxWidth: 520, fontSize: 20, fontWeight: 700, color: "#1e8449",
+        lineHeight: 1.5, border: "1px solid #27ae6030", ...hVisible(hl, 2)
+      }}>
+        Your agents get a data-driven cash offer that gets listings. Everybody wins.
       </div>
     </div>
   );
@@ -723,61 +735,55 @@ function SectionHowWePay({ hl }: { hl: number }) {
 
 function SectionCTA({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
         Your Unfair Advantage Starts Here, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
       </h2>
-      <p style={{ fontSize: 16, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...hVisible(hl, 1) }}>
-        You already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge.
-      </p>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 480, ...hVisible(hl, 2) }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%", maxWidth: 440, ...hVisible(hl, 1) }}>
         <a
           href="https://calendly.com/usale/broker-demo"
           target="_blank"
           rel="noopener noreferrer"
           style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 12,
-            padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
-            color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
+            padding: "22px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
+            color: "#fff", border: "none", borderRadius: 16, fontSize: 19, fontWeight: 700,
             cursor: "pointer", textDecoration: "none",
-            boxShadow: "0 6px 24px #E8571A40",
-            transition: "transform 0.2s, box-shadow 0.2s",
+            boxShadow: "0 8px 28px #E8571A40",
           }}
         >
-          Schedule Your Demo
+          Schedule Your Demo Today
         </a>
         <a
           href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`}
           download="USale_Broker_Playbook.pdf"
           style={{
             display: "flex", alignItems: "center", justifyContent: "center", gap: 14,
-            padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none",
+            padding: "18px 32px", background: "#2C3E50", borderRadius: 16, textDecoration: "none",
             boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700,
-            transition: "transform 0.2s, box-shadow 0.2s",
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download the Broker Playbook
+          Download the USale.com Broker Playbook
         </a>
-        <div style={{ fontSize: 12, color: "#adb5bd", marginTop: 4 }}>No sales pitch. No friction. Just a demonstration of what's already possible.</div>
       </div>
 
-      <div style={{ display: "flex", gap: 14, alignItems: "center", ...hVisible(hl, 3) }}>
-        <span style={{ fontSize: 14, color: "#6c757d" }}>Questions? Contact me directly:</span>
-      </div>
-      <div style={{
-        display: "flex", alignItems: "center", gap: 20, padding: "20px 28px",
-        background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4)
-      }}>
-        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
-        <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale.com &amp; FlipiQ</div>
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
-            <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
-            <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
-            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
+      <div style={{ ...hVisible(hl, 2) }}>
+        <div style={{ fontSize: 15, color: "#6c757d", marginBottom: 14 }}>Questions? Feel free to contact me directly.</div>
+        <div style={{
+          display: "flex", alignItems: "center", gap: 20, padding: "20px 28px",
+          background: "#f8f9fa", borderRadius: 16, border: "1px solid #eee",
+        }}>
+          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+          <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
+            <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale.com &amp; FlipIQ</div>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
+              <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
+              <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
+              <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
+            </div>
           </div>
         </div>
       </div>
