@@ -1,0 +1,173 @@
+Make the following changes to the file artifacts/usale-homepage/src/pages/broker-presentation.tsx. Do each one exactly as written — find the exact text, replace with the exact replacement.
+CHANGE 1 — Replace the getScripts function (around line 130-143)
+Find the entire function getScripts and replace it with:
+typescriptfunction getScripts(broker: BrokerData) {
+  return [
+    `Welcome ${broker.name}, my name is Tony Diaz. I am the Founder of You-Sale dot com, the online marketplace where off-market deals meet credible buyers. I've been in the real estate business for thirty-two years and have done over eleven hundred flips. It's our goal at You-Sale dot com to empower investor-friendly brokers and agents with a trusted source to list and negotiate off-market fix or flip or quick close opportunities with vetted, finance-backed investors. In our analysis of the MLS data in your market, we were impressed to see your brokerage's performance to date, and put together a special report for you to see what you've accomplished to date with your investor-friendly relationships, and a peek at how You-Sale dot com can help increase your revenue, all in less than 5-minutes.`,
+    `Here's the investor-friendly data that matters for ${broker.brokerage}. You have eighteen thousand eight hundred and thirty-four total transactions to investors with a double-end rate of zero percent. Your average purchase price is about two million dollars and your average resale is about two point two million dollars. The last property sourced was at thirteen twenty-one Gates Avenue in Manhattan Beach \u2014 that was Tracy B Do, two point four five million dollars, December twenty twenty-four, and the buyer was Fairtrade, LLC. You've sold two thousand five hundred and twelve listings for investors and sold two thousand and eighty-eight listings to investors. If you click the drop-downs on these headers, you'll see detailed breakdowns of each investor's data points, which really helps give insight into your key relationships and the ROI they produce. Other points of interest include the nine hundred and thirty-five resales to investors with a purchase-to-resale ratio of eighty-nine percent. Also, you have four thousand five hundred and seventy-three unique investor relationships \u2014 which is incredibly strong. The last data of interest is looking at your fifty-six investor-friendly agents. Tracy B Do leads with two hundred and three transactions, followed by Sally Forster Jones with one hundred and thirty-eight, and Stephanie Younger with one hundred and nineteen. So, ${broker.name}, how does all of this data translate to your bottom line? This is where it gets even more exciting, so let's talk dollars.`,
+    `${broker.name}, with an average two percent commission rate and two thousand and eighty-eight transactions, your office has generated over eighty-two point seven million dollars in commissions from investor transactions alone. Now, here's where things get exciting. What if You-Sale dot com could increase your investor revenue line by twenty percent at no additional cost to you or your agents? That's an additional sixteen point five million dollars in revenue! Ready to learn more? Let me give you a quick introduction to You-Sale dot com and how it works.`,
+    `You-Sale is a frictionless, off-market marketplace \u2014 think of it as an investor-focused MLS. No membership fees. No transaction fees. No competition with the MLS. We simply connect your investor-friendly agents with every active investor in the market \u2014 with full transparency into track records so your agents can pick their buyer. It's really that easy, ${broker.name}.`,
+    `We're all about creating win-win scenarios for your agents. No listing? Invite your seller to the You-Sale dot com marketplace. If they accept an offer, the buyer pays your agent two and a half percent. No listing, no contract \u2014 you still get paid. New listing? Post it on You-Sale dot com alongside the MLS. Hundreds of active investors see it, and your agent picks the best buyer and double-ends it. Buyer goes under contract elsewhere? Your agent gets notified automatically and earns the re-list.`,
+    `You-Sale dot com works because the market needs inventory, you need transactions, and investors want first opportunities to acquire properties in your market. It's a win, win, win deal all around.`,
+    `So, you may be asking how we make money at You-Sale dot com? It's pretty simple. We're not monetizing the marketplace. When our investors buy a property through a cash offer, we take a small share. That's it. Your agents walk into seller appointments with a real, data-driven cash offer \u2014 that gets listings. And when the seller doesn't take the cash offer, your agent lists it. Everybody wins.`,
+    `${broker.name}, you already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge. If you're ready to learn more, here's the next step \u2014 one demo. We'll show you exactly how your agents get paid without a listing, how to use You-Sale dot com to recruit the best investor-friendly agents in the market, and how to put that sixteen point five million dollar opportunity into motion. No sales pitch. No friction. Just a demonstration of what's already possible with what you've already built.`,
+  ];
+}
+CHANGE 2 — Replace SECTION_TITLES
+Find the SECTION_TITLES array and replace it with:
+typescriptconst SECTION_TITLES = [
+  "Welcome",
+  "Your Data",
+  "The Opportunity",
+  "Introducing USale",
+  "How It Works",
+  "Everyone Wins",
+  "How We Get Paid",
+  "Your Advantage",
+];
+CHANGE 3 — Replace HIGHLIGHT_CUES
+Find the HIGHLIGHT_CUES array and replace it with:
+typescriptconst HIGHLIGHT_CUES: [number, number][][] = [
+  [[0, 0], [0.09, 1], [0.3, 2]],
+  [[0, 0], [0.07, 1], [0.1, 2], [0.12, 3], [0.15, 4], [0.24, 5], [0.32, 6], [0.35, 7], [0.4, 8], [0.44, 9], [0.47, 10], [0.52, 11]],
+  [[0, 0], [0.07, 1], [0.29, 2], [0.66, 3], [0.79, 4]],
+  [[0.07, 0], [0.27, 1], [0.31, 2], [0.5, 3]],
+  [[0.03, 0], [0.39, 1], [0.57, 2]],
+  [[0, 0], [0.3, 1]],
+  [[0, 0], [0.04, 1], [0.32, 2]],
+  [[0.04, 0], [0.2, 1], [0.3, 2], [0.44, 3], [0.53, 4]],
+];
+CHANGE 4 — Update SectionWelcome
+In SectionWelcome, find the <p> tag that says "We're a tech company that specializes in empowering investors and the investor-friendly agents who transact with them." and replace the entire <p> tag with:
+tsx<div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, ...introReveal(hl, 2) }}>
+  <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 560, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+    Where off-market deals meet credible buyers…and everyone wins.
+  </p>
+  <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
+    No commitment. No cost. Just access.
+  </p>
+</div>
+CHANGE 5 — Update SectionValueProp
+In SectionValueProp, find Do I have your attention and replace with Ready to learn more. Also find the subtext "We're just providing you tools and ways to make money. You don't have to do much more outside of what you're already doing." and replace with "Let me give you a quick introduction to USale.com and how it works."
+CHANGE 6 — Fix the X icons in SectionWhyDifferent
+In SectionWhyDifferent, the cards have SVG X icons with stroke="#E8571A" and two <line> elements making an X shape. Replace the entire SVG icon with a green checkmark: change stroke="#E8571A" to stroke="#27ae60" and replace the two <line> elements with <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>. Also change the icon background from #E8571A0A to #27ae600D.
+Also update the heading from "A frictionless marketplace. Think of it as an off-market MLS." to: Introducing <span style={{ color: "#E8571A" }}>USale.com</span>. Add a subtitle paragraph: A frictionless, off-market marketplace — think of it as an investor-focused MLS.
+CHANGE 7 — Replace the entire SectionCTA function
+Find the entire function SectionCTA and replace it with:
+tsxfunction SectionCTA({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        Your Unfair Advantage Starts Here, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>
+      </h2>
+      <p style={{ fontSize: 16, color: "#2C3E50", maxWidth: 560, lineHeight: 1.7, margin: 0, ...hVisible(hl, 1) }}>
+        You already have the relationships, the agents, and the transaction history. We have the data, the technology, and the buyers. Together, that's a serious edge.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, width: "100%", maxWidth: 480, ...hVisible(hl, 2) }}>
+        <a href="https://calendly.com/usale/broker-demo" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, padding: "20px 40px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", textDecoration: "none", boxShadow: "0 6px 24px #E8571A40" }}>
+          Schedule Your Demo
+        </a>
+        <a href={`${import.meta.env.BASE_URL}USale_Broker_Playbook.pdf`} download="USale_Broker_Playbook.pdf" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, padding: "18px 32px", background: "#2C3E50", borderRadius: 14, textDecoration: "none", boxShadow: "0 4px 16px rgba(44,62,80,0.15)", color: "#fff", fontSize: 16, fontWeight: 700 }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download the Broker Playbook
+        </a>
+        <div style={{ fontSize: 12, color: "#adb5bd", marginTop: 4 }}>No sales pitch. No friction. Just a demonstration of what's already possible.</div>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "20px 28px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", ...hVisible(hl, 4) }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+          <div style={{ fontSize: 13, color: "#6c757d" }}>Founder & CEO, USale.com & FlipiQ</div>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
+            <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
+            <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
+            <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+CHANGE 8 — Replace the entire SectionEverybodyWins function
+Find function SectionEverybodyWins and replace the entire function with:
+tsxfunction SectionEverybodyWins({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "55vh", textAlign: "center", gap: 32 }}>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,48px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        A Marketplace Where <span style={{ color: "#E8571A" }}>Everyone Wins</span>
+      </h2>
+      <div style={{ display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
+        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>🏠</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>The Market</div>
+          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Needs inventory</div>
+        </div>
+        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>📈</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>You</div>
+          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Need transactions</div>
+        </div>
+        <div style={{ flex: "1 1 200px", maxWidth: 260, padding: "32px 24px", background: "#fff", borderRadius: 16, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>💰</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50", marginBottom: 6 }}>Investors</div>
+          <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>Want first opportunities</div>
+        </div>
+      </div>
+      <div style={{ padding: "20px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, fontSize: 20, fontWeight: 700, color: "#1e8449" }}>
+        Win, win, win — all around.
+      </div>
+    </div>
+  );
+}
+CHANGE 9 — Replace the entire SectionHowWePay function
+Find function SectionHowWePay and replace the entire function with:
+tsxfunction SectionHowWePay({ hl }: { hl: number }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "50vh", textAlign: "center", gap: 28 }}>
+      <h2 style={{ fontSize: "clamp(26px,4vw,40px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
+        How do we get paid?
+      </h2>
+      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🏠</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Your agent brings a seller</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#fff", borderRadius: 14, border: "1px solid #eee", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>💰</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>Our investor makes a cash offer</div>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", color: "#E8571A", fontSize: 24, fontWeight: 700 }}>→</div>
+        <div style={{ flex: "1 1 160px", maxWidth: 200, padding: "24px 16px", background: "#E8571A08", borderRadius: 14, border: "1px solid #E8571A20", textAlign: "center" }}>
+          <div style={{ fontSize: 32, marginBottom: 8 }}>🤝</div>
+          <div style={{ fontSize: 14, fontWeight: 600, color: "#E8571A" }}>If they buy, we take a small share</div>
+        </div>
+      </div>
+      <div style={{ padding: "24px 32px", background: "#27ae600D", border: "1px solid #27ae6025", borderRadius: 16, maxWidth: 560, fontSize: 18, fontWeight: 700, color: "#1e8449", lineHeight: 1.5, ...hVisible(hl, 2) }}>
+        Everybody wins. No friction. No middleman.
+      </div>
+    </div>
+  );
+}
+CHANGE 10 — Update the sections array
+Find the const sections = [ array and replace it with:
+tsx  const sections = [
+    <SectionWelcome key={0} hl={hlStep(0)} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={isTTSPlaying && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={timerShouldRun && slide === 1} />,
+    <SectionValueProp key={2} hl={hlStep(2)} />,
+    <SectionWhyDifferent key={3} hl={hlStep(3)} />,
+    <SectionWorkflow key={4} hl={hlStep(4)} />,
+    <SectionEverybodyWins key={5} hl={hlStep(5)} />,
+    <SectionHowWePay key={6} hl={hlStep(6)} />,
+    <SectionCTA key={7} hl={hlStep(7)} />,
+  ];
+This removes SectionWhyDoingThis, SectionCredibility, and SectionSurvey from the presentation. The deck is now 8 slides instead of 11.
+CHANGE 11 — Update SectionWorkflow paths
+In SectionWorkflow, replace the paths array with:
+tsx  const paths = [
+    { n: "1", icon: "🏠", t: "No Listing? Invite to the Marketplace", body: "Your agent invites the seller to the marketplace. Full transparency and control for your agents, even without the listing. If the seller accepts an offer, the buyer pays your agent 2.5%. No listing. No contracts. The buyer pays you." },
+    { n: "2", icon: "📋", t: "New Listing? Post Coming Soon on USale", body: "Post it on USale and coming soon on the MLS. Hundreds of local, active investors see it. Pick the buyer based on track record. Double-end. No fees." },
+    { n: "3", icon: "🔔", t: "Buyer Goes Under Contract? Your Agent Gets the Re-List", body: "The marketplace notifies your agents. Any investor-buyer they bring, when that buyer accepts an offer on any property, your agent gets a re-list. They can agree outside the marketplace. The system lets them know. No-brainer." },
+  ];
+Also in the workflow card rendering, find the orange numbered circle span <span style={{ background: "#E8571A"...}}>{p.n}</span> and replace it with <span style={{ fontSize: 24 }}>{p.icon}</span>
+After making all changes, save the file and run the project.
