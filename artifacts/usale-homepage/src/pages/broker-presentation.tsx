@@ -565,7 +565,7 @@ function SectionValueProp({ hl }: { hl: number }) {
 
       <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
-        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to USale.com and how it works.</div>
+        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to USale and how it works.</div>
       </div>
     </div>
   );
@@ -575,7 +575,7 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        Introducing <span style={{ color: "#E8571A" }}>USale.com</span>
+        Introducing <span style={{ color: "#E8571A" }}>USale</span>
       </h2>
       <p style={{ fontSize: 20, color: "#6c757d", margin: 0, lineHeight: 1.6, maxWidth: 540, ...hVisible(hl, 0) }}>
         A frictionless, off-market marketplace — think of it as an <b style={{ color: "#2C3E50" }}>investor-focused MLS</b>.
@@ -640,7 +640,7 @@ function SectionWorkflow({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", textAlign: "center", ...hVisible(hl, 0) }}>
-        How <span style={{ color: "#E8571A" }}>USale.com</span> Works
+        How <span style={{ color: "#E8571A" }}>USale</span> Works
       </h2>
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", maxWidth: 800, width: "100%" }}>
         {[
@@ -795,7 +795,7 @@ function SectionCTA({ hl }: { hl: number }) {
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download the USale.com Broker Playbook
+          Download the USale Broker Playbook
         </a>
       </div>
 
@@ -808,7 +808,7 @@ function SectionCTA({ hl }: { hl: number }) {
           <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
             <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale.com &amp; FlipIQ</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale &amp; FlipIQ</div>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
               <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
               <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
@@ -1040,7 +1040,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale.com &amp; Flip IQ</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale &amp; Flip IQ</div>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
               <a href="tel:714-581-7805" style={{
                 fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
@@ -1612,8 +1612,7 @@ export default function BrokerPresentation() {
           </a>
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {BROKER.name} &middot; {BROKER.brokerage}</span>
-          <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
-          <span style={{ fontSize: 12, color: "#adb5bd", letterSpacing: "0.03em" }}>usale.com/broker/{BROKER.slug}</span>
+          
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={toggleAudio} style={{
