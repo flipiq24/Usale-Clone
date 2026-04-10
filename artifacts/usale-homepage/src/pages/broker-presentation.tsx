@@ -803,7 +803,7 @@ function SectionCTA({ hl }: { hl: number }) {
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download the <BrandName /> Broker Playbook
+          Download the <span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#fff" }}>Sale</span> Broker Playbook
         </a>
       </div>
 
@@ -1032,7 +1032,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>Download the <span style={{ color: "#fff" }}>USale</span> Broker Playbook</div>
+          <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>Download the <span style={{ color: "#E8571A" }}>U</span>Sale Broker Playbook</div>
           <div style={{ fontSize: 12, color: "#ffffffAA", marginTop: 2 }}>Recruiting scripts, 90-day plan, income channels & more</div>
         </div>
       </a>
