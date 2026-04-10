@@ -20,7 +20,7 @@ router.post("/ai/tts", async (req, res) => {
     const voice = voiceId || "hx3a4sOlCGJb16SPtV2d";
 
     const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voice}/stream`,
+      `https://api.elevenlabs.io/v3/text-to-speech/${voice}/stream`,
       {
         method: "POST",
         headers: {
@@ -29,13 +29,14 @@ router.post("/ai/tts", async (req, res) => {
         },
         body: JSON.stringify({
           text,
-          model_id: "eleven_turbo_v2_5",
+          model_id: "eleven_multilingual_v2",
           voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
+            stability: 0.6,
+            similarity_boost: 0.8,
+            style: 0.15,
             use_speaker_boost: true,
+            speed: 0.85,
           },
-          optimize_streaming_latency: 3,
         }),
       }
     );
