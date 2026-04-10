@@ -36,7 +36,7 @@ router.post("/ai/tts", async (req, res) => {
             style: 0.25,
             use_speaker_boost: true,
           },
-          speed: 1.0,
+          speed: 1.1,
         }),
       }
     );
