@@ -575,7 +575,7 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        Introducing <span style={{ color: "#E8571A" }}>USale</span>
+        Introducing <span><span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#2C3E50" }}>Sale</span></span>
       </h2>
       <p style={{ fontSize: 20, color: "#6c757d", margin: 0, lineHeight: 1.6, maxWidth: 540, ...hVisible(hl, 0) }}>
         A frictionless, off-market marketplace — think of it as an <b style={{ color: "#2C3E50" }}>investor-focused MLS</b>.
@@ -640,7 +640,7 @@ function SectionWorkflow({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", textAlign: "center", ...hVisible(hl, 0) }}>
-        How <span style={{ color: "#E8571A" }}>USale</span> Works
+        How <span><span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#2C3E50" }}>Sale</span></span> Works
       </h2>
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", maxWidth: 800, width: "100%" }}>
         {[
