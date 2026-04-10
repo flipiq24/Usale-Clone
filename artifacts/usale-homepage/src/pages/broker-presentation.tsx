@@ -1424,14 +1424,10 @@ export default function BrokerPresentation() {
     preloadTTS(SCRIPTS[2]);
   }, []);
 
-  const initialPlayDone = useRef(false);
   useEffect(() => {
     if (!started) return;
     if (audioOn) {
-      if (initialPlayDone.current || slide > 0) {
-        playTTS(SCRIPTS[slide]);
-      }
-      initialPlayDone.current = true;
+      playTTS(SCRIPTS[slide]);
       for (let i = 1; i <= 3; i++) {
         if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
       }
@@ -1578,7 +1574,7 @@ export default function BrokerPresentation() {
           <div style={{ fontSize: 16, color: "#6c757d" }}>{BROKER.brokerage}</div>
         </div>
         <button
-          onClick={() => { setStarted(true); playTTS(SCRIPTS[0]); }}
+          onClick={() => setStarted(true)}
           style={{
             padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)",
             color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700,
