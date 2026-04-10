@@ -1692,6 +1692,9 @@ export default function BrokerPresentation() {
       </div>
 
       <div style={{ maxWidth: 1400, margin: "0 auto", padding: "88px 40px 110px" }}>
+        <div style={{ position: "fixed", top: 60, left: "50%", transform: "translateX(-50%)", zIndex: 9999, background: "#ff0000", color: "#fff", padding: "6px 20px", borderRadius: 8, fontSize: 16, fontWeight: 900 }}>
+          DEBUG: Slide {slide + 1} of {total} | sections.length={sections.length}
+        </div>
         {sections[slide]}
       </div>
 
