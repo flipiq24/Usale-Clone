@@ -3,6 +3,10 @@ import { useParams } from "wouter";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
 import TONY_PHOTO from "@assets/image_1774069888966.png";
 
+function BrandName() {
+  return <span><span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#2C3E50" }}>Sale</span></span>;
+}
+
 interface BrokerData {
   name: string;
   brokerage: string;
@@ -129,14 +133,14 @@ const RELATIONSHIPS_DATA: RelationshipRow[] = [
 
 function getScripts(broker: BrokerData) {
   return [
-    `${broker.name} — Tony Diaz, founder of YOU SALE. Quick background — thirty-two years in the business, over eleven hundred flips, and I'm also the co-creator of Cloud CMA's iBuyer Connect. But I'm not here to talk about me. I'm here because we pulled all your transactions with investors — and what we found is impressive. We put together a detailed report showing what your brokerage has already accomplished with investor transactions, and how YOU SALE can help you do even more. This takes about five minutes. Let's get into it.`,
+    `${broker.name} — Tony Diaz, founder of Yoo-Sale. Quick background — thirty-two years in the business, over eleven hundred flips, and I'm also the co-creator of Cloud CMA's iBuyer Connect. But I'm not here to talk about me. I'm here because we pulled all your transactions with investors — and what we found is impressive. We put together a detailed report showing what your brokerage has already accomplished with investor transactions, and how Yoo-Sale can help you do even more. This takes about five minutes. Let's get into it.`,
     `Here's what we know about ${broker.brokerage}. Eighteen thousand eight hundred and thirty-four total transactions to investors. Average purchase price — about two million. Average resale — two point two million. Your last property sourced was thirteen twenty-one Gates Avenue in Manhattan Beach — Tracy B Do, two point four five million, December twenty twenty-four, buyer was Fairtrade LLC. You've sold two thousand five hundred and twelve listings FOR investors and two thousand eighty-eight listings TO investors. Click the drop-downs and you'll see exactly who — Opendoor, Zillow, D.R. Horton, Lennar — they're all in there. Nine hundred thirty-five resales to investors. Eighty-nine percent purchase-to-resale ratio. Four thousand five hundred and seventy-three unique investor relationships — that is a powerful network, ${broker.name}. And fifty-six investor-friendly agents. Tracy B Do leading with two hundred three transactions, Sally Forster Jones at one hundred thirty-eight, Stephanie Younger at one hundred nineteen. Now — what does all of this actually mean in dollars? Because that's where it gets interesting.`,
     `At a 2% average commission across two thousand eighty-eight transactions — your office has generated over $82.7 million in investor commissions. That's real money. Now here's the question — what if you could increase that by 20%? Not by working harder. Not by hiring more agents. Just by giving your agents access to a marketplace that puts more active investor buyers in front of their deals. That's an additional $16.5 million. And it costs you nothing. Zero. Let me show you how.`,
-    `YOU SALE is a frictionless, off-market marketplace. Think of it as an investor-focused MLS. No membership fees — ever. No transaction fees — ever. We don't compete with the MLS. We complement it. We simply connect your investor-friendly agents with every active, verified investor in the market. Full transparency — your agents can see track records, choose their buyer, and transact with confidence. That's it. It's really that simple, ${broker.name}.`,
-    `Here's how your agents actually use it. Scenario one — your agent can't secure a listing. Instead of walking away empty-handed, they invite the seller to YOU SALE. When any investor makes an offer and the seller accepts, the buyer pays your agent 2.5%. No listing needed. No contract needed. Your agent gets paid simply by inviting the seller to YOU SALE. Scenario two — your agent HAS a listing. They post it on YOU SALE alongside the MLS. Hundreds of local investors see it immediately. Your agent picks the best buyer based on their track record and how they transact, double-ends the deal. No extra fees. No cost. Scenario three — your agent invites an investor buyer to the marketplace. When that buyer goes under contract on ANY property — your agent gets notified and can request to list the property after it's fixed. Three ways to win. Zero downside.`,
-    `This works because everyone gets what they need. YOU SALE needs inventory. You need transactions. Investors need access to properties in your market — and we deliver it. Everybody wins.`,
-    `So how does YOU SALE make money? We don't charge you or your agents anything. We don't monetize the marketplace. Here's what happens — your agent walks into a seller appointment with a real, data-backed cash offer from one of our local investors. That gets the seller's attention. Most of the time, the seller says no to the cash offer — and our data-driven offers help move the seller away from the cash offer over to a listing. When the seller DOES accept the cash offer, our preferred agent network that provides the instant offer pays us a small share of the transaction. That's it. Your agent gets a FREE white-label site with tools that help them win more listings — or even get paid without a listing.`,
-    `${broker.name} — you already have the investor-friendly agents and the transaction history. We have the active investor buyer network and the technology that creates transparency, efficiency, and trust. Put those together and you have an edge. If you're ready to see this in action — schedule a demo. Takes fifteen minutes. We'll walk you through the platform, show you your agents' data live, and show you exactly how that $16.5 million opportunity works. You can also download the YOU SALE Broker Playbook. It's got everything we covered today plus recruiting scripts to help your brokerage grow your investor-friendly agent team, income projections, and a 90-day rollout plan. Either way, ${broker.name} — this is yours. We're not selling anything. No pitch. Just a better way to do what you're already doing. Thanks for your time.`,
+    `Yoo-Sale is a frictionless, off-market marketplace. Think of it as an investor-focused MLS. No membership fees — ever. No transaction fees — ever. We don't compete with the MLS. We complement it. We simply connect your investor-friendly agents with every active, verified investor in the market. Full transparency — your agents can see track records, choose their buyer, and transact with confidence. That's it. It's really that simple, ${broker.name}.`,
+    `Here's how your agents actually use it. Scenario one — your agent can't secure a listing. Instead of walking away empty-handed, they invite the seller to Yoo-Sale. When any investor makes an offer and the seller accepts, the buyer pays your agent 2.5%. No listing needed. No contract needed. Your agent gets paid simply by inviting the seller to Yoo-Sale. Scenario two — your agent HAS a listing. They post it on Yoo-Sale alongside the MLS. Hundreds of local investors see it immediately. Your agent picks the best buyer based on their track record and how they transact, double-ends the deal. No extra fees. No cost. Scenario three — your agent invites an investor buyer to the marketplace. When that buyer goes under contract on ANY property — your agent gets notified and can request to list the property after it's fixed. Three ways to win. Zero downside.`,
+    `This works because everyone gets what they need. Yoo-Sale needs inventory. You need transactions. Investors need access to properties in your market — and we deliver it. Everybody wins.`,
+    `So how does Yoo-Sale make money? We don't charge you or your agents anything. We don't monetize the marketplace. Here's what happens — your agent walks into a seller appointment with a real, data-backed cash offer from one of our local investors. That gets the seller's attention. Most of the time, the seller says no to the cash offer — and our data-driven offers help move the seller away from the cash offer over to a listing. When the seller DOES accept the cash offer, our preferred agent network that provides the instant offer pays us a small share of the transaction. That's it. Your agent gets a FREE white-label site with tools that help them win more listings — or even get paid without a listing.`,
+    `${broker.name} — you already have the investor-friendly agents and the transaction history. We have the active investor buyer network and the technology that creates transparency, efficiency, and trust. Put those together and you have an edge. If you're ready to see this in action — schedule a demo. Takes fifteen minutes. We'll walk you through the platform, show you your agents' data live, and show you exactly how that $16.5 million opportunity works. You can also download the Yoo-Sale Broker Playbook. It's got everything we covered today plus recruiting scripts to help your brokerage grow your investor-friendly agent team, income projections, and a 90-day rollout plan. Either way, ${broker.name} — this is yours. We're not selling anything. No pitch. Just a better way to do what you're already doing. Thanks for your time.`,
   ];
 }
 
@@ -565,7 +569,7 @@ function SectionValueProp({ hl }: { hl: number }) {
 
       <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
         <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
-        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to USale and how it works.</div>
+        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to <BrandName /> and how it works.</div>
       </div>
     </div>
   );
@@ -648,8 +652,8 @@ function SectionWorkflow({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", maxWidth: 800, width: "100%" }}>
         {[
-          { icon: "1", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A" },
-          { icon: "2", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50" },
+          { icon: "1", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A", hasUsale: true },
+          { icon: "2", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50", hasUsale: true },
           { icon: "3", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#1e8449" },
         ].map((item, i) => (
           <div key={i} style={{
@@ -799,7 +803,7 @@ function SectionCTA({ hl }: { hl: number }) {
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download the USale Broker Playbook
+          Download the <BrandName /> Broker Playbook
         </a>
       </div>
 
@@ -812,7 +816,7 @@ function SectionCTA({ hl }: { hl: number }) {
           <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 4, textAlign: "left" }}>
             <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, USale &amp; FlipIQ</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, <BrandName /> &amp; FlipIQ</div>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
               <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
               <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
@@ -902,6 +906,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           </div>
         )}
         <YesNo label="Do you see value in what USale can offer?" value={seeValue} onChange={setSeeValue} />
+
       </div>
 
       <div style={{ ...hVisible(hl, 2) }}>
@@ -1027,7 +1032,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>Download the USale Broker Playbook</div>
+          <div style={{ fontSize: 15, fontWeight: 700, color: "#fff" }}>Download the <span style={{ color: "#fff" }}>USale</span> Broker Playbook</div>
           <div style={{ fontSize: 12, color: "#ffffffAA", marginTop: 2 }}>Recruiting scripts, 90-day plan, income channels & more</div>
         </div>
       </a>
@@ -1044,7 +1049,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
           }} />
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, USale &amp; Flip IQ</div>
+            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder, <BrandName /> &amp; Flip IQ</div>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 4 }}>
               <a href="tel:714-581-7805" style={{
                 fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
@@ -1714,9 +1719,9 @@ export default function BrokerPresentation() {
             {chatMessages.length === 0 && (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "#adb5bd" }}>
                 <div style={{ fontSize: 16, fontWeight: 700, color: "#6c757d", marginBottom: 8 }}>Ask a Question</div>
-                <p style={{ fontSize: 13, lineHeight: 1.5, margin: 0 }}>Ask questions about the broker data, USale's platform, or anything in this presentation.</p>
+                <p style={{ fontSize: 13, lineHeight: 1.5, margin: 0 }}>Ask questions about the broker data, <BrandName />'s platform, or anything in this presentation.</p>
                 <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 6 }}>
-                  {["What does USale offer brokers?", "Tell me about the investor data", "How does the workflow work?"].map((q, i) => (
+                  {["What does USale offer brokers?", "Tell me about the investor data", "How does the workflow work?"].map((q, i) =>  (
                     <button key={i} onClick={() => sendChat(q)} style={{
                       padding: "8px 12px", background: "#f8f9fa", border: "1px solid #eee", borderRadius: 8,
                       fontSize: 12, color: "#2C3E50", cursor: "pointer", textAlign: "left",
