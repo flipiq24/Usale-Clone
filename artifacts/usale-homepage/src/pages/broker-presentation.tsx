@@ -582,13 +582,17 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
       </p>
       <div style={{ display: "flex", gap: 0, flexWrap: "wrap", justifyContent: "center", maxWidth: 700, width: "100%", ...hVisible(hl, 1) }}>
         {[
-          { icon: "$0", label: "No Membership Fees" },
-          { icon: "$0", label: "No Transaction Fees" },
-          { icon: "+", label: "No Competition with MLS" },
-          { icon: "✓", label: "Full Transparency" },
+          { label: "No Membership Fees" },
+          { label: "No Transaction Fees" },
+          { label: "No Competition with MLS" },
+          { label: "Full Transparency" },
         ].map((item, i) => (
           <div key={i} style={{ flex: "1 1 140px", padding: "28px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-            <div style={{ fontSize: 32, lineHeight: 1, width: 56, height: 56, borderRadius: "50%", background: "#FFF5F0", color: "#E8571A", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800 }}>{item.icon}</div>
+            <div style={{ width: 56, height: 56, borderRadius: "50%", background: "#FFF5F0", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8571A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
             <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", lineHeight: 1.3 }}>{item.label}</div>
           </div>
         ))}
