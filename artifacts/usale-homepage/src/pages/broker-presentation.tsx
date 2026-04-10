@@ -582,13 +582,13 @@ function SectionWhyDifferent({ hl }: { hl: number }) {
       </p>
       <div style={{ display: "flex", gap: 0, flexWrap: "wrap", justifyContent: "center", maxWidth: 700, width: "100%", ...hVisible(hl, 1) }}>
         {[
-          { icon: "🆓", label: "No Membership Fees" },
-          { icon: "💸", label: "No Transaction Fees" },
-          { icon: "🤝", label: "No Competition with MLS" },
-          { icon: "🔍", label: "Full Transparency" },
+          { icon: "$0", label: "No Membership Fees" },
+          { icon: "$0", label: "No Transaction Fees" },
+          { icon: "+", label: "No Competition with MLS" },
+          { icon: "✓", label: "Full Transparency" },
         ].map((item, i) => (
           <div key={i} style={{ flex: "1 1 140px", padding: "28px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-            <div style={{ fontSize: 44, lineHeight: 1 }}>{item.icon}</div>
+            <div style={{ fontSize: 32, lineHeight: 1, width: 56, height: 56, borderRadius: "50%", background: "#FFF5F0", color: "#E8571A", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800 }}>{item.icon}</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", lineHeight: 1.3 }}>{item.label}</div>
           </div>
         ))}
@@ -644,17 +644,17 @@ function SectionWorkflow({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", maxWidth: 800, width: "100%" }}>
         {[
-          { icon: "🏠", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A" },
-          { icon: "📋", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50" },
-          { icon: "🔔", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#1e8449" },
+          { icon: "1", title: "No Listing?", subtitle: "Invite to USale. Buyer pays your agent 2.5%.", color: "#E8571A" },
+          { icon: "2", title: "New Listing?", subtitle: "Post on USale + MLS. Pick the best buyer. Double-end.", color: "#2C3E50" },
+          { icon: "3", title: "Buyer Under Contract?", subtitle: "Your agent gets notified. Earns the re-list.", color: "#1e8449" },
         ].map((item, i) => (
           <div key={i} style={{
             flex: "1 1 220px", maxWidth: 240, display: "flex", flexDirection: "column", alignItems: "center",
             textAlign: "center", gap: 12, ...hVisible(hl, i)
           }}>
             <div style={{
-              width: 90, height: 90, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: 44, background: `${item.color}10`, border: `2px solid ${item.color}30`,
+              width: 64, height: 64, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: 28, fontWeight: 800, background: item.color, color: "#fff",
             }}>{item.icon}</div>
             <div style={{ fontSize: 20, fontWeight: 700, color: item.color }}>{item.title}</div>
             <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.5 }}>{item.subtitle}</div>
@@ -700,15 +700,15 @@ function SectionEverybodyWins({ hl }: { hl: number }) {
       </h2>
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", justifyContent: "center", ...hVisible(hl, 1) }}>
         {[
-          { emoji: "🏠", who: "The Market", need: "Needs inventory", gradient: "linear-gradient(145deg, #f8f9fa, #e9ecef)" },
-          { emoji: "👤", who: "You", need: "Need transactions", gradient: "linear-gradient(145deg, #FFF5F0, #FFE8DB)" },
-          { emoji: "💰", who: "Investors", need: "Want first opportunities", gradient: "linear-gradient(145deg, #f0fdf4, #dcfce7)" },
+          { letter: "M", who: "The Market", need: "Needs inventory", gradient: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#6c757d" },
+          { letter: "B", who: "You", need: "Need transactions", gradient: "linear-gradient(145deg, #FFF5F0, #FFE8DB)", accent: "#E8571A" },
+          { letter: "I", who: "Investors", need: "Want first opportunities", gradient: "linear-gradient(145deg, #f0fdf4, #dcfce7)", accent: "#1e8449" },
         ].map((card, i) => (
           <div key={i} style={{
             flex: "1 1 200px", maxWidth: 260, padding: "40px 28px", background: card.gradient,
             borderRadius: 20, textAlign: "center", position: "relative", overflow: "hidden",
           }}>
-            <div style={{ fontSize: 56, marginBottom: 16 }}>{card.emoji}</div>
+            <div style={{ width: 64, height: 64, borderRadius: "50%", background: card.accent, color: "#fff", fontSize: 28, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>{card.letter}</div>
             <div style={{ fontSize: 20, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>{card.who}</div>
             <div style={{ fontSize: 15, color: "#6c757d", lineHeight: 1.5 }}>{card.need}</div>
           </div>
@@ -736,9 +736,9 @@ function SectionHowWePay({ hl }: { hl: number }) {
       </p>
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center", alignItems: "center", ...hVisible(hl, 1) }}>
         {[
-          { icon: "🏠", label: "Your agent brings a seller", bg: "linear-gradient(145deg, #f8f9fa, #e9ecef)" },
-          { icon: "💰", label: "Investor makes a cash offer", bg: "linear-gradient(145deg, #FFF5F0, #FFE8DB)" },
-          { icon: "🤝", label: "If they buy, we take a small share", bg: "linear-gradient(145deg, #f0fdf4, #dcfce7)" },
+          { icon: "1", label: "Your agent brings a seller", bg: "linear-gradient(145deg, #f8f9fa, #e9ecef)", accent: "#6c757d" },
+          { icon: "2", label: "Investor makes a cash offer", bg: "linear-gradient(145deg, #FFF5F0, #FFE8DB)", accent: "#E8571A" },
+          { icon: "3", label: "If they buy, we take a small share", bg: "linear-gradient(145deg, #f0fdf4, #dcfce7)", accent: "#1e8449" },
         ].map((step, i) => (
           <React.Fragment key={i}>
             {i > 0 && <div style={{ fontSize: 28, color: "#E8571A", fontWeight: 700 }}>→</div>}
@@ -746,7 +746,7 @@ function SectionHowWePay({ hl }: { hl: number }) {
               flex: "0 0 180px", padding: "28px 16px", background: step.bg,
               borderRadius: 18, textAlign: "center",
             }}>
-              <div style={{ fontSize: 40, marginBottom: 10 }}>{step.icon}</div>
+              <div style={{ width: 48, height: 48, borderRadius: "50%", background: step.accent, color: "#fff", fontSize: 22, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px" }}>{step.icon}</div>
               <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", lineHeight: 1.4 }}>{step.label}</div>
             </div>
           </React.Fragment>
@@ -1045,11 +1045,11 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
               <a href="tel:714-581-7805" style={{
                 fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none",
                 display: "inline-flex", alignItems: "center", gap: 6,
-              }}>📱 714-581-7805</a>
+              }}>714-581-7805</a>
               <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{
                 fontSize: 14, fontWeight: 600, color: "#0077B5", textDecoration: "none",
                 display: "inline-flex", alignItems: "center", gap: 6,
-              }}>🔗 LinkedIn</a>
+              }}>LinkedIn</a>
             </div>
           </div>
         </div>
@@ -1069,7 +1069,7 @@ function SectionSurvey({ hl, contactId, onAskTony }: { hl: number; contactId?: n
               position: "relative", overflow: "hidden",
             }}
           >
-            <div style={{ fontSize: 36 }}>💬</div>
+            <div style={{ fontSize: 20, fontWeight: 800, opacity: 0.9 }}>Q&A</div>
             <div style={{ fontSize: 20, fontWeight: 800, lineHeight: 1.2, textAlign: "center" }}>Ask Me Any<br/>Question Now</div>
             <div style={{ fontSize: 13, opacity: 0.85, textAlign: "center" }}>Get instant answers from Tony's AI</div>
             <div className="ask-tony-pulse" />
@@ -1709,7 +1709,7 @@ export default function BrokerPresentation() {
           <div style={{ flex: 1, overflowY: "auto", padding: "12px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
             {chatMessages.length === 0 && (
               <div style={{ textAlign: "center", padding: "40px 20px", color: "#adb5bd" }}>
-                <div style={{ fontSize: 32, marginBottom: 8 }}>💬</div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: "#6c757d", marginBottom: 8 }}>Ask a Question</div>
                 <p style={{ fontSize: 13, lineHeight: 1.5, margin: 0 }}>Ask questions about the broker data, USale's platform, or anything in this presentation.</p>
                 <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 6 }}>
                   {["What does USale offer brokers?", "Tell me about the investor data", "How does the workflow work?"].map((q, i) => (
@@ -1753,7 +1753,7 @@ export default function BrokerPresentation() {
               }}
               title={isRecording ? "Stop recording" : "Voice input"}
             >
-              🎤
+              MIC
             </button>
             <input
               ref={chatInputRef}
