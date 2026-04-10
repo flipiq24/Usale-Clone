@@ -35,7 +35,7 @@ const OFFICE_METRICS: OfficeMetric[] = [
   { label: "Double-end Trans. %", value: "0.0%" },
   { label: "Avg. Purchase", value: "$1.98M" },
   { label: "Avg. Resale", value: "$2.23M" },
-  { label: "Last Property Sourced", value: "1321 GATES AVE, MANHATTAN BEACH", subtext: "Agent: Tracy B Do · $2.45M · 12/2024 · Buyer: Fairtrade, LLC" },
+  { label: "Last Property Sourced to Investor", value: "1321 GATES AVE, MANHATTAN BEACH", subtext: "Agent: Tracy B Do · $2.45M · 12/2024 · Buyer: Fairtrade, LLC" },
   { label: "Listings Sold for Investors", value: "2,512", expandKey: "sold-for" },
   { label: "Listings Sold to Investors", value: "2,088", expandKey: "sold-to" },
   { label: "Listings Re-Sold to Investors", value: "935" },
