@@ -1088,20 +1088,17 @@ interface ChatMessage {
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
 
 let globalAudioCtx: AudioContext | null = null;
+function getAudioCtx(): AudioContext {
+  if (!globalAudioCtx) globalAudioCtx = new AudioContext();
+  return globalAudioCtx;
+}
 function unlockAudioContext() {
-  if (!globalAudioCtx) {
-    globalAudioCtx = new AudioContext();
-  }
-  if (globalAudioCtx.state === "suspended") {
-    globalAudioCtx.resume().catch(() => {});
-  }
-  const silent = new Audio("data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=");
-  silent.volume = 0;
-  silent.play().catch(() => {});
+  const ctx = getAudioCtx();
+  if (ctx.state === "suspended") ctx.resume().catch(() => {});
 }
 
 function useAudioNarration(onEnded?: () => void) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const onEndedRef = useRef(onEnded);
   onEndedRef.current = onEnded;
@@ -1110,19 +1107,22 @@ function useAudioNarration(onEnded?: () => void) {
   const progressRef = useRef(0);
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
-  const preloadCache = useRef<Map<string, { audio: HTMLAudioElement; url: string }>>(new Map());
+  const startTimeRef = useRef(0);
+  const durationRef = useRef(0);
+  const preloadCache = useRef<Map<string, ArrayBuffer>>(new Map());
   const preloadingKeys = useRef<Set<string>>(new Set());
-  const [preloadReady, setPreloadReady] = useState(false);
 
   const stopProgressTracker = useCallback(() => {
     if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
   }, []);
 
-  const startProgressTracker = useCallback((audio: HTMLAudioElement) => {
+  const startProgressTracker = useCallback(() => {
     stopProgressTracker();
+    const ctx = getAudioCtx();
     const tick = () => {
-      if (audio.duration && audio.duration > 0 && !isNaN(audio.duration)) {
-        const p = audio.currentTime / audio.duration;
+      if (durationRef.current > 0) {
+        const elapsed = ctx.currentTime - startTimeRef.current;
+        const p = Math.min(elapsed / durationRef.current, 1);
         progressRef.current = p;
         setProgress(p);
       }
@@ -1134,12 +1134,9 @@ function useAudioNarration(onEnded?: () => void) {
   const stop = useCallback(() => {
     if (abortRef.current) abortRef.current.abort();
     stopProgressTracker();
-    if (audioRef.current) {
-      audioRef.current.onended = null;
-      audioRef.current.onerror = null;
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current = null;
+    if (sourceRef.current) {
+      try { sourceRef.current.onended = null; sourceRef.current.stop(); } catch {}
+      sourceRef.current = null;
     }
     setIsPlaying(false);
     setIsLoading(false);
@@ -1147,7 +1144,7 @@ function useAudioNarration(onEnded?: () => void) {
     progressRef.current = 0;
   }, [stopProgressTracker]);
 
-  const preload = useCallback(async (text: string, markReady?: boolean) => {
+  const preload = useCallback(async (text: string) => {
     if (preloadCache.current.has(text) || preloadingKeys.current.has(text)) return;
     preloadingKeys.current.add(text);
     try {
@@ -1157,18 +1154,8 @@ function useAudioNarration(onEnded?: () => void) {
         body: JSON.stringify({ text }),
       });
       if (resp.ok) {
-        const blob = await resp.blob();
-        const url = URL.createObjectURL(blob);
-        const audio = new Audio(url);
-        audio.preload = "auto";
-        await new Promise<void>((resolve) => {
-          audio.oncanplaythrough = () => resolve();
-          audio.onerror = () => resolve();
-          audio.load();
-          setTimeout(resolve, 3000);
-        });
-        preloadCache.current.set(text, { audio, url });
-        if (markReady) setPreloadReady(true);
+        const buf = await resp.arrayBuffer();
+        preloadCache.current.set(text, buf);
       }
     } catch { /* silent */ }
     preloadingKeys.current.delete(text);
@@ -1182,12 +1169,10 @@ function useAudioNarration(onEnded?: () => void) {
     setProgress(0);
     progressRef.current = 0;
     try {
-      let audio: HTMLAudioElement;
-      let url: string;
+      let arrayBuf: ArrayBuffer;
       const cached = preloadCache.current.get(text);
       if (cached) {
-        audio = cached.audio;
-        url = cached.url;
+        arrayBuf = cached;
         preloadCache.current.delete(text);
       } else {
         const resp = await fetch(`${API_BASE}/ai/tts`, {
@@ -1197,54 +1182,39 @@ function useAudioNarration(onEnded?: () => void) {
           signal: controller.signal,
         });
         if (!resp.ok) throw new Error("TTS failed");
-        const blob = await resp.blob();
-        if (controller.signal.aborted) return;
-        url = URL.createObjectURL(blob);
-        audio = new Audio(url);
+        arrayBuf = await resp.arrayBuffer();
       }
       if (controller.signal.aborted) return;
-      audioRef.current = audio;
-      audio.onended = () => {
+      const ctx = getAudioCtx();
+      if (ctx.state === "suspended") await ctx.resume();
+      const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+      if (controller.signal.aborted) return;
+      const source = ctx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(ctx.destination);
+      sourceRef.current = source;
+      durationRef.current = audioBuffer.duration;
+      startTimeRef.current = ctx.currentTime;
+      source.onended = () => {
         stopProgressTracker();
         setIsPlaying(false);
         setIsLoading(false);
         setProgress(1);
         progressRef.current = 1;
-        URL.revokeObjectURL(url);
+        sourceRef.current = null;
         onEndedRef.current?.();
       };
-      audio.onerror = (e) => {
-        console.error("Audio playback error:", e);
-        stopProgressTracker();
-        setIsPlaying(false);
-        setIsLoading(false);
-        URL.revokeObjectURL(url);
-      };
-      try {
-        await audio.play();
-      } catch (playErr) {
-        console.warn("Autoplay blocked, retrying:", playErr);
-        try {
-          if (globalAudioCtx && globalAudioCtx.state === "suspended") {
-            await globalAudioCtx.resume();
-          }
-          await audio.play();
-        } catch (retryErr) {
-          console.error("Audio play retry also failed:", retryErr);
-          stop();
-          return;
-        }
-      }
+      source.start(0);
       setIsLoading(false);
       setIsPlaying(true);
-      startProgressTracker(audio);
+      startProgressTracker();
     } catch (err) {
       console.error("TTS play failed:", err);
       stop();
     }
   }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying, isLoading, progress, preload, preloadReady };
+  return { play, stop, isPlaying, isLoading, progress, preload };
 }
 
 function getWsBase(): string {
