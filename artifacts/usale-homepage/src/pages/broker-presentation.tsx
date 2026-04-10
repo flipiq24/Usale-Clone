@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { useParams } from "wouter";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
 import TONY_PHOTO from "@assets/image_1774069888966.png";
@@ -151,9 +151,33 @@ const SECTION_TITLES = [
   "Your Advantage",
 ];
 
-const HIGHLIGHT_CUES: [number, number][][] = [
+const DATA_SLIDE_MARKERS = [
+  "investor-friendly data",
+  "eighteen thousand",
+  "double-end rate",
+  "average purchase price",
+  "average resale",
+  "last property sourced",
+  "five hundred and twelve",
+  "eighty-eight listings",
+  "nine hundred and thirty-five",
+  "purchase-to-resale ratio",
+  "four thousand five hundred",
+  "fifty-six investor-friendly",
+];
+
+function computeTextCues(text: string, markers: string[]): [number, number][] {
+  const len = text.length;
+  return markers.map((marker, i) => {
+    const pos = text.toLowerCase().indexOf(marker.toLowerCase());
+    const pct = pos >= 0 ? Math.max(0, pos / len) : i / markers.length;
+    return [pct, i] as [number, number];
+  });
+}
+
+const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.09, 1], [0.3, 2]],
-  [[0, 0], [0.04, 1], [0.10, 2], [0.13, 3], [0.17, 4], [0.21, 5], [0.35, 6], [0.40, 7], [0.53, 8], [0.63, 9], [0.72, 10], [0.79, 11]],
+  [],
   [[0, 0], [0.07, 1], [0.29, 2], [0.66, 3], [0.79, 4]],
   [[0.07, 0], [0.27, 1], [0.31, 2], [0.5, 3]],
   [[0.03, 0], [0.39, 1], [0.57, 2]],
@@ -162,7 +186,13 @@ const HIGHLIGHT_CUES: [number, number][][] = [
   [[0.04, 0], [0.3, 1], [0.6, 2]],
 ];
 
-const HIGHLIGHT_COUNTS = HIGHLIGHT_CUES.map(cues => cues[cues.length - 1][1] + 1);
+function getHighlightCues(scripts: string[]): [number, number][][] {
+  const cues = [...STATIC_HIGHLIGHT_CUES];
+  cues[1] = computeTextCues(scripts[1], DATA_SLIDE_MARKERS);
+  return cues;
+}
+
+const STATIC_HIGHLIGHT_COUNTS = [3, 12, 5, 4, 3, 2, 3, 3];
 
 function hVisible(step: number, index: number): React.CSSProperties {
   const active = index <= step;
@@ -287,10 +317,10 @@ const EXPAND_AT_STEP: Record<number, string> = {
   11: "agents",
 };
 
-function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void; isActive: boolean }) {
+function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive, narrationDone }: { hl: number; isNarrating: boolean; expanded: string | null; setExpanded: (k: string | null) => void; isActive: boolean; narrationDone?: boolean }) {
   const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [timerStep, setTimerStep] = useState(-1);
-  const timerActive = isActive && !isNarrating;
+  const timerActive = isActive && !isNarrating && !narrationDone;
 
   useEffect(() => {
     if (!timerActive) { setTimerStep(-1); return; }
@@ -309,8 +339,8 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive }: 
     return () => clearTimeout(timeout);
   }, [timerActive]);
 
-  const effectiveHl = timerActive ? timerStep : hl;
-  const effectiveNarrating = isNarrating || timerActive;
+  const effectiveHl = narrationDone ? OFFICE_METRICS.length : (timerActive ? timerStep : hl);
+  const effectiveNarrating = narrationDone ? false : (isNarrating || timerActive);
 
   useEffect(() => {
     if (!effectiveNarrating) return;
@@ -1289,6 +1319,8 @@ export default function BrokerPresentation() {
   const startTimeRef = useRef<number>(Date.now());
   const SCRIPTS = getScripts(brokerData);
   const total = SCRIPTS.length;
+  const HIGHLIGHT_CUES = useMemo(() => getHighlightCues(SCRIPTS), [SCRIPTS[1]]);
+  const HIGHLIGHT_COUNTS = STATIC_HIGHLIGHT_COUNTS;
 
   useEffect(() => {
     const slug = params?.slug;
@@ -1396,9 +1428,14 @@ export default function BrokerPresentation() {
   }, [slide, audioOn, started]);
 
   const timerShouldRun = !audioOn || (!isTTSPlaying && !isTTSLoading);
+  const slideAlreadyNarrated = narratedSlidesRef.current.has(slide);
 
   useEffect(() => {
     if (!timerShouldRun) { setSilentStep(0); return; }
+    if (narratedSlidesRef.current.has(slide)) {
+      setSilentStep(HIGHLIGHT_COUNTS[slide] - 1);
+      return;
+    }
     setSilentStep(0);
     const maxSteps = HIGHLIGHT_COUNTS[slide];
     let step = 0;
@@ -1505,7 +1542,7 @@ export default function BrokerPresentation() {
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={isTTSPlaying && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={timerShouldRun && slide === 1} />,
+    <SectionDataCards key={1} hl={hlStep(1)} isNarrating={isTTSPlaying && slide === 1} expanded={expanded} setExpanded={setExpanded} isActive={timerShouldRun && slide === 1} narrationDone={narratedSlidesRef.current.has(1)} />,
     <SectionValueProp key={2} hl={hlStep(2)} />,
     <SectionWhyDifferent key={3} hl={hlStep(3)} />,
     <SectionWorkflow key={4} hl={hlStep(4)} />,
