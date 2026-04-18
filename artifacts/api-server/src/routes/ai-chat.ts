@@ -5,7 +5,7 @@ const router: IRouter = Router();
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
-const MODEL = "claude-opus-4-5";
+const MODEL = "claude-haiku-4-5";
 
 const SYSTEM_PROMPT = `You are a helpful AI assistant for USale.com, a frictionless real estate marketplace that connects investors, agents, and service providers. You are currently assisting during a broker presentation. You have deep knowledge about the USale platform, its value proposition, and the broker's data being presented. Keep responses concise and professional. When asked about broker data, reference the context provided. Always emphasize USale's key differentiators: no memberships, no transaction fees, off-market deals, and transparent investor-agent connections.`;
 
