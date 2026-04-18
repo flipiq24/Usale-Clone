@@ -161,7 +161,7 @@ function getScripts(inv: InvestorData) {
   const n = inv.legalName;
   return [
     `Hello ${n} — my name is Tony Diaz. I've been in the buy-fix-and-sell business for thirty-two years, with over eleven hundred flips. Along the way I became obsessed with data and technology, and I want to show you a little bit about some of the systems we created. Let's dive in.`,
-    `${n} — your investor rating is thirty-two transactions. Average purchase price seven hundred forty-eight thousand. Average resale nine hundred eighty-two thousand. Purchase-to-future-value seventy-seven percent — healthy leverage. List to sold ratio ninety-seven percent. Average purchase to market three hundred seventy-eight days, purchase to resale four fifty days. Acquisition source — you're buying the majority of your properties off market. Now let me walk you through the relationships behind these numbers. First — your related entities. You have ten of them — INVESTSOCAL LLC under 1 VENTURE with eleven transactions, the same name under PO BOX 80518 with nineteen, plus CHERRY VILLAGE INLAND, INLAND SENIOR DEVELOPMENT, ALDEA FOOTHILL, and a few others. This is tax data, not a hundred percent accurate, but it paints a complete picture. Next — your twenty-two agent relationships. JOSE DIAZ is your primary — six transactions with you, fifty-seven total, doing the majority of your resales. Probably one of your principals or partners. Kimberly Olivo — six resale listings. Strong network across Coldwell Banker, eXp, RE/MAX, and Keller Williams. Now your lenders. Five of them. KIAVI FUNDING with seventeen loans averaging eight hundred forty-seven thousand. LENDINGHOME with ten more. QWAN, plus First American. Total thirty-one loans. We partner with national hard-money lenders. And finally — title companies. Twenty-seven of them, but you clearly prefer LAWYERS TITLE with ten transactions, then Chicago Title, Ticor, Stewart. We know every single agent, lender, and title company you have ever touched.`,
+    `${n} — let's look at the data. Here are your related entities. The one you use most is INVESTSOCAL LLC under PO Box 80518 — nineteen transactions, average purchase eight hundred thirty-six thousand, resale a million seventy-six, list-to-sold a hundred and two percent. That's your workhorse. Now here are the agents you're working with. Jose Diaz is your guy — six deals with you, fifty-seven total, doing the majority of your resales. Probably one of your principals. You're also borrowing from Kiavi — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you prefer Lawyers Title — ten transactions, the rest spread across Chicago Title, Ticor, and Stewart. We know every agent, lender, and title company you have ever touched.`,
     `What does this mean for you? We are building the most powerful off-market place that has ever existed. Think of it as InvestorLift — without any cost. Not just other wholesalers posting properties, but Realtors looking to double-end their listings. This is also a way for you to monetize properties you do not purchase yourself. We pair this with the most powerful acquisition platform ever built — this is not a ninety-nine-dollar Privy. Privy is fantastic, but this is a true operational dream. It does absolutely everything.`,
     `${inv.name} — you already have the volume, the relationships, and the discipline. We have the marketplace, the agent network, and the technology. Put those together and you have an unfair advantage. Schedule a fifteen-minute demo and we'll walk you through everything live.`,
   ];
@@ -173,7 +173,7 @@ const STATIC_HIGHLIGHT_COUNTS = [3, 5, 4, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.18, 1], [0.36, 2], [0.6, 3], [0.82, 4]],
+  [[0, 0], [0.12, 1], [0.38, 2], [0.62, 3], [0.78, 4]],
   [[0, 0], [0.25, 1], [0.5, 2], [0.75, 3]],
   [[0, 0], [0.5, 1]],
 ];
@@ -384,14 +384,19 @@ function TitlesTable({ pulseRow }: { pulseRow?: number }) {
   );
 }
 
-const TAB_INDEX_BY_HL: Record<number, TabKey> = { 1: "entities", 2: "agents", 3: "lenders", 4: "titles" };
-
-const PULSE_ROWS: Record<TabKey, number> = { entities: 0, agents: 0, lenders: 0, titles: 0 };
+const STEP_MAP: { tab: TabKey; row: number | null }[] = [
+  { tab: "entities", row: null },
+  { tab: "entities", row: 5 },
+  { tab: "agents", row: 0 },
+  { tab: "lenders", row: 0 },
+  { tab: "titles", row: 0 },
+];
 
 function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey) => void }) {
-  const activeTab: TabKey = TAB_INDEX_BY_HL[Math.max(1, Math.min(hl, 4))];
+  const idx = Math.max(0, Math.min(hl, STEP_MAP.length - 1));
+  const { tab: activeTab, row } = STEP_MAP[idx];
+  const pulseRow = row ?? undefined;
   const activeIdx = TABS.findIndex(t => t.key === activeTab);
-  const pulseRow = PULSE_ROWS[activeTab];
   useEffect(() => { onTabChange?.(activeTab); }, [activeTab, onTabChange]);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, paddingTop: 8 }}>
