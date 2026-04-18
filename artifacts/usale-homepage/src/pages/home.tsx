@@ -62,19 +62,26 @@ export default function Home() {
                 Home
               </a>
 
-              <div className="relative" ref={dropdownRef}>
-                <a
-                  href="https://usale.replit.app/broker/bcollective-agency"
-                  className="px-4 py-2 text-sm flex items-center gap-1 transition-colors hover:underline focus:outline-none"
+              <div
+                className="relative"
+                ref={dropdownRef}
+                onMouseEnter={() => setWhoWeServeOpen(true)}
+                onMouseLeave={() => setWhoWeServeOpen(false)}
+              >
+                <button
+                  type="button"
+                  onClick={() => setWhoWeServeOpen((v) => !v)}
+                  aria-expanded={whoWeServeOpen}
+                  aria-haspopup="true"
+                  className="px-4 py-2 text-sm flex items-center gap-1 transition-colors hover:underline focus:outline-none bg-transparent border-0 cursor-pointer"
                   style={{ color: ORANGE }}
                 >
                   Who We Serve
-                </a>
+                  <span style={{ fontSize: 10, transform: whoWeServeOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▼</span>
+                </button>
                 {whoWeServeOpen && (
                   <div
                     className="absolute top-full left-0 mt-0 w-52 bg-white shadow-lg border border-gray-100 py-1 z-50"
-                    onMouseEnter={() => setWhoWeServeOpen(true)}
-                    onMouseLeave={() => setWhoWeServeOpen(false)}
                   >
                     {[
                       { label: "Brokers", href: "/broker/bcollective-agency", external: true },
