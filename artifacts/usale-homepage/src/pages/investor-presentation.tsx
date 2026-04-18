@@ -160,20 +160,20 @@ const TITLE_COMPANIES: TitleCo[] = [
 function getScripts(inv: InvestorData) {
   const n = inv.legalName;
   return [
-    `Hello ${n} — my name is Tony Diaz. I've been in the buy-fix-and-sell business for thirty-two years, with over eleven hundred flips. Along the way I became obsessed with data and technology, and I want to show you a little bit about some of the systems we created. Let's dive in.`,
-    `${n} — let's look at the data. Here are your related entities. The one you use most is INVESTSOCAL LLC under PO Box 80518 — nineteen transactions, average purchase eight hundred thirty-six thousand, resale a million seventy-six, list-to-sold a hundred and two percent. That's your workhorse. Now here are the agents you're working with. Jose Diaz is your guy — six deals with you, fifty-seven total, doing the majority of your resales. Probably one of your principals. You're also borrowing from Kiavi — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you prefer Lawyers Title — ten transactions, the rest spread across Chicago Title, Ticor, and Stewart. We know every agent, lender, and title company you have ever touched.`,
-    `What does this mean for you? We are building the most powerful off-market place that has ever existed. Think of it as InvestorLift — without any cost. Not just other wholesalers posting properties, but Realtors looking to double-end their listings. This is also a way for you to monetize properties you do not purchase yourself. We pair this with the most powerful acquisition platform ever built — this is not a ninety-nine-dollar Privy. Privy is fantastic, but this is a true operational dream. It does absolutely everything.`,
+    `Hello — my name is Tony Diaz and I'm the founder of USale. I've been in the business thirty-two years with over eleven hundred flips. You're here because we found you through data — because you're a real operator. Let me share that data with you first.`,
+    `Here are your related entities. Keep in mind — this is MLS and tax data, so it's not always a hundred percent accurate. You've done thirty-two transactions, average purchase price seven hundred forty-eight thousand, average resale nine hundred eighty-two thousand, list-to-sold ninety-seven percent. The entity you use the most is INVESTSOCAL LLC under PO Box 80518 — nineteen of those transactions came through there. Now — here are the real estate agent relationships you have. The one you use the most is Jose Diaz — six deals with you, fifty-seven total in his career, doing the majority of your resales. Probably one of your principals. These are the lenders you have. The one you use the most is Kiavi Funding — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you like to work with Lawyers Title — ten transactions there, the rest spread across Chicago Title, Ticor, and Stewart.`,
+    `Now think about what this means. We know who you are. We have your data. We know how you operate. I know your acquisition sources — you're getting most of your properties off market, but you're also buying through the MLS. That's exactly what this system was built for. We're building the most powerful off-market marketplace that has ever existed — think of it as InvestorLift, without any cost. Not just other wholesalers posting properties, but Realtors looking to double-end their listings. It's also a way for you to monetize properties you don't purchase yourself. We pair that with the most powerful acquisition platform ever built — this is not a ninety-nine-dollar Privy. Privy is fantastic, but this is a true operational dream. It does absolutely everything.`,
     `${inv.name} — you already have the volume, the relationships, and the discipline. We have the marketplace, the agent network, and the technology. Put those together and you have an unfair advantage. Schedule a fifteen-minute demo and we'll walk you through everything live.`,
   ];
 }
 
 const SECTION_TITLES = ["Welcome", "Your Data", "The Marketplace", "Next Steps"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 5, 4, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 6, 4, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.12, 1], [0.38, 2], [0.62, 3], [0.78, 4]],
+  [[0, 0], [0.14, 1], [0.28, 2], [0.42, 3], [0.68, 4], [0.86, 5]],
   [[0, 0], [0.25, 1], [0.5, 2], [0.75, 3]],
   [[0, 0], [0.5, 1]],
 ];
@@ -385,6 +385,7 @@ function TitlesTable({ pulseRow }: { pulseRow?: number }) {
 }
 
 const STEP_MAP: { tab: TabKey; row: number | null }[] = [
+  { tab: "entities", row: null },
   { tab: "entities", row: null },
   { tab: "entities", row: 5 },
   { tab: "agents", row: 0 },
