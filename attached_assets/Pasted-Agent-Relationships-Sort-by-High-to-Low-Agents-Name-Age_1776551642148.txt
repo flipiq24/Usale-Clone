@@ -1,0 +1,224 @@
+Agent Relationships:
+Sort by: 
+High to Low
+Agents Name	Agent Transactions with Investor	Company	Agents Phone	Email	Investor Agent Rating
+JOSE DIAZ	
+6
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 5
+JOSE ANTONIO DIAZ, BROKER	909-815-2224	Offers@InvestSoCal.com	
+57
+Acquisition Listing: 33
+Acquisition Buyer: 3
+Resale Listing: 21
+Kimberly Olivo	
+6
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 6
+Keller Williams Spectrum Properties	951-329-7926	kimber.olivo@gmail.com	
+16
+Acquisition Listing: 7
+Acquisition Buyer: 2
+Resale Listing: 7
+Alan Zemek	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+LRS Realty & Management Inc	N/A	alan@lrsrm.com	
+6
+Acquisition Listing: 5
+Acquisition Buyer: 1
+Resale Listing: 0
+Christopher Zoch	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Coldwell Banker Realty	949-547-1723	chriszoch@ochomes.org	
+10
+Acquisition Listing: 4
+Acquisition Buyer: 5
+Resale Listing: 1
+Dean O''Dell	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Seven Gables Real Estate	714-785-6124	dean@theodellgroup.com	
+33
+Acquisition Listing: 14
+Acquisition Buyer: 17
+Resale Listing: 2
+Dennis Cogbill	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Deluxe Realty Corporation	818-917-4169	dennis.cogbill@gmail.com	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Ed Dowd	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Ed Dowd, Broker	5628586311	edowd@sbcglobal.net	
+5
+Acquisition Listing: 3
+Acquisition Buyer: 2
+Resale Listing: 0
+Elgin Walker	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+eXp Realty of California Inc	661.347.6248	Elgin@thewalkerssoldit.com	
+6
+Acquisition Listing: 3
+Acquisition Buyer: 2
+Resale Listing: 1
+Javier Salas	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+SALAS REALTY GROUP	562-715-7709	mrjaviersalas@aol.com	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+JOE FUSCO	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+REALTY MASTERS & ASSOCIATES	909-224-7386	Joe@JoeFuscoGroup.com	
+26
+Acquisition Listing: 10
+Acquisition Buyer: 11
+Resale Listing: 5
+Mary Anne Been	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+REMAX Empower	818-266-9766	mabeen@mac.com	
+8
+Acquisition Listing: 6
+Acquisition Buyer: 2
+Resale Listing: 0
+Nilda Suarez	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Coldwell Banker Ambassador	562 279-4974	nsgreathomes@gmail.com	
+3
+Acquisition Listing: 2
+Acquisition Buyer: 1
+Resale Listing: 0
+Paul Marcelino	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+RE/MAX Estate Properties	310-871-9343	paulmarcelino@aol.com	
+6
+Acquisition Listing: 3
+Acquisition Buyer: 3
+Resale Listing: 0
+ROBYN BLAIR	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+COLDWELL BANKER REALTY	951-682-1133	riverside@robynblairrealestate.com	
+4
+Acquisition Listing: 3
+Acquisition Buyer: 1
+Resale Listing: 0
+Stephanie Garvey	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+eXp Realty of California Inc	949-424-4893	stephanie@garvey.group	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Bryan Ochse	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 1
+Media West Realty,Inc.	818-845-9700	Bryan@mediawestrealty.com	
+34
+Acquisition Listing: 28
+Acquisition Buyer: 2
+Resale Listing: 4
+Jennifer Petsu	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 1
+Keller Williams, Inc.-Aria Properties	310-945-6365	jpetsu@gmail.com	
+9
+Acquisition Listing: 5
+Acquisition Buyer: 2
+Resale Listing: 2
+Keith Jones	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Coldwell Banker Realty	714-206-6616	keith-byron@sbcglobal.net	
+2
+Acquisition Listing: 2
+Acquisition Buyer: 0
+Resale Listing: 0
+Kiani Pegues	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Keller Williams Realty	310-519-1080	kianipegues@kw.com	
+6
+Acquisition Listing: 5
+Acquisition Buyer: 1
+Resale Listing: 0
+MARY JO TER MEER	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 1
+KW Vision	909-628-9100	mtermeer@pic-invest.com	
+4
+Acquisition Listing: 2
+Acquisition Buyer: 0
+Resale Listing: 2
+Shanika Long	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+Keller Williams Realty-Los Feliz	N/A	eve.long@realestatebyevelong.com	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+Tony Fletcher	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 1
+Keller Williams Realty- YL/ AH	714-809-0003	tony@directreo.com	
+7
+Acquisition Listing: 3
+Acquisition Buyer: 2
+Resale Listing: 2

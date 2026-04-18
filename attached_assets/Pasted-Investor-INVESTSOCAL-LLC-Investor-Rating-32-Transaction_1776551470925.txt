@@ -1,0 +1,266 @@
+Investor: INVESTSOCAL LLC
+Investor Rating:
+32 Transaction
+
+Owners: 1
+
+Sold: 31
+
+Avg Purchase Price:
+$748,688
+
+Low: $215,000
+
+High: $2,400,000
+
+Avg Resale Price:
+$982,653
+
+Low: $305,000
+
+High: $2,436,000
+
+Avg Purchase-to-Future-Value
+77%
+
+Low: 59%
+
+High: 99%
+
+Avg List to Sold Price
+97%
+
+Transactions: 22
+
+Avg Purchase to Market
+378 Days
+
+Low: 155 days
+
+High: 540 Days
+
+Avg Purchase to Resale
+450 Days
+
+Low: 182 days
+
+High: 658 Days
+
+Acquisition Source
+MLS: 45
+
+Off Market: 50
+
+10 Related Entities
+22 Agent Relationships
+5 Lenders
+27 Title Companies
+Filter by investor name...
+Entities: 1 VENTURE
+
+11-
+INVESTSOCAL LLC
+Entity Rating
+11 Transactions
+
+Avg. Purchase Price
+$550,455
+
+Avg. Resale Price
+$765,000
+
+PTFV
+73%
+
+List to Sold Price
+89%
+
+Purchase to Market
+155 days
+
+Purchase to Resale
+182 days
+
+
+4-
+CHERRY VILLAGE INLAND LLC
+Entity Rating
+4 Transactions
+
+Avg. Purchase Price
+$1,287,500
+
+Avg. Resale Price
+PTFV
+List to Sold Price
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+
+2-
+INLAND SENIOR DEVELOPMENT LLC
+Entity Rating
+2 Transactions
+
+Avg. Purchase Price
+$707,500
+
+Avg. Resale Price
+PTFV
+List to Sold Price
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+
+1-
+ALDEA FOOTHILL TWO LLC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$1,275,000
+
+Avg. Resale Price
+PTFV
+List to Sold Price
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+
+1-
+1 VENTURE REALTY INC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$540,000
+
+Avg. Resale Price
+$860,000
+
+PTFV
+63%
+
+List to Sold Price
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+Entities: PO BOX 80518
+
+19-
+INVESTSOCAL LLC
+Entity Rating
+19 Transactions
+
+Avg. Purchase Price
+$836,737
+
+Avg. Resale Price
+$1,076,014
+
+PTFV
+80%
+
+List to Sold Price
+102%
+
+Purchase to Market
+540 days
+
+Purchase to Resale
+658 days
+
+
+1-
+STOCKPILE PROPERTY VENTURES LLC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$580,000
+
+Avg. Resale Price
+$580,000
+
+PTFV
+List to Sold Price
+61%
+
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+
+1-
+YQUE PROPERTY ENTERPRISES LLC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$640,000
+
+Avg. Resale Price
+PTFV
+List to Sold Price
+92%
+
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+
+1-
+IVESTSOCAL LLC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$275,000
+
+Avg. Resale Price
+PTFV
+List to Sold Price
+110%
+
+Purchase to Market
+days
+
+Purchase to Resale
+days
+
+Entities: PO BOX 80378
+
+1-
+INVESTSOCAL LLC
+Entity Rating
+1 Transactions
+
+Avg. Purchase Price
+$1,000,000
+
+Avg. Resale Price
+$1,299,000
+
+PTFV
+77%
+
+List to Sold Price
+103%
+
+Purchase to Market
