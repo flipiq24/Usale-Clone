@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import BrokerPresentation from "@/pages/broker-presentation";
+import InvestorPresentation from "@/pages/investor-presentation";
 import AdminPage from "@/pages/admin";
 import ComingSoon from "@/pages/coming-soon";
 import NotFound from "@/pages/not-found";
@@ -16,6 +17,10 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/admin" component={AdminPage} />
       <Route path="/broker/:slug" component={BrokerPresentation} />
+      <Route path="/investor-team/:slug" component={InvestorPresentation} />
+      <Route path="/individual-investor/:slug" component={ComingSoon} />
+      <Route path="/wholesaler/:slug" component={ComingSoon} />
+      <Route path="/coach/:slug" component={ComingSoon} />
       <Route path="/agent/:slug" component={ComingSoon} />
       <Route path="/title/:slug" component={ComingSoon} />
       <Route path="/escrow/:slug" component={ComingSoon} />

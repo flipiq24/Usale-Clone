@@ -77,16 +77,21 @@ export default function Home() {
                     onMouseLeave={() => setWhoWeServeOpen(false)}
                   >
                     {[
-                      { label: "Real Estate Investors", href: "/real-estate-investors" },
-                      { label: "Real Estate Agents", href: "/real-estate-agents" },
-                      { label: "Strategic Partners", href: "/strategic-partners" },
+                      { label: "Brokers", href: "/broker/bcollective-agency", external: true },
+                      { label: "Agents", href: "/agent/coming-soon", external: false },
+                      { label: "Investor Teams", href: "/investor-team/investsocal", external: true },
+                      { label: "Individual Investors", href: "/individual-investor/coming-soon", external: false },
+                      { label: "Title Companies", href: "/title/coming-soon", external: false },
+                      { label: "Escrow Companies", href: "/escrow/coming-soon", external: false },
+                      { label: "Coaches", href: "/coach/coming-soon", external: false },
+                      { label: "Hard Money Lenders", href: "/hard-money/coming-soon", external: false },
+                      { label: "Wholesalers", href: "/wholesaler/coming-soon", external: false },
                     ].map((item) => (
                       <a
-                        key={item.href}
+                        key={item.label}
                         href={item.href}
                         className="block px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
                         style={{ color: DARK_BLUE }}
-                        onClick={(e) => e.preventDefault()}
                       >
                         {item.label}
                       </a>
