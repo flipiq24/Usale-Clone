@@ -249,19 +249,26 @@ const TABS = [
 
 type TabKey = typeof TABS[number]["key"];
 
-function EntitiesTable() {
+function EntitiesTable({ pulseRow }: { pulseRow?: number }) {
   let lastGroup = "";
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    if (pulseRow == null) return;
+    const el = rowRefs.current[pulseRow];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [pulseRow]);
   return (
     <div style={{ overflow: "auto", maxHeight: 420 }}>
       {RELATED_ENTITIES.map((e, i) => {
         const showGroup = e.group !== lastGroup;
         lastGroup = e.group;
+        const isPulse = pulseRow === i;
         return (
           <React.Fragment key={i}>
             {showGroup && (
               <div style={{ background: "#E8E8E0", padding: "10px 16px", fontSize: 13, fontWeight: 600, color: "#2C3E50" }}>{e.group}</div>
             )}
-            <div style={{ display: "grid", gridTemplateColumns: "40px 1.6fr 1fr 1fr 1fr 0.6fr 0.8fr 0.9fr 0.9fr", gap: 8, padding: "12px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", alignItems: "center" }}>
+            <div ref={(el) => { rowRefs.current[i] = el; }} style={{ display: "grid", gridTemplateColumns: "40px 1.6fr 1fr 1fr 1fr 0.6fr 0.8fr 0.9fr 0.9fr", gap: 8, padding: "12px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", alignItems: "center", background: isPulse ? "#E8571A18" : "transparent", boxShadow: isPulse ? "inset 4px 0 0 #E8571A" : "none", animation: isPulse ? "rowPulse 1.6s ease-in-out infinite" : "none", transition: "background 0.4s" }}>
               <span style={{ fontWeight: 700 }}>{e.count}-</span>
               <span style={{ fontWeight: 600, color: "#E8571A" }}>{e.name}</span>
               <span><div style={{ color: "#E8571A", fontWeight: 600, fontSize: 11 }}>Entity Rating</div><div>{e.transactions}</div></span>
@@ -279,7 +286,13 @@ function EntitiesTable() {
   );
 }
 
-function AgentsTable() {
+function AgentsTable({ pulseRow }: { pulseRow?: number }) {
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    if (pulseRow == null) return;
+    const el = rowRefs.current[pulseRow];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [pulseRow]);
   return (
     <div style={{ overflow: "auto", maxHeight: 420 }}>
       <div style={{ background: "#E8E8E0", padding: "10px 16px", fontSize: 13, fontWeight: 600, color: "#2C3E50" }}>Agent Relationships</div>
@@ -287,7 +300,7 @@ function AgentsTable() {
         <span>Agent</span><span>Trans. w/ Investor</span><span>Company</span><span>Phone</span><span>Email</span><span>Investor Rating</span>
       </div>
       {AGENT_RELATIONSHIPS.map((a, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1.4fr 0.9fr 1.4fr 1fr", gap: 8, padding: "10px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: i % 2 ? "#fafafa" : "#fff" }}>
+        <div key={i} ref={(el) => { rowRefs.current[i] = el; }} style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1.4fr 0.9fr 1.4fr 1fr", gap: 8, padding: "10px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: pulseRow === i ? "#E8571A18" : (i % 2 ? "#fafafa" : "#fff"), boxShadow: pulseRow === i ? "inset 4px 0 0 #E8571A" : "none", animation: pulseRow === i ? "rowPulse 1.6s ease-in-out infinite" : "none", transition: "background 0.4s" }}>
           <span style={{ fontWeight: 600, color: "#E8571A" }}>{a.name}</span>
           <span>
             <div style={{ fontWeight: 700 }}>{a.withInvestor.total}</div>
@@ -310,7 +323,13 @@ function AgentsTable() {
   );
 }
 
-function LendersTable() {
+function LendersTable({ pulseRow }: { pulseRow?: number }) {
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    if (pulseRow == null) return;
+    const el = rowRefs.current[pulseRow];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [pulseRow]);
   return (
     <div style={{ overflow: "auto", maxHeight: 420 }}>
       <div style={{ background: "#E8E8E0", padding: "10px 16px", fontSize: 13, fontWeight: 600, color: "#2C3E50" }}>Lenders</div>
@@ -318,7 +337,7 @@ function LendersTable() {
         <span>Lender</span><span>Loans</span><span>Avg Loan</span><span>Open</span><span>Closed</span><span>Avg Loan Time</span>
       </div>
       {LENDERS.map((l, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 0.7fr 1fr 0.8fr 0.8fr 1fr", gap: 8, padding: "12px 16px", fontSize: 13, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: i % 2 ? "#fafafa" : "#fff" }}>
+        <div key={i} ref={(el) => { rowRefs.current[i] = el; }} style={{ display: "grid", gridTemplateColumns: "2fr 0.7fr 1fr 0.8fr 0.8fr 1fr", gap: 8, padding: "12px 16px", fontSize: 13, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: pulseRow === i ? "#E8571A18" : (i % 2 ? "#fafafa" : "#fff"), boxShadow: pulseRow === i ? "inset 4px 0 0 #E8571A" : "none", animation: pulseRow === i ? "rowPulse 1.6s ease-in-out infinite" : "none", transition: "background 0.4s" }}>
           <span style={{ fontWeight: 600 }}>{l.name}</span>
           <span>{l.loans}</span>
           <span>{l.avgLoan}</span>
@@ -339,7 +358,13 @@ function LendersTable() {
   );
 }
 
-function TitlesTable() {
+function TitlesTable({ pulseRow }: { pulseRow?: number }) {
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
+  useEffect(() => {
+    if (pulseRow == null) return;
+    const el = rowRefs.current[pulseRow];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [pulseRow]);
   return (
     <div style={{ overflow: "auto", maxHeight: 420 }}>
       <div style={{ background: "#E8E8E0", padding: "10px 16px", fontSize: 13, fontWeight: 600, color: "#2C3E50" }}>Title Company Relationships</div>
@@ -347,7 +372,7 @@ function TitlesTable() {
         <span>Title Company</span><span>Trans w/ Investor</span><span>Acq Listing</span><span>Acq Buyer</span><span>Resale Listing</span>
       </div>
       {TITLE_COMPANIES.map((t, i) => (
-        <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr 1.2fr 1.2fr", gap: 8, padding: "10px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: i % 2 ? "#fafafa" : "#fff" }}>
+        <div key={i} ref={(el) => { rowRefs.current[i] = el; }} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1.2fr 1.2fr 1.2fr", gap: 8, padding: "10px 16px", fontSize: 12, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: pulseRow === i ? "#E8571A18" : (i % 2 ? "#fafafa" : "#fff"), boxShadow: pulseRow === i ? "inset 4px 0 0 #E8571A" : "none", animation: pulseRow === i ? "rowPulse 1.6s ease-in-out infinite" : "none", transition: "background 0.4s" }}>
           <span style={{ fontWeight: 600 }}>{t.name}</span>
           <span>{t.withInvestor}</span>
           <span>{t.acqListing}</span>
@@ -361,9 +386,13 @@ function TitlesTable() {
 
 const TAB_INDEX_BY_HL: Record<number, TabKey> = { 1: "entities", 2: "agents", 3: "lenders", 4: "titles" };
 
-function SectionData({ hl }: { hl: number }) {
+const PULSE_ROWS: Record<TabKey, number> = { entities: 0, agents: 0, lenders: 0, titles: 0 };
+
+function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey) => void }) {
   const activeTab: TabKey = TAB_INDEX_BY_HL[Math.max(1, Math.min(hl, 4))];
   const activeIdx = TABS.findIndex(t => t.key === activeTab);
+  const pulseRow = PULSE_ROWS[activeTab];
+  useEffect(() => { onTabChange?.(activeTab); }, [activeTab, onTabChange]);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16, paddingTop: 8 }}>
       <h2 style={{ fontSize: "clamp(22px,3.5vw,32px)", fontWeight: 700, color: "#2C3E50", margin: 0 }}>
@@ -390,15 +419,19 @@ function SectionData({ hl }: { hl: number }) {
         background: "#fff", borderRadius: 12, border: "1px solid #eee", overflow: "hidden", minHeight: 320,
         animation: "tabFadeIn 0.4s cubic-bezier(0.16,1,0.3,1)",
       }}>
-        {activeTab === "entities" && <EntitiesTable />}
-        {activeTab === "agents" && <AgentsTable />}
-        {activeTab === "lenders" && <LendersTable />}
-        {activeTab === "titles" && <TitlesTable />}
+        {activeTab === "entities" && <EntitiesTable pulseRow={pulseRow} />}
+        {activeTab === "agents" && <AgentsTable pulseRow={pulseRow} />}
+        {activeTab === "lenders" && <LendersTable pulseRow={pulseRow} />}
+        {activeTab === "titles" && <TitlesTable pulseRow={pulseRow} />}
       </div>
       <style>{`
         @keyframes tabFadeIn {
           from { opacity: 0; transform: translateY(8px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes rowPulse {
+          0%, 100% { box-shadow: inset 4px 0 0 #E8571A, 0 0 0 0 #E8571A30; }
+          50% { box-shadow: inset 4px 0 0 #E8571A, 0 0 0 6px #E8571A18; }
         }
       `}</style>
     </div>
@@ -610,6 +643,7 @@ export default function InvestorPresentation() {
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [silentStep, setSilentStep] = useState(0);
+  const [currentTab, setCurrentTab] = useState<TabKey>("entities");
   const narratedSlidesRef = useRef<Set<number>>(new Set());
   const chatEndRef = useRef<HTMLDivElement>(null);
   const SCRIPTS = useMemo(() => getScripts(investorData), [investorData]);
@@ -726,6 +760,8 @@ export default function InvestorPresentation() {
             legalName: INVESTOR.legalName,
             currentSlide: SECTION_TITLES[slide],
             currentScript: SCRIPTS[slide],
+            currentTab: slide === 1 ? currentTab : null,
+            currentTabLabel: slide === 1 ? TABS.find(t => t.key === currentTab)?.label : null,
             metrics: INVESTOR_METRICS,
             entityCount: RELATED_ENTITIES.length,
             agentCount: AGENT_RELATIONSHIPS.length,
@@ -755,7 +791,7 @@ export default function InvestorPresentation() {
 
   const sections = [
     <SectionWelcome key={0} hl={hlStep(0)} />,
-    <SectionData key={1} hl={hlStep(1)} />,
+    <SectionData key={1} hl={hlStep(1)} onTabChange={setCurrentTab} />,
     <SectionMarketplace key={2} hl={hlStep(2)} />,
     <SectionCTA key={3} hl={hlStep(3)} />,
   ];

@@ -78,7 +78,7 @@ export default function Home() {
                   >
                     {[
                       { label: "Brokers", href: "/broker/bcollective-agency", external: true },
-                      { label: "Agents", href: "/agent/coming-soon", external: false },
+                      { label: "Real Estate Agents", href: "/agent/coming-soon", external: false },
                       { label: "Investor Teams", href: "/investor-team/investsocal", external: true },
                       { label: "Individual Investors", href: "/individual-investor/coming-soon", external: false },
                       { label: "Title Companies", href: "/title/coming-soon", external: false },
@@ -149,9 +149,19 @@ export default function Home() {
               <a href="#" className="block px-3 py-2 text-sm" style={{ color: DARK_BLUE }} onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); setMobileMenuOpen(false); }}>Home</a>
               <div className="px-3 py-1">
                 <p className="text-xs uppercase tracking-wider text-gray-400 mb-1">Who We Serve</p>
-                <a href="/real-estate-investors" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Real Estate Investors</a>
-                <a href="/real-estate-agents" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Real Estate Agents</a>
-                <a href="/strategic-partners" className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Strategic Partners</a>
+                {[
+                  { label: "Brokers", href: "/broker/bcollective-agency" },
+                  { label: "Real Estate Agents", href: "/agent/coming-soon" },
+                  { label: "Investor Teams", href: "/investor-team/investsocal" },
+                  { label: "Individual Investors", href: "/individual-investor/coming-soon" },
+                  { label: "Title Companies", href: "/title/coming-soon" },
+                  { label: "Escrow Companies", href: "/escrow/coming-soon" },
+                  { label: "Coaches", href: "/coach/coming-soon" },
+                  { label: "Hard Money Lenders", href: "/hard-money/coming-soon" },
+                  { label: "Wholesalers", href: "/wholesaler/coming-soon" },
+                ].map((item) => (
+                  <a key={item.label} href={item.href} className="block py-1 text-sm pl-3" style={{ color: DARK_BLUE }}>{item.label}</a>
+                ))}
               </div>
               <a href="/about-us" className="block px-3 py-2 text-sm" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>About Us</a>
               <a href="/lets-talk" className="block px-3 py-2 text-sm" style={{ color: DARK_BLUE }} onClick={(e) => e.preventDefault()}>Let's Talk</a>
