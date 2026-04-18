@@ -781,7 +781,7 @@ export default function InvestorPresentation() {
     } finally {
       setChatLoading(false);
     }
-  }, [chatMessages, slide, SCRIPTS]);
+  }, [chatMessages, slide, SCRIPTS, currentTab]);
 
   const hlStep = (idx: number) => {
     if (slide !== idx) return 99;
