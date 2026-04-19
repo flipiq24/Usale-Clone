@@ -905,10 +905,9 @@ export default function InvestorPresentation() {
       }}>
         <img src={USALE_LOGO} alt="USale" style={{ height: 100 }} />
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 28, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>
-            Prepared for <span style={{ color: "#E8571A" }}>{investorData.name}</span>
+          <div style={{ fontSize: 28, fontWeight: 700, color: "#2C3E50" }}>
+            Prepared for <span style={{ color: "#E8571A" }}>{investorData.legalName}</span>
           </div>
-          <div style={{ fontSize: 16, color: "#6c757d" }}>{investorData.legalName}</div>
         </div>
         <button
           onClick={() => {
