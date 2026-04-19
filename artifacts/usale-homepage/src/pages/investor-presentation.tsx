@@ -191,7 +191,7 @@ const TITLE_COMPANIES: TitleCo[] = [
 function getScripts(_inv: InvestorData) {
   return [
     `My name is Tony Diaz. Thirty-two years. Eleven hundred flips. Obsessed with data and technology. You're not here by accident — we found you through the data because you're a real operator. Four minutes. I'm going to show you your numbers the way nobody's ever shown them to you. Then I'll tell you what we built — and you decide if you want in.`,
-    `Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator. Now watch. Your primary entity — INVESTSOCAL LLC out of PO Box eighty-five-eighteen — nineteen of the thirty-two. Your agent — Jose Diaz. Six with you, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others. That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.`,
+    `Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator. Now watch. Your primary entity — INVESTSOCAL LLC. Eleven of those transactions ran through your 1 VENTURE stack. Hacienda Heights. San Pedro. Long Beach. And eight more — every address, every lender, every agent, every price. Your agent — Jose Diaz. Six with you, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others. That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.`,
     `Here's the reality — and I'm not going to pitch you. AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. You're either in front of it or behind it. We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. The marketplace is free. That's not a discount — that's the model. Think about it. Google. Zillow. The biggest companies ever built — free. Why? Because they weren't trying to make ninety-nine bucks. They were building the most powerful platform, and the transactions came. That's us. We're not here to make ninety-nine. We're here to build the most powerful off-market marketplace that's ever existed — and the money comes from the people who see the value and want to be inside the machine. That's why you're being invited. Two of the largest national hard money lenders and two of the largest national title companies are already behind this. Not because we paid them. Because they understand what we're building — a frictionless community where everybody wins. And no, we don't need everybody. We need the twelve thousand four hundred forty-eight investor-friendly agents in Southern California. That's it. That's the beachhead. Then we go national. What we built is one system. Acquisition, disposition, CRM, AI voice training for your team, and the free off-market marketplace — USale. Think InvestorLift without the cost. Think Privy with actual intelligence. And I'll be straight — this isn't for everybody. If you're not seeing where this is going, we're not it. No harm done. Enjoy the free marketplace.`,
     `INVESTSOCAL — you already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two. Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us. If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.`,
   ];
@@ -199,11 +199,11 @@ function getScripts(_inv: InvestorData) {
 
 const SECTION_TITLES = ["Welcome", "Your Data", "The Marketplace", "Next Steps"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 6, 6, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 7, 6, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.30, 1], [0.46, 2], [0.62, 3], [0.76, 4], [0.90, 5]],
+  [[0, 0], [0.28, 1], [0.36, 2], [0.52, 3], [0.66, 4], [0.78, 5], [0.90, 6]],
   [[0, 0], [0.15, 1], [0.32, 2], [0.52, 3], [0.72, 4], [0.88, 5]],
   [[0, 0], [0.5, 1]],
 ];
@@ -451,7 +451,8 @@ function PropertyDrilldown() {
 
 const STEP_MAP: { tab: TabKey; row: number | null; drilldown?: boolean }[] = [
   { tab: "entities", row: null },
-  { tab: "entities", row: 5 },
+  { tab: "entities", row: 0 },
+  { tab: "entities", row: 0, drilldown: true },
   { tab: "agents", row: 0 },
   { tab: "lenders", row: 0 },
   { tab: "titles", row: 0 },
