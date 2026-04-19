@@ -191,20 +191,20 @@ const TITLE_COMPANIES: TitleCo[] = [
 function getScripts(_inv: InvestorData) {
   return [
     `My name is Tony Diaz. Thirty-two years. Eleven hundred flips. Obsessed with data and technology. You're not here by accident — we found you through the data because you're a real operator. Four minutes. I'm going to show you your numbers the way nobody's ever shown them to you. Then I'll tell you what we built — and you decide if you want in.`,
-    `INVESTSOCAL. Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator. Now watch. Your primary entity — INVESTSOCAL LLC out of PO Box eighty-five-eighteen — nineteen of the thirty-two. Your agent — Jose Diaz. Six with you, fifty-seven in his career, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others. That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.`,
-    `Here's the reality — and I'm not going to pitch you. AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. That's the only version of this story that matters — and you're either in front of it or behind it. We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. We don't charge a dollar for the marketplace. That's not a discount — that's the model. In the new age, value goes first, money comes last. That's where we live. That's why the hard money lenders and the title companies are behind this. Kiavi — your lender — gets it. Fidelity Title gets it. They've seen what happens when an operator runs on one stack instead of eight tools duct-taped together. They subsidize our hundred-thousand-dollar operating system down to ten — because when you win, they win. And I'll be straight with you — this isn't for everybody. If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it. If that's not you, no harm done. Enjoy the free marketplace.`,
-    `INVESTSOCAL — you already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two. Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us. If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.`,
+    `Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator. Now watch. Your primary entity has nineteen of the thirty-two. Your top agent — six deals with you, fifty-seven in their career, running most of your resales. That's not an agent. That's a principal. Your capital — seventeen loans, eight-forty-seven average. That's your lender. Your title — ten transactions, spread across five others. That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.`,
+    `Here's the reality — and I'm not going to pitch you. AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. That's the only version of this story that matters — and you're either in front of it or behind it. We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. We don't charge a dollar for the marketplace. That's not a discount — that's the model. In the new age, value goes first, money comes last. That's where we live. And I'll be straight with you — this isn't for everybody. If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it. If that's not you, no harm done. Enjoy the free marketplace.`,
+    `You already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two. Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us. If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.`,
   ];
 }
 
 const SECTION_TITLES = ["Welcome", "Your Data", "The Marketplace", "Next Steps"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 6, 5, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 6, 4, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
   [[0, 0], [0.14, 1], [0.32, 2], [0.54, 3], [0.74, 4], [0.90, 5]],
-  [[0, 0], [0.18, 1], [0.42, 2], [0.68, 3], [0.88, 4]],
+  [[0, 0], [0.20, 1], [0.50, 2], [0.85, 3]],
   [[0, 0], [0.5, 1]],
 ];
 
@@ -538,19 +538,7 @@ function SectionMarketplace({ hl }: { hl: number }) {
         ))}
       </div>
 
-      <div style={{ padding: "18px 22px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 14, color: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, ...hVisible(hl, 3) }}>
-        <div>
-          <div style={{ fontSize: 12, fontWeight: 700, opacity: 0.9, textTransform: "uppercase", letterSpacing: "0.04em" }}>Subsidized by your partners</div>
-          <div style={{ fontSize: 17, fontWeight: 800, marginTop: 4 }}>Kiavi · Fidelity Title · the people behind us.</div>
-          <div style={{ fontSize: 12, opacity: 0.92, marginTop: 4 }}>One stack instead of eight tools duct-taped together. When you win, they win.</div>
-        </div>
-        <div style={{ textAlign: "right", flexShrink: 0 }}>
-          <div style={{ fontSize: 11, opacity: 0.85, textTransform: "uppercase", letterSpacing: "0.06em" }}>Operating system</div>
-          <div style={{ fontSize: 22, fontWeight: 900, lineHeight: 1 }}><span style={{ textDecoration: "line-through", opacity: 0.55 }}>$100K</span> → $10K</div>
-        </div>
-      </div>
-
-      <div style={{ padding: "14px 18px", borderRadius: 12, border: "2px dashed #2C3E5040", background: "#fff", fontSize: 14, color: "#2C3E50", lineHeight: 1.5, ...hVisible(hl, 4) }}>
+      <div style={{ padding: "14px 18px", borderRadius: 12, border: "2px dashed #2C3E5040", background: "#fff", fontSize: 14, color: "#2C3E50", lineHeight: 1.5, ...hVisible(hl, 3) }}>
         <b>Straight up — this isn't for everybody.</b> If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it.
       </div>
     </div>
@@ -561,7 +549,7 @@ function SectionCTA({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.15, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        INVESTSOCAL — <span style={{ color: "#E8571A" }}>you don't need us.</span>
+        <span style={{ color: "#E8571A" }}>You don't need us.</span>
       </h2>
       <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 640, margin: 0, lineHeight: 1.55, ...hVisible(hl, 0) }}>
         You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two.
