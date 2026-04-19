@@ -661,11 +661,6 @@ function SectionCurrentBorrowers() {
 
 function SectionGDBDetail({ drillPhase = 0 }: { drillPhase?: number }) {
   const [activeTab, setActiveTab] = useState<"entities" | "agents" | "lenders" | "title">("lenders");
-  const [lenderFilter, setLenderFilter] = useState("");
-  const [agentFilter, setAgentFilter] = useState("");
-  const [agentSort, setAgentSort] = useState<"High to Low" | "Low to High">("High to Low");
-  const [titleFilter, setTitleFilter] = useState("");
-  const [titleSort, setTitleSort] = useState<"High to Low" | "Low to High">("High to Low");
 
   const forcedTab = drillPhase === 1 ? "agents" : drillPhase === 2 ? "title" : null;
   const displayTab = (forcedTab || activeTab) as "entities" | "agents" | "lenders" | "title";
@@ -681,13 +676,9 @@ function SectionGDBDetail({ drillPhase = 0 }: { drillPhase?: number }) {
     { key: "title",    label: "30 Title Companies" },
   ];
 
-  const filteredLenders = GDB_LENDERS.filter(l => l.entity.toLowerCase().includes(lenderFilter.toLowerCase()));
-  const filteredAgents = GDB_AGENTS
-    .filter(a => a.name.toLowerCase().includes(agentFilter.toLowerCase()))
-    .sort((a, b) => agentSort === "High to Low" ? b.investorTrans - a.investorTrans : a.investorTrans - b.investorTrans);
-  const filteredTitle = GDB_TITLE_COMPANIES
-    .filter(t => t.company.toLowerCase().includes(titleFilter.toLowerCase()))
-    .sort((a, b) => titleSort === "High to Low" ? b.withInvestor - a.withInvestor : a.withInvestor - b.withInvestor);
+  const filteredLenders = GDB_LENDERS;
+  const filteredAgents = [...GDB_AGENTS].sort((a, b) => b.investorTrans - a.investorTrans);
+  const filteredTitle = [...GDB_TITLE_COMPANIES].sort((a, b) => b.withInvestor - a.withInvestor);
 
   const statsGrid = [
     { label: "Investor Rating:",            main: "48 Transaction",  sub: ["Owners: 3", "Sold: 45"] },
@@ -733,49 +724,12 @@ function SectionGDBDetail({ drillPhase = 0 }: { drillPhase?: number }) {
       </div>
 
       <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #dee2e6", overflow: "hidden" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 16px", background: "#f8f9fa", borderBottom: "1px solid #dee2e6", flexWrap: "wrap", gap: 8 }}>
-          <div style={{ display: "flex", gap: 4 }}>
-            {tabs.map(t => (
-              <button key={t.key} style={tabBtnStyle(t.key)} onClick={() => setActiveTab(t.key)}>
-                {t.label}
-              </button>
-            ))}
-          </div>
-          {displayTab === "lenders" && (
-            <input
-              value={lenderFilter} onChange={e => setLenderFilter(e.target.value)}
-              placeholder="Filter by lender name..."
-              style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 210, outline: "none", background: "#fff" }}
-            />
-          )}
-          {displayTab === "agents" && (
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <input
-                value={agentFilter} onChange={e => setAgentFilter(e.target.value)}
-                placeholder="Filter by agent name..."
-                style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 200, outline: "none", background: "#fff" }}
-              />
-              <select value={agentSort} onChange={e => setAgentSort(e.target.value as "High to Low" | "Low to High")}
-                style={{ padding: "7px 10px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, background: "#fff", cursor: "pointer" }}>
-                <option>High to Low</option>
-                <option>Low to High</option>
-              </select>
-            </div>
-          )}
-          {displayTab === "title" && (
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <input
-                value={titleFilter} onChange={e => setTitleFilter(e.target.value)}
-                placeholder="Filter by company name..."
-                style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 220, outline: "none", background: "#fff" }}
-              />
-              <select value={titleSort} onChange={e => setTitleSort(e.target.value as "High to Low" | "Low to High")}
-                style={{ padding: "7px 10px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, background: "#fff", cursor: "pointer" }}>
-                <option>High to Low</option>
-                <option>Low to High</option>
-              </select>
-            </div>
-          )}
+        <div style={{ display: "flex", alignItems: "center", padding: "8px 16px", background: "#f8f9fa", borderBottom: "1px solid #dee2e6", gap: 4 }}>
+          {tabs.map(t => (
+            <button key={t.key} style={tabBtnStyle(t.key)} onClick={() => setActiveTab(t.key)}>
+              {t.label}
+            </button>
+          ))}
         </div>
 
         {displayTab === "entities" && (
@@ -1165,10 +1119,6 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
 function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => void }) {
   const isGDB = name === "G D BRISTOL LLC";
   const [activeTab, setActiveTab] = useState<"entities" | "agents" | "lenders" | "title">("lenders");
-  const [lenderFilter, setLenderFilter] = useState("");
-  const [agentFilter, setAgentFilter] = useState("");
-  const [titleFilter, setTitleFilter] = useState("");
-
   const thStyle: React.CSSProperties = {
     padding: "10px 12px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const,
     letterSpacing: "0.04em", color: "#2C3E50", background: "#E8571A0A",
@@ -1207,9 +1157,9 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
     { label: "Acquisition Source",            main: "MLS: 89",         sub: ["Off Market: 52"] },
   ];
 
-  const filteredLenders = GDB_LENDERS.filter(l => l.entity.toLowerCase().includes(lenderFilter.toLowerCase()));
-  const filteredAgents  = GDB_AGENTS.filter(a => a.name.toLowerCase().includes(agentFilter.toLowerCase()));
-  const filteredTitle   = GDB_TITLE_COMPANIES.filter(t => t.company.toLowerCase().includes(titleFilter.toLowerCase()));
+  const filteredLenders = GDB_LENDERS;
+  const filteredAgents  = [...GDB_AGENTS].sort((a, b) => b.investorTrans - a.investorTrans);
+  const filteredTitle   = [...GDB_TITLE_COMPANIES].sort((a, b) => b.withInvestor - a.withInvestor);
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(44,62,80,0.6)", backdropFilter: "blur(4px)" }} onClick={onClose}>
@@ -1235,37 +1185,23 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
           </div>
         </div>
 
-        <div style={{ background: "#f8f9fa", padding: "0 8px", borderBottom: "1px solid #dee2e6", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
-          <div style={{ display: "flex" }}>
-            {modalTabs.map(t => (
-              <button
-                key={t.key}
-                onClick={() => setActiveTab(t.key)}
-                style={{
-                  padding: "12px 18px", background: activeTab === t.key ? "#e9ecef" : "transparent",
-                  border: "none", cursor: "pointer", fontSize: 13,
-                  fontWeight: activeTab === t.key ? 700 : 500,
-                  color: activeTab === t.key ? "#E8571A" : "#6c757d",
-                  borderRadius: 8, margin: "4px 2px", transition: "all 0.15s",
-                  whiteSpace: "nowrap" as const,
-                }}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-          {activeTab === "lenders" && (
-            <input value={lenderFilter} onChange={e => setLenderFilter(e.target.value)} placeholder="Filter by lender name..."
-              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 190, outline: "none", background: "#fff", margin: "4px 8px" }} />
-          )}
-          {activeTab === "agents" && (
-            <input value={agentFilter} onChange={e => setAgentFilter(e.target.value)} placeholder="Filter by agent name..."
-              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 190, outline: "none", background: "#fff", margin: "4px 8px" }} />
-          )}
-          {activeTab === "title" && (
-            <input value={titleFilter} onChange={e => setTitleFilter(e.target.value)} placeholder="Filter by company name..."
-              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 200, outline: "none", background: "#fff", margin: "4px 8px" }} />
-          )}
+        <div style={{ background: "#f8f9fa", padding: "0 8px", borderBottom: "1px solid #dee2e6", flexShrink: 0, display: "flex", alignItems: "center" }}>
+          {modalTabs.map(t => (
+            <button
+              key={t.key}
+              onClick={() => setActiveTab(t.key)}
+              style={{
+                padding: "12px 18px", background: activeTab === t.key ? "#e9ecef" : "transparent",
+                border: "none", cursor: "pointer", fontSize: 13,
+                fontWeight: activeTab === t.key ? 700 : 500,
+                color: activeTab === t.key ? "#E8571A" : "#6c757d",
+                borderRadius: 8, margin: "4px 2px", transition: "all 0.15s",
+                whiteSpace: "nowrap" as const,
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
 
         <div style={{ overflowY: "auto", flex: 1, background: "#fff" }}>
