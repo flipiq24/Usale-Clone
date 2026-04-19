@@ -275,6 +275,10 @@ const LENDER_TABLE: CompetitorRow[] = [
   { lender: "LUMENT REAL ESTATE CAPITAL LLC",           avgLoan: "$7,173,316",    loanPurchaseRatio: "45.4%",  totalTrans: 19,   uniqueRels: 5,   avgLoansPerRel: 3.8 },
   { lender: "SHWETZ FAMILY 2009 REVOCABLE TRUST",       avgLoan: "$184,706",      loanPurchaseRatio: "336.8%", totalTrans: 17,   uniqueRels: 5,   avgLoansPerRel: 3.4 },
   { lender: "SUNCREST BANK",                            avgLoan: "$660,168",      loanPurchaseRatio: "67.9%",  totalTrans: 60,   uniqueRels: 5,   avgLoansPerRel: 12.0 },
+  { lender: "GENESIS CAPITAL LLC",                      avgLoan: "$578,420",      loanPurchaseRatio: "94.1%",  totalTrans: 48,   uniqueRels: 5,   avgLoansPerRel: 9.6  },
+  { lender: "CIVIC FINANCIAL SERVICES LLC",             avgLoan: "$612,750",      loanPurchaseRatio: "96.8%",  totalTrans: 41,   uniqueRels: 4,   avgLoansPerRel: 10.3 },
+  { lender: "VELOCITY MORTGAGE CAPITAL LLC",            avgLoan: "$524,890",      loanPurchaseRatio: "91.2%",  totalTrans: 38,   uniqueRels: 4,   avgLoansPerRel: 9.5  },
+  { lender: "GROUNDFLOOR FINANCE INC",                  avgLoan: "$489,330",      loanPurchaseRatio: "88.5%",  totalTrans: 33,   uniqueRels: 4,   avgLoansPerRel: 8.3  },
 ];
 
 interface BorrowerEntity {
@@ -481,13 +485,16 @@ function SectionWelcome() {
         Welcome, <span style={{ color: "#E8571A" }}>{LENDER.company}</span>.
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 120 }} />
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-        <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 560, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
-          Thirty-two years. Over 1,100 flips. I've been on the other side of your desk.
-        </p>
-        <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
-          Tony Diaz · Founder, <BrandName />
-        </p>
+      <div style={{ display: "flex", alignItems: "center", gap: 20, background: "#fff", border: "1px solid #dee2e6", borderRadius: 16, padding: "20px 28px", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", maxWidth: 520 }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+        <div style={{ textAlign: "left" }}>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+          <div style={{ fontSize: 13, color: "#6c757d", marginTop: 2 }}>Founder &amp; CEO — <BrandName /> &amp; FlipIQ</div>
+          <div style={{ fontSize: 13, color: "#6c757d", marginTop: 8, lineHeight: 1.6 }}>
+            32 years. Over 1,100 flips.<br />
+            I've been on the other side of your desk.
+          </div>
+        </div>
       </div>
     </div>
   );
