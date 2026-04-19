@@ -188,24 +188,23 @@ const TITLE_COMPANIES: TitleCo[] = [
   { name: "CONSUMERS TITLE COMPANY", withInvestor: 1, acqListing: 0, acqBuyer: 0, resaleListing: 1 },
 ];
 
-function getScripts(inv: InvestorData) {
-  const n = inv.legalName;
+function getScripts(_inv: InvestorData) {
   return [
-    `Hello — my name is Tony Diaz and I'm the founder of USale. I've been in the business thirty-two years with over eleven hundred flips. You're here because we found you through data — because you're a real operator. Let me share that data with you first.`,
-    `Here are your related entities. Keep in mind — this is MLS and tax data, so it's not always a hundred percent accurate. You've done thirty-two transactions, average purchase price seven hundred forty-eight thousand, average resale nine hundred eighty-two thousand, list-to-sold ninety-seven percent. One key entity we want to focus on is INVESTSOCAL LLC under 1 VENTURE — eleven transactions there. Hacienda Heights, San Pedro, Long Beach, Upland, Riverside, Los Angeles, Anaheim, Laguna Niguel, Corona, Victorville, La Puente — your map across Southern California, with LendingHome and Qwan as your capital partners. Now — here are the real estate agent relationships you have. The one you use the most is Jose Diaz — six deals with you, fifty-seven total in his career, doing the majority of your resales. Probably one of your principals. These are the lenders you have. The one you use the most is Kiavi Funding — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you like to work with Lawyers Title — ten transactions there, the rest spread across Chicago Title, Ticor, and Stewart.`,
-    `You're a great buyer — we want people like you in our ecosystem. This is frictionless — we're not selling you anything. We already have your information. By simply joining our waiting list, you'll be notified once properties start flowing through — from investor-friendly agents we're bringing into the ecosystem through our national title and escrow relationships. This will change the way investor-friendly agents connect with investors, and how wholesalers can participate without the bait and switch. And we have many, many tools.`,
-    `There's an opportunity here. We are looking for investor-operator partnerships — handpicked operators able to use our Command platform, the most powerful acquisition platform ever built. Either way, there's value here for you. Please set up a meeting and we'll discuss next steps.`,
+    `My name is Tony Diaz. Thirty-two years. Eleven hundred flips. Obsessed with data and technology. You're not here by accident — we found you through the data because you're a real operator. Four minutes. I'm going to show you your numbers the way nobody's ever shown them to you. Then I'll tell you what we built — and you decide if you want in.`,
+    `INVESTSOCAL. Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator. Now watch. Your primary entity — INVESTSOCAL LLC out of PO Box eighty-five-eighteen — nineteen of the thirty-two. Your agent — Jose Diaz. Six with you, fifty-seven in his career, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others. That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.`,
+    `Here's the reality — and I'm not going to pitch you. AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. That's the only version of this story that matters — and you're either in front of it or behind it. We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. We don't charge a dollar for the marketplace. That's not a discount — that's the model. In the new age, value goes first, money comes last. That's where we live. That's why the hard money lenders and the title companies are behind this. Kiavi — your lender — gets it. Fidelity Title gets it. They've seen what happens when an operator runs on one stack instead of eight tools duct-taped together. They subsidize our hundred-thousand-dollar operating system down to ten — because when you win, they win. And I'll be straight with you — this isn't for everybody. If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it. If that's not you, no harm done. Enjoy the free marketplace.`,
+    `INVESTSOCAL — you already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two. Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us. If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.`,
   ];
 }
 
 const SECTION_TITLES = ["Welcome", "Your Data", "The Marketplace", "Next Steps"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 7, 4, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 6, 5, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
-  [[0, 0], [0.25, 1], [0.55, 2]],
-  [[0, 0], [0.12, 1], [0.24, 2], [0.33, 3], [0.50, 4], [0.72, 5], [0.88, 6]],
-  [[0, 0], [0.14, 1], [0.30, 2], [0.65, 3]],
+  [[0, 0], [0.4, 1], [0.75, 2]],
+  [[0, 0], [0.14, 1], [0.32, 2], [0.54, 3], [0.74, 4], [0.90, 5]],
+  [[0, 0], [0.18, 1], [0.42, 2], [0.68, 3], [0.88, 4]],
   [[0, 0], [0.5, 1]],
 ];
 
@@ -445,12 +444,11 @@ function PropertyDrilldown() {
 
 const STEP_MAP: { tab: TabKey; row: number | null; drilldown?: boolean }[] = [
   { tab: "entities", row: null },
-  { tab: "entities", row: null },
-  { tab: "entities", row: 0 },
-  { tab: "entities", row: 0, drilldown: true },
+  { tab: "entities", row: 5 },
   { tab: "agents", row: 0 },
   { tab: "lenders", row: 0 },
   { tab: "titles", row: 0 },
+  { tab: "entities", row: null },
 ];
 
 function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey) => void }) {
@@ -512,44 +510,48 @@ function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey
 
 function SectionMarketplace({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        You're a great buyer. <span style={{ color: "#E8571A" }}>We want people like you</span> in our ecosystem.
-      </h2>
+    <div style={{ display: "flex", flexDirection: "column", gap: 18, minHeight: "60vh", justifyContent: "center" }}>
+      <div style={{ ...hVisible(hl, 0) }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6 }}>The Reality</div>
+        <h2 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.15, letterSpacing: "-0.02em" }}>
+          AI is going to change this business. <span style={{ color: "#E8571A" }}>Fast.</span>
+        </h2>
+      </div>
 
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", ...hVisible(hl, 1) }}>
+      <div style={{ padding: "20px 24px", background: "#2C3E50", borderRadius: 14, color: "#fff", ...hVisible(hl, 1) }}>
+        <div style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.3 }}>
+          AI is not going to take your deals. <span style={{ color: "#E8571A" }}>Somebody using it will.</span>
+        </div>
+        <div style={{ fontSize: 13, opacity: 0.8, marginTop: 8 }}>You're either in front of it, or behind it.</div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, ...hVisible(hl, 2) }}>
         {[
-          { k: "Frictionless", v: "Nothing to sell you" },
-          { k: "Already Have Your Info", v: "No forms, no friction" },
-          { k: "Just Join the Waitlist", v: "Get notified when properties flow" },
+          { k: "Not on Facebook", v: "We have the data. That's how we found you." },
+          { k: "$0 Marketplace", v: "Not a discount — that's the model." },
+          { k: "Value first", v: "Money comes last. That's where we live." },
         ].map((c, i) => (
-          <div key={i} style={{ flex: "1 1 240px", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #E8571A30", display: "flex", flexDirection: "column", gap: 4 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.04em" }}>{c.k}</div>
-            <div style={{ fontSize: 15, fontWeight: 600, color: "#2C3E50" }}>{c.v}</div>
+          <div key={i} style={{ padding: "14px 16px", background: "#fff", borderRadius: 12, border: "1px solid #E8571A30" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: 4 }}>{c.k}</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", lineHeight: 1.4 }}>{c.v}</div>
           </div>
         ))}
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, ...hVisible(hl, 2) }}>
-        <div style={{ padding: "22px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Investor-Friendly Agents</div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>Flowing in through national title &amp; escrow.</div>
-          <div style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.55 }}>
-            We're changing how investor-friendly agents connect with investors. Real inventory, real relationships — not cold outreach.
-          </div>
+      <div style={{ padding: "18px 22px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 14, color: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, ...hVisible(hl, 3) }}>
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, opacity: 0.9, textTransform: "uppercase", letterSpacing: "0.04em" }}>Subsidized by your partners</div>
+          <div style={{ fontSize: 17, fontWeight: 800, marginTop: 4 }}>Kiavi · Fidelity Title · the people behind us.</div>
+          <div style={{ fontSize: 12, opacity: 0.92, marginTop: 4 }}>One stack instead of eight tools duct-taped together. When you win, they win.</div>
         </div>
-        <div style={{ padding: "22px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Wholesalers Welcome</div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>No more bait &amp; switch.</div>
-          <div style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.55 }}>
-            Wholesalers can finally participate cleanly — full transparency, real properties, real buyers.
-          </div>
+        <div style={{ textAlign: "right", flexShrink: 0 }}>
+          <div style={{ fontSize: 11, opacity: 0.85, textTransform: "uppercase", letterSpacing: "0.06em" }}>Operating system</div>
+          <div style={{ fontSize: 22, fontWeight: 900, lineHeight: 1 }}><span style={{ textDecoration: "line-through", opacity: 0.55 }}>$100K</span> → $10K</div>
         </div>
       </div>
 
-      <div style={{ padding: "20px 24px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 14, color: "#fff", ...hVisible(hl, 3) }}>
-        <div style={{ fontSize: 13, fontWeight: 600, opacity: 0.9, marginBottom: 4 }}>And we have many, many tools.</div>
-        <div style={{ fontSize: 20, fontWeight: 800 }}>The whole ecosystem — sourcing, capital, title, agents, buyers — in one place.</div>
+      <div style={{ padding: "14px 18px", borderRadius: 12, border: "2px dashed #2C3E5040", background: "#fff", fontSize: 14, color: "#2C3E50", lineHeight: 1.5, ...hVisible(hl, 4) }}>
+        <b>Straight up — this isn't for everybody.</b> If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it.
       </div>
     </div>
   );
@@ -558,14 +560,14 @@ function SectionMarketplace({ hl }: { hl: number }) {
 function SectionCTA({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
-        Handpicked operators. <span style={{ color: "#E8571A" }}>One Command platform.</span>
+      <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.15, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
+        INVESTSOCAL — <span style={{ color: "#E8571A" }}>you don't need us.</span>
       </h2>
-      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 620, margin: 0, lineHeight: 1.55, ...hVisible(hl, 1) }}>
-        Let's get on a call. Fifteen minutes — I'll walk you through Command and show you exactly how it fits your buy box.
+      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 640, margin: 0, lineHeight: 1.55, ...hVisible(hl, 0) }}>
+        You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two.
       </p>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%", maxWidth: 440, ...hVisible(hl, 1) }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%", maxWidth: 460, ...hVisible(hl, 1) }}>
         <a
           href="https://calendly.com/usale/investor-demo"
           target="_blank"
@@ -578,12 +580,25 @@ function SectionCTA({ hl }: { hl: number }) {
             boxShadow: "0 8px 28px #E8571A40",
           }}
         >
-          Schedule Your Demo Today
+          15 min · One Demo · No Pitch
+        </a>
+        <a
+          href="https://usale.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            padding: "14px 24px", background: "#fff",
+            color: "#2C3E50", border: "1.5px solid #2C3E5040", borderRadius: 14, fontSize: 14, fontWeight: 600,
+            textDecoration: "none",
+          }}
+        >
+          Not ready? Sign up for USale — it's free. Either way, the water's warm.
         </a>
       </div>
 
       <div style={{ ...hVisible(hl, 1) }}>
-        <div style={{ fontSize: 15, color: "#6c757d", marginBottom: 14 }}>Questions? Feel free to contact me directly.</div>
+        <div style={{ fontSize: 15, color: "#6c757d", marginBottom: 14 }}>Questions? Reach out direct.</div>
         <div style={{
           display: "flex", alignItems: "center", gap: 20, padding: "20px 28px",
           background: "#f8f9fa", borderRadius: 16, border: "1px solid #eee",
