@@ -485,17 +485,6 @@ function SectionWelcome() {
         Welcome, <span style={{ color: "#E8571A" }}>{LENDER.company}</span>.
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 120 }} />
-      <div style={{ display: "flex", alignItems: "center", gap: 20, background: "#fff", border: "1px solid #dee2e6", borderRadius: 16, padding: "20px 28px", boxShadow: "0 4px 20px rgba(0,0,0,0.06)", maxWidth: 520 }}>
-        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 80, height: 80, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
-        <div style={{ textAlign: "left" }}>
-          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-          <div style={{ fontSize: 13, color: "#6c757d", marginTop: 2 }}>Founder &amp; CEO — <BrandName /> &amp; FlipIQ</div>
-          <div style={{ fontSize: 13, color: "#6c757d", marginTop: 8, lineHeight: 1.6 }}>
-            32 years. Over 1,100 flips.<br />
-            I've been on the other side of your desk.
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
