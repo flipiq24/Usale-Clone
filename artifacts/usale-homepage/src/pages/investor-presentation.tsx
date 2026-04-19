@@ -202,11 +202,11 @@ function getScripts(_inv: InvestorData) {
 
 const SECTION_TITLES = ["Welcome", "Your Data", "AI Reality", "First Movers", "Top-Down", "The System", "Your Move"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 6, 3, 3, 3, 2, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 7, 3, 3, 3, 2, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.30, 1], [0.46, 2], [0.62, 3], [0.76, 4], [0.90, 5]],
+  [[0, 0], [0.28, 1], [0.36, 2], [0.52, 3], [0.66, 4], [0.78, 5], [0.90, 6]],
   [[0, 0], [0.30, 1], [0.65, 2]],
   [[0, 0], [0.30, 1], [0.65, 2]],
   [[0, 0], [0.30, 1], [0.65, 2]],
@@ -457,7 +457,8 @@ function PropertyDrilldown() {
 
 const STEP_MAP: { tab: TabKey; row: number | null; drilldown?: boolean }[] = [
   { tab: "entities", row: null },
-  { tab: "entities", row: 5 },
+  { tab: "entities", row: 0 },
+  { tab: "entities", row: 0, drilldown: true },
   { tab: "agents", row: 0 },
   { tab: "lenders", row: 0 },
   { tab: "titles", row: 0 },
