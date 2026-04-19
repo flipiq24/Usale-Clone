@@ -190,7 +190,7 @@ function useAudioNarration(onEnded?: () => void) {
 function getHMLScripts(company: string): string[] {
   return [
     // 0: Welcome — Who I Am
-    `Welcome, and thank you for the time. My name is Tony Diaz. I've been in this business 32 years. Over 1,100 flips. I've borrowed from Kiavi, Anchor, Genesis, private individuals. At one point I was the second-largest borrower at Anchor Loans. So when I talk about hard money, I'm not talking at you. I'm talking as someone who's been on the other side of your desk for three decades.`,
+    `Welcome, ${company}. My name is Tony Diaz. I've been in this business 32 years. Over 1,100 flips. I've borrowed from Kiavi, Anchor, Genesis, private individuals. At one point I was the second-largest borrower at Anchor Loans. So when I talk about hard money, I'm not talking at you. I'm talking as someone who's been on the other side of your desk for three decades.`,
 
     // 1: Your Data — competitive landscape
     `Before we talk about what I'm building — let's talk about you. ${company}, in the Los Angeles area, you have done 1,047 transactions. 681 unique investor relationships. Average loan amount of approximately 623 thousand dollars. Average loan-to-purchase of 90.5 percent. Average 1.5 loans per relationship. That last number is the one I want you to think about. One and a half. That means most of your borrowers borrow once, and they move on. That's not loyalty — that's luck.`,
@@ -1134,7 +1134,10 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
 
 function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => void }) {
   const isGDB = name === "G D BRISTOL LLC";
-  const [activeTab, setActiveTab] = useState<"overview" | "lenders" | "agents">("lenders");
+  const [activeTab, setActiveTab] = useState<"entities" | "agents" | "lenders" | "title">("lenders");
+  const [lenderFilter, setLenderFilter] = useState("");
+  const [agentFilter, setAgentFilter] = useState("");
+  const [titleFilter, setTitleFilter] = useState("");
 
   const thStyle: React.CSSProperties = {
     padding: "10px 12px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const,
@@ -1143,6 +1146,13 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
     position: "sticky" as const, top: 0, zIndex: 1,
   };
   const tdStyle: React.CSSProperties = { padding: "9px 12px", fontSize: 13, borderBottom: "1px solid #E8571A15" };
+
+  const modalTabs: { key: "entities" | "agents" | "lenders" | "title"; label: string }[] = [
+    { key: "entities", label: "14 Related Entities" },
+    { key: "agents",   label: "38 Agent Relationships" },
+    { key: "lenders",  label: "4 Lenders" },
+    { key: "title",    label: "30 Title Companies" },
+  ];
 
   if (!isGDB) {
     return (
@@ -1156,137 +1166,194 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
     );
   }
 
+  const statsGrid = [
+    { label: "Investor Rating:",              main: "48 Transaction",  sub: ["Owners: 3", "Sold: 45"] },
+    { label: "Avg Purchase Price:",           main: "$674,698",        sub: ["Low: $370,000", "High: $1,350,000"] },
+    { label: "Avg Resale Price:",             main: "$867,998",        sub: ["Low: $530,000", "High: $1,650,000"] },
+    { label: "Avg Purchase-to-Future-Value:", main: "77%",             sub: ["Low: 61%", "High: 96%"] },
+    { label: "Avg List to Sold Price",        main: "81%",             sub: ["Transactions: 38"] },
+    { label: "Avg Purchase to Market",        main: "64 Days",         sub: ["Low: 2 days", "High: 292 Days"] },
+    { label: "Avg Purchase to Resale",        main: "118 Days",        sub: ["Low: 25 days", "High: 329 Days"] },
+    { label: "Acquisition Source",            main: "MLS: 89",         sub: ["Off Market: 52"] },
+  ];
+
+  const filteredLenders = GDB_LENDERS.filter(l => l.entity.toLowerCase().includes(lenderFilter.toLowerCase()));
+  const filteredAgents  = GDB_AGENTS.filter(a => a.name.toLowerCase().includes(agentFilter.toLowerCase()));
+  const filteredTitle   = GDB_TITLE_COMPANIES.filter(t => t.company.toLowerCase().includes(titleFilter.toLowerCase()));
+
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(44,62,80,0.6)", backdropFilter: "blur(4px)" }} onClick={onClose}>
-      <div style={{ background: "#fff", borderRadius: 22, maxWidth: 900, width: "95vw", maxHeight: "88vh", display: "flex", flexDirection: "column", boxShadow: "0 28px 90px rgba(0,0,0,0.28)", overflow: "hidden" }} onClick={e => e.stopPropagation()}>
-        <div style={{ padding: "20px 26px", borderBottom: "2px solid #E8571A20", flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-              <h3 style={{ fontSize: 22, fontWeight: 800, color: "#2C3E50", margin: 0 }}>{name}</h3>
-              <span style={{ fontSize: 11, background: "#E8571A", color: "#fff", borderRadius: 6, padding: "2px 8px", fontWeight: 700 }}>EASY STREET BORROWER</span>
-            </div>
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-              {[
-                "All Locations",
-                "Last Purchase: 11/16/2023",
-                "38 of 49 Transactions",
-              ].map((item, i) => (
-                <span key={i} style={{ fontSize: 13, color: "#6c757d" }}>{item}</span>
-              ))}
-            </div>
+      <div style={{ background: "#f8f9fa", borderRadius: 18, maxWidth: 980, width: "96vw", maxHeight: "90vh", display: "flex", flexDirection: "column", boxShadow: "0 28px 90px rgba(0,0,0,0.28)", overflow: "hidden" }} onClick={e => e.stopPropagation()}>
+
+        <div style={{ background: "#fff", padding: "16px 24px", borderBottom: "1px solid #dee2e6", flexShrink: 0, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h3 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "#2C3E50" }}>
+            Investor: <span style={{ color: "#E8571A", textDecoration: "underline" }}>{name}</span>{" "}
+            <span style={{ fontSize: 13, color: "#adb5bd" }}>&#8599;</span>
+          </h3>
+          <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 20, color: "#6c757d", padding: "4px 8px", lineHeight: 1 }}>✕</button>
+        </div>
+
+        <div style={{ background: "#fff", padding: "16px 24px", borderBottom: "1px solid #dee2e6", flexShrink: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "12px 20px" }}>
+            {statsGrid.map((s, i) => (
+              <div key={i}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#E8571A", marginBottom: 3 }}>{s.label}</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", marginBottom: 1 }}>{s.main}</div>
+                {s.sub.map((line, j) => <div key={j} style={{ fontSize: 11, color: "#6c757d" }}>{line}</div>)}
+              </div>
+            ))}
           </div>
-          <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", fontSize: 22, color: "#6c757d", padding: "4px 8px", lineHeight: 1 }}>✕</button>
         </div>
 
-        <div style={{ display: "flex", borderBottom: "2px solid #E8571A20", flexShrink: 0 }}>
-          {(["lenders", "overview", "agents"] as const).map(tab => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: "14px 24px", background: "none", border: "none", cursor: "pointer",
-                fontSize: 14, fontWeight: activeTab === tab ? 700 : 500,
-                color: activeTab === tab ? "#E8571A" : "#6c757d",
-                borderBottom: activeTab === tab ? "3px solid #E8571A" : "3px solid transparent",
-                transition: "all 0.2s",
-              }}
-            >
-              {tab === "lenders" ? "Lenders (4)" : tab === "overview" ? "Overview" : "Agents (38)"}
-            </button>
-          ))}
+        <div style={{ background: "#f8f9fa", padding: "0 8px", borderBottom: "1px solid #dee2e6", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+          <div style={{ display: "flex" }}>
+            {modalTabs.map(t => (
+              <button
+                key={t.key}
+                onClick={() => setActiveTab(t.key)}
+                style={{
+                  padding: "12px 18px", background: activeTab === t.key ? "#e9ecef" : "transparent",
+                  border: "none", cursor: "pointer", fontSize: 13,
+                  fontWeight: activeTab === t.key ? 700 : 500,
+                  color: activeTab === t.key ? "#E8571A" : "#6c757d",
+                  borderRadius: 8, margin: "4px 2px", transition: "all 0.15s",
+                  whiteSpace: "nowrap" as const,
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          {activeTab === "lenders" && (
+            <input value={lenderFilter} onChange={e => setLenderFilter(e.target.value)} placeholder="Filter by lender name..."
+              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 190, outline: "none", background: "#fff", margin: "4px 8px" }} />
+          )}
+          {activeTab === "agents" && (
+            <input value={agentFilter} onChange={e => setAgentFilter(e.target.value)} placeholder="Filter by agent name..."
+              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 190, outline: "none", background: "#fff", margin: "4px 8px" }} />
+          )}
+          {activeTab === "title" && (
+            <input value={titleFilter} onChange={e => setTitleFilter(e.target.value)} placeholder="Filter by company name..."
+              style={{ padding: "6px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 12, width: 200, outline: "none", background: "#fff", margin: "4px 8px" }} />
+          )}
         </div>
 
-        <div style={{ overflowY: "auto", flex: 1 }}>
-          {activeTab === "overview" && (
-            <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 6 }}>
-              {[
-                { label: "Investor Rating",         value: "48 Transactions",    sub: "Owners: 3 · Sold: 45" },
-                { label: "Avg. Purchase Price",     value: "$674,698",           sub: "Low: $370K · High: $1.35M" },
-                { label: "Avg. Resale Price",       value: "$867,998",           sub: "Low: $530K · High: $1.65M" },
-                { label: "P/FV Ratio",              value: "77%",                sub: "Low: 61% · High: 96%" },
-                { label: "List-to-Sold",            value: "81%",                sub: "38 transactions" },
-                { label: "Avg. Days to Market",     value: "64 Days",            sub: "Low: 2 · High: 292 days" },
-                { label: "Avg. Days to Resale",     value: "118 Days",           sub: "Low: 25 · High: 329 days" },
-                { label: "Acquisition Source",      value: "MLS 89 / Off-Mkt 52",sub: "Mixed acquisition" },
-                { label: "Last Property Purchased", value: "9455 IVES ST, BELLFLOWER", sub: "" },
-              ].map((m, i) => (
-                <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderLeft: "4px solid #E8571A30", borderBottom: "1px solid #E8571A15" }}>
-                  <div>
-                    <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>{m.label}</div>
-                    {m.sub && <div style={{ fontSize: 12, color: "#6c757d", marginTop: 2 }}>{m.sub}</div>}
-                  </div>
-                  <span style={{ fontSize: 15, fontWeight: 700, color: "#E8571A" }}>{m.value}</span>
-                </div>
-              ))}
+        <div style={{ overflowY: "auto", flex: 1, background: "#fff" }}>
+
+          {activeTab === "entities" && (
+            <div style={{ padding: 32, color: "#6c757d", fontSize: 15, fontStyle: "italic" }}>
+              Related entity data for G D BRISTOL LLC — 14 entities across Yorba Linda, CA area. Detail coming soon.
             </div>
           )}
 
           {activeTab === "lenders" && (
-            <div style={{ padding: 0 }}>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr>
-                    <th style={thStyle}>Lending Entity</th>
-                    <th style={{ ...thStyle, textAlign: "right" as const }}>Loans</th>
-                    <th style={{ ...thStyle, textAlign: "right" as const }}>Avg. Loan</th>
-                    <th style={{ ...thStyle, textAlign: "right" as const }}>Open</th>
-                    <th style={{ ...thStyle, textAlign: "right" as const }}>Closed</th>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>Lending Entity</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Loans</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Avg. Loan</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Open</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Closed</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Avg Loan Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredLenders.map((row, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
+                    <td style={{ ...tdStyle, fontWeight: 600, color: "#E8571A" }}>{row.entity}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50", fontWeight: 700 }}>{row.loans}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50" }}>{row.avgLoan}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.open}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.closed}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.avgLoanTime}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {GDB_LENDERS.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
-                      <td style={{ ...tdStyle, fontWeight: 600, color: "#E8571A" }}>{row.entity}</td>
-                      <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50", fontWeight: 700 }}>{row.loans}</td>
-                      <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50" }}>{row.avgLoan}</td>
-                      <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.open}</td>
-                      <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.closed}</td>
-                    </tr>
-                  ))}
-                  <tr style={{ background: "#E8571A08" }}>
-                    <td style={{ ...tdStyle, fontWeight: 800, color: "#2C3E50" }}>Total</td>
-                    <td style={{ ...tdStyle, textAlign: "right", fontWeight: 800, color: "#E8571A" }}>24</td>
-                    <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>$443,347</td>
-                    <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>1</td>
-                    <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>23</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                ))}
+                <tr style={{ background: "#E8571A08" }}>
+                  <td style={{ ...tdStyle, fontWeight: 800, color: "#2C3E50" }}>Total</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 800, color: "#E8571A" }}>24</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>$443,347</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>1</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>23</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>74 days</td>
+                </tr>
+              </tbody>
+            </table>
           )}
 
           {activeTab === "agents" && (
-            <div style={{ padding: 0 }}>
-              <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                <thead>
-                  <tr>
-                    <th style={thStyle}>Agent</th>
-                    <th style={{ ...thStyle, textAlign: "right" as const }}>W/ Investor</th>
-                    <th style={thStyle}>Acq. Listing / Buyer / Resale</th>
-                    <th style={thStyle}>Company</th>
-                    <th style={thStyle}>Phone</th>
-                    <th style={thStyle}>Email</th>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>Agents Name</th>
+                  <th style={{ ...thStyle, textAlign: "center" as const }}>W/ Investor</th>
+                  <th style={{ ...thStyle, textAlign: "center" as const }}>Breakdown</th>
+                  <th style={thStyle}>Company</th>
+                  <th style={thStyle}>Phone</th>
+                  <th style={thStyle}>Email</th>
+                  <th style={{ ...thStyle, textAlign: "center" as const }}>Investor Agent Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredAgents.map((row, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
+                    <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50", whiteSpace: "nowrap" as const }}>&#8599; {row.name}</td>
+                    <td style={{ ...tdStyle, textAlign: "center", fontWeight: 700, color: "#E8571A" }}>{row.investorTrans}</td>
+                    <td style={{ ...tdStyle, fontSize: 11, color: "#6c757d" }}>
+                      <div>Listing: {row.acqListing}</div>
+                      <div>Buyer: {row.acqBuyer}</div>
+                      <div>Resale: {row.resaleListing}</div>
+                    </td>
+                    <td style={{ ...tdStyle, color: "#2C3E50", fontSize: 12 }}>{row.company}</td>
+                    <td style={{ ...tdStyle, fontSize: 12 }}>
+                      {row.phone !== "—" ? <a href={`tel:${row.phone}`} style={{ color: "#2C3E50", textDecoration: "none" }}>{row.phone}</a> : "—"}
+                    </td>
+                    <td style={{ ...tdStyle, fontSize: 11 }}>
+                      <a href={`mailto:${row.email}`} style={{ color: "#E8571A", textDecoration: "none" }}>{row.email}</a>
+                    </td>
+                    <td style={{ ...tdStyle, textAlign: "center" }}>
+                      {row.ratingAcqListing !== undefined ? (
+                        <div>
+                          <div style={{ fontWeight: 700, color: "#E8571A" }}>{row.totalTrans}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Listing: {row.ratingAcqListing}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Buyer: {row.ratingAcqBuyer}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Resale: {row.ratingResaleListing}</div>
+                        </div>
+                      ) : (
+                        <span style={{ fontWeight: 700, color: "#E8571A" }}>{row.totalTrans}</span>
+                      )}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {GDB_AGENTS.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
-                      <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50", whiteSpace: "nowrap" as const }}>{row.name}</td>
-                      <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#E8571A" }}>{row.investorTrans}</td>
-                      <td style={{ ...tdStyle, color: "#6c757d", fontSize: 12 }}>{row.acqListing} / {row.acqBuyer} / {row.resaleListing}</td>
-                      <td style={{ ...tdStyle, color: "#2C3E50", fontSize: 12, maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const }}>{row.company}</td>
-                      <td style={{ ...tdStyle, fontSize: 12 }}>
-                        {row.phone !== "—" ? <a href={`tel:${row.phone}`} style={{ color: "#2C3E50", textDecoration: "none" }}>{row.phone}</a> : "—"}
-                      </td>
-                      <td style={{ ...tdStyle, fontSize: 12 }}>
-                        <a href={`mailto:${row.email}`} style={{ color: "#E8571A", textDecoration: "none" }}>{row.email}</a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           )}
+
+          {activeTab === "title" && (
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={thStyle}>Title Company</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>W/ Investor</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Acq. Listing</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Acq. Buyers</th>
+                  <th style={{ ...thStyle, textAlign: "right" as const }}>Resale Listing</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTitle.map((row, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
+                    <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50" }}>{row.company}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#E8571A" }}>{row.withInvestor}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.acqListing}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.acqBuyer}</td>
+                    <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.resaleListing}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
         </div>
       </div>
     </div>
