@@ -8,6 +8,7 @@ import InvestorPresentation from "@/pages/investor-presentation";
 import AdminPage from "@/pages/admin";
 import ComingSoon from "@/pages/coming-soon";
 import IndividualInvestorPresentation from "@/pages/individual-investor-presentation";
+import HardMoneyPresentation from "@/pages/hard-money-presentation";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -25,7 +26,7 @@ function Router() {
       <Route path="/agent/:slug" component={ComingSoon} />
       <Route path="/title/:slug" component={ComingSoon} />
       <Route path="/escrow/:slug" component={ComingSoon} />
-      <Route path="/hard-money/:slug" component={ComingSoon} />
+      <Route path="/hard-money/:slug" component={HardMoneyPresentation} />
       <Route path="/technology-partner/:slug" component={ComingSoon} />
       <Route path="/service-provider/:slug" component={ComingSoon} />
       <Route component={NotFound} />
