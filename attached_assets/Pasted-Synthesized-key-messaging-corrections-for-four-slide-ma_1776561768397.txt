@@ -1,0 +1,45 @@
+Synthesized key messaging corrections for four-slide marketplace pitch
+Synthesized key messaging corrections for four-slide marketplace pitch
+SLIDE 1 — Welcome
+My name is Tony Diaz. Thirty-two years. Eleven hundred flips. Obsessed with data and technology. You're not here by accident — we found you through the data because you're a real operator. Four minutes. I'm going to show you your numbers the way nobody's ever shown them to you. Then I'll tell you what we built — and you decide if you want in.
+
+SLIDE 2 — Your Data
+INVESTSOCAL. Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator.
+
+Now watch. Your primary entity — INVESTSOCAL LLC out of PO Box eighty-five-eighteen — nineteen of the thirty-two. Your agent — Jose Diaz. Six with you, fifty-seven in his career, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others.
+
+That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.
+
+SLIDE 3 — The Shift
+Here's the reality — and I'm not going to pitch you.
+
+AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. You're either in front of it or behind it.
+
+We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. The marketplace is free. That's not a discount — that's the model.
+
+Think about it. Google. Zillow. The biggest companies ever built — free. Why? Because they weren't trying to make ninety-nine bucks. They were building the most powerful platform, and the transactions came. That's us. We're not here to make ninety-nine. We're here to build the most powerful off-market marketplace that's ever existed — and the money comes from the people who see the value and want to be inside the machine. That's why you're being invited.
+
+Two of the largest national hard money lenders and two of the largest national title companies are already behind this. Not because we paid them. Because they understand what we're building — a frictionless community where everybody wins.
+
+And no, we don't need everybody. We need the twelve thousand four hundred forty-eight investor-friendly agents in Southern California. That's it. That's the beachhead. Then we go national.
+
+What we built is one system. Acquisition, disposition, CRM, AI voice training for your team, and the free off-market marketplace — USale. Think InvestorLift without the cost. Think Privy with actual intelligence.
+
+And I'll be straight — this isn't for everybody. If you're not seeing where this is going, we're not it. No harm done. Enjoy the free marketplace.
+
+SLIDE 4 — Your Move
+INVESTSOCAL — you already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two.
+
+Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us.
+
+If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.
+
+Sync points — Slide 3 re-mapped to 6 beats
+STATIC_HIGHLIGHT_CUES[2] = [[0,0],[0.15,1],[0.32,2],[0.52,3],[0.72,4],[0.88,5]]
+
+0 — "AI is going to change this business" card
+0.15 — "somebody using it will" — bold callout
+0.32 — "We're not on Facebook / marketplace is free" card
+0.52 — Google + Zillow reference → "transactions come, that's the model"
+0.72 — Partner silhouettes (no names) + "12,448 agents / SoCal beachhead / then national"
+0.88 — "This isn't for everybody" takeaway card
