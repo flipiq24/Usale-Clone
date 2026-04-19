@@ -249,6 +249,14 @@ function SectionWelcome({ hl }: { hl: number }) {
         You're a <span style={{ color: "#E8571A" }}>real operator</span>.
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 110, ...introReveal(hl, 2) }} />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, ...introReveal(hl, 3) }}>
+        <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 600, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+          Tony Diaz · 32 years buy-fix-sell · 1,100+ flips · obsessed with data.
+        </p>
+        <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
+          Here's a five-minute look at your numbers — and what we built for you.
+        </p>
+      </div>
     </div>
   );
 }
