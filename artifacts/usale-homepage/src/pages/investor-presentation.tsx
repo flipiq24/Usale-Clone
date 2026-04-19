@@ -942,7 +942,7 @@ export default function InvestorPresentation() {
             <img src={USALE_LOGO} alt="USale" style={{ height: 48, cursor: "pointer" }} />
           </a>
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
-          <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {investorData.name} &middot; {investorData.legalName}</span>
+          <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for {investorData.legalName}</span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button onClick={() => setChatOpen(o => !o)} style={{
