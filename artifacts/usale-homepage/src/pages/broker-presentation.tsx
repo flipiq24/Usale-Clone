@@ -498,24 +498,6 @@ function SectionDataCards({ hl, isNarrating, expanded, setExpanded, isActive, na
   );
 }
 
-function AnimatedNumber({ target, run, prefix = "", suffix = "", dur = 1400 }: { target: number; run: boolean; prefix?: string; suffix?: string; dur?: number }) {
-  const [v, setV] = useState(0);
-  const r = useRef<number | null>(null);
-  useEffect(() => {
-    if (!run) { setV(0); return; }
-    let s: number | null = null;
-    const step = (t: number) => {
-      if (!s) s = t;
-      const p = Math.min((t - s) / dur, 1);
-      setV(Math.round((1 - Math.pow(1 - p, 3)) * target));
-      if (p < 1) r.current = requestAnimationFrame(step);
-    };
-    r.current = requestAnimationFrame(step);
-    return () => { if (r.current) cancelAnimationFrame(r.current); };
-  }, [run, target, dur]);
-  return <>{prefix}{v.toLocaleString()}{suffix}</>;
-}
-
 const CURRENT_TRANS = 2088;
 const AVG_PURCHASE_RAW = 1981255;
 const AVG_PURCHASE_DISPLAY = 1.98;
@@ -528,48 +510,53 @@ const ADDITIONAL_TRANS = Math.round(CURRENT_TRANS * GROWTH_RATE);
 
 function SectionValueProp({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 36, minHeight: "60vh", justifyContent: "center", maxWidth: 980, margin: "0 auto", width: "100%" }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,36px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
         Alright {BROKER.name}, let's talk <span style={{ color: "#E8571A" }}>dollars</span>.
       </h2>
 
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 1) }}>
-        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Transactions to Investors</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}><AnimatedNumber target={CURRENT_TRANS} run={hl >= 1} /></div>
+      <style>{`
+        .vp-compare { display: grid; grid-template-columns: 1fr auto 1.35fr; align-items: stretch; gap: 24px; }
+        @media (max-width: 720px) {
+          .vp-compare { grid-template-columns: 1fr; gap: 16px; }
+          .vp-arrow { transform: rotate(90deg); justify-self: center; }
+        }
+      `}</style>
+      <div className="vp-compare">
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", padding: "8px 4px", ...hVisible(hl, 1) }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#2C3E5099", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Today</div>
+          <div style={{ fontSize: "clamp(34px,4.4vw,52px)", fontWeight: 700, color: "#2C3E50", lineHeight: 1, letterSpacing: "-0.02em" }}>${CURRENT_COMMISSIONS_M}M</div>
+          <div style={{ fontSize: 13, color: "#2C3E5099", marginTop: 10, lineHeight: 1.5 }}>
+            {CURRENT_TRANS.toLocaleString()} transactions · $1.98M avg · 2% commission
+          </div>
         </div>
-        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Avg. Purchase Price</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}>$1.98M</div>
-        </div>
-        <div style={{ flex: "1 1 200px", background: "#fff", border: "1px solid #E8571A30", borderRadius: 14, padding: "24px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#2C3E50", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>At 2% Commission</div>
-          <div style={{ fontSize: 32, fontWeight: 800, color: "#E8571A" }}>${CURRENT_COMMISSIONS_M}M</div>
+
+        <div aria-hidden className="vp-arrow" style={{ display: "flex", alignItems: "center", justifyContent: "center", color: "#2C3E5040", fontSize: 28, fontWeight: 300, ...hVisible(hl, 2) }}>→</div>
+
+        <div style={{ background: "#E8571A", borderRadius: 18, padding: "32px 32px", color: "#fff", display: "flex", flexDirection: "column", justifyContent: "center", ...hVisible(hl, 2) }}>
+          <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", opacity: 0.85, marginBottom: 10 }}>With a 20% lift</div>
+          <div style={{ fontSize: "clamp(48px,6.4vw,76px)", fontWeight: 800, lineHeight: 1, letterSpacing: "-0.025em" }}>${PROJECTED_COMMISSIONS_M}M</div>
+          <div style={{ fontSize: 14, marginTop: 12, opacity: 0.95, lineHeight: 1.5 }}>
+            Not by working harder — by putting <b>more buyers</b> in front of your agents.
+          </div>
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 2) }}>
-        <div style={{ flex: "1 1 300px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 16, padding: "28px 24px", textAlign: "center", color: "#fff" }}>
-          <div style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.03em", marginBottom: 6 }}>What if we bring this up by 20%?</div>
-          <div style={{ fontSize: 42, fontWeight: 800 }}>${PROJECTED_COMMISSIONS_M}M</div>
-          <div style={{ fontSize: 13, marginTop: 8, opacity: 0.9 }}>Not because you work harder, because you <b>control more buyers</b></div>
+      <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", color: "#2C3E50", ...hVisible(hl, 3) }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+          <span style={{ fontSize: 22, fontWeight: 700, color: "#E8571A" }}>+${ADDITIONAL_COMMISSIONS_M}M</span>
+          <span style={{ fontSize: 13, color: "#2C3E5099" }}>additional revenue</span>
+        </div>
+        <div style={{ width: 1, background: "#2C3E5020" }} />
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+          <span style={{ fontSize: 22, fontWeight: 700, color: "#E8571A" }}>+{ADDITIONAL_TRANS.toLocaleString()}</span>
+          <span style={{ fontSize: 13, color: "#2C3E5099" }}>more transactions</span>
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", ...hVisible(hl, 3) }}>
-        <div style={{ flex: "1 1 220px", background: "#E8571A0D", border: "2px solid #E8571A30", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>Additional Revenue</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: "#E8571A" }}>+${ADDITIONAL_COMMISSIONS_M}M</div>
-        </div>
-        <div style={{ flex: "1 1 220px", background: "#E8571A0D", border: "2px solid #E8571A30", borderRadius: 14, padding: "22px 20px", textAlign: "center" }}>
-          <div style={{ fontSize: 12, fontWeight: 600, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>More Transactions</div>
-          <div style={{ fontSize: 30, fontWeight: 800, color: "#E8571A" }}>+<AnimatedNumber target={ADDITIONAL_TRANS} run={hl >= 3} /></div>
-        </div>
-      </div>
-
-      <div style={{ textAlign: "center", padding: "20px", background: "#2C3E5008", borderRadius: 14, border: "1px solid #2C3E5018", ...hVisible(hl, 4) }}>
-        <div style={{ fontSize: 22, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
-        <div style={{ fontSize: 14, color: "#2C3E50", marginTop: 8, lineHeight: 1.6 }}>Let me give you a quick introduction to <BrandName /> and how it works.</div>
+      <div style={{ textAlign: "center", paddingTop: 8, ...hVisible(hl, 4) }}>
+        <div style={{ fontSize: 20, fontWeight: 700, color: "#2C3E50" }}>Ready to learn more, <span style={{ color: "#E8571A" }}>{BROKER.name}</span>?</div>
+        <div style={{ fontSize: 14, color: "#2C3E5099", marginTop: 6, lineHeight: 1.6 }}>Let me give you a quick introduction to <BrandName /> and how it works.</div>
       </div>
     </div>
   );
