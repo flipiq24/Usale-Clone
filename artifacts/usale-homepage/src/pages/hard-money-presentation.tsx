@@ -190,7 +190,7 @@ function useAudioNarration(onEnded?: () => void) {
 function getHMLScripts(company: string): string[] {
   return [
     // 0: Welcome
-    `Welcome, ${company}. My name is Tony Diaz. I've been in this business 32 years. Over 1,100 flips. I've borrowed from Kiavi, Anchor, Genesis, and private individuals. At one point I was the second-largest borrower at Anchor Loans.`,
+    `Welcome, ${company}. My name is Tony Diaz. I've been in this business 32 years. Over eleven hundred flips. I've borrowed from Kiavi, Anchor, Genesis, and private individuals. At one point I was the second-largest borrower at Anchor Loans.`,
 
     // 1: Your Data
     `Before we talk about what I'm building — let's talk about you. ${company} across the Southern California markets: 1,047 transactions. 681 unique investor relationships. Average loan amount around $623K. Average loan-to-purchase of 90.5 percent. Average of 1.5 loans per relationship. That last number is the one I want you to think about. One point five. That means most of your borrowers borrow once, and they move on. That's not loyalty. Look at your competition — Kiavi averages 3.5 loans per borrower. Anchor 4.6. You get the point. I know you know your data.`,
