@@ -1399,9 +1399,10 @@ export default function HardMoneyPresentation() {
       try {
         const resp = await fetch(`${API_BASE}/contacts/by-slug/${slug}`);
         if (resp.ok) {
-          const data = await resp.json() as { name?: string; company?: string; slug?: string; id?: number };
-          if (data?.name) {
-            LENDER = { name: data.name, company: data.company || data.name, slug: data.slug || slug, contactId: data.id ?? null };
+          const data = await resp.json() as { firstName?: string; lastName?: string; company?: string; slug?: string; id?: number };
+          const displayName = data?.company || (data?.firstName ? `${data.firstName}${data.lastName ? " " + data.lastName : ""}` : null);
+          if (displayName) {
+            LENDER = { name: displayName, company: displayName, slug: data.slug || slug, contactId: data.id ?? null };
           }
         }
       } catch { /* silent */ } finally {
@@ -1470,7 +1471,16 @@ export default function HardMoneyPresentation() {
           <div style={{ fontSize: 16, color: "#6c757d" }}>Hard Money Lender Presentation</div>
         </div>
         <button
-          onClick={() => setStarted(true)}
+          onClick={() => {
+            unlockAudioContext();
+            setStarted(true);
+            if (audioOn) {
+              playTTS(SCRIPTS[0]);
+              for (let i = 1; i <= 3; i++) {
+                if (i < total) preloadTTS(SCRIPTS[i]);
+              }
+            }
+          }}
           style={{ padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", boxShadow: "0 6px 24px #E8571A40" }}
         >
           ▶ Start Presentation
