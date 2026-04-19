@@ -662,28 +662,30 @@ function SectionAsk() {
 
 function SectionClose() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
-      <div style={{ maxWidth: 680 }}>
-        <h2 style={{ fontSize: "clamp(26px,4.5vw,44px)", fontWeight: 800, color: "#2C3E50", margin: "0 0 28px", lineHeight: 1.15, letterSpacing: "-0.02em" }}>
-          I'm not asking you for your clients.<br />
-          <span style={{ color: "#E8571A" }}>I already have your clients.</span>
-        </h2>
-        <p style={{ fontSize: 18, color: "#2C3E50", lineHeight: 1.8, margin: "0 0 20px" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 40 }}>
+      <div style={{ maxWidth: 700, display: "flex", flexDirection: "column", gap: 20 }}>
+        <p style={{ fontSize: "clamp(22px,3.5vw,32px)", fontWeight: 800, color: "#2C3E50", margin: 0, lineHeight: 1.25, letterSpacing: "-0.02em" }}>
+          I'm not asking you for your clients.
+        </p>
+        <p style={{ fontSize: "clamp(22px,3.5vw,32px)", fontWeight: 800, color: "#E8571A", margin: 0, lineHeight: 1.25, letterSpacing: "-0.02em" }}>
+          I already have your clients.
+        </p>
+        <p style={{ fontSize: 18, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
           Go ahead and skip-trace all you want — I have a better way to reach them.
         </p>
         <p style={{ fontSize: 18, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
           What I'm asking is for you to stop competing on rate and start winning on value — and let us deliver that value to the borrowers who make you money whether you ever cold-called them or not.
         </p>
       </div>
-      <div style={{ padding: "20px 28px", background: "#f8f9fa", borderRadius: 16, border: "1px solid #eee" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 64, height: 64, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
+      <div style={{ padding: "24px 32px", background: "#f8f9fa", borderRadius: 16, border: "1px solid #eee", minWidth: 320 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 72, height: 72, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
           <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
-            <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, <BrandName /> &amp; FlipIQ</div>
-            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 6 }}>
-              <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
-              <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
+            <div style={{ fontSize: 18, fontWeight: 800, color: "#2C3E50", marginBottom: 2 }}>Tony Diaz</div>
+            <div style={{ fontSize: 13, color: "#6c757d", marginBottom: 8 }}>Founder &amp; CEO, <BrandName /> &amp; FlipIQ</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+              <a href="mailto:tony@flipiq.com" style={{ fontSize: 14, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
+              <a href="tel:714-581-7805" style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
             </div>
           </div>
         </div>
