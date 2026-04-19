@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "wouter";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
 import TONY_PHOTO from "@assets/image_1774069888966.png";
@@ -15,7 +15,7 @@ interface LenderContact {
   slug: string;
   contactId?: number | null;
 }
-const DEFAULT_LENDER: LenderContact = { name: "Easy Street Funding", company: "Easy Street Capital", slug: "easy-street-funding", contactId: null };
+const DEFAULT_LENDER: LenderContact = { name: "Easy Street Funding", company: "Easy Street Funding", slug: "easy-street-funding", contactId: null };
 let LENDER: LenderContact = DEFAULT_LENDER;
 
 interface CompetitorRow {
@@ -30,7 +30,7 @@ interface CompetitorRow {
 
 const LENDER_TABLE: CompetitorRow[] = [
   { lender: "KIAVI FUNDING INC",                         avgLoan: "$717,080",      loanPurchaseRatio: "125.2%", totalTrans: 2644, uniqueRels: 753, avgLoansPerRel: 3.5 },
-  { lender: "EASY STREET CAPITAL (All Entities)",        avgLoan: "$623,000",      loanPurchaseRatio: "90.5%",  totalTrans: 1047, uniqueRels: 681, avgLoansPerRel: 1.5, isEasyStreet: true },
+  { lender: "EASY STREET CAPITAL",                       avgLoan: "$623,000",      loanPurchaseRatio: "90.5%",  totalTrans: 1047, uniqueRels: 681, avgLoansPerRel: 1.5, isEasyStreet: true },
   { lender: "ANCHOR LOANS INC",                         avgLoan: "$930,523",      loanPurchaseRatio: "104.1%", totalTrans: 2822, uniqueRels: 611, avgLoansPerRel: 4.6 },
   { lender: "LENDINGHOME FUNDING CORP",                 avgLoan: "$533,474",      loanPurchaseRatio: "95.3%",  totalTrans: 1622, uniqueRels: 395, avgLoansPerRel: 4.1 },
   { lender: "WESTERN ALLIANCE BANK",                    avgLoan: "$42,575,090",   loanPurchaseRatio: "793.8%", totalTrans: 491,  uniqueRels: 138, avgLoansPerRel: 3.6 },
@@ -140,44 +140,44 @@ interface AgentRelRow {
 }
 
 const GDB_AGENTS: AgentRelRow[] = [
-  { name: "Russell Morgan",      investorTrans: 17, acqListing: 1,  acqBuyer: 3,  resaleListing: 13, company: "HomeWay",                                                 phone: "562-237-0580", email: "russell@thehomewayteam.com",    totalTrans: 59 },
-  { name: "Sherry Carr",         investorTrans: 7,  acqListing: 0,  acqBuyer: 2,  resaleListing: 5,  company: "Keller Williams Realty",                                  phone: "626-355-2384", email: "sherrycarr777@yahoo.com",       totalTrans: 23 },
-  { name: "Monica Cornelius",    investorTrans: 6,  acqListing: 2,  acqBuyer: 2,  resaleListing: 2,  company: "The Cross Street Team",                                   phone: "714-686-2470", email: "Monica@TheCrossStreetTeam.com", totalTrans: 9  },
-  { name: "Ryan Meltcher",       investorTrans: 6,  acqListing: 0,  acqBuyer: 3,  resaleListing: 3,  company: "Corcoran Global Living",                                  phone: "714-404-1267", email: "ryan@meltcher.com",             totalTrans: 26 },
-  { name: "Tony Congelliere",    investorTrans: 6,  acqListing: 0,  acqBuyer: 6,  resaleListing: 0,  company: "Russell James Morgan, Broker",                            phone: "714-482-5329", email: "ajc1984112@gmail.com",          totalTrans: 19 },
-  { name: "David De La Vega",    investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "The Doorway Realty",                                      phone: "714-914-6205", email: "daviddlv@hotmail.com",          totalTrans: 21 },
-  { name: "Oscar Rosas",         investorTrans: 2,  acqListing: 0,  acqBuyer: 0,  resaleListing: 2,  company: "T.N.G. Real Estate Consultants",                          phone: "714-679-2761", email: "ojrosas@tngrealestate.com",     totalTrans: 8  },
-  { name: "Tony Weber",          investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "Berkshire Hathaway HomeService",                          phone: "949-370-2483", email: "anthonyweberrealty@gmail.com",  totalTrans: 4  },
-  { name: "CHERYL BOWDISH",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "COLDWELL BANKER REALTY",                                  phone: "714-319-9071", email: "cheryl.bowdish@cbrealty.com",   totalTrans: 1  },
-  { name: "Christopher Rodriguez",investorTrans: 1, acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "MLA Investments",                                         phone: "(909) 594-62", email: "CHRISPRUD@SBCGLOBAL.NET",       totalTrans: 7  },
-  { name: "Eric Baskett",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Circle Real Estate",                                      phone: "310-564-6640", email: "info@ericbaskett.com",          totalTrans: 6  },
-  { name: "Helen Araujo",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Century 21 Award",                                        phone: "619-654-1413", email: "teamaraujosd@gmail.com",        totalTrans: 3  },
-  { name: "IAN VILLALBA",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "KELLER WILLIAMS WEST FOOTHILLS",                          phone: "626-367-4851", email: "ian.villalba@gmail.com",        totalTrans: 2  },
-  { name: "Isavel Smith",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "First Team Real Estate",                                  phone: "213-400-8295", email: "isavelsmith@firstteam.com",     totalTrans: 3  },
-  { name: "Jaclyn Kornely",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Caliber Real Estate Group",                               phone: "7146242597",   email: "jaclyn@caliberre.net",          totalTrans: 10 },
-  { name: "Jeremy Lai",          investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "True Legacy Homes",                                       phone: "808-778-3531", email: "jeremy.lai@truelegacyhomes.com",totalTrans: 4  },
-  { name: "Juan Carlos Ayala",   investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Executive Bankers Realty",                                phone: "323-397-0529", email: "realtor5286@gmail.com",         totalTrans: 2  },
-  { name: "Kariann Voorhees",    investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "First Team Real Estate",                                  phone: "—",            email: "kvoorheeslaw@gmail.com",        totalTrans: 3  },
-  { name: "Kevin Keaty",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Berkshire Hathaway HomeServices California",              phone: "714-608-3298", email: "kevinkeaty@bhhscal.com",        totalTrans: 3  },
-  { name: "Laura Dandoy",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "RE/MAX RESOURCES",                                        phone: "—",            email: "Offers@LauraDandoy.com",        totalTrans: 42 },
-  { name: "Laura Spencer",       investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "T.N.G. Real Estate Consultants",                          phone: "714-987-3310", email: "laura@tngrealestate.com",       totalTrans: 8  },
-  { name: "Mariano Lopez",       investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "T.N.G. Real Estate Consultants",                          phone: "714-696-1187", email: "MarianoLopez.RE@gmail.com",     totalTrans: 1  },
-  { name: "Marija Mladenovic",   investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "RE/MAX Estate Properties",                                phone: "310-982-5503", email: "marija@gogabby.com",            totalTrans: 5  },
-  { name: "Martha Morales",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Keller Williams Realty",                                  phone: "562 902-5100", email: "martha@teammorales.com",        totalTrans: 10 },
-  { name: "Matthew Fletcher",    investorTrans: 1,  acqListing: 0,  acqBuyer: 0,  resaleListing: 1,  company: "Seven Gables Real Estate",                                phone: "949-677-3618", email: "matthewf@sevengables.com",      totalTrans: 8  },
-  { name: "MICAH ADAMS",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "CENTURY 21 ADAMS & BARNES",                               phone: "626-589-3870", email: "micah.adams@century21.com",     totalTrans: 3  },
-  { name: "MICHAEL WALLACE",     investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "BETTER HOME FINANCIAL, INC",                              phone: "9093945626",   email: "mike@bhfmortgage.com",          totalTrans: 4  },
-  { name: "NINA ERBST",          investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "KELLER WILLIAMS/VICTOR VALLEY",                           phone: "760-559-3332", email: "ninaerbstteam@gmail.com",       totalTrans: 9  },
-  { name: "Pat Rojas",           investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Re/Max Masters",                                          phone: "562-943-5577", email: "gospel1@aol.com",               totalTrans: 3  },
-  { name: "Pete Whan",           investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Pete Whan and Associates, Inc.",                          phone: "(626) 278-4333",email: "pete@petewhan.com",            totalTrans: 5  },
-  { name: "Randy Rogers",        investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "HomeWay",                                                 phone: "714-501-3697", email: "rogers8416@yahoo.com",          totalTrans: 18 },
-  { name: "Ron Vallery",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Re/Max Estate Properties",                                phone: "310-703-1886", email: "ronvallery@yahoo.com",          totalTrans: 6  },
-  { name: "Ryan Vessey",         investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "New Western Acquisitions",                                phone: "714-609-5429", email: "ryan.vessey@fairtraderealestate.com", totalTrans: 16 },
-  { name: "Steven Kleemann",     investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Rodeo Realty",                                            phone: "818-349-9997", email: "skrealtor4u@socal.rr.com",      totalTrans: 4  },
-  { name: "THOMAS MESSINA",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "CURTIS REAL ESTATE",                                      phone: "909-816-7364", email: "homesales@thomasmessina.com",   totalTrans: 7  },
-  { name: "Victor Jackson",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Victor Jackson",                                          phone: "323-864-9492", email: "vjrealestate617@gmail.com",     totalTrans: 8  },
-  { name: "Wendy Rawley",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Reliance Real Estate Services",                           phone: "714.746.6355", email: "wendy@go2wendy.com",            totalTrans: 7  },
-  { name: "ZACHARY BLOUNT",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "REALTY MASTERS & ASSOCIATES",                             phone: "951-231-4344", email: "zach@homeswithzach.com",        totalTrans: 6  },
+  { name: "Russell Morgan",      investorTrans: 17, acqListing: 1,  acqBuyer: 3,  resaleListing: 13, company: "HomeWay",                                   phone: "562-237-0580", email: "russell@thehomewayteam.com",    totalTrans: 59 },
+  { name: "Sherry Carr",         investorTrans: 7,  acqListing: 0,  acqBuyer: 2,  resaleListing: 5,  company: "Keller Williams Realty",                    phone: "626-355-2384", email: "sherrycarr777@yahoo.com",       totalTrans: 23 },
+  { name: "Monica Cornelius",    investorTrans: 6,  acqListing: 2,  acqBuyer: 2,  resaleListing: 2,  company: "The Cross Street Team",                     phone: "714-686-2470", email: "Monica@TheCrossStreetTeam.com", totalTrans: 9  },
+  { name: "Ryan Meltcher",       investorTrans: 6,  acqListing: 0,  acqBuyer: 3,  resaleListing: 3,  company: "Corcoran Global Living",                    phone: "714-404-1267", email: "ryan@meltcher.com",             totalTrans: 26 },
+  { name: "Tony Congelliere",    investorTrans: 6,  acqListing: 0,  acqBuyer: 6,  resaleListing: 0,  company: "Russell James Morgan, Broker",              phone: "714-482-5329", email: "ajc1984112@gmail.com",          totalTrans: 19 },
+  { name: "David De La Vega",    investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "The Doorway Realty",                        phone: "714-914-6205", email: "daviddlv@hotmail.com",          totalTrans: 21 },
+  { name: "Oscar Rosas",         investorTrans: 2,  acqListing: 0,  acqBuyer: 0,  resaleListing: 2,  company: "T.N.G. Real Estate Consultants",            phone: "714-679-2761", email: "ojrosas@tngrealestate.com",     totalTrans: 8  },
+  { name: "Tony Weber",          investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "Berkshire Hathaway HomeService",            phone: "949-370-2483", email: "anthonyweberrealty@gmail.com",  totalTrans: 4  },
+  { name: "CHERYL BOWDISH",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "COLDWELL BANKER REALTY",                    phone: "714-319-9071", email: "cheryl.bowdish@cbrealty.com",   totalTrans: 1  },
+  { name: "Christopher Rodriguez",investorTrans: 1, acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "MLA Investments",                           phone: "(909) 594-62", email: "CHRISPRUD@SBCGLOBAL.NET",       totalTrans: 7  },
+  { name: "Eric Baskett",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Circle Real Estate",                        phone: "310-564-6640", email: "info@ericbaskett.com",          totalTrans: 6  },
+  { name: "Helen Araujo",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Century 21 Award",                          phone: "619-654-1413", email: "teamaraujosd@gmail.com",        totalTrans: 3  },
+  { name: "IAN VILLALBA",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "KELLER WILLIAMS WEST FOOTHILLS",            phone: "626-367-4851", email: "ian.villalba@gmail.com",        totalTrans: 2  },
+  { name: "Isavel Smith",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "First Team Real Estate",                    phone: "213-400-8295", email: "isavelsmith@firstteam.com",     totalTrans: 3  },
+  { name: "Jaclyn Kornely",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Caliber Real Estate Group",                 phone: "7146242597",   email: "jaclyn@caliberre.net",          totalTrans: 10 },
+  { name: "Jeremy Lai",          investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "True Legacy Homes",                         phone: "808-778-3531", email: "jeremy.lai@truelegacyhomes.com",totalTrans: 4  },
+  { name: "Juan Carlos Ayala",   investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Executive Bankers Realty",                  phone: "323-397-0529", email: "realtor5286@gmail.com",         totalTrans: 2  },
+  { name: "Kariann Voorhees",    investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "First Team Real Estate",                    phone: "—",            email: "kvoorheeslaw@gmail.com",        totalTrans: 3  },
+  { name: "Kevin Keaty",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Berkshire Hathaway HomeServices California",phone: "714-608-3298", email: "kevinkeaty@bhhscal.com",        totalTrans: 3  },
+  { name: "Laura Dandoy",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "RE/MAX RESOURCES",                          phone: "—",            email: "Offers@LauraDandoy.com",        totalTrans: 42 },
+  { name: "Laura Spencer",       investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "T.N.G. Real Estate Consultants",            phone: "714-987-3310", email: "laura@tngrealestate.com",       totalTrans: 8  },
+  { name: "Mariano Lopez",       investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "T.N.G. Real Estate Consultants",            phone: "714-696-1187", email: "MarianoLopez.RE@gmail.com",     totalTrans: 1  },
+  { name: "Marija Mladenovic",   investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "RE/MAX Estate Properties",                  phone: "310-982-5503", email: "marija@gogabby.com",            totalTrans: 5  },
+  { name: "Martha Morales",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Keller Williams Realty",                    phone: "562 902-5100", email: "martha@teammorales.com",        totalTrans: 10 },
+  { name: "Matthew Fletcher",    investorTrans: 1,  acqListing: 0,  acqBuyer: 0,  resaleListing: 1,  company: "Seven Gables Real Estate",                  phone: "949-677-3618", email: "matthewf@sevengables.com",      totalTrans: 8  },
+  { name: "MICAH ADAMS",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "CENTURY 21 ADAMS & BARNES",                 phone: "626-589-3870", email: "micah.adams@century21.com",     totalTrans: 3  },
+  { name: "MICHAEL WALLACE",     investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "BETTER HOME FINANCIAL, INC",                phone: "9093945626",   email: "mike@bhfmortgage.com",          totalTrans: 4  },
+  { name: "NINA ERBST",          investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "KELLER WILLIAMS/VICTOR VALLEY",             phone: "760-559-3332", email: "ninaerbstteam@gmail.com",       totalTrans: 9  },
+  { name: "Pat Rojas",           investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Re/Max Masters",                            phone: "562-943-5577", email: "gospel1@aol.com",               totalTrans: 3  },
+  { name: "Pete Whan",           investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Pete Whan and Associates, Inc.",            phone: "(626) 278-4333",email: "pete@petewhan.com",            totalTrans: 5  },
+  { name: "Randy Rogers",        investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "HomeWay",                                   phone: "714-501-3697", email: "rogers8416@yahoo.com",          totalTrans: 18 },
+  { name: "Ron Vallery",         investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Re/Max Estate Properties",                  phone: "310-703-1886", email: "ronvallery@yahoo.com",          totalTrans: 6  },
+  { name: "Ryan Vessey",         investorTrans: 1,  acqListing: 0,  acqBuyer: 1,  resaleListing: 0,  company: "New Western Acquisitions",                  phone: "714-609-5429", email: "ryan.vessey@fairtraderealestate.com", totalTrans: 16 },
+  { name: "Steven Kleemann",     investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Rodeo Realty",                              phone: "818-349-9997", email: "skrealtor4u@socal.rr.com",      totalTrans: 4  },
+  { name: "THOMAS MESSINA",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "CURTIS REAL ESTATE",                        phone: "909-816-7364", email: "homesales@thomasmessina.com",   totalTrans: 7  },
+  { name: "Victor Jackson",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Victor Jackson",                            phone: "323-864-9492", email: "vjrealestate617@gmail.com",     totalTrans: 8  },
+  { name: "Wendy Rawley",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Reliance Real Estate Services",             phone: "714.746.6355", email: "wendy@go2wendy.com",            totalTrans: 7  },
+  { name: "ZACHARY BLOUNT",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "REALTY MASTERS & ASSOCIATES",               phone: "951-231-4344", email: "zach@homeswithzach.com",        totalTrans: 6  },
 ];
 
 interface GDBLenderRow {
@@ -194,45 +194,31 @@ const GDB_LENDERS: GDBLenderRow[] = [
   { entity: "EASY STREET CAPATIAL CA LLC",  loans: 1,  avgLoan: "$555,000", open: "—",  closed: "1"  },
 ];
 
-const SLIDES = [
-  { id: "welcome",    title: "Welcome" },
-  { id: "data",       title: "Your Data" },
-  { id: "changed",    title: "What Changed" },
-  { id: "lens",       title: "A Different Lens" },
-  { id: "math",       title: "The Math" },
-  { id: "ask",        title: "The Ask" },
-  { id: "close",      title: "Wrap Up" },
+const SECTION_TITLES = [
+  "Welcome",
+  "Your Data",
+  "What Changed",
+  "A Different Lens",
+  "The Math",
+  "The Ask",
+  "Wrap Up",
 ];
 
 function SectionWelcome() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 40, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 28 }}>
-        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 120, height: 120, borderRadius: "50%", objectFit: "cover", border: "4px solid #E8571A", boxShadow: "0 8px 32px #E8571A30" }} />
-        <div>
-          <h1 style={{ fontSize: "clamp(28px,4.5vw,48px)", fontWeight: 800, color: "#2C3E50", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
-            Welcome, <span style={{ color: "#E8571A" }}>{LENDER.company}</span>
-          </h1>
-          <p style={{ fontSize: "clamp(16px,2.2vw,22px)", color: "#6c757d", margin: 0, maxWidth: 600, lineHeight: 1.6 }}>
-            My name is Tony Diaz. Thirty-two years in this business. Over 1,100 flips. I've borrowed from hard money lenders my entire career — Kiavi, Anchor, Genesis, private individuals. At one point I was the second-largest borrower at Anchor Loans.
-          </p>
-        </div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
+      <h1 style={{ fontSize: "clamp(40px,6.5vw,72px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em" }}>
+        Welcome, <span style={{ color: "#E8571A" }}>{LENDER.company}</span>.
+      </h1>
+      <img src={USALE_LOGO} alt="USale" style={{ height: 120 }} />
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+        <p style={{ fontSize: 20, color: "#2C3E50", maxWidth: 560, lineHeight: 1.6, margin: 0, fontWeight: 600 }}>
+          Thirty-two years. Over 1,100 flips. I've been on the other side of your desk.
+        </p>
+        <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
+          Tony Diaz · Founder, <BrandName />
+        </p>
       </div>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-        {[
-          { stat: "32 Years", label: "In the Business" },
-          { stat: "1,100+", label: "Flips Completed" },
-          { stat: "Kiavi, Anchor & More", label: "Lenders Borrowed From" },
-        ].map((item, i) => (
-          <div key={i} style={{ padding: "24px 32px", background: i === 0 ? "linear-gradient(135deg,#E8571A,#c44e00)" : "#fff", borderRadius: 16, border: i === 0 ? "none" : "2px solid #E8571A20", boxShadow: "0 4px 16px rgba(0,0,0,0.08)", minWidth: 160 }}>
-            <div style={{ fontSize: 24, fontWeight: 800, color: i === 0 ? "#fff" : "#E8571A" }}>{item.stat}</div>
-            <div style={{ fontSize: 13, fontWeight: 600, color: i === 0 ? "rgba(255,255,255,0.85)" : "#6c757d", marginTop: 4 }}>{item.label}</div>
-          </div>
-        ))}
-      </div>
-      <p style={{ fontSize: 17, color: "#6c757d", maxWidth: 560, lineHeight: 1.7, margin: 0 }}>
-        When I talk about hard money, I'm not talking <em>at</em> you. I'm talking as someone who has been on the other side of your desk for three decades. And I'm here because we pulled your data — and what we found is worth talking about.
-      </p>
     </div>
   );
 }
@@ -240,28 +226,58 @@ function SectionWelcome() {
 function SectionData({ onShowBorrowers }: { onShowBorrowers: () => void }) {
   const thStyle: React.CSSProperties = {
     padding: "10px 14px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const,
-    letterSpacing: "0.05em", color: "#2C3E50", background: "#f8f9fa",
-    borderBottom: "2px solid #E8571A20", whiteSpace: "nowrap" as const, position: "sticky" as const, top: 0, zIndex: 1,
+    letterSpacing: "0.05em", color: "#2C3E50", background: "#E8571A0A",
+    borderBottom: "2px solid #E8571A30", whiteSpace: "nowrap" as const,
+    position: "sticky" as const, top: 0, zIndex: 1,
   };
-  const tdStyle: React.CSSProperties = { padding: "10px 14px", fontSize: 13, borderBottom: "1px solid #f0f0f0" };
+  const tdStyle: React.CSSProperties = { padding: "10px 14px", fontSize: 13, borderBottom: "1px solid #E8571A15" };
+
+  const metrics = [
+    { label: "Total Transactions", value: "1,047" },
+    { label: "Unique Investor Relationships", value: "681", clickable: true },
+    { label: "Avg. Loan Amount", value: "~$623K" },
+    { label: "Avg. Loan-to-Purchase", value: "90.5%" },
+    { label: "Avg. Loans per Relationship", value: "1.5" },
+  ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <div>
-        <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: "0 0 6px", letterSpacing: "-0.02em" }}>
-          Here's your data, <span style={{ color: "#E8571A" }}>{LENDER.company}</span>
-        </h2>
-        <p style={{ fontSize: 15, color: "#6c757d", margin: 0 }}>
-          Lender activity ranked by unique investor relationships — Southern California market. Click the Easy Street row to see your borrowers.
-        </p>
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "flex-start", paddingTop: 16 }}>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
+        This is the data for <span style={{ color: "#E8571A" }}>{LENDER.company}</span>!
+      </h2>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {metrics.map((m, i) => (
+          <div
+            key={i}
+            onClick={m.clickable ? onShowBorrowers : undefined}
+            style={{
+              display: "flex", justifyContent: "space-between", alignItems: "center",
+              padding: "14px 20px", borderRadius: 12, background: "#fff",
+              borderLeft: "4px solid #E8571A30",
+              borderRight: "2px solid #E8571A15",
+              borderTop: "2px solid #E8571A15",
+              borderBottom: "2px solid #E8571A15",
+              cursor: m.clickable ? "pointer" : "default",
+            }}
+            onMouseEnter={e => { if (m.clickable) (e.currentTarget as HTMLDivElement).style.background = "#E8571A08"; }}
+            onMouseLeave={e => { if (m.clickable) (e.currentTarget as HTMLDivElement).style.background = "#fff"; }}
+          >
+            <span style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50", letterSpacing: "0.01em" }}>
+              {m.label}
+              {m.clickable && <span style={{ marginLeft: 8, fontSize: 11, background: "#E8571A", color: "#fff", borderRadius: 5, padding: "1px 6px", fontWeight: 700 }}>VIEW</span>}
+            </span>
+            <span style={{ fontSize: 16, fontWeight: 700, color: "#E8571A" }}>{m.value}</span>
+          </div>
+        ))}
       </div>
 
-      <div style={{ border: "1px solid #E8571A20", borderRadius: 16, overflow: "hidden", boxShadow: "0 4px 20px rgba(44,62,80,0.08)" }}>
-        <div style={{ overflowX: "auto", maxHeight: 460, overflowY: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", tableLayout: "fixed" as const }}>
+      <div style={{ border: "1px solid #E8571A20", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 12px rgba(44,62,80,0.06)" }}>
+        <div style={{ overflowX: "auto", maxHeight: 400, overflowY: "auto" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ ...thStyle, width: "34%", textAlign: "left" as const }}>Lender</th>
+                <th style={{ ...thStyle, textAlign: "left" as const }}>Lender</th>
                 <th style={{ ...thStyle, textAlign: "right" as const }}>Avg. Loan</th>
                 <th style={{ ...thStyle, textAlign: "right" as const }}>Loan/Purchase</th>
                 <th style={{ ...thStyle, textAlign: "right" as const }}>Total Trans.</th>
@@ -277,29 +293,23 @@ function SectionData({ onShowBorrowers }: { onShowBorrowers: () => void }) {
                     key={i}
                     onClick={isES ? onShowBorrowers : undefined}
                     style={{
-                      background: isES
-                        ? "linear-gradient(135deg,#E8571A08,#E8571A14)"
-                        : (i % 2 === 0 ? "#fff" : "#fafafa"),
+                      background: isES ? "linear-gradient(135deg,#E8571A08,#E8571A14)" : (i % 2 === 0 ? "#fff" : "#E8571A06"),
                       cursor: isES ? "pointer" : "default",
-                      transition: "background 0.2s",
                     }}
                     onMouseEnter={e => isES && ((e.currentTarget as HTMLTableRowElement).style.background = "linear-gradient(135deg,#E8571A18,#E8571A28)")}
                     onMouseLeave={e => isES && ((e.currentTarget as HTMLTableRowElement).style.background = "linear-gradient(135deg,#E8571A08,#E8571A14)")}
                   >
-                    <td style={{ ...tdStyle, fontWeight: isES ? 700 : 500, color: isES ? "#E8571A" : "#2C3E50", display: "flex", alignItems: "center", gap: 8 }}>
+                    <td style={{ ...tdStyle, fontWeight: isES ? 700 : 600, color: isES ? "#E8571A" : "#2C3E50", display: "flex", alignItems: "center", gap: 8 }}>
                       {isES && <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#E8571A", flexShrink: 0, display: "inline-block" }} />}
                       <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const }}>{row.lender}</span>
-                      {isES && <span style={{ fontSize: 11, background: "#E8571A", color: "#fff", borderRadius: 6, padding: "2px 7px", fontWeight: 700, flexShrink: 0 }}>YOU</span>}
+                      {isES && <span style={{ fontSize: 10, background: "#E8571A", color: "#fff", borderRadius: 5, padding: "1px 6px", fontWeight: 700, flexShrink: 0 }}>YOU</span>}
                     </td>
                     <td style={{ ...tdStyle, textAlign: "right", fontWeight: isES ? 700 : 400, color: isES ? "#E8571A" : "#2C3E50" }}>{row.avgLoan}</td>
                     <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.loanPurchaseRatio}</td>
                     <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.totalTrans.toLocaleString()}</td>
                     <td style={{ ...tdStyle, textAlign: "right", fontWeight: isES ? 700 : 400, color: isES ? "#E8571A" : "#2C3E50" }}>
                       {isES ? (
-                        <button
-                          onClick={e => { e.stopPropagation(); onShowBorrowers(); }}
-                          style={{ background: "none", border: "none", cursor: "pointer", color: "#E8571A", fontWeight: 700, fontSize: 13, padding: 0, textDecoration: "underline" }}
-                        >
+                        <button onClick={e => { e.stopPropagation(); onShowBorrowers(); }} style={{ background: "none", border: "none", cursor: "pointer", color: "#E8571A", fontWeight: 700, fontSize: 13, padding: 0, textDecoration: "underline" }}>
                           {row.uniqueRels.toLocaleString()}
                         </button>
                       ) : row.uniqueRels.toLocaleString()}
@@ -312,52 +322,26 @@ function SectionData({ onShowBorrowers }: { onShowBorrowers: () => void }) {
           </table>
         </div>
       </div>
-
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        {[
-          { label: "Total Transactions", value: "1,047" },
-          { label: "Unique Investor Rels.", value: "681" },
-          { label: "Avg. Loan Amount", value: "~$623K" },
-          { label: "Avg. Loan/Purchase", value: "90.5%" },
-          { label: "Avg. Loans per Rel.", value: "1.5" },
-        ].map((kpi, i) => (
-          <div key={i} style={{ flex: "1 1 130px", padding: "18px 20px", background: "#fff", borderRadius: 14, border: "2px solid #E8571A20", boxShadow: "0 2px 10px rgba(0,0,0,0.06)", textAlign: "center" }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#E8571A" }}>{kpi.value}</div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: "#6c757d", marginTop: 4 }}>{kpi.label}</div>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
 
 function SectionChanged() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", maxWidth: 980, margin: "0 auto", width: "100%" }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,38px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         What <span style={{ color: "#E8571A" }}>Changed</span>
       </h2>
-      <p style={{ fontSize: 17, color: "#444", lineHeight: 1.75, margin: 0, maxWidth: 720 }}>
-        Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets.
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0, maxWidth: 800 }}>
+        A lot has changed. Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets. Which means you're competing on two things: rate and sales pressure.
       </p>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-        {[
-          { icon: "📊", title: "Same Data Sources", desc: "Every HML buys from the same 3 data vendors. You're all calling the same borrowers." },
-          { icon: "💰", title: "Competing on Rate", desc: "If a borrower is with Kiavi, you can't touch them on rate. So you undercut margins or hire expensive reps." },
-          { icon: "📞", title: "The Cold Call Problem", desc: '"Hey, our rates are competitive and our service is great." Click. Operators hang up. Every day.' },
-        ].map((card, i) => (
-          <div key={i} style={{ flex: "1 1 220px", padding: "28px 24px", background: i === 0 ? "#fff" : (i === 1 ? "#FFF5F0" : "#fff"), borderRadius: 18, border: `2px solid ${i === 1 ? "#E8571A30" : "#eee"}`, boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
-            <div style={{ fontSize: 32, marginBottom: 12 }}>{card.icon}</div>
-            <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>{card.title}</div>
-            <div style={{ fontSize: 14, color: "#6c757d", lineHeight: 1.6 }}>{card.desc}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{ padding: "24px 32px", background: "linear-gradient(135deg,#E8571A10,#E8571A20)", borderRadius: 18, border: "1px solid #E8571A30" }}>
-        <p style={{ fontSize: 17, fontWeight: 700, color: "#E8571A", margin: 0, lineHeight: 1.6 }}>
-          "I get ten of those calls a month. I hung up. Every operator does. And I was one of the biggest borrowers in the market."
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0, maxWidth: 800 }}>
+        That's a losing game. If a borrower is with Kiavi, you can't touch them on rate — so you either undercut yourself into thin margins, or you hire the most expensive salesperson you can find. And even then, what are you saying?
+      </p>
+      <div style={{ padding: "22px 28px", background: "#f8f9fa", borderRadius: 12, borderLeft: "4px solid #E8571A", maxWidth: 760 }}>
+        <p style={{ fontSize: 17, fontWeight: 600, color: "#2C3E50", margin: 0, fontStyle: "italic", lineHeight: 1.7 }}>
+          "Hey, I saw you borrow from Kiavi — our rates are competitive and our service is great." Click. I get ten of those calls a month. I hang up. Every operator does.
         </p>
-        <p style={{ fontSize: 14, color: "#6c757d", margin: "8px 0 0" }}>— Tony Diaz, former #2 borrower at Anchor Loans</p>
       </div>
     </div>
   );
@@ -365,150 +349,112 @@ function SectionChanged() {
 
 function SectionLens() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", maxWidth: 980, margin: "0 auto", width: "100%" }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,38px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
-        A <span style={{ color: "#E8571A" }}>Different Lens</span>
+        A Different <span style={{ color: "#E8571A" }}>Lens</span>
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-        <div style={{ padding: "28px 24px", background: "#f8f9fa", borderRadius: 18, border: "2px solid #dee2e6" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase" as const, color: "#6c757d", letterSpacing: "0.05em", marginBottom: 12 }}>The Old Approach</div>
-          <div style={{ fontSize: 16, fontWeight: 600, color: "#2C3E50", lineHeight: 1.7 }}>You look at data to find the borrower at the moment they need a loan.</div>
-        </div>
-        <div style={{ padding: "28px 24px", background: "linear-gradient(135deg,#E8571A08,#E8571A15)", borderRadius: 18, border: "2px solid #E8571A30" }}>
-          <div style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase" as const, color: "#E8571A", letterSpacing: "0.05em", marginBottom: 12 }}>The USale Approach</div>
-          <div style={{ fontSize: 16, fontWeight: 600, color: "#2C3E50", lineHeight: 1.7 }}>We look at data to build an ecosystem <em>before</em> the loan is needed.</div>
-        </div>
-      </div>
-      <div>
-        <h3 style={{ fontSize: 20, fontWeight: 700, color: "#2C3E50", margin: "0 0 16px" }}>What We Built</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          {[
-            { step: "1", text: "Identified every active flipper in the market — same as you" },
-            { step: "2", text: "Identified every investor-friendly agent, title company, and escrow officer they transact with" },
-            { step: "3", text: "Put them all in one free, off-market marketplace — no fees, no friction" },
-            { step: "4", text: "Agents post deals. Investors compete. Title closes. Nobody pays." },
-            { step: "5", text: "When a borrower accepts a property, we hand you their full profile — every transaction, every lender, active loans, flip velocity, acquisition source" },
-          ].map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "14px 18px", background: "#fff", borderRadius: 12, border: "1px solid #E8571A20" }}>
-              <div style={{ width: 32, height: 32, borderRadius: "50%", background: "linear-gradient(135deg,#E8571A,#c44e00)", color: "#fff", fontSize: 14, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{item.step}</div>
-              <div style={{ fontSize: 15, color: "#2C3E50", lineHeight: 1.6, paddingTop: 4 }}>{item.text}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ padding: "22px 28px", background: "linear-gradient(135deg,#2C3E50,#1a2634)", borderRadius: 18, color: "#fff" }}>
-        <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>Why This Matters for Easy Street Funding</div>
-        <div style={{ fontSize: 15, opacity: 0.9, lineHeight: 1.7 }}>
-          Your 681 borrower relationships are already in our data. When one of them accepts a property in the USale marketplace, you get notified — before the loan is needed, with a complete operator profile.
-        </div>
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
+        We look at the same data differently. You look at it to find the borrower at the moment they need a loan. We look at it to build an ecosystem <em>before</em> the loan is needed.
+      </p>
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
+        Here's what we built. A free, off-market marketplace. No fees. No signup. No friction.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {[
+          "We identified every active flipper — same way you do.",
+          "We identified every investor-friendly agent, every title company, every escrow officer they transact with.",
+          "We put them all in one place. Agents post deals. Investors compete. Title handles closings. Everybody participates. Nobody pays.",
+          "When a borrower accepts a property in our marketplace, we hand you a full profile — every transaction, who they've borrowed from, active loans, average flip time, how they find deals, how well they buy, what they list for, how fast they sell.",
+          "You know exactly who they are before you quote the loan.",
+        ].map((text, i) => (
+          <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start", padding: "14px 20px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderBottom: "1px solid #E8571A15", borderLeft: "4px solid #E8571A30" }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", background: "linear-gradient(135deg,#E8571A,#c44e00)", color: "#fff", fontSize: 12, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>{i + 1}</div>
+            <div style={{ fontSize: 15, color: "#2C3E50", lineHeight: 1.65, paddingTop: 2 }}>{text}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
 function SectionMath() {
+  const metrics = [
+    { label: "MSAs where hard money is most active", value: "75" },
+    { label: "Top operators per market", value: "5" },
+    { label: "Deals/month today", value: "2" },
+    { label: "Deals/month with our technology", value: "4+" },
+    { label: "Target operators over 3 years", value: "375" },
+    { label: "Average hard money loan", value: "$257,000" },
+    { label: "Monthly originations  —  375 operators × 2 loans × $257K", value: "$192M / mo" },
+    { label: "Origination fee", value: "1%" },
+  ];
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh", justifyContent: "center", maxWidth: 980, margin: "0 auto", width: "100%" }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,38px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         The <span style={{ color: "#E8571A" }}>Math</span>
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 16 }}>
-        {[
-          { label: "Unique Investor Rels.", value: "681", note: "Easy Street Capital (all entities)" },
-          { label: "If Half Close 1 More/Qtr", value: "~340", note: "Additional loan events per year" },
-          { label: "Avg. Loan Amount", value: "$623K", note: "Your current average" },
-          { label: "Potential Additional Volume", value: "$212M+", note: "Per year at current avg. loan" },
-        ].map((kpi, i) => (
-          <div key={i} style={{ padding: "28px 20px", background: i === 3 ? "linear-gradient(135deg,#E8571A,#c44e00)" : "#fff", borderRadius: 18, border: i === 3 ? "none" : "2px solid #E8571A20", boxShadow: "0 4px 16px rgba(0,0,0,0.08)", textAlign: "center" }}>
-            <div style={{ fontSize: 30, fontWeight: 800, color: i === 3 ? "#fff" : "#E8571A" }}>{kpi.value}</div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: i === 3 ? "rgba(255,255,255,0.9)" : "#2C3E50", marginTop: 6 }}>{kpi.label}</div>
-            <div style={{ fontSize: 12, color: i === 3 ? "rgba(255,255,255,0.75)" : "#6c757d", marginTop: 4 }}>{kpi.note}</div>
-          </div>
-        ))}
-      </div>
-      <div style={{ padding: "24px 28px", background: "#fff", borderRadius: 18, border: "2px solid #E8571A20", boxShadow: "0 4px 16px rgba(0,0,0,0.06)" }}>
-        <h3 style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", margin: "0 0 16px" }}>Loan Volume Model</h3>
-        <table style={{ width: "100%", borderCollapse: "collapse" }}>
-          <thead>
-            <tr style={{ background: "#f8f9fa" }}>
-              {["Metric", "Per Loan", "Avg 2 Loans/mo", "10 Borrowers × 1 Yr"].map(h => (
-                <th key={h} style={{ padding: "10px 14px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const, letterSpacing: "0.05em", color: "#2C3E50", textAlign: "left" as const, borderBottom: "2px solid #E8571A20" }}>{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ["Avg Loan Amount",    "$150,000",     "$300,000/mo",      "—"],
-              ["Origination (1–2%)", "$1,500–$3,000","$3,000–$6,000/mo", "—"],
-              ["10 Active Borrowers","—",            "~$3M/mo deployed", "~$36M/yr"],
-            ].map((row, i) => (
-              <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
-                {row.map((cell, j) => (
-                  <td key={j} style={{ padding: "10px 14px", fontSize: 14, color: j === 0 ? "#2C3E50" : "#6c757d", fontWeight: j === 0 ? 600 : 400, borderBottom: "1px solid #f0f0f0" }}>{cell}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div style={{ padding: "20px 28px", background: "linear-gradient(135deg,#E8571A10,#E8571A20)", borderRadius: 16, border: "1px solid #E8571A30" }}>
-        <p style={{ fontSize: 16, fontWeight: 700, color: "#E8571A", margin: 0, lineHeight: 1.6 }}>
-          Not new borrowers. Your <em>existing</em> borrowers — doing more of what they already do, because they have a steady pipeline of off-market inventory.
-        </p>
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
+        Here's why this scales.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {metrics.map((m, i) => {
+          const isBig = m.label.startsWith("Monthly");
+          return (
+            <div
+              key={i}
+              style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "14px 20px",
+                background: isBig ? "linear-gradient(135deg,#E8571A,#c44e00)" : (i % 2 === 0 ? "#fff" : "#E8571A06"),
+                borderLeft: `4px solid ${isBig ? "#c44e00" : "#E8571A30"}`,
+                borderRight: `2px solid ${isBig ? "transparent" : "#E8571A15"}`,
+                borderTop: `2px solid ${isBig ? "transparent" : "#E8571A15"}`,
+                borderBottom: `2px solid ${isBig ? "transparent" : "#E8571A15"}`,
+                borderRadius: isBig ? 12 : 0,
+              }}
+            >
+              <span style={{ fontSize: 14, fontWeight: 600, color: isBig ? "rgba(255,255,255,0.9)" : "#2C3E50" }}>{m.label}</span>
+              <span style={{ fontSize: isBig ? 20 : 16, fontWeight: 800, color: isBig ? "#fff" : "#E8571A" }}>{m.value}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
 function SectionAsk() {
+  const terms = [
+    { label: "Normal operator fee to join", value: "$100,000" },
+    { label: "Your investment", value: "$250,000" },
+    { label: "Operator fee with your partnership", value: "$10,000" },
+    { label: "Operators delivered (7 today, building to)", value: "20" },
+    { label: "Revenue share / referral fee", value: "None" },
+    { label: "Your borrower-acquisition cost today", value: "0.4 – 0.5%" },
+    { label: "Your borrower-acquisition cost with USale", value: "$0" },
+  ];
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", maxWidth: 980, margin: "0 auto", width: "100%" }}>
       <h2 style={{ fontSize: "clamp(24px,3.5vw,38px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
         The <span style={{ color: "#E8571A" }}>Ask</span>
       </h2>
-      <div>
-        <h3 style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", margin: "0 0 14px" }}>Three-Phase Pilot</h3>
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {[
-            { phase: "Phase 1", title: "Local Launch", desc: "Connect first 10 experienced operators to a dedicated pipeline. Property reports, borrower histories, deal notifications — USale handles it. You close the loans." },
-            { phase: "Phase 2", title: "Regional Expansion", desc: "Scale to 30–40 operators across USale's MLS/tax data-covered states. Your co-brand embedded in the marketplace." },
-            { phase: "Phase 3", title: "National Rollout", desc: "Full expansion to 375 operators nationwide. You become the default capital source for the entire USale operator network." },
-          ].map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: 0, background: "#fff", borderRadius: 14, overflow: "hidden", border: "2px solid #E8571A20", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}>
-              <div style={{ width: 110, padding: "20px 16px", background: i === 0 ? "linear-gradient(135deg,#E8571A,#c44e00)" : "#2C3E50", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
-                <div style={{ fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.75)", marginBottom: 4 }}>{item.phase}</div>
-                <div style={{ fontSize: 15, fontWeight: 800, color: "#fff" }}>{item.title}</div>
-              </div>
-              <div style={{ padding: "20px 22px", flex: 1, display: "flex", alignItems: "center" }}>
-                <p style={{ fontSize: 14, color: "#6c757d", margin: 0, lineHeight: 1.65 }}>{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <p style={{ fontSize: 17, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
+        We normally charge operators $100,000 to join — comparable to a franchise. I don't want a sales team. I don't want overhead. I want distribution partners who already have the data.
+      </p>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {terms.map((t, i) => (
+          <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 20px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderLeft: "4px solid #E8571A30", borderRight: "2px solid #E8571A15", borderTop: "2px solid #E8571A15", borderBottom: "2px solid #E8571A15" }}>
+            <span style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>{t.label}</span>
+            <span style={{ fontSize: 16, fontWeight: 800, color: "#E8571A" }}>{t.value}</span>
+          </div>
+        ))}
       </div>
-      <div>
-        <h3 style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", margin: "0 0 14px" }}>What Easy Street Funding Gets</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))", gap: 10 }}>
-          {[
-            "Co-brand placement inside USale — every operator sees you as the preferred lender",
-            "Pre-vetted pipeline of experienced operators delivered to a dedicated contact",
-            "Real-time deal notifications — know when your borrowers are active",
-            "Access to USale's proprietary operator data: transaction history, flip track records",
-            "Co-marketing with USale and title partners to reach new networks",
-            "Zero acquisition cost — USale handles borrower sourcing and vetting",
-          ].map((benefit, i) => (
-            <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "14px 16px", background: "#fff", borderRadius: 12, border: "1px solid #E8571A20" }}>
-              <span style={{ color: "#E8571A", fontSize: 18, flexShrink: 0, marginTop: 1 }}>✓</span>
-              <span style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.55 }}>{benefit}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ padding: "20px 28px", background: "linear-gradient(135deg,#2C3E50,#1a2634)", borderRadius: 18, color: "#fff" }}>
-        <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 8 }}>The Bottom Line</div>
-        <div style={{ fontSize: 15, opacity: 0.9, lineHeight: 1.7 }}>
-          The partnership costs you nothing and delivers a steady pipeline of qualified borrowers already embedded in a professional deal-sourcing system.
-        </div>
+      <div style={{ padding: "22px 28px", background: "#f8f9fa", borderRadius: 12, borderLeft: "4px solid #2C3E50" }}>
+        <p style={{ fontSize: 15, fontWeight: 600, color: "#2C3E50", margin: 0, lineHeight: 1.75 }}>
+          Phase two, after proof of concept: national partnership. Bigger investment, bigger ownership. That's where 20 becomes 375. That's where $192 million a month becomes real.
+        </p>
       </div>
     </div>
   );
@@ -516,64 +462,32 @@ function SectionAsk() {
 
 function SectionClose() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 32, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-      <div>
-        <h2 style={{ fontSize: "clamp(26px,4.5vw,44px)", fontWeight: 800, color: "#2C3E50", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
-          <span style={{ color: "#E8571A" }}>{LENDER.company}</span> already has the relationships.
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
+      <div style={{ maxWidth: 680 }}>
+        <h2 style={{ fontSize: "clamp(26px,4.5vw,44px)", fontWeight: 800, color: "#2C3E50", margin: "0 0 28px", lineHeight: 1.15, letterSpacing: "-0.02em" }}>
+          I'm not asking you for your clients.<br />
+          <span style={{ color: "#E8571A" }}>I already have your clients.</span>
         </h2>
-        <p style={{ fontSize: 18, color: "#6c757d", margin: 0, maxWidth: 620, lineHeight: 1.7 }}>
-          Over 1,000 transactions. 681 unique operator relationships. 90% loan-to-purchase ratios. You know how to lend to the right people.
+        <p style={{ fontSize: 18, color: "#2C3E50", lineHeight: 1.8, margin: "0 0 20px" }}>
+          Go ahead and skip-trace all you want — I have a better way to reach them.
+        </p>
+        <p style={{ fontSize: 18, color: "#2C3E50", lineHeight: 1.8, margin: 0 }}>
+          What I'm asking is for you to stop competing on rate and start winning on value — and let us deliver that value to the borrowers who make you money whether you ever cold-called them or not.
         </p>
       </div>
-      <div style={{ padding: "28px 36px", background: "linear-gradient(135deg,#E8571A10,#E8571A20)", borderRadius: 20, border: "1px solid #E8571A30", maxWidth: 560 }}>
-        <p style={{ fontSize: 18, fontWeight: 700, color: "#E8571A", margin: 0, lineHeight: 1.7 }}>
-          We know how to keep those operators supplied with deals. Put those together and every existing borrower stays active longer, borrows more often, and refers the next operator.
-        </p>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%", maxWidth: 440 }}>
-        <a
-          href="https://calendly.com/usale/hml-demo"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 12,
-            padding: "22px 40px", background: "linear-gradient(135deg,#E8571A,#c44e00)",
-            color: "#fff", borderRadius: 16, fontSize: 18, fontWeight: 700,
-            cursor: "pointer", textDecoration: "none", boxShadow: "0 8px 28px #E8571A40",
-          }}
-        >
-          Schedule a 15-Minute Walkthrough
-        </a>
-        <a
-          href={`${import.meta.env.BASE_URL}USale_HML_Playbook.pdf`}
-          download="USale_HML_Playbook.pdf"
-          style={{
-            display: "flex", alignItems: "center", justifyContent: "center", gap: 14,
-            padding: "18px 32px", background: "#2C3E50", borderRadius: 16, textDecoration: "none",
-            color: "#fff", fontSize: 16, fontWeight: 700,
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download the HML Playbook
-        </a>
-      </div>
-      <div style={{ padding: "22px 28px", background: "#f8f9fa", borderRadius: 18, border: "1px solid #eee", maxWidth: 480, width: "100%" }}>
+      <div style={{ padding: "20px 28px", background: "#f8f9fa", borderRadius: 16, border: "1px solid #eee" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 72, height: 72, borderRadius: 12, objectFit: "cover", flexShrink: 0 }} />
+          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 64, height: 64, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
           <div style={{ textAlign: "left" }}>
-            <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
+            <div style={{ fontSize: 16, fontWeight: 700, color: "#2C3E50" }}>Tony Diaz</div>
             <div style={{ fontSize: 13, color: "#6c757d" }}>Founder &amp; CEO, <BrandName /> &amp; FlipIQ</div>
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 6 }}>
               <a href="mailto:tony@flipiq.com" style={{ fontSize: 13, fontWeight: 600, color: "#E8571A", textDecoration: "none" }}>tony@flipiq.com</a>
               <a href="tel:714-581-7805" style={{ fontSize: 13, fontWeight: 600, color: "#2C3E50", textDecoration: "none" }}>714-581-7805</a>
-              <a href="https://www.linkedin.com/in/tony-diaz-2a0a7417/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, color: "#0077B5", textDecoration: "none" }}>LinkedIn</a>
             </div>
           </div>
         </div>
       </div>
-      <p style={{ fontSize: 16, color: "#6c757d", margin: 0 }}>
-        I'm Tony Diaz — thanks for your time.
-      </p>
     </div>
   );
 }
@@ -581,24 +495,18 @@ function SectionClose() {
 function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onSelectBorrower: (name: string) => void }) {
   const thStyle: React.CSSProperties = {
     padding: "10px 12px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const,
-    letterSpacing: "0.05em", color: "#2C3E50", background: "#f8f9fa",
-    borderBottom: "2px solid #E8571A20", whiteSpace: "nowrap" as const, position: "sticky" as const, top: 0, zIndex: 1, textAlign: "left" as const,
+    letterSpacing: "0.05em", color: "#2C3E50", background: "#E8571A0A",
+    borderBottom: "2px solid #E8571A30", whiteSpace: "nowrap" as const, position: "sticky" as const, top: 0, zIndex: 1, textAlign: "left" as const,
   };
-  const tdStyle: React.CSSProperties = { padding: "9px 12px", fontSize: 13, borderBottom: "1px solid #f0f0f0", color: "#2C3E50" };
+  const tdStyle: React.CSSProperties = { padding: "9px 12px", fontSize: 13, borderBottom: "1px solid #E8571A15", color: "#2C3E50" };
 
   return (
-    <div style={{
-      position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center",
-      background: "rgba(44,62,80,0.55)", backdropFilter: "blur(4px)",
-    }} onClick={onClose}>
-      <div
-        style={{ background: "#fff", borderRadius: 20, maxWidth: 920, width: "95vw", maxHeight: "85vh", display: "flex", flexDirection: "column", boxShadow: "0 24px 80px rgba(0,0,0,0.25)", overflow: "hidden" }}
-        onClick={e => e.stopPropagation()}
-      >
+    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(44,62,80,0.55)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+      <div style={{ background: "#fff", borderRadius: 20, maxWidth: 920, width: "95vw", maxHeight: "85vh", display: "flex", flexDirection: "column", boxShadow: "0 24px 80px rgba(0,0,0,0.25)", overflow: "hidden" }} onClick={e => e.stopPropagation()}>
         <div style={{ padding: "20px 24px", borderBottom: "2px solid #E8571A20", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}>
           <div>
             <h3 style={{ fontSize: 20, fontWeight: 800, color: "#2C3E50", margin: 0 }}>
-              Easy Street Capital — Investor Relationships
+              {LENDER.company} — Investor Relationships
             </h3>
             <p style={{ fontSize: 13, color: "#6c757d", margin: "4px 0 0" }}>681 unique investor relationships · Click a borrower to see full detail</p>
           </div>
@@ -608,14 +516,14 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ ...thStyle }}>Entity Name</th>
-                <th style={{ ...thStyle }}>Last Purchase</th>
-                <th style={{ ...thStyle }}>Total Trans.</th>
-                <th style={{ ...thStyle }}>Avg. Purchase</th>
-                <th style={{ ...thStyle }}>Avg. Resale</th>
-                <th style={{ ...thStyle }}>P/FV Ratio</th>
-                <th style={{ ...thStyle }}>Financing</th>
-                <th style={{ ...thStyle }}>Last Property</th>
+                <th style={thStyle}>Entity Name</th>
+                <th style={thStyle}>Last Purchase</th>
+                <th style={thStyle}>Total Trans.</th>
+                <th style={thStyle}>Avg. Purchase</th>
+                <th style={thStyle}>Avg. Resale</th>
+                <th style={thStyle}>P/FV Ratio</th>
+                <th style={thStyle}>Financing</th>
+                <th style={thStyle}>Last Property</th>
               </tr>
             </thead>
             <tbody>
@@ -624,13 +532,10 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
                 return (
                   <tr
                     key={i}
-                    onClick={isGDB ? () => onSelectBorrower(row.name) : undefined}
-                    style={{
-                      background: isGDB ? "linear-gradient(135deg,#E8571A08,#E8571A14)" : (i % 2 === 0 ? "#fff" : "#fafafa"),
-                      cursor: isGDB ? "pointer" : "default",
-                    }}
-                    onMouseEnter={e => isGDB && ((e.currentTarget as HTMLTableRowElement).style.background = "linear-gradient(135deg,#E8571A18,#E8571A28)")}
-                    onMouseLeave={e => isGDB && ((e.currentTarget as HTMLTableRowElement).style.background = "linear-gradient(135deg,#E8571A08,#E8571A14)")}
+                    onClick={() => onSelectBorrower(row.name)}
+                    style={{ background: isGDB ? "linear-gradient(135deg,#E8571A08,#E8571A14)" : (i % 2 === 0 ? "#fff" : "#E8571A06"), cursor: "pointer" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLTableRowElement).style.background = "linear-gradient(135deg,#E8571A10,#E8571A20)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLTableRowElement).style.background = isGDB ? "linear-gradient(135deg,#E8571A08,#E8571A14)" : (i % 2 === 0 ? "#fff" : "#E8571A06"); }}
                   >
                     <td style={{ ...tdStyle, fontWeight: isGDB ? 700 : 500, color: isGDB ? "#E8571A" : "#2C3E50" }}>
                       <span style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -640,10 +545,10 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
                     </td>
                     <td style={{ ...tdStyle, color: "#6c757d" }}>{row.lastPurchase}</td>
                     <td style={{ ...tdStyle, color: "#6c757d" }}>{row.totalTrans}</td>
-                    <td style={{ ...tdStyle }}>{row.avgPurchase}</td>
-                    <td style={{ ...tdStyle }}>{row.avgResale}</td>
+                    <td style={tdStyle}>{row.avgPurchase}</td>
+                    <td style={tdStyle}>{row.avgResale}</td>
                     <td style={{ ...tdStyle, color: "#6c757d" }}>{row.pfvRatio}</td>
-                    <td style={{ ...tdStyle }}>
+                    <td style={tdStyle}>
                       <span style={{ padding: "2px 8px", borderRadius: 6, fontSize: 11, fontWeight: 700, background: row.financing === "LOAN" ? "#2C3E5015" : "#E8571A10", color: row.financing === "LOAN" ? "#2C3E50" : "#E8571A" }}>
                         {row.financing}
                       </span>
@@ -661,15 +566,28 @@ function BorrowerModal({ onClose, onSelectBorrower }: { onClose: () => void; onS
 }
 
 function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => void }) {
-  const [activeTab, setActiveTab] = useState<"overview" | "lenders" | "agents">("overview");
+  const isGDB = name === "G D BRISTOL LLC";
+  const [activeTab, setActiveTab] = useState<"overview" | "lenders" | "agents">("lenders");
 
   const thStyle: React.CSSProperties = {
     padding: "10px 12px", fontSize: 11, fontWeight: 700, textTransform: "uppercase" as const,
-    letterSpacing: "0.04em", color: "#2C3E50", background: "#f8f9fa",
-    borderBottom: "2px solid #E8571A20", whiteSpace: "nowrap" as const, textAlign: "left" as const,
+    letterSpacing: "0.04em", color: "#2C3E50", background: "#E8571A0A",
+    borderBottom: "2px solid #E8571A30", whiteSpace: "nowrap" as const, textAlign: "left" as const,
     position: "sticky" as const, top: 0, zIndex: 1,
   };
-  const tdStyle: React.CSSProperties = { padding: "9px 12px", fontSize: 13, borderBottom: "1px solid #f0f0f0" };
+  const tdStyle: React.CSSProperties = { padding: "9px 12px", fontSize: 13, borderBottom: "1px solid #E8571A15" };
+
+  if (!isGDB) {
+    return (
+      <div style={{ position: "fixed", inset: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(44,62,80,0.6)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+        <div style={{ background: "#fff", borderRadius: 22, maxWidth: 480, width: "90vw", padding: "48px 40px", textAlign: "center", boxShadow: "0 28px 90px rgba(0,0,0,0.28)" }} onClick={e => e.stopPropagation()}>
+          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 12 }}>{name}</div>
+          <div style={{ fontSize: 15, color: "#6c757d", lineHeight: 1.7 }}>Full detail data coming soon for this borrower.</div>
+          <button onClick={onClose} style={{ marginTop: 28, padding: "12px 32px", background: "#E8571A", color: "#fff", border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer" }}>Close</button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 1100, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(44,62,80,0.6)", backdropFilter: "blur(4px)" }} onClick={onClose}>
@@ -682,13 +600,11 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
             </div>
             <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
               {[
-                { label: "All Locations", icon: "📍" },
-                { label: "Last Purchase: 11/16/2023", icon: "📅" },
-                { label: "38 of 49 Transactions", icon: "📊" },
+                "All Locations",
+                "Last Purchase: 11/16/2023",
+                "38 of 49 Transactions",
               ].map((item, i) => (
-                <span key={i} style={{ fontSize: 13, color: "#6c757d", display: "flex", alignItems: "center", gap: 5 }}>
-                  <span>{item.icon}</span>{item.label}
-                </span>
+                <span key={i} style={{ fontSize: 13, color: "#6c757d" }}>{item}</span>
               ))}
             </div>
           </div>
@@ -696,7 +612,7 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
         </div>
 
         <div style={{ display: "flex", borderBottom: "2px solid #E8571A20", flexShrink: 0 }}>
-          {(["overview", "lenders", "agents"] as const).map(tab => (
+          {(["lenders", "overview", "agents"] as const).map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -705,55 +621,36 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
                 fontSize: 14, fontWeight: activeTab === tab ? 700 : 500,
                 color: activeTab === tab ? "#E8571A" : "#6c757d",
                 borderBottom: activeTab === tab ? "3px solid #E8571A" : "3px solid transparent",
-                textTransform: "capitalize" as const, transition: "all 0.2s",
+                transition: "all 0.2s",
               }}
             >
-              {tab === "overview" ? "Overview" : tab === "lenders" ? "Lenders (4)" : "Agents (38)"}
+              {tab === "lenders" ? "Lenders (4)" : tab === "overview" ? "Overview" : "Agents (38)"}
             </button>
           ))}
         </div>
 
         <div style={{ overflowY: "auto", flex: 1 }}>
           {activeTab === "overview" && (
-            <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 14 }}>
-                {[
-                  { label: "Investor Rating",       value: "48 Transactions",   sub: "Owners: 3 · Sold: 45" },
-                  { label: "Avg. Purchase Price",   value: "$674,698",          sub: "Low: $370K · High: $1.35M" },
-                  { label: "Avg. Resale Price",     value: "$867,998",          sub: "Low: $530K · High: $1.65M" },
-                  { label: "P/FV Ratio",            value: "77%",               sub: "Low: 61% · High: 96%" },
-                  { label: "List-to-Sold",          value: "81%",               sub: "38 transactions" },
-                  { label: "Avg. Days to Market",   value: "64 Days",           sub: "Low: 2 · High: 292 days" },
-                  { label: "Avg. Days to Resale",   value: "118 Days",          sub: "Low: 25 · High: 329 days" },
-                  { label: "Acquisition Source",    value: "MLS 89 / Off-Mkt 52", sub: "Mixed acquisition" },
-                ].map((m, i) => (
-                  <div key={i} style={{ padding: "18px 16px", background: "#fff", borderRadius: 14, border: "2px solid #E8571A20", boxShadow: "0 2px 10px rgba(0,0,0,0.04)" }}>
-                    <div style={{ fontSize: 17, fontWeight: 800, color: "#E8571A" }}>{m.value}</div>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: "#2C3E50", marginTop: 4 }}>{m.label}</div>
-                    <div style={{ fontSize: 11, color: "#6c757d", marginTop: 3 }}>{m.sub}</div>
+            <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 6 }}>
+              {[
+                { label: "Investor Rating",         value: "48 Transactions",    sub: "Owners: 3 · Sold: 45" },
+                { label: "Avg. Purchase Price",     value: "$674,698",           sub: "Low: $370K · High: $1.35M" },
+                { label: "Avg. Resale Price",       value: "$867,998",           sub: "Low: $530K · High: $1.65M" },
+                { label: "P/FV Ratio",              value: "77%",                sub: "Low: 61% · High: 96%" },
+                { label: "List-to-Sold",            value: "81%",                sub: "38 transactions" },
+                { label: "Avg. Days to Market",     value: "64 Days",            sub: "Low: 2 · High: 292 days" },
+                { label: "Avg. Days to Resale",     value: "118 Days",           sub: "Low: 25 · High: 329 days" },
+                { label: "Acquisition Source",      value: "MLS 89 / Off-Mkt 52",sub: "Mixed acquisition" },
+                { label: "Last Property Purchased", value: "9455 IVES ST, BELLFLOWER", sub: "" },
+              ].map((m, i) => (
+                <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 20px", background: i % 2 === 0 ? "#fff" : "#E8571A06", borderLeft: "4px solid #E8571A30", borderBottom: "1px solid #E8571A15" }}>
+                  <div>
+                    <div style={{ fontSize: 14, fontWeight: 600, color: "#2C3E50" }}>{m.label}</div>
+                    {m.sub && <div style={{ fontSize: 12, color: "#6c757d", marginTop: 2 }}>{m.sub}</div>}
                   </div>
-                ))}
-              </div>
-              <div style={{ padding: "16px 20px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee" }}>
-                <div style={{ fontSize: 13, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>Related Entities &amp; Network</div>
-                <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-                  {[
-                    { label: "Related Entities", value: "14" },
-                    { label: "Agent Relationships", value: "38" },
-                    { label: "Lenders", value: "4" },
-                    { label: "Title Companies", value: "30" },
-                  ].map((item, i) => (
-                    <div key={i} style={{ textAlign: "center" }}>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: "#2C3E50" }}>{item.value}</div>
-                      <div style={{ fontSize: 11, color: "#6c757d", marginTop: 2 }}>{item.label}</div>
-                    </div>
-                  ))}
+                  <span style={{ fontSize: 15, fontWeight: 700, color: "#E8571A" }}>{m.value}</span>
                 </div>
-              </div>
-              <div style={{ padding: "14px 18px", background: "linear-gradient(135deg,#E8571A10,#E8571A18)", borderRadius: 14, border: "1px solid #E8571A30" }}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: "#6c757d", marginBottom: 4 }}>Last Property Purchased</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: "#2C3E50" }}>9455 IVES ST, BELLFLOWER</div>
-              </div>
+              ))}
             </div>
           )}
 
@@ -771,7 +668,7 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
                 </thead>
                 <tbody>
                   {GDB_LENDERS.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
                       <td style={{ ...tdStyle, fontWeight: 600, color: "#E8571A" }}>{row.entity}</td>
                       <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50", fontWeight: 700 }}>{row.loans}</td>
                       <td style={{ ...tdStyle, textAlign: "right", color: "#2C3E50" }}>{row.avgLoan}</td>
@@ -779,7 +676,7 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
                       <td style={{ ...tdStyle, textAlign: "right", color: "#6c757d" }}>{row.closed}</td>
                     </tr>
                   ))}
-                  <tr style={{ background: "linear-gradient(135deg,#E8571A08,#E8571A14)", fontWeight: 700 }}>
+                  <tr style={{ background: "#E8571A08" }}>
                     <td style={{ ...tdStyle, fontWeight: 800, color: "#2C3E50" }}>Total</td>
                     <td style={{ ...tdStyle, textAlign: "right", fontWeight: 800, color: "#E8571A" }}>24</td>
                     <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>$443,347</td>
@@ -806,15 +703,13 @@ function InvestorDetailPanel({ name, onClose }: { name: string; onClose: () => v
                 </thead>
                 <tbody>
                   {GDB_AGENTS.map((row, i) => (
-                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                    <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A06" }}>
                       <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50", whiteSpace: "nowrap" as const }}>{row.name}</td>
                       <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#E8571A" }}>{row.investorTrans}</td>
                       <td style={{ ...tdStyle, color: "#6c757d", fontSize: 12 }}>{row.acqListing} / {row.acqBuyer} / {row.resaleListing}</td>
                       <td style={{ ...tdStyle, color: "#2C3E50", fontSize: 12, maxWidth: 200, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" as const }}>{row.company}</td>
                       <td style={{ ...tdStyle, fontSize: 12 }}>
-                        {row.phone !== "—" ? (
-                          <a href={`tel:${row.phone}`} style={{ color: "#2C3E50", textDecoration: "none", fontWeight: 500 }}>{row.phone}</a>
-                        ) : "—"}
+                        {row.phone !== "—" ? <a href={`tel:${row.phone}`} style={{ color: "#2C3E50", textDecoration: "none" }}>{row.phone}</a> : "—"}
                       </td>
                       <td style={{ ...tdStyle, fontSize: 12 }}>
                         <a href={`mailto:${row.email}`} style={{ color: "#E8571A", textDecoration: "none" }}>{row.email}</a>
@@ -836,9 +731,12 @@ export default function HardMoneyPresentation() {
   const slug = params.slug || DEFAULT_LENDER.slug;
 
   const [lenderLoaded, setLenderLoaded] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [started, setStarted] = useState(false);
+  const [slide, setSlide] = useState(0);
   const [showBorrowers, setShowBorrowers] = useState(false);
   const [selectedBorrower, setSelectedBorrower] = useState<string | null>(null);
+
+  const total = SECTION_TITLES.length;
 
   useEffect(() => {
     async function fetchContact() {
@@ -847,12 +745,7 @@ export default function HardMoneyPresentation() {
         if (resp.ok) {
           const data = await resp.json() as { name?: string; company?: string; slug?: string; id?: number };
           if (data?.name) {
-            LENDER = {
-              name: data.name,
-              company: data.company || data.name,
-              slug: data.slug || slug,
-              contactId: data.id ?? null,
-            };
+            LENDER = { name: data.name, company: data.company || data.name, slug: data.slug || slug, contactId: data.id ?? null };
           }
         }
       } catch { /* silent */ } finally {
@@ -863,116 +756,102 @@ export default function HardMoneyPresentation() {
   }, [slug]);
 
   useEffect(() => {
+    if (!started) return;
     const handleKey = (e: KeyboardEvent) => {
       if (showBorrowers || selectedBorrower) return;
-      if (e.key === "ArrowRight" || e.key === "ArrowDown") setCurrentSlide(s => Math.min(s + 1, SLIDES.length - 1));
-      if (e.key === "ArrowLeft" || e.key === "ArrowUp") setCurrentSlide(s => Math.max(s - 1, 0));
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") setSlide(s => Math.min(s + 1, total - 1));
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") setSlide(s => Math.max(s - 1, 0));
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [showBorrowers, selectedBorrower]);
+  }, [started, showBorrowers, selectedBorrower, total]);
 
-  const goNext = useCallback(() => setCurrentSlide(s => Math.min(s + 1, SLIDES.length - 1)), []);
-  const goPrev = useCallback(() => setCurrentSlide(s => Math.max(s - 1, 0)), []);
+  const goNext = useCallback(() => setSlide(s => Math.min(s + 1, total - 1)), [total]);
+  const goPrev = useCallback(() => setSlide(s => Math.max(s - 1, 0)), []);
 
   if (!lenderLoaded) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#f8f9fa" }}>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#fff" }}>
         <div style={{ fontSize: 18, color: "#6c757d" }}>Loading…</div>
       </div>
     );
   }
 
-  return (
-    <div style={{ minHeight: "100vh", background: "linear-gradient(160deg,#fafafa 0%,#f0f2f5 100%)", display: "flex", flexDirection: "column", fontFamily: "'Inter','Segoe UI',system-ui,sans-serif" }}>
-      <header style={{ background: "#fff", borderBottom: "1px solid #E8571A20", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0, boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <img src={USALE_LOGO} alt="USale" style={{ height: 38, borderRadius: 8, objectFit: "contain" }} />
-          <div style={{ width: 1, height: 32, background: "#E8571A30" }} />
-          <div style={{ fontSize: 13, color: "#6c757d" }}>
-            Hard Money Lender Playbook for{" "}
-            <span style={{ fontWeight: 700, color: "#2C3E50" }}>{LENDER.company}</span>
+  if (!started) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 32 }}>
+        <img src={USALE_LOGO} alt="USale" style={{ height: 100 }} />
+        <div style={{ textAlign: "center" }}>
+          <div style={{ fontSize: 28, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>
+            Prepared for <span style={{ color: "#E8571A" }}>{LENDER.company}</span>
           </div>
+          <div style={{ fontSize: 16, color: "#6c757d" }}>Hard Money Lender Presentation</div>
         </div>
-        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-          {SLIDES.map((s, i) => (
+        <button
+          onClick={() => setStarted(true)}
+          style={{ padding: "18px 48px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", color: "#fff", border: "none", borderRadius: 14, fontSize: 18, fontWeight: 700, cursor: "pointer", boxShadow: "0 6px 24px #E8571A40" }}
+        >
+          ▶ Start Presentation
+        </button>
+      </div>
+    );
+  }
+
+  const sections = [
+    <SectionWelcome key={0} />,
+    <SectionData key={1} onShowBorrowers={() => setShowBorrowers(true)} />,
+    <SectionChanged key={2} />,
+    <SectionLens key={3} />,
+    <SectionMath key={4} />,
+    <SectionAsk key={5} />,
+    <SectionClose key={6} />,
+  ];
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#FFFFFF", fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", position: "relative" }}>
+
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "white", boxShadow: "0 2px 16px rgba(0,0,0,0.08)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <a href="/" style={{ display: "flex", alignItems: "center" }}>
+            <img src={USALE_LOGO} alt="USale" style={{ height: 48, cursor: "pointer" }} />
+          </a>
+          <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
+          <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for <strong>{LENDER.company}</strong></span>
+        </div>
+        <div style={{ display: "flex", gap: 4 }}>
+          {Array.from({ length: total }, (_, i) => (
             <button
-              key={s.id}
-              onClick={() => setCurrentSlide(i)}
-              title={s.title}
-              style={{
-                width: i === currentSlide ? 28 : 10, height: 10, borderRadius: 5, border: "none",
-                background: i === currentSlide ? "#E8571A" : (i < currentSlide ? "#E8571A60" : "#dee2e6"),
-                cursor: "pointer", transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)", padding: 0,
-              }}
+              key={i}
+              onClick={() => setSlide(i)}
+              title={SECTION_TITLES[i]}
+              style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, border: "none", background: i === slide ? "#E8571A" : "#2C3E5020", cursor: "pointer", transition: "all 0.3s", padding: 0 }}
             />
           ))}
         </div>
-      </header>
+      </div>
 
-      <main style={{ flex: 1, padding: "40px 24px", maxWidth: 1000, margin: "0 auto", width: "100%", boxSizing: "border-box" }}>
-        <div style={{ background: "#fff", borderRadius: 24, padding: "40px 44px", boxShadow: "0 8px 48px rgba(44,62,80,0.10)", border: "1px solid #E8571A10", minHeight: "60vh" }}>
-          {currentSlide === 0 && <SectionWelcome />}
-          {currentSlide === 1 && <SectionData onShowBorrowers={() => setShowBorrowers(true)} />}
-          {currentSlide === 2 && <SectionChanged />}
-          {currentSlide === 3 && <SectionLens />}
-          {currentSlide === 4 && <SectionMath />}
-          {currentSlide === 5 && <SectionAsk />}
-          {currentSlide === 6 && <SectionClose />}
-        </div>
-      </main>
+      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "88px 40px 110px" }}>
+        {sections[slide]}
+      </div>
 
-      <footer style={{ padding: "16px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0, borderTop: "1px solid #E8571A15", background: "#fff" }}>
-        <button
-          onClick={goPrev}
-          disabled={currentSlide === 0}
-          style={{
-            display: "flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 12,
-            border: "2px solid #E8571A30", background: "#fff", cursor: currentSlide === 0 ? "not-allowed" : "pointer",
-            fontSize: 15, fontWeight: 600, color: currentSlide === 0 ? "#ccc" : "#2C3E50",
-            transition: "all 0.2s",
-          }}
-        >
-          ← Back
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 100, padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", background: "rgba(248,249,250,0.95)", backdropFilter: "blur(16px)", borderTop: "1px solid #eee" }}>
+        <button onClick={goPrev} disabled={slide === 0} style={{ padding: "10px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: slide === 0 ? "default" : "pointer", border: "1px solid #dee2e6", background: "#fff", color: slide === 0 ? "#adb5bd" : "#2C3E50", opacity: slide === 0 ? 0.5 : 1 }}>
+          ← Previous
         </button>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#6c757d" }}>
-          {currentSlide + 1} / {SLIDES.length} — {SLIDES[currentSlide].title}
-        </div>
-        <button
-          onClick={goNext}
-          disabled={currentSlide === SLIDES.length - 1}
-          style={{
-            display: "flex", alignItems: "center", gap: 8, padding: "12px 28px", borderRadius: 12,
-            border: "none", background: currentSlide === SLIDES.length - 1 ? "#dee2e6" : "linear-gradient(135deg,#E8571A,#c44e00)",
-            cursor: currentSlide === SLIDES.length - 1 ? "not-allowed" : "pointer",
-            fontSize: 15, fontWeight: 600, color: currentSlide === SLIDES.length - 1 ? "#aaa" : "#fff",
-            boxShadow: currentSlide === SLIDES.length - 1 ? "none" : "0 4px 16px #E8571A40",
-            transition: "all 0.2s",
-          }}
-        >
+        <span style={{ fontSize: 13, color: "#adb5bd", fontWeight: 500 }}>
+          {SECTION_TITLES[slide]} &middot; {slide + 1} of {total}
+        </span>
+        <button onClick={goNext} disabled={slide === total - 1} style={{ padding: "10px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: slide === total - 1 ? "default" : "pointer", border: "none", background: slide === total - 1 ? "#E8571A30" : "#E8571A", color: slide === total - 1 ? "#E8571A60" : "#fff", boxShadow: slide === total - 1 ? "none" : "0 4px 14px #E8571A35" }}>
           Next →
         </button>
-      </footer>
+      </div>
 
       {showBorrowers && !selectedBorrower && (
-        <BorrowerModal
-          onClose={() => setShowBorrowers(false)}
-          onSelectBorrower={(name) => { setSelectedBorrower(name); setShowBorrowers(false); }}
-        />
+        <BorrowerModal onClose={() => setShowBorrowers(false)} onSelectBorrower={(name) => { setSelectedBorrower(name); setShowBorrowers(false); }} />
       )}
-
       {selectedBorrower && (
-        <InvestorDetailPanel
-          name={selectedBorrower}
-          onClose={() => setSelectedBorrower(null)}
-        />
+        <InvestorDetailPanel name={selectedBorrower} onClose={() => setSelectedBorrower(null)} />
       )}
-
-      <style>{`
-        @media (max-width: 600px) {
-          main > div { padding: 24px 20px !important; }
-        }
-      `}</style>
     </div>
   );
 }
