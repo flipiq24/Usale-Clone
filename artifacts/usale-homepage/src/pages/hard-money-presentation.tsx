@@ -190,7 +190,7 @@ function useAudioNarration(onEnded?: () => void) {
 function getHMLScripts(company: string): string[] {
   return [
     // 0: Welcome — Who I Am
-    `Welcome, ${company}. I'm Tony Diaz. Thirty-two years in this business. Over eleven hundred flips. I've been a borrower — Kiavi, Anchor, Genesis, private money. At one point I was the second-largest borrower at Anchor Loans. I'm not talking at you. I'm talking as someone who spent three decades on the other side of your desk.`,
+    `Welcome, ${company}. I'm Tony Diaz. Thirty-two years in this business. Over eleven hundred flips. I've been a borrower — Kiavi, Anchor, Genesis, private money. At one point I was the second-largest borrower at Anchor Loans. I've been on the other side of your desk.`,
 
     // 1: Your Data — competitive landscape
     `Before we talk about what I'm building — let's talk about you. ${company}, in the Los Angeles area, you have done over a thousand transactions. 681 unique investor relationships. Average loan around 623 thousand. Average loan-to-purchase of 90 percent. Average 1.5 loans per relationship. That last number is the one I want you to think about. One and a half. That means most of your borrowers borrow once and move on. That's not loyalty — that's luck.`,
