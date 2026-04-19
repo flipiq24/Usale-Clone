@@ -204,6 +204,20 @@ const SECTION_TITLES = ["Welcome", "Your Data", "AI Reality", "First Movers", "T
 
 const STATIC_HIGHLIGHT_COUNTS = [3, 6, 3, 3, 3, 2, 2];
 
+type SemanticCue = { after: string; bufferMs?: number; step: number };
+
+const SEMANTIC_CUES: (SemanticCue[] | null)[] = [
+  null,
+  [
+    { after: "primary entity", step: 1, bufferMs: 50 },
+    { after: "Jose Diaz", step: 2, bufferMs: 250 },
+    { after: "one lender", step: 3, bufferMs: 250 },
+    { after: "Your title", step: 4, bufferMs: 250 },
+    { after: "The MLS and tax data", step: 5, bufferMs: 100 },
+  ],
+  null, null, null, null, null,
+];
+
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
   [[0, 0], [0.19, 1], [0.37, 2], [0.53, 3], [0.61, 4], [0.70, 5]],
@@ -230,6 +244,37 @@ function getHighlightStep(progress: number, cues: [number, number][]): number {
     else break;
   }
   return step;
+}
+
+interface Alignment {
+  characters: string[];
+  character_start_times_seconds: number[];
+  character_end_times_seconds: number[];
+}
+
+function computeCuesFromAlignment(
+  text: string,
+  alignment: Alignment | null,
+  semantic: SemanticCue[] | null,
+): [number, number][] | null {
+  if (!alignment || !semantic) return null;
+  const total = alignment.character_end_times_seconds[alignment.character_end_times_seconds.length - 1];
+  if (!total || total <= 0) return null;
+  const aligned = alignment.characters.join("");
+  const cues: [number, number][] = [[0, 0]];
+  let searchFrom = 0;
+  for (const cue of semantic) {
+    const idx = aligned.indexOf(cue.after, searchFrom);
+    if (idx === -1) continue;
+    const endChar = idx + cue.after.length - 1;
+    const endTime = alignment.character_end_times_seconds[endChar];
+    if (endTime == null) continue;
+    const fraction = Math.min(1, (endTime + (cue.bufferMs ?? 0) / 1000) / total);
+    cues.push([fraction, cue.step]);
+    searchFrom = endChar + 1;
+  }
+  cues.sort((a, b) => a[0] - b[0]);
+  return cues;
 }
 
 function introReveal(step: number, index: number): React.CSSProperties {
@@ -699,17 +744,27 @@ function unlockAudioContext() {
   try { const ctx = getAudioCtx(); if (ctx.state === "suspended") ctx.resume(); } catch {}
 }
 
+function base64ToArrayBuffer(b64: string): ArrayBuffer {
+  const bin = atob(b64);
+  const buf = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+  return buf.buffer;
+}
+
+interface TTSPayload { audio: ArrayBuffer; alignment: Alignment | null; }
+
 function useAudioNarration(onEnded?: () => void) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [alignment, setAlignment] = useState<Alignment | null>(null);
   const sourceRef = useRef<AudioBufferSourceNode | null>(null);
   const fallbackAudioRef = useRef<HTMLAudioElement | null>(null);
   const startTimeRef = useRef<number>(0);
   const durationRef = useRef<number>(0);
   const progressRef = useRef<number>(0);
   const rafRef = useRef<number | null>(null);
-  const cacheRef = useRef<Map<string, ArrayBuffer>>(new Map());
+  const cacheRef = useRef<Map<string, TTSPayload>>(new Map());
   const currentControllerRef = useRef<AbortController | null>(null);
   const onEndedRef = useRef(onEnded);
   useEffect(() => { onEndedRef.current = onEnded; }, [onEnded]);
@@ -734,18 +789,23 @@ function useAudioNarration(onEnded?: () => void) {
     if (fallbackAudioRef.current) { fallbackAudioRef.current.pause(); fallbackAudioRef.current = null; }
     stopProgressTracker();
     setIsPlaying(false); setIsLoading(false); setProgress(0); progressRef.current = 0;
+    setAlignment(null);
   }, [stopProgressTracker]);
 
-  const fetchAudio = useCallback(async (text: string): Promise<ArrayBuffer> => {
+  const fetchPayload = useCallback(async (text: string): Promise<TTSPayload> => {
     if (cacheRef.current.has(text)) return cacheRef.current.get(text)!;
     const resp = await fetch(`${API_BASE}/ai/tts`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
     if (!resp.ok) throw new Error("TTS fetch failed");
-    const buf = await resp.arrayBuffer();
-    cacheRef.current.set(text, buf);
-    return buf;
+    const json = await resp.json();
+    const payload: TTSPayload = {
+      audio: base64ToArrayBuffer(json.audio_base64),
+      alignment: json.alignment ?? null,
+    };
+    cacheRef.current.set(text, payload);
+    return payload;
   }, []);
 
-  const preload = useCallback((text: string) => { fetchAudio(text).catch(() => {}); }, [fetchAudio]);
+  const preload = useCallback((text: string) => { fetchPayload(text).catch(() => {}); }, [fetchPayload]);
 
   const play = useCallback(async (text: string) => {
     stop();
@@ -753,15 +813,10 @@ function useAudioNarration(onEnded?: () => void) {
     currentControllerRef.current = controller;
     setIsLoading(true);
     try {
-      let arrayBuf: ArrayBuffer;
-      if (cacheRef.current.has(text)) {
-        arrayBuf = cacheRef.current.get(text)!;
-      } else {
-        const resp = await fetch(`${API_BASE}/ai/tts`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
-        if (!resp.ok) throw new Error("TTS fetch failed");
-        arrayBuf = await resp.arrayBuffer();
-      }
+      const payload = await fetchPayload(text);
+      const arrayBuf = payload.audio;
       if (controller.signal.aborted) return;
+      setAlignment(payload.alignment);
       const onDone = () => {
         stopProgressTracker();
         setIsPlaying(false); setIsLoading(false); setProgress(1); progressRef.current = 1;
@@ -799,7 +854,7 @@ function useAudioNarration(onEnded?: () => void) {
     }
   }, [stop, startProgressTracker, stopProgressTracker]);
 
-  return { play, stop, isPlaying, isLoading, progress, preload };
+  return { play, stop, isPlaying, isLoading, progress, preload, alignment };
 }
 
 export default function InvestorPresentation() {
@@ -855,7 +910,7 @@ export default function InvestorPresentation() {
       return s;
     });
   }, [SCRIPTS.length]);
-  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, progress: ttsProgress, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, progress: ttsProgress, preload: preloadTTS, alignment: ttsAlignment } = useAudioNarration(handleTTSEnded);
 
   const goNext = useCallback(() => { if (slide < total - 1) setSlide(s => s + 1); }, [slide, total]);
   const goPrev = useCallback(() => { if (slide > 0) setSlide(s => s - 1); }, [slide]);
@@ -956,7 +1011,11 @@ export default function InvestorPresentation() {
 
   const hlStep = (idx: number) => {
     if (slide !== idx) return 99;
-    if (isTTSPlaying) return Math.max(0, getHighlightStep(ttsProgress, HIGHLIGHT_CUES[idx]));
+    if (isTTSPlaying) {
+      const dynamic = idx === slide ? computeCuesFromAlignment(SCRIPTS[idx], ttsAlignment, SEMANTIC_CUES[idx]) : null;
+      const cues = dynamic ?? HIGHLIGHT_CUES[idx];
+      return Math.max(0, getHighlightStep(ttsProgress, cues));
+    }
     return Math.max(0, silentStep);
   };
 

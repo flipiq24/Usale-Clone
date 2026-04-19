@@ -20,7 +20,7 @@ router.post("/ai/tts", async (req, res) => {
     const voice = voiceId || "qR0n740Ytgfd0xk8jMxA";
 
     const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voice}/stream`,
+      `https://api.elevenlabs.io/v1/text-to-speech/${voice}/with-timestamps`,
       {
         method: "POST",
         headers: {
@@ -48,26 +48,12 @@ router.post("/ai/tts", async (req, res) => {
       return;
     }
 
-    res.setHeader("Content-Type", "audio/mpeg");
-    res.setHeader("Transfer-Encoding", "chunked");
+    const data = (await response.json()) as { audio_base64?: string; alignment?: unknown; normalized_alignment?: unknown };
     res.setHeader("Cache-Control", "no-cache");
-
-    const reader = response.body?.getReader();
-    if (!reader) {
-      res.status(500).json({ error: "No response body from TTS" });
-      return;
-    }
-
-    const pump = async () => {
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        res.write(value);
-      }
-      res.end();
-    };
-
-    await pump();
+    res.json({
+      audio_base64: data.audio_base64,
+      alignment: data.alignment ?? data.normalized_alignment ?? null,
+    });
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : "Unknown error";
     console.error("TTS error:", errorMessage);
