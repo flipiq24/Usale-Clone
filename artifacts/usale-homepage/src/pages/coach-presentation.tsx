@@ -234,22 +234,45 @@ interface AgentRow {
   phone: string;
 }
 
-const SAMPLE_AGENTS: AgentRow[] = [
-  { name: "Russell Morgan",       investorTrans: 17, company: "HomeWay",                              phone: "562-237-0580" },
-  { name: "Sherry Carr",          investorTrans: 7,  company: "Keller Williams Realty",              phone: "626-355-2384" },
-  { name: "Monica Cornelius",     investorTrans: 6,  company: "The Cross Street Team",               phone: "714-686-2470" },
-  { name: "Ryan Meltcher",        investorTrans: 6,  company: "Corcoran Global Living",              phone: "714-404-1267" },
-  { name: "Tony Congelliere",     investorTrans: 6,  company: "Russell James Morgan, Broker",        phone: "714-482-5329" },
-  { name: "David De La Vega",     investorTrans: 2,  company: "The Doorway Realty",                  phone: "714-914-6205" },
-  { name: "Oscar Rosas",          investorTrans: 2,  company: "T.N.G. Real Estate Consultants",      phone: "714-679-2761" },
-  { name: "Tony Weber",           investorTrans: 2,  company: "Berkshire Hathaway HomeService",      phone: "949-370-2483" },
-  { name: "Cheryl Bowdish",       investorTrans: 1,  company: "Coldwell Banker Realty",              phone: "714-319-9071" },
-  { name: "Eric Baskett",         investorTrans: 1,  company: "Circle Real Estate",                  phone: "310-564-6640" },
-  { name: "Helen Araujo",         investorTrans: 1,  company: "Century 21 Award",                    phone: "619-654-1413" },
-  { name: "Laura Dandoy",         investorTrans: 1,  company: "RE/MAX Resources",                    phone: "—"           },
-  { name: "Martha Morales",       investorTrans: 1,  company: "Keller Williams Realty",              phone: "562 902-5100" },
-  { name: "Randy Rogers",         investorTrans: 1,  company: "HomeWay",                             phone: "714-501-3697" },
-  { name: "Ron Vallery",          investorTrans: 1,  company: "Re/Max Estate Properties",            phone: "310-703-1886" },
+const GDB_AGENTS: AgentRow[] = [
+  { name: "Russell Morgan",       investorTrans: 17, company: "HomeWay",                                   phone: "562-237-0580" },
+  { name: "Sherry Carr",          investorTrans: 7,  company: "Keller Williams Realty",                   phone: "626-355-2384" },
+  { name: "Monica Cornelius",     investorTrans: 6,  company: "The Cross Street Team",                    phone: "714-686-2470" },
+  { name: "Ryan Meltcher",        investorTrans: 6,  company: "Corcoran Global Living",                   phone: "714-404-1267" },
+  { name: "Tony Congelliere",     investorTrans: 6,  company: "Russell James Morgan, Broker",             phone: "714-482-5329" },
+  { name: "David De La Vega",     investorTrans: 2,  company: "The Doorway Realty",                       phone: "714-914-6205" },
+  { name: "Oscar Rosas",          investorTrans: 2,  company: "T.N.G. Real Estate Consultants",           phone: "714-679-2761" },
+  { name: "Tony Weber",           investorTrans: 2,  company: "Berkshire Hathaway HomeService",           phone: "949-370-2483" },
+  { name: "CHERYL BOWDISH",       investorTrans: 1,  company: "COLDWELL BANKER REALTY",                   phone: "714-319-9071" },
+  { name: "Christopher Rodriguez",investorTrans: 1,  company: "MLA Investments",                          phone: "(909) 594-62" },
+  { name: "Eric Baskett",         investorTrans: 1,  company: "Circle Real Estate",                       phone: "310-564-6640" },
+  { name: "Helen Araujo",         investorTrans: 1,  company: "Century 21 Award",                         phone: "619-654-1413" },
+  { name: "IAN VILLALBA",         investorTrans: 1,  company: "KELLER WILLIAMS WEST FOOTHILLS",           phone: "626-367-4851" },
+  { name: "Isavel Smith",         investorTrans: 1,  company: "First Team Real Estate",                   phone: "213-400-8295" },
+  { name: "Jaclyn Kornely",       investorTrans: 1,  company: "Caliber Real Estate Group",                phone: "7146242597"   },
+  { name: "Jeremy Lai",           investorTrans: 1,  company: "True Legacy Homes",                        phone: "808-778-3531" },
+  { name: "Juan Carlos Ayala",    investorTrans: 1,  company: "Executive Bankers Realty",                 phone: "323-397-0529" },
+  { name: "Kariann Voorhees",     investorTrans: 1,  company: "First Team Real Estate",                   phone: "—"            },
+  { name: "Kevin Keaty",          investorTrans: 1,  company: "Berkshire Hathaway HomeServices California",phone: "714-608-3298" },
+  { name: "Laura Dandoy",         investorTrans: 1,  company: "RE/MAX RESOURCES",                         phone: "—"            },
+  { name: "Laura Spencer",        investorTrans: 1,  company: "T.N.G. Real Estate Consultants",           phone: "714-987-3310" },
+  { name: "Mariano Lopez",        investorTrans: 1,  company: "T.N.G. Real Estate Consultants",           phone: "714-696-1187" },
+  { name: "Marija Mladenovic",    investorTrans: 1,  company: "RE/MAX Estate Properties",                 phone: "310-982-5503" },
+  { name: "Martha Morales",       investorTrans: 1,  company: "Keller Williams Realty",                   phone: "562 902-5100" },
+  { name: "Matthew Fletcher",     investorTrans: 1,  company: "Seven Gables Real Estate",                 phone: "949-677-3618" },
+  { name: "MICAH ADAMS",          investorTrans: 1,  company: "CENTURY 21 ADAMS & BARNES",               phone: "626-589-3870" },
+  { name: "MICHAEL WALLACE",      investorTrans: 1,  company: "BETTER HOME FINANCIAL, INC",              phone: "9093945626"   },
+  { name: "NINA ERBST",           investorTrans: 1,  company: "KELLER WILLIAMS/VICTOR VALLEY",           phone: "760-559-3332" },
+  { name: "Pat Rojas",            investorTrans: 1,  company: "Re/Max Masters",                           phone: "562-943-5577" },
+  { name: "Pete Whan",            investorTrans: 1,  company: "Pete Whan and Associates, Inc.",           phone: "(626) 278-4333"},
+  { name: "Randy Rogers",         investorTrans: 1,  company: "HomeWay",                                  phone: "714-501-3697" },
+  { name: "Ron Vallery",          investorTrans: 1,  company: "Re/Max Estate Properties",                 phone: "310-703-1886" },
+  { name: "Ryan Vessey",          investorTrans: 1,  company: "New Western Acquisitions",                 phone: "714-609-5429" },
+  { name: "Steven Kleemann",      investorTrans: 1,  company: "Rodeo Realty",                             phone: "818-349-9997" },
+  { name: "THOMAS MESSINA",       investorTrans: 1,  company: "CURTIS REAL ESTATE",                      phone: "909-816-7364" },
+  { name: "Victor Jackson",       investorTrans: 1,  company: "Victor Jackson",                           phone: "323-864-9492" },
+  { name: "Wendy Rawley",         investorTrans: 1,  company: "Reliance Real Estate Services",            phone: "714.746.6355" },
+  { name: "ZACHARY BLOUNT",       investorTrans: 1,  company: "REALTY MASTERS & ASSOCIATES",             phone: "951-231-4344" },
 ];
 
 function BrandName() {
@@ -266,9 +289,6 @@ function SectionWelcome() {
         How to Turn Your Students Into a Recurring Revenue Engine — and Build the Backend That Compounds Over Time.
       </p>
       <img src={USALE_LOGO} alt="USale" style={{ height: 100 }} />
-      <p style={{ fontSize: 14, color: "#adb5bd", margin: 0 }}>
-        For Real Estate Coaching Companies &nbsp;·&nbsp; Investor Education Programs &nbsp;·&nbsp; Wholesaling Mentors
-      </p>
     </div>
   );
 }
@@ -314,7 +334,7 @@ function SectionWhatIsUSale() {
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
             <tr>
-              <th style={{ ...thStyle, width: "30%" }}>Who They Are</th>
+              <th style={{ ...thStyle, width: "30%" }}>Who</th>
               <th style={thStyle}>What USale Gives Them</th>
             </tr>
           </thead>
@@ -327,11 +347,6 @@ function SectionWhatIsUSale() {
             ))}
           </tbody>
         </table>
-      </div>
-      <div style={{ padding: "18px 24px", background: "#f8f9fa", borderRadius: 12, borderLeft: "4px solid #E8571A" }}>
-        <p style={{ margin: 0, fontSize: 15, color: "#2C3E50", fontWeight: 600, lineHeight: 1.6 }}>
-          Powered by FlipIQ — built by an investor with 30+ years and 1,100+ flips who was tired of the friction in the market.
-        </p>
       </div>
     </div>
   );
@@ -436,7 +451,7 @@ function SectionStudentTools() {
               </tr>
             </thead>
             <tbody>
-              {SAMPLE_AGENTS.map((a, i) => (
+              {GDB_AGENTS.map((a, i) => (
                 <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#E8571A04" }}>
                   <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50" }}>{a.name}</td>
                   <td style={{ ...tdStyle, textAlign: "center", fontWeight: 700, color: "#E8571A" }}>{a.investorTrans}</td>
@@ -481,7 +496,7 @@ function SectionIncomeChannels() {
                 <tr style={{ background: "#fff" }}>
                   <td style={{ ...tdStyle, fontWeight: 600, color: "#2C3E50" }}>Standard Coaching</td>
                   <td style={{ ...tdStyle, color: "#6c757d" }}>Your existing offer. Core training, curriculum, fundamentals. No change required.</td>
-                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>$7,800 – $9,800</td>
+                  <td style={{ ...tdStyle, textAlign: "right", fontWeight: 700, color: "#2C3E50" }}>$7,000 – $10,000</td>
                 </tr>
                 <tr style={{ background: "#E8571A06" }}>
                   <td style={{ ...tdStyle, fontWeight: 700, color: "#E8571A" }}>Premium — Guaranteed Tier</td>
