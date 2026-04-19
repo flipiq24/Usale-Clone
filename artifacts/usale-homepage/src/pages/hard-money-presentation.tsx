@@ -189,19 +189,32 @@ function useAudioNarration(onEnded?: () => void) {
 
 function getHMLScripts(company: string): string[] {
   return [
+    // 0: Welcome — Who I Am
     `Welcome, and thank you for the time. My name is Tony Diaz. I've been in this business 32 years. Over 1,100 flips. I've borrowed from Kiavi, Anchor, Genesis, private individuals. At one point I was the second-largest borrower at Anchor Loans. So when I talk about hard money, I'm not talking at you. I'm talking as someone who's been on the other side of your desk for three decades.`,
 
+    // 1: Your Data — competitive landscape
     `Before we talk about what I'm building — let's talk about you. ${company}, in the Los Angeles area, you have done 1,047 transactions. 681 unique investor relationships. Average loan amount of approximately 623 thousand dollars. Average loan-to-purchase of 90.5 percent. Average 1.5 loans per relationship. That last number is the one I want you to think about. One and a half. That means most of your borrowers borrow once, and they move on. That's not loyalty — that's luck.`,
 
+    // 2: Current Borrowers — who they are right now
+    `These are your active borrowers. Ten of your top relationships. G D Bristol — 38 transactions, mixed financing, last deal November 2023. H K Investments — 18 deals, average loan nine hundred thousand. Flipping SoCal — 30 deals. Millennial Investments — 28 deals. These aren't cold leads. These aren't names from a skip-trace list. These are operators who already know you, already trust you with their capital. Let's drill down on one of them.`,
+
+    // 3: Investor Drill-Down — the full picture
+    `G D Bristol. 48 transactions. Average purchase $674,698 — they buy right. Average resale $867,998. They've borrowed 24 times. 21 of those loans from your entity. You are their primary lender. Now look at the agents. Russell Morgan at HomeWay — 17 of their investor deals. I know Russell personally. I have direct relationships with two of the top agents on this list. These agents each work with 20, 30, 40 active investors. Everybody is trying to sell them something. I bring value first. I'm not selling — I'm showing them off-market deals. And when one of their investors needs a loan, I already know exactly who their lender is. Now look at the title companies — 30 of them. First American handled 19 of this borrower's closings. I know who they call. I know where their deals come from. I know what they paid. And here's what most lenders miss: most borrowers don't borrow from just one lender. They shop. They rotate. This data is how you retain the relationships you already have — and get in front of new ones where you can't afford to undercut on rate.`,
+
+    // 4: What Changed
     `A lot has changed. Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets. Which means you're competing on two things: rate and sales pressure. That's a losing game. If a borrower is with Kiavi, you can't touch them on rate — so you either undercut yourself into thin margins, or you hire the most expensive salesperson you can find. And even then, what are you saying? Hey, I saw you borrow from Kiavi — our rates are competitive and our service is great. Click. I get ten of those calls a month. I hang up. Every operator does.`,
 
+    // 5: A Different Lens — the ecosystem
     `We look at the same data differently. You look at it to find the borrower at the moment they need a loan. We look at it to build an ecosystem before the loan is needed. Here's what we built. A free, off-market marketplace. No fees. No signup. No friction. We identified every active flipper — same way you do. Then we identified every investor-friendly agent, every title company, every escrow officer they transact with. We put them all in one place. Agents post deals. Investors compete. Title handles closings. Everybody participates. Nobody pays. When a borrower accepts a property in our marketplace, we hand you a full profile — every transaction, who they've borrowed from, active loans, average flip time, how they find deals, how well they buy, what they list for, how fast they sell. You know exactly who they are before you quote the loan.`,
 
+    // 6: The Math
     `Here's why this scales. There are 75 MSAs in this country where hard money is the most active. In each one, there are five operators who do the most volume. That's our target universe. Today, a top operator does about two hard money deals a month. Our technology gets them to four, minimum. 375 operators over three years. The average hard money loan is two hundred fifty-seven thousand dollars. 375 operators, two new loans a month, at two fifty-seven thousand. That's one hundred ninety-two million dollars a month in new originations. At one percent origination fee, that's 1.9 million dollars a month in new fee income for you.`,
 
+    // 7: The Ask
     `We normally charge operators one hundred thousand dollars to join — comparable to a franchise. I don't want a sales team. I don't want overhead. I want distribution partners who already have the data. So here's the deal. Two hundred fifty thousand dollar initial investment from ${company}. We drop the operator fee to ten thousand — they keep skin in the game. You get ownership in the technology. You get 20 tier-one operators delivered — we have seven today, we'll build to 20. Those borrowers are yours. No revenue share, no referral fee. Your blended borrower-acquisition cost today runs 0.4 to 0.5 percent of the loan amount. With us, you don't need reps. We become your reps — except we work for the borrower first, which is why they stay sticky. Phase two, after proof of concept: national partnership. Bigger investment, bigger ownership. That's where 20 becomes 375. That's where 192 million a month becomes real.`,
 
-    `I'm not asking you for your clients. I already have your clients. Go ahead and skip-trace all you want — I have a better way to reach them. What I'm asking is for you to stop competing on rate and start winning on value — and let us deliver that value to the borrowers who make you money whether you ever cold-called them or not. That's the pitch. Let's look at your data. I'm Tony Diaz — thanks for your time.`,
+    // 8: Close
+    `I'm not asking you for your clients. I already have your clients. Go ahead and skip-trace all you want — I have a better way to reach them. What I'm asking is for you to stop competing on rate and start winning on value — and let us deliver that value to the borrowers who make you money whether you ever cold-called them or not. That's the pitch. I'm Tony Diaz — thanks for your time.`,
   ];
 }
 
@@ -337,17 +350,20 @@ interface AgentRelRow {
   phone: string;
   email: string;
   totalTrans: number;
+  ratingAcqListing?: number;
+  ratingAcqBuyer?: number;
+  ratingResaleListing?: number;
 }
 
 const GDB_AGENTS: AgentRelRow[] = [
-  { name: "Russell Morgan",      investorTrans: 17, acqListing: 1,  acqBuyer: 3,  resaleListing: 13, company: "HomeWay",                                   phone: "562-237-0580", email: "russell@thehomewayteam.com",    totalTrans: 59 },
-  { name: "Sherry Carr",         investorTrans: 7,  acqListing: 0,  acqBuyer: 2,  resaleListing: 5,  company: "Keller Williams Realty",                    phone: "626-355-2384", email: "sherrycarr777@yahoo.com",       totalTrans: 23 },
-  { name: "Monica Cornelius",    investorTrans: 6,  acqListing: 2,  acqBuyer: 2,  resaleListing: 2,  company: "The Cross Street Team",                     phone: "714-686-2470", email: "Monica@TheCrossStreetTeam.com", totalTrans: 9  },
-  { name: "Ryan Meltcher",       investorTrans: 6,  acqListing: 0,  acqBuyer: 3,  resaleListing: 3,  company: "Corcoran Global Living",                    phone: "714-404-1267", email: "ryan@meltcher.com",             totalTrans: 26 },
-  { name: "Tony Congelliere",    investorTrans: 6,  acqListing: 0,  acqBuyer: 6,  resaleListing: 0,  company: "Russell James Morgan, Broker",              phone: "714-482-5329", email: "ajc1984112@gmail.com",          totalTrans: 19 },
-  { name: "David De La Vega",    investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "The Doorway Realty",                        phone: "714-914-6205", email: "daviddlv@hotmail.com",          totalTrans: 21 },
-  { name: "Oscar Rosas",         investorTrans: 2,  acqListing: 0,  acqBuyer: 0,  resaleListing: 2,  company: "T.N.G. Real Estate Consultants",            phone: "714-679-2761", email: "ojrosas@tngrealestate.com",     totalTrans: 8  },
-  { name: "Tony Weber",          investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "Berkshire Hathaway HomeService",            phone: "949-370-2483", email: "anthonyweberrealty@gmail.com",  totalTrans: 4  },
+  { name: "Russell Morgan",      investorTrans: 17, acqListing: 1,  acqBuyer: 3,  resaleListing: 13, company: "HomeWay",                                   phone: "562-237-0580", email: "russell@thehomewayteam.com",    totalTrans: 59, ratingAcqListing: 21, ratingAcqBuyer: 18, ratingResaleListing: 20 },
+  { name: "Sherry Carr",         investorTrans: 7,  acqListing: 0,  acqBuyer: 2,  resaleListing: 5,  company: "Keller Williams Realty",                    phone: "626-355-2384", email: "sherrycarr777@yahoo.com",       totalTrans: 23, ratingAcqListing: 10, ratingAcqBuyer: 6,  ratingResaleListing: 7  },
+  { name: "Monica Cornelius",    investorTrans: 6,  acqListing: 2,  acqBuyer: 2,  resaleListing: 2,  company: "The Cross Street Team",                     phone: "714-686-2470", email: "Monica@TheCrossStreetTeam.com", totalTrans: 9,  ratingAcqListing: 5,  ratingAcqBuyer: 2,  ratingResaleListing: 2  },
+  { name: "Ryan Meltcher",       investorTrans: 6,  acqListing: 0,  acqBuyer: 3,  resaleListing: 3,  company: "Corcoran Global Living",                    phone: "714-404-1267", email: "ryan@meltcher.com",             totalTrans: 26, ratingAcqListing: 9,  ratingAcqBuyer: 10, ratingResaleListing: 7  },
+  { name: "Tony Congelliere",    investorTrans: 6,  acqListing: 0,  acqBuyer: 6,  resaleListing: 0,  company: "Russell James Morgan, Broker",              phone: "714-482-5329", email: "ajc1984112@gmail.com",          totalTrans: 19, ratingAcqListing: 2,  ratingAcqBuyer: 15, ratingResaleListing: 2  },
+  { name: "David De La Vega",    investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "The Doorway Realty",                        phone: "714-914-6205", email: "daviddlv@hotmail.com",          totalTrans: 21, ratingAcqListing: 9,  ratingAcqBuyer: 6,  ratingResaleListing: 6  },
+  { name: "Oscar Rosas",         investorTrans: 2,  acqListing: 0,  acqBuyer: 0,  resaleListing: 2,  company: "T.N.G. Real Estate Consultants",            phone: "714-679-2761", email: "ojrosas@tngrealestate.com",     totalTrans: 8,  ratingAcqListing: 4,  ratingAcqBuyer: 0,  ratingResaleListing: 4  },
+  { name: "Tony Weber",          investorTrans: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0,  company: "Berkshire Hathaway HomeService",            phone: "949-370-2483", email: "anthonyweberrealty@gmail.com",  totalTrans: 4,  ratingAcqListing: 3,  ratingAcqBuyer: 1,  ratingResaleListing: 0  },
   { name: "CHERYL BOWDISH",      investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "COLDWELL BANKER REALTY",                    phone: "714-319-9071", email: "cheryl.bowdish@cbrealty.com",   totalTrans: 1  },
   { name: "Christopher Rodriguez",investorTrans: 1, acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "MLA Investments",                           phone: "(909) 594-62", email: "CHRISPRUD@SBCGLOBAL.NET",       totalTrans: 7  },
   { name: "Eric Baskett",        investorTrans: 1,  acqListing: 1,  acqBuyer: 0,  resaleListing: 0,  company: "Circle Real Estate",                        phone: "310-564-6640", email: "info@ericbaskett.com",          totalTrans: 6  },
@@ -386,17 +402,71 @@ interface GDBLenderRow {
   avgLoan: string;
   open: string;
   closed: string;
+  avgLoanTime: string;
 }
 const GDB_LENDERS: GDBLenderRow[] = [
-  { entity: "EASY STREET CAPITAL CA LLC",   loans: 21, avgLoan: "$498,386", open: "1",  closed: "20" },
-  { entity: "EAST STREET CAPITAL CA LLC",   loans: 1,  avgLoan: "$270,000", open: "—",  closed: "1"  },
-  { entity: "IDA WEST INC",                 loans: 1,  avgLoan: "$450,000", open: "—",  closed: "1"  },
-  { entity: "EASY STREET CAPATIAL CA LLC",  loans: 1,  avgLoan: "$555,000", open: "—",  closed: "1"  },
+  { entity: "EASY STREET CAPITAL CA LLC",  loans: 21, avgLoan: "$498,386", open: "1",  closed: "20", avgLoanTime: "111 days" },
+  { entity: "EAST STREET CAPITAL CA LLC",  loans: 1,  avgLoan: "$270,000", open: "—",  closed: "1",  avgLoanTime: "113 days" },
+  { entity: "IDA WEST INC",                loans: 1,  avgLoan: "$450,000", open: "—",  closed: "1",  avgLoanTime: "70 days"  },
+  { entity: "EASY STREET CAPATIAL CA LLC", loans: 1,  avgLoan: "$555,000", open: "—",  closed: "1",  avgLoanTime: "—"        },
+];
+
+interface GDBTitleRow {
+  company: string;
+  withInvestor: number;
+  acqListing: number;
+  acqBuyer: number;
+  resaleListing: number;
+}
+const GDB_TITLE_COMPANIES: GDBTitleRow[] = [
+  { company: "FIRST AMERICAN TITLE COMPANY",   withInvestor: 19, acqListing: 11, acqBuyer: 11, resaleListing: 7 },
+  { company: "LAWYERS TITLE COMPANY",          withInvestor: 11, acqListing: 5,  acqBuyer: 5,  resaleListing: 5 },
+  { company: "LAWYERS TITLE",                  withInvestor: 7,  acqListing: 4,  acqBuyer: 4,  resaleListing: 2 },
+  { company: "FIRST AMER TTL CO RES DIV",      withInvestor: 6,  acqListing: 2,  acqBuyer: 2,  resaleListing: 0 },
+  { company: "CHICAGO TITLE COMPANY",          withInvestor: 5,  acqListing: 4,  acqBuyer: 4,  resaleListing: 1 },
+  { company: "WESTERN RESOURCES TITLE",        withInvestor: 5,  acqListing: 4,  acqBuyer: 4,  resaleListing: 3 },
+  { company: "CALIFORNIA TITLE COMPANY",       withInvestor: 5,  acqListing: 3,  acqBuyer: 3,  resaleListing: 1 },
+  { company: "FIDELITY NATL TTL ORANGE CNT",   withInvestor: 5,  acqListing: 5,  acqBuyer: 5,  resaleListing: 2 },
+  { company: "FIRST AMERICAN TITLE",           withInvestor: 3,  acqListing: 2,  acqBuyer: 2,  resaleListing: 2 },
+  { company: "ORANGE COAST TTL CO OF SOCAL",   withInvestor: 3,  acqListing: 3,  acqBuyer: 3,  resaleListing: 1 },
+  { company: "TICOR TITLE",                    withInvestor: 3,  acqListing: 2,  acqBuyer: 2,  resaleListing: 1 },
+  { company: "TICOR TITLE RIVERSIDE",          withInvestor: 2,  acqListing: 1,  acqBuyer: 1,  resaleListing: 0 },
+  { company: "FIRST AMER TTL CO GLENDALE",     withInvestor: 2,  acqListing: 2,  acqBuyer: 2,  resaleListing: 0 },
+];
+
+interface CurrentBorrowerRow {
+  name: string;
+  hometown: string;
+  lastPurchase: string;
+  totalTrans: string;
+  avgPurchase: string;
+  avgResale: string;
+  pfvRatio: string;
+  listSoldRatio: string;
+  avgDays: string;
+  pmRatio: number;
+  financing: string;
+  agentRel: string;
+  lastProperty: string;
+}
+const CURRENT_BORROWERS: CurrentBorrowerRow[] = [
+  { name: "G D BRISTOL LLC",                  hometown: "YORBA LINDA, CA",  lastPurchase: "11/16/2023", totalTrans: "38/49",  avgPurchase: "$687,539",   avgResale: "$892,376",   pfvRatio: "77.23%", listSoldRatio: "104.57%", avgDays: "205 days", pmRatio: 114, financing: "MIXED", agentRel: "21/21/11/6",  lastProperty: "9455 IVES ST, BELLFLOWER"              },
+  { name: "HK INVESTMENTS GROUP LLC",         hometown: "FONTANA, CA",      lastPurchase: "12/21/2022", totalTrans: "18/18",  avgPurchase: "$900,167",   avgResale: "$1,120,492", pfvRatio: "69.77%", listSoldRatio: "104.54%", avgDays: "412 days", pmRatio: 354, financing: "LOAN",  agentRel: "5/3/3/5",     lastProperty: "2199 SUMMITRIDGE DR, BEVERLY HILLS"    },
+  { name: "FLIPPING SOCAL LLC",               hometown: "EASTVALE, CA",     lastPurchase: "02/28/2024", totalTrans: "30/33",  avgPurchase: "$475,333",   avgResale: "$618,127",   pfvRatio: "79.99%", listSoldRatio: "97.79%",  avgDays: "144 days", pmRatio: 156, financing: "MIXED", agentRel: "4/4/4/3",     lastProperty: "1526 KORBEL ST, PERRIS"                },
+  { name: "MILLENNIAL INVESTMENTS LLC",       hometown: "LONG BEACH, CA",   lastPurchase: "04/16/2024", totalTrans: "28/41",  avgPurchase: "$519,750",   avgResale: "$707,935",   pfvRatio: "73.50%", listSoldRatio: "106.62%", avgDays: "78 days",  pmRatio: 103, financing: "LOAN",  agentRel: "14/14/6/2",   lastProperty: "3627 GARDENIA AVE, LONG BEACH"         },
+  { name: "DCBX ENTERPRISE INC",             hometown: "SAN GABRIEL, CA",  lastPurchase: "05/25/2022", totalTrans: "16/26",  avgPurchase: "$424,406",   avgResale: "$565,833",   pfvRatio: "76.52%", listSoldRatio: "102.40%", avgDays: "695 days", pmRatio: 135, financing: "MIXED", agentRel: "1/0/0/1",     lastProperty: "952 GRAYBAR AVE, LA PUENTE"            },
+  { name: "EM INVESTMENTS LLC",              hometown: "MONTCLAIR, CA",    lastPurchase: "11/29/2023", totalTrans: "46/57",  avgPurchase: "$259,946",   avgResale: "$403,322",   pfvRatio: "58.44%", listSoldRatio: "102.60%", avgDays: "172 days", pmRatio: 197, financing: "MIXED", agentRel: "15/8/7/15",   lastProperty: "330 MURIEL DR, BARSTOW"                },
+  { name: "ALLEGIANT PROPERTY MGMT LLC",     hometown: "REDLANDS, CA",     lastPurchase: "02/17/2022", totalTrans: "9/11",   avgPurchase: "$399,056",   avgResale: "$784,201",   pfvRatio: "67.09%", listSoldRatio: "93.82%",  avgDays: "455 days", pmRatio: 443, financing: "LOAN",  agentRel: "3/0/0/3",     lastProperty: "18682 VINE AVE, ORANGE"                },
+  { name: "ANAYA PROPERTIES LLC",            hometown: "REDLANDS, CA",     lastPurchase: "04/27/2023", totalTrans: "10/11",  avgPurchase: "$266,050",   avgResale: "$419,375",   pfvRatio: "70.74%", listSoldRatio: "107.45%", avgDays: "150 days", pmRatio: 141, financing: "MIXED", agentRel: "3/3/2/1",     lastProperty: "25094 VALLE DR, CRESTLINE"             },
+  { name: "CAPSTONE CAPITAL GROUP LLC",      hometown: "SAN DIEGO, CA",    lastPurchase: "05/24/2022", totalTrans: "11/19",  avgPurchase: "$952,636",   avgResale: "$1,354,778", pfvRatio: "74.48%", listSoldRatio: "96.49%",  avgDays: "451 days", pmRatio: 168, financing: "LOAN",  agentRel: "5/5/4/3",     lastProperty: "1317 VISTA DEL MONTE DR, EL CAJON"     },
+  { name: "OM NAMAH SHIVAAI LLC",            hometown: "ESCONDIDO, CA",    lastPurchase: "07/12/2023", totalTrans: "11/16",  avgPurchase: "$1,036,136", avgResale: "$1,150,000", pfvRatio: "70.28%", listSoldRatio: "100.91%", avgDays: "400 days", pmRatio: 235, financing: "LOAN",  agentRel: "4/3/3/4",     lastProperty: "1271 BRITTANY CROSS RD, SANTA ANA"     },
 ];
 
 const SECTION_TITLES = [
   "Welcome",
   "Your Data",
+  "Current Borrowers",
+  "Investor Drill-Down",
   "What Changed",
   "A Different Lens",
   "The Math",
@@ -521,6 +591,301 @@ function SectionData({ onShowBorrowers }: { onShowBorrowers: () => void }) {
             </tbody>
           </table>
         </div>
+      </div>
+    </div>
+  );
+}
+
+const TH: React.CSSProperties = { padding: "10px 14px", textAlign: "left", fontSize: 12, fontWeight: 700, color: "#E8571A", borderBottom: "2px solid #f0f0f0", whiteSpace: "nowrap", background: "#fff" };
+const TD: React.CSSProperties = { padding: "10px 14px", fontSize: 13, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", verticalAlign: "top" };
+
+function SectionCurrentBorrowers() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20, minHeight: "60vh" }}>
+      <div>
+        <h2 style={{ fontSize: "clamp(20px,3vw,30px)", fontWeight: 700, color: "#2C3E50", margin: "0 0 4px", letterSpacing: "-0.02em" }}>
+          Here are all your current <span style={{ color: "#E8571A" }}>borrowers</span>.
+        </h2>
+        <p style={{ margin: 0, fontSize: 14, color: "#6c757d" }}>Top active investor relationships — all transactions with {LENDER.company}</p>
+      </div>
+      <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid #eee", background: "#fff", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 1100 }}>
+          <thead>
+            <tr>
+              <th style={TH}>Entity Name</th>
+              <th style={TH}>Hometown / State</th>
+              <th style={TH}>Last Purchase</th>
+              <th style={TH}>Total Trans.</th>
+              <th style={TH}>Avg Purchase</th>
+              <th style={TH}>Avg Resale</th>
+              <th style={TH}>PFV Ratio</th>
+              <th style={TH}>List/Sold Ratio</th>
+              <th style={TH}>Avg Days</th>
+              <th style={TH}>P-to-Market</th>
+              <th style={TH}>Financing</th>
+              <th style={TH}>Agent Rel.</th>
+            </tr>
+          </thead>
+          <tbody>
+            {CURRENT_BORROWERS.map((b, i) => (
+              <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                <td style={{ ...TD, fontWeight: 600, color: "#2C3E50" }}>{b.name}</td>
+                <td style={TD}>{b.hometown}</td>
+                <td style={TD}>{b.lastPurchase}</td>
+                <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>{b.totalTrans}</td>
+                <td style={TD}>{b.avgPurchase}</td>
+                <td style={TD}>{b.avgResale}</td>
+                <td style={{ ...TD, color: "#E8571A", fontWeight: 600 }}>{b.pfvRatio}</td>
+                <td style={TD}>{b.listSoldRatio}</td>
+                <td style={TD}>{b.avgDays}</td>
+                <td style={{ ...TD, textAlign: "center" }}>{b.pmRatio}</td>
+                <td style={{ ...TD }}>
+                  <span style={{ padding: "2px 8px", borderRadius: 100, fontSize: 11, fontWeight: 700, background: b.financing === "LOAN" ? "#E8571A18" : "#2C3E5015", color: b.financing === "LOAN" ? "#E8571A" : "#2C3E50" }}>
+                    {b.financing}
+                  </span>
+                </td>
+                <td style={{ ...TD, fontFamily: "monospace", fontSize: 12 }}>{b.agentRel}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style={{ margin: 0, fontSize: 12, color: "#adb5bd" }}>
+        Agent Rel. format: Acq Listing / Acq Buyer / Resale Listing / Total Agents
+      </p>
+    </div>
+  );
+}
+
+function SectionGDBDetail() {
+  const [activeTab, setActiveTab] = useState<"entities" | "agents" | "lenders" | "title">("lenders");
+  const [lenderFilter, setLenderFilter] = useState("");
+  const [agentFilter, setAgentFilter] = useState("");
+  const [agentSort, setAgentSort] = useState<"High to Low" | "Low to High">("High to Low");
+  const [titleFilter, setTitleFilter] = useState("");
+  const [titleSort, setTitleSort] = useState<"High to Low" | "Low to High">("High to Low");
+
+  const tabs: { key: "entities" | "agents" | "lenders" | "title"; label: string }[] = [
+    { key: "entities", label: "14 Related Entities" },
+    { key: "agents",   label: "38 Agent Relationships" },
+    { key: "lenders",  label: "4 Lenders" },
+    { key: "title",    label: "30 Title Companies" },
+  ];
+
+  const filteredLenders = GDB_LENDERS.filter(l => l.entity.toLowerCase().includes(lenderFilter.toLowerCase()));
+  const filteredAgents = GDB_AGENTS
+    .filter(a => a.name.toLowerCase().includes(agentFilter.toLowerCase()))
+    .sort((a, b) => agentSort === "High to Low" ? b.investorTrans - a.investorTrans : a.investorTrans - b.investorTrans);
+  const filteredTitle = GDB_TITLE_COMPANIES
+    .filter(t => t.company.toLowerCase().includes(titleFilter.toLowerCase()))
+    .sort((a, b) => titleSort === "High to Low" ? b.withInvestor - a.withInvestor : a.withInvestor - b.withInvestor);
+
+  const statsGrid = [
+    { label: "Investor Rating:",            main: "48 Transaction",  sub: ["Owners: 3", "Sold: 45"] },
+    { label: "Avg Purchase Price:",         main: "$674,698",        sub: ["Low: $370,000", "High: $1,350,000"] },
+    { label: "Avg Resale Price:",           main: "$867,998",        sub: ["Low: $530,000", "High: $1,650,000"] },
+    { label: "Avg Purchase-to-Future-Value:", main: "77%",           sub: ["Low: 61%", "High: 96%"] },
+    { label: "Avg List to Sold Price",      main: "81%",             sub: ["Transactions: 38"] },
+    { label: "Avg Purchase to Market",      main: "64 Days",         sub: ["Low: 2 days", "High: 292 Days"] },
+    { label: "Avg Purchase to Resale",      main: "118 Days",        sub: ["Low: 25 days", "High: 329 Days"] },
+    { label: "Acquisition Source",          main: "MLS: 89",         sub: ["Off Market: 52"] },
+  ];
+
+  const tabBtnStyle = (key: string): React.CSSProperties => ({
+    padding: "10px 18px", border: "none", borderRadius: 8, cursor: "pointer",
+    fontWeight: activeTab === key ? 700 : 500, fontSize: 14,
+    background: activeTab === key ? "#e9ecef" : "transparent",
+    color: activeTab === key ? "#E8571A" : "#6c757d",
+    transition: "all 0.15s",
+    whiteSpace: "nowrap",
+  });
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 16, minHeight: "60vh" }}>
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #dee2e6", padding: "20px 24px" }}>
+        <h2 style={{ margin: "0 0 4px", fontSize: "clamp(18px,2.5vw,26px)", fontWeight: 700, color: "#2C3E50" }}>
+          Investor: <span style={{ color: "#E8571A", textDecoration: "underline", cursor: "pointer" }}>G D BRISTOL LLC</span>{" "}
+          <span style={{ fontSize: 14, color: "#adb5bd" }}>&#8599;</span>
+        </h2>
+      </div>
+
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #dee2e6", padding: "20px 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "16px 24px" }}>
+          {statsGrid.map((s, i) => (
+            <div key={i}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", marginBottom: 4 }}>{s.label}</div>
+              <div style={{ fontSize: 15, fontWeight: 700, color: "#2C3E50", marginBottom: 2 }}>{s.main}</div>
+              {s.sub.map((line, j) => (
+                <div key={j} style={{ fontSize: 12, color: "#6c757d" }}>{line}</div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ background: "#fff", borderRadius: 12, border: "1px solid #dee2e6", overflow: "hidden" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 16px", background: "#f8f9fa", borderBottom: "1px solid #dee2e6", flexWrap: "wrap", gap: 8 }}>
+          <div style={{ display: "flex", gap: 4 }}>
+            {tabs.map(t => (
+              <button key={t.key} style={tabBtnStyle(t.key)} onClick={() => setActiveTab(t.key)}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+          {activeTab === "lenders" && (
+            <input
+              value={lenderFilter} onChange={e => setLenderFilter(e.target.value)}
+              placeholder="Filter by lender name..."
+              style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 210, outline: "none", background: "#fff" }}
+            />
+          )}
+          {activeTab === "agents" && (
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input
+                value={agentFilter} onChange={e => setAgentFilter(e.target.value)}
+                placeholder="Filter by agent name..."
+                style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 200, outline: "none", background: "#fff" }}
+              />
+              <select value={agentSort} onChange={e => setAgentSort(e.target.value as "High to Low" | "Low to High")}
+                style={{ padding: "7px 10px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, background: "#fff", cursor: "pointer" }}>
+                <option>High to Low</option>
+                <option>Low to High</option>
+              </select>
+            </div>
+          )}
+          {activeTab === "title" && (
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <input
+                value={titleFilter} onChange={e => setTitleFilter(e.target.value)}
+                placeholder="Filter by company name..."
+                style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 220, outline: "none", background: "#fff" }}
+              />
+              <select value={titleSort} onChange={e => setTitleSort(e.target.value as "High to Low" | "Low to High")}
+                style={{ padding: "7px 10px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, background: "#fff", cursor: "pointer" }}>
+                <option>High to Low</option>
+                <option>Low to High</option>
+              </select>
+            </div>
+          )}
+        </div>
+
+        {activeTab === "entities" && (
+          <div style={{ padding: 32, color: "#6c757d", fontSize: 15, fontStyle: "italic" }}>
+            Related entity data for G D BRISTOL LLC — 14 entities across Yorba Linda, CA area.
+          </div>
+        )}
+
+        {activeTab === "lenders" && (
+          <div style={{ overflowX: "auto" }}>
+            <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Lender Relationships:</div>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={TH}>Lender</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Loans</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Avg Loan</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Open Loans</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Closed Loans</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Avg Loan Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredLenders.map((l, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                    <td style={{ ...TD, fontWeight: 600 }}>{l.entity}</td>
+                    <td style={{ ...TD, textAlign: "center", fontWeight: 700, color: "#E8571A" }}>{l.loans}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{l.avgLoan}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{l.open}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{l.closed}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{l.avgLoanTime}</td>
+                  </tr>
+                ))}
+                <tr style={{ background: "#fff3ee", borderTop: "2px solid #E8571A30" }}>
+                  <td style={{ ...TD, fontWeight: 700 }}>Total</td>
+                  <td style={{ ...TD, textAlign: "center", fontWeight: 700, color: "#E8571A" }}>24</td>
+                  <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>$443,347</td>
+                  <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>1</td>
+                  <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>23</td>
+                  <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>74 days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {activeTab === "agents" && (
+          <div style={{ overflowX: "auto" }}>
+            <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Agent Relationships:</div>
+            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 860 }}>
+              <thead>
+                <tr>
+                  <th style={TH}>Agents Name</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Agent Transactions<br />with Investor</th>
+                  <th style={TH}>Company</th>
+                  <th style={TH}>Agents Phone</th>
+                  <th style={TH}>Email</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Investor Agent Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredAgents.map((a, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                    <td style={{ ...TD, fontWeight: 600 }}>&#8599; {a.name}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>
+                      <div style={{ fontWeight: 700, color: "#E8571A", fontSize: 15 }}>{a.investorTrans}</div>
+                      <div style={{ fontSize: 11, color: "#6c757d" }}>Acquisition Listing: {a.acqListing}</div>
+                      <div style={{ fontSize: 11, color: "#6c757d" }}>Acquisition Buyer: {a.acqBuyer}</div>
+                      <div style={{ fontSize: 11, color: "#6c757d" }}>Resale Listing: {a.resaleListing}</div>
+                    </td>
+                    <td style={TD}>{a.company}</td>
+                    <td style={TD}>{a.phone}</td>
+                    <td style={{ ...TD, fontSize: 12 }}>{a.email}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>
+                      {a.ratingAcqListing !== undefined ? (
+                        <>
+                          <div style={{ fontWeight: 700, color: "#E8571A", fontSize: 15 }}>{a.totalTrans}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Acquisition Listing: {a.ratingAcqListing}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Acquisition Buyer: {a.ratingAcqBuyer}</div>
+                          <div style={{ fontSize: 11, color: "#6c757d" }}>Resale Listing: {a.ratingResaleListing}</div>
+                        </>
+                      ) : (
+                        <span style={{ fontWeight: 700, color: "#E8571A" }}>{a.totalTrans}</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+        {activeTab === "title" && (
+          <div style={{ overflowX: "auto" }}>
+            <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Title Company Relationships:</div>
+            <table style={{ width: "100%", borderCollapse: "collapse" }}>
+              <thead>
+                <tr>
+                  <th style={TH}>Title Company</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Transactions with Investor</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Acquisition Listing Transactions</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Acquisition Buyers Transactions</th>
+                  <th style={{ ...TH, textAlign: "center" }}>Resale Listing Transactions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTitle.map((t, i) => (
+                  <tr key={i} style={{ background: i % 2 === 0 ? "#fff" : "#fafafa" }}>
+                    <td style={{ ...TD, fontWeight: 600 }}>{t.company}</td>
+                    <td style={{ ...TD, textAlign: "center", fontWeight: 700 }}>{t.withInvestor}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{t.acqListing}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{t.acqBuyer}</td>
+                    <td style={{ ...TD, textAlign: "center" }}>{t.resaleListing}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1043,11 +1408,13 @@ export default function HardMoneyPresentation() {
   const sections = [
     <SectionWelcome key={0} />,
     <SectionData key={1} onShowBorrowers={() => setShowBorrowers(true)} />,
-    <SectionChanged key={2} />,
-    <SectionLens key={3} />,
-    <SectionMath key={4} />,
-    <SectionAsk key={5} />,
-    <SectionClose key={6} />,
+    <SectionCurrentBorrowers key={2} />,
+    <SectionGDBDetail key={3} />,
+    <SectionChanged key={4} />,
+    <SectionLens key={5} />,
+    <SectionMath key={6} />,
+    <SectionAsk key={7} />,
+    <SectionClose key={8} />,
   ];
 
   return (
