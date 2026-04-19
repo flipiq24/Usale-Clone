@@ -1,0 +1,52 @@
+SLIDE 1 — Welcome
+
+My name is Tony Diaz. Thirty-two years. Eleven hundred flips. Obsessed with data and technology. You're not here by accident — we found you through the data because you're a real operator. Four minutes. I'm going to show you your numbers the way nobody's ever shown them to you. Then I'll tell you what we built — and you decide if you want in.
+
+
+SLIDE 2 — Your Data
+
+INVESTSOCAL. Thirty-two transactions. Seven-forty-eight average purchase, nine-eighty-two average resale. Seventy-seven percent purchase-to-future-value, ninety-seven list-to-sold. Fifty deals off-market, forty-five through the MLS. You're a real operator.
+Now watch. Your primary entity — INVESTSOCAL LLC out of PO Box eighty-five-eighteen — nineteen of the thirty-two. Your agent — Jose Diaz. Six with you, fifty-seven in his career, running most of your resales. That's not an agent. That's a principal. Your capital — Kiavi. Seventeen loans, eight-forty-seven average. That's your lender. Your title — Lawyers Title leads with ten, spread across five others.
+That's MLS and tax data. Not a hundred percent. But close enough to know exactly how you operate. Most operators have never seen themselves this way. And this is the floor of what we see — not the ceiling.
+
+
+SLIDE 3 — The Shift (the takeaway, right between the teeth)
+
+Here's the reality — and I'm not going to pitch you.
+AI is going to change this business. Fast. You already know that. AI is not going to take your deals. Somebody using it will. That's the only version of this story that matters — and you're either in front of it or behind it.
+We're not on Facebook. We're not running ads. We don't need to. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. We don't charge a dollar for the marketplace. That's not a discount — that's the model. In the new age, value goes first, money comes last. That's where we live.
+That's why the hard money lenders and the title companies are behind this. Kiavi — your lender — gets it. Fidelity Title gets it. They've seen what happens when an operator runs on one stack instead of eight tools duct-taped together. They subsidize our hundred-thousand-dollar operating system down to ten — because when you win, they win.
+What we built is one system. Acquisition, disposition, CRM, AI voice training for your team, and a free off-market marketplace called USale. Think InvestorLift without the cost. Think Privy with actual intelligence — we know every investor-friendly agent in your market, how they transact, and who they sell to.
+And I'll be straight with you — this isn't for everybody. If two flips a year is the goal, we're not it. We built this for operators who see where this is going and want to be in front of it. If that's not you, no harm done. Enjoy the free marketplace.
+
+
+SLIDE 4 — Your Move
+
+INVESTSOCAL — you already have the volume. The relationships. The discipline. You don't need us. You've done thirty-two. The only question is whether you want an unfair advantage on the next thirty-two.
+Fifteen minutes. One demo. No pitch. You see the system live, you see your market live, and you decide — not us.
+If you're in, the link below is your move. If not — sign up for USale. It's free. Either way, the water's warm.
+
+
+Sync point updates (minor — slot in cleanly to STATIC_HIGHLIGHT_CUES)
+Slide 1 — unchanged: [[0,0],[0.4,1],[0.75,2]]
+Slide 2 — keep the 6-beat reveal, but re-map triggers to the sharpened copy:
+
+0% — "INVESTSOCAL. Thirty-two transactions…" → Entities tab opens, header metrics pulse
+0.14 — "Your primary entity…" → pulse INVESTSOCAL LLC / PO Box 80518 (row 5)
+0.32 — "Your agent — Jose Diaz…" → switch to Agents tab, pulse row 0 (Jose)
+0.54 — "Your capital — Kiavi…" → switch to Lenders tab, pulse row 0 (Kiavi)
+0.74 — "Your title — Lawyers Title leads…" → switch to Titles tab, pulse row 0
+0.90 — "floor of what we see — not the ceiling" → all tabs dim, Tony card re-pulses
+
+Slide 3 — expand to 5 beats to let each punch land: [[0,0],[0.18,1],[0.42,2],[0.68,3],[0.88,4]]
+
+0 — "AI is going to change this business" card
+0.18 — "somebody using it will" — bold callout
+0.42 — "We're not on Facebook / $0 marketplace" — disruption card
+0.68 — Kiavi + Fidelity partner logos + $100K→$10K subsidy graphic
+0.88 — "This isn't for everybody" takeaway card
+
+Slide 4 — keep 2-beat: [[0,0],[0.5,1]] — headline, then CTA + free USale fallback.
+
+What changed vs. the current script: Jose is now named explicitly (holy-shit moment). Kiavi is positioned as your lender before being positioned as our partner (credibility bridge). The AI line is the nuts shot. The Sandler takeaway is doubled — "this isn't for everybody" in Slide 3, "you don't need us" in Slide 4. The free-USale fallback in Slide 4 is the Sandler safety valve that actually closes more, not less — it gives the operator an out that keeps the door open.
+Paste it. Tell me what to tighten.
