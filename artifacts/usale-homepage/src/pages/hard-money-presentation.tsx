@@ -1,9 +1,209 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useParams } from "wouter";
 import USALE_LOGO from "@assets/Capture_1774062446790.JPG";
 import TONY_PHOTO from "@assets/image_1774069888966.png";
 
 const API_BASE = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/../api`;
+
+let globalAudioCtx: AudioContext | null = null;
+function getAudioCtx(): AudioContext {
+  if (!globalAudioCtx) globalAudioCtx = new AudioContext();
+  return globalAudioCtx;
+}
+function unlockAudioContext() {
+  const ctx = getAudioCtx();
+  if (ctx.state === "suspended") ctx.resume().catch(() => {});
+}
+
+function useAudioNarration(onEnded?: () => void) {
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const onEndedRef = useRef(onEnded);
+  onEndedRef.current = onEnded;
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const progressRef = useRef(0);
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number | null>(null);
+  const startTimeRef = useRef(0);
+  const durationRef = useRef(0);
+  const preloadCache = useRef<Map<string, ArrayBuffer>>(new Map());
+  const preloadingKeys = useRef<Set<string>>(new Set());
+
+  const stopProgressTracker = useCallback(() => {
+    if (rafRef.current) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
+  }, []);
+
+  const startProgressTracker = useCallback(() => {
+    stopProgressTracker();
+    const ctx = getAudioCtx();
+    const tick = () => {
+      if (durationRef.current > 0) {
+        const elapsed = ctx.currentTime - startTimeRef.current;
+        const p = Math.min(elapsed / durationRef.current, 1);
+        progressRef.current = p;
+        setProgress(p);
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  }, [stopProgressTracker]);
+
+  const stop = useCallback(() => {
+    if (abortRef.current) abortRef.current.abort();
+    stopProgressTracker();
+    if (sourceRef.current) {
+      try { sourceRef.current.onended = null; sourceRef.current.stop(); } catch {}
+      sourceRef.current = null;
+    }
+    setIsPlaying(false);
+    setIsLoading(false);
+    setProgress(0);
+    progressRef.current = 0;
+  }, [stopProgressTracker]);
+
+  const isValidMp3 = (buf: ArrayBuffer | undefined): boolean => {
+    if (!buf || buf.byteLength < 4) return false;
+    const v = new Uint8Array(buf, 0, 3);
+    if (v[0] === 0x49 && v[1] === 0x44 && v[2] === 0x33) return true;
+    if (v[0] === 0xff && (v[1] & 0xe0) === 0xe0) return true;
+    return false;
+  };
+
+  const preload = useCallback(async (text: string) => {
+    const existing = preloadCache.current.get(text);
+    if (existing && isValidMp3(existing)) return;
+    if (existing) preloadCache.current.delete(text);
+    if (preloadingKeys.current.has(text)) return;
+    preloadingKeys.current.add(text);
+    try {
+      const resp = await fetch(`${API_BASE}/ai/tts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      if (resp.ok) {
+        const json = (await resp.json()) as { audio_base64?: string };
+        if (json.audio_base64) {
+          const bin = atob(json.audio_base64);
+          const u8 = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+          preloadCache.current.set(text, u8.buffer);
+        }
+      }
+    } catch { /* silent */ }
+    preloadingKeys.current.delete(text);
+  }, []);
+
+  const fallbackAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  const play = useCallback(async (text: string) => {
+    stop();
+    if (fallbackAudioRef.current) { fallbackAudioRef.current.pause(); fallbackAudioRef.current = null; }
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setIsLoading(true);
+    setProgress(0);
+    progressRef.current = 0;
+    try {
+      let arrayBuf: ArrayBuffer;
+      const cached = preloadCache.current.get(text);
+      if (cached && isValidMp3(cached)) {
+        arrayBuf = cached;
+        preloadCache.current.delete(text);
+      } else {
+        if (cached) preloadCache.current.delete(text);
+        const resp = await fetch(`${API_BASE}/ai/tts`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+          signal: controller.signal,
+        });
+        if (!resp.ok) throw new Error("TTS failed");
+        const json = (await resp.json()) as { audio_base64?: string };
+        if (!json.audio_base64) throw new Error("TTS missing audio");
+        const bin = atob(json.audio_base64);
+        const u8 = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+        arrayBuf = u8.buffer;
+      }
+      if (controller.signal.aborted) return;
+
+      const onDone = () => {
+        stopProgressTracker();
+        setIsPlaying(false);
+        setIsLoading(false);
+        setProgress(1);
+        progressRef.current = 1;
+        sourceRef.current = null;
+        onEndedRef.current?.();
+      };
+
+      let played = false;
+      try {
+        const ctx = getAudioCtx();
+        if (ctx.state === "suspended") await ctx.resume();
+        const audioBuffer = await ctx.decodeAudioData(arrayBuf.slice(0));
+        if (controller.signal.aborted) return;
+        const source = ctx.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(ctx.destination);
+        sourceRef.current = source;
+        durationRef.current = audioBuffer.duration;
+        startTimeRef.current = ctx.currentTime;
+        source.onended = onDone;
+        source.start(0);
+        played = true;
+      } catch { /* try fallback */ }
+
+      if (!played) {
+        try {
+          const blob = new Blob([arrayBuf], { type: "audio/mpeg" });
+          const url = URL.createObjectURL(blob);
+          const audio = new Audio(url);
+          fallbackAudioRef.current = audio;
+          audio.onended = () => { URL.revokeObjectURL(url); onDone(); };
+          audio.onerror = () => { URL.revokeObjectURL(url); stop(); };
+          const dur = await new Promise<number>((resolve) => {
+            audio.onloadedmetadata = () => resolve(audio.duration);
+            audio.load();
+            setTimeout(() => resolve(30), 2000);
+          });
+          durationRef.current = dur;
+          startTimeRef.current = getAudioCtx().currentTime;
+          await audio.play();
+          played = true;
+        } catch { /* silent */ }
+      }
+
+      if (!played) { stop(); return; }
+      if (controller.signal.aborted) return;
+      setIsLoading(false);
+      setIsPlaying(true);
+      startProgressTracker();
+    } catch { stop(); }
+  }, [stop, startProgressTracker, stopProgressTracker]);
+
+  return { play, stop, isPlaying, isLoading, progress, preload };
+}
+
+function getHMLScripts(company: string): string[] {
+  return [
+    `Welcome, and thank you for the time. My name is Tony Diaz. I've been in this business 32 years. Over 1,100 flips. I've borrowed from Kiavi, Anchor, Genesis, private individuals. At one point I was the second-largest borrower at Anchor Loans. So when I talk about hard money, I'm not talking at you. I'm talking as someone who's been on the other side of your desk for three decades.`,
+
+    `Before we talk about what I'm building — let's talk about you. ${company}, in the Los Angeles area, you have done 1,047 transactions. 681 unique investor relationships. Average loan amount of approximately 623 thousand dollars. Average loan-to-purchase of 90.5 percent. Average 1.5 loans per relationship. That last number is the one I want you to think about. One and a half. That means most of your borrowers borrow once, and they move on. That's not loyalty — that's luck.`,
+
+    `A lot has changed. Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets. Which means you're competing on two things: rate and sales pressure. That's a losing game. If a borrower is with Kiavi, you can't touch them on rate — so you either undercut yourself into thin margins, or you hire the most expensive salesperson you can find. And even then, what are you saying? Hey, I saw you borrow from Kiavi — our rates are competitive and our service is great. Click. I get ten of those calls a month. I hang up. Every operator does.`,
+
+    `We look at the same data differently. You look at it to find the borrower at the moment they need a loan. We look at it to build an ecosystem before the loan is needed. Here's what we built. A free, off-market marketplace. No fees. No signup. No friction. We identified every active flipper — same way you do. Then we identified every investor-friendly agent, every title company, every escrow officer they transact with. We put them all in one place. Agents post deals. Investors compete. Title handles closings. Everybody participates. Nobody pays. When a borrower accepts a property in our marketplace, we hand you a full profile — every transaction, who they've borrowed from, active loans, average flip time, how they find deals, how well they buy, what they list for, how fast they sell. You know exactly who they are before you quote the loan.`,
+
+    `Here's why this scales. There are 75 MSAs in this country where hard money is the most active. In each one, there are five operators who do the most volume. That's our target universe. Today, a top operator does about two hard money deals a month. Our technology gets them to four, minimum. 375 operators over three years. The average hard money loan is two hundred fifty-seven thousand dollars. 375 operators, two new loans a month, at two fifty-seven thousand. That's one hundred ninety-two million dollars a month in new originations. At one percent origination fee, that's 1.9 million dollars a month in new fee income for you.`,
+
+    `We normally charge operators one hundred thousand dollars to join — comparable to a franchise. I don't want a sales team. I don't want overhead. I want distribution partners who already have the data. So here's the deal. Two hundred fifty thousand dollar initial investment from ${company}. We drop the operator fee to ten thousand — they keep skin in the game. You get ownership in the technology. You get 20 tier-one operators delivered — we have seven today, we'll build to 20. Those borrowers are yours. No revenue share, no referral fee. Your blended borrower-acquisition cost today runs 0.4 to 0.5 percent of the loan amount. With us, you don't need reps. We become your reps — except we work for the borrower first, which is why they stay sticky. Phase two, after proof of concept: national partnership. Bigger investment, bigger ownership. That's where 20 becomes 375. That's where 192 million a month becomes real.`,
+
+    `I'm not asking you for your clients. I already have your clients. Go ahead and skip-trace all you want — I have a better way to reach them. What I'm asking is for you to stop competing on rate and start winning on value — and let us deliver that value to the borrowers who make you money whether you ever cold-called them or not. That's the pitch. Let's look at your data. I'm Tony Diaz — thanks for your time.`,
+  ];
+}
 
 function BrandName() {
   return <span><span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#2C3E50" }}>Sale</span></span>;
@@ -733,10 +933,25 @@ export default function HardMoneyPresentation() {
   const [lenderLoaded, setLenderLoaded] = useState(false);
   const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
+  const [audioOn, setAudioOn] = useState(true);
   const [showBorrowers, setShowBorrowers] = useState(false);
   const [selectedBorrower, setSelectedBorrower] = useState<string | null>(null);
+  const narratedSlidesRef = useRef<Set<number>>(new Set());
+  const initialPlayDone = useRef(false);
 
   const total = SECTION_TITLES.length;
+
+  const handleTTSEnded = useCallback(() => {
+    setSlide(s => {
+      narratedSlidesRef.current.add(s);
+      if (s < total - 1) return s + 1;
+      return s;
+    });
+  }, [total]);
+
+  const { play: playTTS, stop: stopTTS, isPlaying: isTTSPlaying, isLoading: isTTSLoading, preload: preloadTTS } = useAudioNarration(handleTTSEnded);
+
+  const SCRIPTS = getHMLScripts(LENDER.company);
 
   useEffect(() => {
     async function fetchContact() {
@@ -754,6 +969,32 @@ export default function HardMoneyPresentation() {
     }
     fetchContact();
   }, [slug]);
+
+  useEffect(() => {
+    if (!lenderLoaded) return;
+    preloadTTS(SCRIPTS[0]);
+    preloadTTS(SCRIPTS[1]);
+    preloadTTS(SCRIPTS[2]);
+  }, [lenderLoaded]);
+
+  useEffect(() => {
+    if (!started) return;
+    if (!initialPlayDone.current) { initialPlayDone.current = true; return; }
+    if (audioOn) {
+      unlockAudioContext();
+      playTTS(SCRIPTS[slide]);
+      for (let i = 1; i <= 3; i++) {
+        if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
+      }
+    } else {
+      stopTTS();
+    }
+  }, [slide, audioOn, started]);
+
+  const toggleAudio = useCallback(() => {
+    if (audioOn) { stopTTS(); setAudioOn(false); }
+    else { setAudioOn(true); }
+  }, [audioOn, stopTTS]);
 
   useEffect(() => {
     if (!started) return;
@@ -818,15 +1059,36 @@ export default function HardMoneyPresentation() {
           <div style={{ width: 1, height: 22, background: "#dee2e6" }} />
           <span style={{ fontSize: 13, color: "#2C3E50" }}>Prepared for <strong>{LENDER.company}</strong></span>
         </div>
-        <div style={{ display: "flex", gap: 4 }}>
-          {Array.from({ length: total }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => setSlide(i)}
-              title={SECTION_TITLES[i]}
-              style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, border: "none", background: i === slide ? "#E8571A" : "#2C3E5020", cursor: "pointer", transition: "all 0.3s", padding: 0 }}
-            />
-          ))}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <button
+            onClick={toggleAudio}
+            title={audioOn ? "Mute narration" : "Enable narration"}
+            style={{
+              padding: "7px 14px", borderRadius: 8, border: "1px solid #dee2e6",
+              background: audioOn ? "#E8571A" : "#fff",
+              color: audioOn ? "#fff" : "#adb5bd",
+              fontSize: 13, fontWeight: 600, cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 6,
+              transition: "all 0.2s",
+            }}
+          >
+            {isTTSLoading ? (
+              <span style={{ display: "inline-block", width: 14, height: 14, border: "2px solid rgba(255,255,255,0.4)", borderTopColor: "#fff", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+            ) : (
+              <span>{audioOn ? "🔊" : "🔇"}</span>
+            )}
+            {isTTSPlaying ? "Playing…" : audioOn ? "Audio On" : "Audio Off"}
+          </button>
+          <div style={{ display: "flex", gap: 4, marginLeft: 4 }}>
+            {Array.from({ length: total }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setSlide(i)}
+                title={SECTION_TITLES[i]}
+                style={{ width: i === slide ? 20 : 6, height: 6, borderRadius: 100, border: "none", background: i === slide ? "#E8571A" : "#2C3E5020", cursor: "pointer", transition: "all 0.3s", padding: 0 }}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
