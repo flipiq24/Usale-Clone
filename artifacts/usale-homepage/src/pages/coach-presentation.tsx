@@ -281,14 +281,21 @@ function BrandName() {
 
 function SectionWelcome() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32, position: "relative" }}>
       <h1 style={{ fontSize: "clamp(36px,5.5vw,64px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em" }}>
         The <span style={{ color: "#E8571A" }}>Coach's</span> Multiplier
       </h1>
       <p style={{ fontSize: "clamp(16px,2vw,22px)", color: "#6c757d", margin: 0, maxWidth: 600, lineHeight: 1.5 }}>
-        How to Turn Your Students Into a Recurring Revenue Engine — and Build the Backend That Compounds Over Time.
+        How to Turn Your Students Into a Recurring Revenue Engine.
       </p>
       <img src={USALE_LOGO} alt="USale" style={{ height: 100 }} />
+      <div style={{ position: "absolute", bottom: 0, right: 0, padding: "18px 22px", background: "#f8f9fa", borderRadius: 14, border: "1px solid #eee", display: "flex", alignItems: "center", gap: 16 }}>
+        <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
+        <div style={{ textAlign: "left" }}>
+          <div style={{ fontSize: 15, fontWeight: 800, color: "#2C3E50", marginBottom: 2 }}>Tony Diaz</div>
+          <div style={{ fontSize: 12, color: "#6c757d" }}>Founder &amp; CEO, <BrandName /> &amp; FlipIQ</div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -304,32 +311,27 @@ function SectionWhatIsUSale() {
   const rows = [
     {
       who: "Real Estate Investors / Operators",
-      gives: "First-look window on every off-market deal in their market. Evaluated with AI-driven comps and seller intelligence. No cold outreach, no marketing spend required.",
+      gives: "First-look window on every off-market deal. Evaluated with AI-driven comps. No cold outreach, no marketing spend.",
     },
     {
       who: "Investor-Friendly Agents",
-      gives: "A free, co-branded tool to monetize sellers who won't sign a listing agreement. Post the property, get a data-driven cash offer in 2–4 hours, earn a sourcing commission at close.",
+      gives: "Free, co-branded tool to monetize sellers who won't sign a listing agreement. Earn a sourcing commission at close.",
     },
     {
       who: "Hard Money Lenders & Title",
-      gives: "Real-time notifications the moment a deal is posted or accepted. First-mover positioning with the most active investors in their market — at zero cost.",
+      gives: "Real-time notifications the moment a deal is posted. First-mover positioning with the most active investors in their market — at zero cost.",
     },
     {
       who: "Wholesalers & Students",
-      gives: "A professional marketplace to post and sell deals without an expensive subscription. Disposition infrastructure they don't have to build themselves.",
+      gives: "A professional marketplace to post and sell deals. Disposition infrastructure they don't have to build themselves.",
     },
   ];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
-      <div>
-        <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: "0 0 8px", letterSpacing: "-0.02em" }}>
-          What Is <BrandName />?
-        </h2>
-        <p style={{ fontSize: 16, color: "#6c757d", margin: 0, lineHeight: 1.6, maxWidth: 740 }}>
-          A 100% free, invitation-only marketplace where investor-friendly agents post deals, verified buyers compete, and transactions close — no platform fees, no friction, no middleman.
-        </p>
-      </div>
+      <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em" }}>
+        What Is <BrandName />?
+      </h2>
       <div style={{ border: "1px solid #E8571A20", borderRadius: 12, overflow: "hidden" }}>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
           <thead>
