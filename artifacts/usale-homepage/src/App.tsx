@@ -9,6 +9,7 @@ import AdminPage from "@/pages/admin";
 import ComingSoon from "@/pages/coming-soon";
 import IndividualInvestorPresentation from "@/pages/individual-investor-presentation";
 import HardMoneyPresentation from "@/pages/hard-money-presentation";
+import CoachPresentation from "@/pages/coach-presentation";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -22,7 +23,7 @@ function Router() {
       <Route path="/investor-team/:slug" component={InvestorPresentation} />
       <Route path="/individual-investor/:slug" component={IndividualInvestorPresentation} />
       <Route path="/wholesaler/:slug" component={ComingSoon} />
-      <Route path="/coach/:slug" component={ComingSoon} />
+      <Route path="/coach/:slug" component={CoachPresentation} />
       <Route path="/agent/:slug" component={ComingSoon} />
       <Route path="/title/:slug" component={ComingSoon} />
       <Route path="/escrow/:slug" component={ComingSoon} />
