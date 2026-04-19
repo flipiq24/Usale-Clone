@@ -1,0 +1,389 @@
+Entities
+38 Agent Relationships
+4 Lenders
+30 Title Companies
+Filter by agent name...
+Agent Relationships:
+Sort by: 
+High to Low
+Agents Name	Agent Transactions with Investor	Company	Agents Phone	Email	Investor Agent Rating
+Russell Morgan	
+17
+Acquisition Listing: 1
+Acquisition Buyer: 3
+Resale Listing: 13
+HomeWay	562-237-0580	russell@thehomewayteam.com	
+59
+Acquisition Listing: 21
+Acquisition Buyer: 18
+Resale Listing: 20
+Sherry Carr	
+7
+Acquisition Listing: 0
+Acquisition Buyer: 2
+Resale Listing: 5
+Keller Williams Realty	626-355-2384	sherrycarr777@yahoo.com	
+23
+Acquisition Listing: 10
+Acquisition Buyer: 6
+Resale Listing: 7
+Monica Cornelius	
+6
+Acquisition Listing: 2
+Acquisition Buyer: 2
+Resale Listing: 2
+The Cross Street Team	714-686-2470	Monica@TheCrossStreetTeam.com	
+9
+Acquisition Listing: 5
+Acquisition Buyer: 2
+Resale Listing: 2
+Ryan Meltcher	
+6
+Acquisition Listing: 0
+Acquisition Buyer: 3
+Resale Listing: 3
+Corcoran Global Living	714-404-1267	ryan@meltcher.com	
+26
+Acquisition Listing: 9
+Acquisition Buyer: 10
+Resale Listing: 7
+Tony Congelliere	
+6
+Acquisition Listing: 0
+Acquisition Buyer: 6
+Resale Listing: 0
+Russell James Morgan, Broker	714-482-5329	ajc1984112@gmail.com	
+19
+Acquisition Listing: 2
+Acquisition Buyer: 15
+Resale Listing: 2
+David De La Vega	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+The Doorway Realty	714-914-6205	daviddlv@hotmail.com	
+21
+Acquisition Listing: 9
+Acquisition Buyer: 6
+Resale Listing: 6
+Oscar Rosas	
+2
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 2
+T.N.G. Real Estate Consultants	714-679-2761	ojrosas@tngrealestate.com	
+8
+Acquisition Listing: 4
+Acquisition Buyer: 0
+Resale Listing: 4
+Tony Weber	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Berkshire Hathaway HomeService	949-370-2483	anthonyweberrealty@gmail.com	
+4
+Acquisition Listing: 3
+Acquisition Buyer: 1
+Resale Listing: 0
+CHERYL BOWDISH	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+COLDWELL BANKER REALTY	714-319-9071	cheryl.bowdish@cbrealty.com	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Christopher Rodriguez	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+MLA Investments	(909) 594-62	CHRISPRUD@SBCGLOBAL.NET	
+7
+Acquisition Listing: 3
+Acquisition Buyer: 4
+Resale Listing: 0
+Eric Baskett	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Circle Real Estate	310-564-6640	info@ericbaskett.com	
+6
+Acquisition Listing: 5
+Acquisition Buyer: 1
+Resale Listing: 0
+Helen Araujo	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Century 21 Award	619-654-1413	teamaraujosd@gmail.com	
+3
+Acquisition Listing: 1
+Acquisition Buyer: 2
+Resale Listing: 0
+IAN VILLALBA	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+KELLER WILLIAMS WEST FOOTHILLS	626-367-4851	ian.villalba@gmail.com	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Isavel Smith	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+First Team Real Estate	213-400-8295	isavelsmith@firstteam.com	
+3
+Acquisition Listing: 2
+Acquisition Buyer: 1
+Resale Listing: 0
+Jaclyn Kornely	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Caliber Real Estate Group	7146242597	jaclyn@caliberre.net	
+10
+Acquisition Listing: 4
+Acquisition Buyer: 6
+Resale Listing: 0
+Jeremy Lai	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+True Legacy Homes	808-778-3531	jeremy.lai@truelegacyhomes.com	
+4
+Acquisition Listing: 0
+Acquisition Buyer: 4
+Resale Listing: 0
+Juan Carlos Ayala	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Executive Bankers Realty	323-397-0529	realtor5286@gmail.com	
+2
+Acquisition Listing: 1
+Acquisition Buyer: 1
+Resale Listing: 0
+Kariann Voorhees	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+First Team Real Estate	-	kvoorheeslaw@gmail.com	
+3
+Acquisition Listing: 3
+Acquisition Buyer: 0
+Resale Listing: 0
+Kevin Keaty	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Berkshire Hathaway HomeServices California Properties	714-608-3298	kevinkeaty@bhhscal.com	
+3
+Acquisition Listing: 3
+Acquisition Buyer: 0
+Resale Listing: 0
+Laura Dandoy	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+RE/MAX RESOURCES	-	Offers@LauraDandoy.com	
+42
+Acquisition Listing: 23
+Acquisition Buyer: 17
+Resale Listing: 2
+Laura Spencer	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+T.N.G. Real Estate Consultants	714-987-3310	laura@tngrealestate.com	
+8
+Acquisition Listing: 4
+Acquisition Buyer: 4
+Resale Listing: 0
+Mariano Lopez	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+T.N.G. Real Estate Consultants	714-696-1187	MarianoLopez.RE@gmail.com	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+Marija Mladenovic	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+RE/MAX Estate Properties	310-982-5503	marija@gogabby.com	
+5
+Acquisition Listing: 0
+Acquisition Buyer: 5
+Resale Listing: 0
+Martha Morales	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Keller Williams Realty	562 902-5100	martha@teammorales.com	
+10
+Acquisition Listing: 5
+Acquisition Buyer: 4
+Resale Listing: 1
+Matthew Fletcher	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 0
+Resale Listing: 1
+Seven Gables Real Estate	949-677-3618	matthewf@sevengables.com	
+8
+Acquisition Listing: 4
+Acquisition Buyer: 1
+Resale Listing: 3
+MICAH ADAMS	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+CENTURY 21 ADAMS & BARNES	626-589-3870	micah.adams@century21.com	
+3
+Acquisition Listing: 3
+Acquisition Buyer: 0
+Resale Listing: 0
+MICHAEL WALLACE	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+BETTER HOME FINANCIAL, INC	9093945626	mike@bhfmortgage.com	
+4
+Acquisition Listing: 3
+Acquisition Buyer: 0
+Resale Listing: 1
+NINA ERBST	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+KELLER WILLIAMS/VICTOR VALLEY	760-559-3332	ninaerbstteam@gmail.com	
+9
+Acquisition Listing: 7
+Acquisition Buyer: 1
+Resale Listing: 1
+Pat Rojas	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Re/Max Masters	562-943-5577	gospel1@aol.com	
+3
+Acquisition Listing: 3
+Acquisition Buyer: 0
+Resale Listing: 0
+Pete Whan	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Pete Whan and Associates, Inc.	(626) 278-4333	pete@petewhan.com	
+5
+Acquisition Listing: 5
+Acquisition Buyer: 0
+Resale Listing: 0
+Randy Rogers	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+HomeWay	714-501-3697	rogers8416@yahoo.com	
+18
+Acquisition Listing: 1
+Acquisition Buyer: 16
+Resale Listing: 1
+Ron Vallery	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Re/Max Estate Properties	310-703-1886	ronvallery@yahoo.com	
+6
+Acquisition Listing: 4
+Acquisition Buyer: 2
+Resale Listing: 0
+Ryan Vessey	
+1
+Acquisition Listing: 0
+Acquisition Buyer: 1
+Resale Listing: 0
+New Western Acquisitions	714-609-5429	ryan.vessey@fairtraderealestate.com	
+16
+Acquisition Listing: 0
+Acquisition Buyer: 16
+Resale Listing: 0
+Steven Kleemann	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Rodeo Realty	818-349-9997	skrealtor4u@socal.rr.com	
+4
+Acquisition Listing: 3
+Acquisition Buyer: 1
+Resale Listing: 0
+THOMAS MESSINA	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+CURTIS REAL ESTATE	909-816-7364	homesales@thomasmessina.com	
+7
+Acquisition Listing: 5
+Acquisition Buyer: 2
+Resale Listing: 0
+Victor Jackson	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Victor Jackson	323-864-9492	vjrealestate617@gmail.com	
+8
+Acquisition Listing: 5
+Acquisition Buyer: 3
+Resale Listing: 0
+Wendy Rawley	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+Reliance Real Estate Services	714.746.6355	wendy@go2wendy.com	
+7
+Acquisition Listing: 3
+Acquisition Buyer: 3
+Resale Listing: 1
+ZACHARY BLOUNT	
+1
+Acquisition Listing: 1
+Acquisition Buyer: 0
+Resale Listing: 0
+REALTY MASTERS & ASSOCIATES	951-231-4344	zach@homeswithzach.com	
+6
+Acquisition Listing: 2
+Acquisition Buyer: 4
+Resale Listing: 0
