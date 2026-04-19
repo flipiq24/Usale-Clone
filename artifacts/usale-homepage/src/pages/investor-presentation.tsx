@@ -127,6 +127,37 @@ interface TitleCo {
   resaleListing: number;
 }
 
+interface PropertyRow {
+  address: string;
+  lender: string;
+  loanAmount: string;
+  acqListing: string;
+  acqBuyer: string;
+  resaleListing: string;
+  listPrice: string;
+  purchasePrice: string;
+  purchaseDate: string;
+  resalePrice: string;
+  resaleDate: string;
+  ptfv: string;
+  listToSold: string;
+  hold: string;
+}
+
+const PROPERTIES_INVESTSOCAL_1VENTURE: PropertyRow[] = [
+  { address: "947 FINEGROVE AVE, HACIENDA HEIGHTS", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$483,700", acqListing: "Nilda Suarez", acqBuyer: "Nilda Suarez", resaleListing: "Kimberly Olivo", listPrice: "—", purchasePrice: "$499,000", purchaseDate: "Feb 24, 2021", resalePrice: "$690,000", resaleDate: "Jun 2, 2021", ptfv: "72%", listToSold: "—", hold: "—" },
+  { address: "761 SEPULVEDA ST, SAN PEDRO", lender: "QWAN INTERNATIONAL INVESTMENTS LLC", loanAmount: "$487,500", acqListing: "Kiani Pegues", acqBuyer: "Shanika Long", resaleListing: "Kimberly Olivo", listPrice: "$650,000 → $445,000", purchasePrice: "$445,000", purchaseDate: "Dec 18, 2020", resalePrice: "$740,000", resaleDate: "Jun 18, 2021", ptfv: "60%", listToSold: "68%", hold: "182 days" },
+  { address: "741 RAYMOND AVE, LONG BEACH", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$810,200", acqListing: "Ed Dowd", acqBuyer: "Ed Dowd", resaleListing: "Kimberly Olivo", listPrice: "$800,000 → $775,000", purchasePrice: "$775,000", purchaseDate: "Jan 15, 2021", resalePrice: "$1,200,000", resaleDate: "May 24, 2021", ptfv: "65%", listToSold: "97%", hold: "—" },
+  { address: "2353 2ND AVE, UPLAND", lender: "N/A", loanAmount: "—", acqListing: "JOE FUSCO", acqBuyer: "JOE FUSCO", resaleListing: "Off Market", listPrice: "—", purchasePrice: "$637,000", purchaseDate: "Jun 15, 2021", resalePrice: "$675,000", resaleDate: "Oct 5, 2021", ptfv: "94%", listToSold: "—", hold: "—" },
+  { address: "10375 BRANIGAN WAY, RIVERSIDE", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$287,000", acqListing: "ROBYN BLAIR", acqBuyer: "ROBYN BLAIR", resaleListing: "Tony Fletcher", listPrice: "$350,000 → $326,000", purchasePrice: "$326,000", purchaseDate: "Sep 8, 2020", resalePrice: "$450,000", resaleDate: "Nov 23, 2020", ptfv: "72%", listToSold: "93%", hold: "—" },
+  { address: "6445 86TH PL, LOS ANGELES", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$900,000", acqListing: "Off Market", acqBuyer: "Off Market", resaleListing: "Kimberly Olivo", listPrice: "$1,150,000 → $900,000", purchasePrice: "$900,000", purchaseDate: "Jan 15, 2021", resalePrice: "$1,250,000", resaleDate: "Jun 16, 2021", ptfv: "72%", listToSold: "78%", hold: "—" },
+  { address: "301 RANCHITO ST, ANAHEIM", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$479,900", acqListing: "Off Market", acqBuyer: "Off Market", resaleListing: "Kimberly Olivo", listPrice: "—", purchasePrice: "$540,000", purchaseDate: "Jun 28, 2021", resalePrice: "$650,000", resaleDate: "Aug 24, 2021", ptfv: "83%", listToSold: "—", hold: "—" },
+  { address: "31352 ABANITA WAY, LAGUNA NIGUEL", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$768,600", acqListing: "Stephanie Garvey", acqBuyer: "Stephanie Garvey", resaleListing: "MARY JO TER MEER", listPrice: "$815,000 → $815,000", purchasePrice: "$815,000", purchaseDate: "Jun 8, 2021", resalePrice: "$1,180,001", resaleDate: "Dec 3, 2021", ptfv: "69%", listToSold: "100%", hold: "—" },
+  { address: "1235 LA TREMOLINA CIR, CORONA", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$442,400", acqListing: "Off Market", acqBuyer: "Off Market", resaleListing: "Off Market", listPrice: "—", purchasePrice: "$460,000", purchaseDate: "Jan 28, 2021", resalePrice: "$610,000", resaleDate: "Apr 1, 2021", ptfv: "75%", listToSold: "—", hold: "—" },
+  { address: "16250 FIGUEROA RD, VICTORVILLE", lender: "QWAN INTERNATIONAL INVESTMENTS LLC", loanAmount: "$206,250", acqListing: "Off Market", acqBuyer: "Off Market", resaleListing: "Off Market", listPrice: "$220,000 → $215,000", purchasePrice: "$215,000", purchaseDate: "Oct 13, 2020", resalePrice: "$305,000", resaleDate: "Jan 21, 2021", ptfv: "70%", listToSold: "98%", hold: "—" },
+  { address: "1036 SUNKIST AVE, LA PUENTE", lender: "LENDINGHOME FUNDING CORP", loanAmount: "$457,400", acqListing: "Off Market", acqBuyer: "Off Market", resaleListing: "Kimberly Olivo", listPrice: "—", purchasePrice: "$443,000", purchaseDate: "Feb 4, 2021", resalePrice: "$665,000", resaleDate: "May 19, 2021", ptfv: "67%", listToSold: "—", hold: "—" },
+];
+
 const TITLE_COMPANIES: TitleCo[] = [
   { name: "LAWYERS TITLE", withInvestor: 10, acqListing: 4, acqBuyer: 4, resaleListing: 4 },
   { name: "CHICAGO TITLE COMPANY", withInvestor: 8, acqListing: 2, acqBuyer: 2, resaleListing: 1 },
@@ -161,20 +192,20 @@ function getScripts(inv: InvestorData) {
   const n = inv.legalName;
   return [
     `Hello — my name is Tony Diaz and I'm the founder of USale. I've been in the business thirty-two years with over eleven hundred flips. You're here because we found you through data — because you're a real operator. Let me share that data with you first.`,
-    `Here are your related entities. Keep in mind — this is MLS and tax data, so it's not always a hundred percent accurate. You've done thirty-two transactions, average purchase price seven hundred forty-eight thousand, average resale nine hundred eighty-two thousand, list-to-sold ninety-seven percent. The entity you use the most is INVESTSOCAL LLC under PO Box 80518 — nineteen of those transactions came through there. Now — here are the real estate agent relationships you have. The one you use the most is Jose Diaz — six deals with you, fifty-seven total in his career, doing the majority of your resales. Probably one of your principals. These are the lenders you have. The one you use the most is Kiavi Funding — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you like to work with Lawyers Title — ten transactions there, the rest spread across Chicago Title, Ticor, and Stewart.`,
-    `Now think about what this means. We know who you are. We have your data. We know how you operate. I know your acquisition sources — you're getting most of your properties off market, but you're also buying through the MLS. That's exactly what this system was built for. We're building the most powerful off-market marketplace that has ever existed — think of it as InvestorLift, without any cost. Not just other wholesalers posting properties, but Realtors looking to double-end their listings. It's also a way for you to monetize properties you don't purchase yourself. We pair that with the most powerful acquisition platform ever built — this is not a ninety-nine-dollar Privy. Privy is fantastic, but this is a true operational dream. It does absolutely everything.`,
-    `${inv.name} — you already have the volume, the relationships, and the discipline. We have the marketplace, the agent network, and the technology. Put those together and you have an unfair advantage. Schedule a fifteen-minute demo and we'll walk you through everything live.`,
+    `Here are your related entities. Keep in mind — this is MLS and tax data, so it's not always a hundred percent accurate. You've done thirty-two transactions, average purchase price seven hundred forty-eight thousand, average resale nine hundred eighty-two thousand, list-to-sold ninety-seven percent. One key entity we want to focus on is INVESTSOCAL LLC under 1 VENTURE — eleven transactions there. Hacienda Heights, San Pedro, Long Beach, Upland, Riverside, Los Angeles, Anaheim, Laguna Niguel, Corona, Victorville, La Puente — your map across Southern California, with LendingHome and Qwan as your capital partners. Now — here are the real estate agent relationships you have. The one you use the most is Jose Diaz — six deals with you, fifty-seven total in his career, doing the majority of your resales. Probably one of your principals. These are the lenders you have. The one you use the most is Kiavi Funding — seventeen loans averaging eight hundred forty-seven thousand. That's your primary capital partner. And you like to work with Lawyers Title — ten transactions there, the rest spread across Chicago Title, Ticor, and Stewart.`,
+    `You're a great buyer — we want people like you in our ecosystem. This is frictionless — we're not selling you anything. We already have your information. By simply joining our waiting list, you'll be notified once properties start flowing through — from investor-friendly agents we're bringing into the ecosystem through our national title and escrow relationships. This will change the way investor-friendly agents connect with investors, and how wholesalers can participate without the bait and switch. And we have many, many tools.`,
+    `There's an opportunity here. We are looking for investor-operator partnerships — handpicked operators able to use our Command platform, the most powerful acquisition platform ever built. Either way, there's value here for you. Please set up a meeting and we'll discuss next steps.`,
   ];
 }
 
 const SECTION_TITLES = ["Welcome", "Your Data", "The Marketplace", "Next Steps"];
 
-const STATIC_HIGHLIGHT_COUNTS = [3, 6, 4, 2];
+const STATIC_HIGHLIGHT_COUNTS = [3, 7, 4, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
-  [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.14, 1], [0.28, 2], [0.42, 3], [0.68, 4], [0.86, 5]],
-  [[0, 0], [0.25, 1], [0.5, 2], [0.75, 3]],
+  [[0, 0], [0.25, 1], [0.55, 2]],
+  [[0, 0], [0.12, 1], [0.24, 2], [0.33, 3], [0.50, 4], [0.72, 5], [0.88, 6]],
+  [[0, 0], [0.14, 1], [0.30, 2], [0.65, 3]],
   [[0, 0], [0.5, 1]],
 ];
 
@@ -209,7 +240,7 @@ function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
       <h1 style={{ fontSize: "clamp(38px,6vw,68px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em", ...introReveal(hl, 0) }}>
-        Welcome, <span style={{ color: "#E8571A" }}>{INVESTOR.name}</span>.
+        You're a <span style={{ color: "#E8571A" }}>real operator</span>.
       </h1>
       <img src={USALE_LOGO} alt="USale" style={{ height: 110, ...introReveal(hl, 1) }} />
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12, ...introReveal(hl, 2) }}>
@@ -384,10 +415,39 @@ function TitlesTable({ pulseRow }: { pulseRow?: number }) {
   );
 }
 
-const STEP_MAP: { tab: TabKey; row: number | null }[] = [
+function PropertyDrilldown() {
+  return (
+    <div style={{ overflow: "auto", maxHeight: 460 }}>
+      <div style={{ background: "#E8571A", padding: "12px 16px", color: "#fff", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ fontSize: 14, fontWeight: 700 }}>INVESTSOCAL LLC · 1 VENTURE — Properties</div>
+        <div style={{ fontSize: 12, opacity: 0.95 }}>{PROPERTIES_INVESTSOCAL_1VENTURE.length} transactions</div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "2.4fr 1.6fr 1.4fr 1fr 1fr 0.7fr 0.9fr", gap: 8, padding: "10px 16px", fontSize: 10, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", borderBottom: "2px solid #E8571A30" }}>
+        <span>Address</span><span>Lender / Loan</span><span>Agents</span><span>Purchase</span><span>Resale</span><span>PTFV</span><span>List/Sold</span>
+      </div>
+      {PROPERTIES_INVESTSOCAL_1VENTURE.map((p, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "2.4fr 1.6fr 1.4fr 1fr 1fr 0.7fr 0.9fr", gap: 8, padding: "10px 16px", fontSize: 11, color: "#2C3E50", borderBottom: "1px solid #f0f0f0", background: i % 2 ? "#fafafa" : "#fff", animation: "drillRowIn 0.45s cubic-bezier(0.16,1,0.3,1) both", animationDelay: `${i * 0.04}s` }}>
+          <span style={{ fontWeight: 700, color: "#2C3E50" }}>{p.address}</span>
+          <span><div style={{ fontWeight: 600, fontSize: 10 }}>{p.lender}</div><div style={{ color: "#E8571A", fontWeight: 700 }}>{p.loanAmount}</div></span>
+          <span style={{ fontSize: 10, lineHeight: 1.4 }}>
+            <div><b>Acq:</b> {p.acqListing}{p.acqBuyer !== p.acqListing ? ` / ${p.acqBuyer}` : ""}</div>
+            <div><b>Resale:</b> {p.resaleListing}</div>
+          </span>
+          <span><div style={{ fontWeight: 700 }}>{p.purchasePrice}</div><div style={{ fontSize: 10, color: "#6c757d" }}>{p.purchaseDate}</div></span>
+          <span><div style={{ fontWeight: 700, color: "#16a34a" }}>{p.resalePrice}</div><div style={{ fontSize: 10, color: "#6c757d" }}>{p.resaleDate}</div></span>
+          <span style={{ fontWeight: 700, color: "#E8571A" }}>{p.ptfv}</span>
+          <span>{p.listToSold}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const STEP_MAP: { tab: TabKey; row: number | null; drilldown?: boolean }[] = [
   { tab: "entities", row: null },
   { tab: "entities", row: null },
-  { tab: "entities", row: 5 },
+  { tab: "entities", row: 0 },
+  { tab: "entities", row: 0, drilldown: true },
   { tab: "agents", row: 0 },
   { tab: "lenders", row: 0 },
   { tab: "titles", row: 0 },
@@ -395,8 +455,9 @@ const STEP_MAP: { tab: TabKey; row: number | null }[] = [
 
 function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey) => void }) {
   const idx = Math.max(0, Math.min(hl, STEP_MAP.length - 1));
-  const { tab: activeTab, row } = STEP_MAP[idx];
+  const { tab: activeTab, row, drilldown } = STEP_MAP[idx];
   const pulseRow = row ?? undefined;
+  const showDrilldown = !!drilldown && activeTab === "entities";
   const activeIdx = TABS.findIndex(t => t.key === activeTab);
   useEffect(() => { onTabChange?.(activeTab); }, [activeTab, onTabChange]);
   return (
@@ -421,11 +482,12 @@ function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey
           );
         })}
       </div>
-      <div key={activeTab} style={{
+      <div key={activeTab + (showDrilldown ? "-drill" : "")} style={{
         background: "#fff", borderRadius: 12, border: "1px solid #eee", overflow: "hidden", minHeight: 320,
         animation: "tabFadeIn 0.4s cubic-bezier(0.16,1,0.3,1)",
       }}>
-        {activeTab === "entities" && <EntitiesTable pulseRow={pulseRow} />}
+        {activeTab === "entities" && !showDrilldown && <EntitiesTable pulseRow={pulseRow} />}
+        {activeTab === "entities" && showDrilldown && <PropertyDrilldown />}
         {activeTab === "agents" && <AgentsTable pulseRow={pulseRow} />}
         {activeTab === "lenders" && <LendersTable pulseRow={pulseRow} />}
         {activeTab === "titles" && <TitlesTable pulseRow={pulseRow} />}
@@ -439,6 +501,10 @@ function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey
           0%, 100% { box-shadow: inset 4px 0 0 #E8571A, 0 0 0 0 #E8571A30; }
           50% { box-shadow: inset 4px 0 0 #E8571A, 0 0 0 6px #E8571A18; }
         }
+        @keyframes drillRowIn {
+          from { opacity: 0; transform: translateX(-12px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
       `}</style>
     </div>
   );
@@ -446,35 +512,44 @@ function SectionData({ hl, onTabChange }: { hl: number; onTabChange?: (t: TabKey
 
 function SectionMarketplace({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24, minHeight: "60vh", justifyContent: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, letterSpacing: "-0.02em", ...hVisible(hl, 0) }}>
-        The most powerful <span style={{ color: "#E8571A" }}>off-market place</span> ever built.
+        You're a great buyer. <span style={{ color: "#E8571A" }}>We want people like you</span> in our ecosystem.
       </h2>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, ...hVisible(hl, 1) }}>
-        <div style={{ padding: "24px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Think InvestorLift…</div>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>Without any cost.</div>
-          <div style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.6 }}>
-            Not just other wholesalers posting properties — also Realtors looking to <b>double-end</b> their listings. More inventory, deeper buyer pool.
+
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", ...hVisible(hl, 1) }}>
+        {[
+          { k: "Frictionless", v: "Nothing to sell you" },
+          { k: "Already Have Your Info", v: "No forms, no friction" },
+          { k: "Just Join the Waitlist", v: "Get notified when properties flow" },
+        ].map((c, i) => (
+          <div key={i} style={{ flex: "1 1 240px", padding: "16px 20px", background: "#fff", borderRadius: 12, border: "1px solid #E8571A30", display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", letterSpacing: "0.04em" }}>{c.k}</div>
+            <div style={{ fontSize: 15, fontWeight: 600, color: "#2C3E50" }}>{c.v}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, ...hVisible(hl, 2) }}>
+        <div style={{ padding: "22px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Investor-Friendly Agents</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>Flowing in through national title &amp; escrow.</div>
+          <div style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.55 }}>
+            We're changing how investor-friendly agents connect with investors. Real inventory, real relationships — not cold outreach.
           </div>
         </div>
-        <div style={{ padding: "24px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Monetize what you don't buy</div>
-          <div style={{ fontSize: 18, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>Deals don't go to waste.</div>
-          <div style={{ fontSize: 14, color: "#2C3E50", lineHeight: 1.6 }}>
-            See a property that doesn't fit your buy box? Pass it through the marketplace. <b>You still get paid.</b>
+        <div style={{ padding: "22px", background: "#fff", borderRadius: 14, border: "1px solid #E8571A30" }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: "#E8571A", textTransform: "uppercase", marginBottom: 8 }}>Wholesalers Welcome</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: "#2C3E50", marginBottom: 8 }}>No more bait &amp; switch.</div>
+          <div style={{ fontSize: 13, color: "#2C3E50", lineHeight: 1.55 }}>
+            Wholesalers can finally participate cleanly — full transparency, real properties, real buyers.
           </div>
         </div>
       </div>
-      <div style={{ padding: "24px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 14, color: "#fff", ...hVisible(hl, 2) }}>
-        <div style={{ fontSize: 13, fontWeight: 600, opacity: 0.9, marginBottom: 6 }}>The acquisition platform</div>
-        <div style={{ fontSize: 22, fontWeight: 800, marginBottom: 8 }}>This is not a $99 Privy.</div>
-        <div style={{ fontSize: 14, lineHeight: 1.6, opacity: 0.95 }}>
-          Privy is fantastic — this is a true <b>operational dream</b>. It does absolutely everything: sourcing, comps, lender match, title routing, agent attribution, and buyer matching — all in one platform.
-        </div>
-      </div>
-      <div style={{ padding: "16px 20px", background: "#2C3E5008", borderRadius: 12, border: "1px solid #2C3E5018", fontSize: 14, color: "#2C3E50", lineHeight: 1.6, ...hVisible(hl, 3) }}>
-        We partner with national hard-money lenders and title companies — every transaction surfaces value for everyone in the chain.
+
+      <div style={{ padding: "20px 24px", background: "linear-gradient(135deg, #E8571A 0%, #c44e00 100%)", borderRadius: 14, color: "#fff", ...hVisible(hl, 3) }}>
+        <div style={{ fontSize: 13, fontWeight: 600, opacity: 0.9, marginBottom: 4 }}>And we have many, many tools.</div>
+        <div style={{ fontSize: 20, fontWeight: 800 }}>The whole ecosystem — sourcing, capital, title, agents, buyers — in one place.</div>
       </div>
     </div>
   );
@@ -484,8 +559,11 @@ function SectionCTA({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 28, minHeight: "60vh", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
       <h2 style={{ fontSize: "clamp(28px,4.5vw,44px)", fontWeight: 700, color: "#2C3E50", margin: 0, ...hVisible(hl, 0) }}>
-        Your Unfair Advantage Starts Here, <span style={{ color: "#E8571A" }}>{INVESTOR.name}</span>
+        Handpicked operators. <span style={{ color: "#E8571A" }}>One Command platform.</span>
       </h2>
+      <p style={{ fontSize: 17, color: "#2C3E50", maxWidth: 620, margin: 0, lineHeight: 1.55, ...hVisible(hl, 1) }}>
+        Let's get on a call. Fifteen minutes — I'll walk you through Command and show you exactly how it fits your buy box.
+      </p>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 14, width: "100%", maxWidth: 440, ...hVisible(hl, 1) }}>
         <a

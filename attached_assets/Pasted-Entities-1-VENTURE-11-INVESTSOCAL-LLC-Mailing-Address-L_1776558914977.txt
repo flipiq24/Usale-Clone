@@ -1,0 +1,169 @@
+Entities: 1 VENTURE
+
+11-
+INVESTSOCAL LLC
+Mailing Address	Lender/Loan	Agents	PTFV Timeline	Price Ratio	Market	Hold Period
+947 FINEGROVE AVE HACIENDA HEIGHTS	
+LENDINGHOME FUNDING CORP
+$483,700
+Acq. Listing Agent: Nilda Suarez
+Acq. Buyer Agent: Nilda Suarez
+Resale Listing Agent: Kimberly Olivo
+$499,000
+Feb 24, 2021
+$690,000
+Jun 2, 2021
+72% PTFV
+—	—	Invalid dates
+761 SEPULVEDA ST SAN PEDRO	
+QWAN INTERNATIONAL INVESTMENTS LLC
+$487,500
+Acq. Listing Agent: Kiani Pegues
+Acq. Buyer Agent: Shanika Long
+Resale Listing Agent: Kimberly Olivo
+$445,000
+Dec 18, 2020
+$740,000
+Jun 18, 2021
+60% PTFV
+68%
+$650,000
+→ $445,000
+—	
+182 Days
+Dec 2020 → Jun 2021
+741 RAYMOND AVE LONG BEACH	
+LENDINGHOME FUNDING CORP
+$810,200
+Acq. Listing Agent: Ed Dowd
+Acq. Buyer Agent: Ed Dowd
+Resale Listing Agent: Kimberly Olivo
+$775,000
+Jan 15, 2021
+$1,200,000
+May 24, 2021
+65% PTFV
+97%
+$800,000
+→ $775,000
+—	Invalid dates
+2353 2ND AVE UPLAND	
+N/A
+Acq. Listing Agent: JOE FUSCO
+Acq. Buyer Agent: JOE FUSCO
+Resale Listing Agent:
+Off Market
+$637,000
+Jun 15, 2021
+$675,000
+Oct 5, 2021
+94% PTFV
+—	—	Invalid dates
+10375 BRANIGAN WAY RIVERSIDE	
+LENDINGHOME FUNDING CORP
+$287,000
+Acq. Listing Agent: ROBYN BLAIR
+Acq. Buyer Agent: ROBYN BLAIR
+Resale Listing Agent: Tony Fletcher
+$326,000
+Sep 8, 2020
+$450,000
+Nov 23, 2020
+72% PTFV
+93%
+$350,000
+→ $326,000
+—	Invalid dates
+6445 86TH PL LOS ANGELES	
+LENDINGHOME FUNDING CORP
+$900,000
+Acq. Listing Agent:
+Off Market
+Acq. Buyer Agent:
+Off Market
+Resale Listing Agent: Kimberly Olivo
+$900,000
+Jan 15, 2021
+$1,250,000
+Jun 16, 2021
+72% PTFV
+78%
+$1,150,000
+→ $900,000
+—	Invalid dates
+301 RANCHITO ST ANAHEIM	
+LENDINGHOME FUNDING CORP
+$479,900
+Acq. Listing Agent:
+Off Market
+Acq. Buyer Agent:
+Off Market
+Resale Listing Agent: Kimberly Olivo
+$540,000
+Jun 28, 2021
+$650,000
+Aug 24, 2021
+83% PTFV
+—	—	Invalid dates
+31352 ABANITA WAY LAGUNA NIGUEL	
+LENDINGHOME FUNDING CORP
+$768,600
+Acq. Listing Agent: Stephanie Garvey
+Acq. Buyer Agent: Stephanie Garvey
+Resale Listing Agent: MARY JO TER MEER
+$815,000
+Jun 8, 2021
+$1,180,001
+Dec 3, 2021
+69% PTFV
+100%
+$815,000
+→ $815,000
+—	Invalid dates
+1235 LA TREMOLINA CIR CORONA	
+LENDINGHOME FUNDING CORP
+$442,400
+Acq. Listing Agent:
+Off Market
+Acq. Buyer Agent:
+Off Market
+Resale Listing Agent:
+Off Market
+$460,000
+Jan 28, 2021
+$610,000
+Apr 1, 2021
+75% PTFV
+—	—	Invalid dates
+16250 FIGUEROA RD VICTORVILLE	
+QWAN INTERNATIONAL INVESTMENTS LLC
+$206,250
+Acq. Listing Agent:
+Off Market
+Acq. Buyer Agent:
+Off Market
+Resale Listing Agent:
+Off Market
+$215,000
+Oct 13, 2020
+$305,000
+Jan 21, 2021
+70% PTFV
+98%
+$220,000
+→ $215,000
+—	Invalid dates
+1036 SUNKIST AVE LA PUENTE	
+LENDINGHOME FUNDING CORP
+$457,400
+Acq. Listing Agent:
+Off Market
+Acq. Buyer Agent:
+Off Market
+Resale Listing Agent: Kimberly Olivo
+$443,000
+Feb 4, 2021
+$665,000
+May 19, 2021
+67% PTFV
+—	—
