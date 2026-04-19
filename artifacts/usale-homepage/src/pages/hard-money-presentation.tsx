@@ -198,8 +198,8 @@ function getHMLScripts(company: string): string[] {
     // 2: Current Borrowers
     `Ten of your top relationships. G D Bristol: 38 transactions. H K Investments: 18 deals, average loan $900K. Flipping SoCal: 30 deals. Millennial Investments: 28 deals. These aren't names from a skip-trace list. These are operators who already know you and already trust you with their capital. Let's drill down on one of them.`,
 
-    // 3: Investor Drill-Down
-    `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender. Now look at the agents for G D Bristol. Russell Morgan at HomeWay — 17 of their investor deals. These agents all work with active investors. Everybody is trying to find deals for those investors. I bring value first. I'm not asking them for anything — I'm showing them off-market deals. And when one of their investors needs a loan, I already know exactly who their lender is and what terms they got. Now look at the title companies. First American handled 19 of this borrower's closings. I know who they call. I know where their deals come from. I know what they paid. Here's what most lenders miss: borrowers don't borrow from just one lender. They shop. They rotate. Investors are looking for the best terms. Bringing them deals is how you retain the relationships you already have — and get in front of new ones where you can't afford to undercut on rate.`,
+    // 3: Investor Drill-Down (split into phases — see DRILL_SCRIPTS)
+    `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender.`,
 
     // 4: What Changed
     `A lot has changed. Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets — and you all make the same call: "Great service. Do you have any loans I can do for you?" Which means you're competing on two things: rate and sales pressure. That's a losing game. If a borrower is with Kiavi, you can't touch them on rate. So you either undercut yourself into thin margins, or you live or die with a sales team that costs you 0.4 to 0.5 percent of loan origination. And even then, what are they saying? "Hey, I saw you borrow from Kiavi — our rates are competitive and our service is great." Click. I get ten of those calls a month. Every operator hears the same pitch: "Give me a loan." Not: "Here's a way for you to find deals — and when you do, I get the loan." That's a nice easy conversation. And I can tell you what the answer is already.`,
@@ -217,6 +217,12 @@ function getHMLScripts(company: string): string[] {
     `I'm not asking you for your clients. I already have your clients — and every agent they work with. Go ahead and skip-trace all you want. I have a better way to reach them, with a much easier sales pitch. What I'm asking is for you to stop competing on rate and start looking at it from the borrower's point of view. "We have great service" doesn't move the needle. "I have a great way to get you deals and I'm going to show you the best machine out there" — now that's interesting. Let us deliver that value to the borrowers who make you money. Here's my goal: find a solid strategic partner who understands this is the best investment they'll ever make. You get ownership. When our numbers get healthy, yours compound with them. And you're approaching the market differently than everyone else. We're ready to launch. If we stay focused on what we do best — supporting our investors — and I don't have to worry about fundraising and sales, our part is easy. I know you know how to do a good loan. We build a great machine. Sounds like a great partnership to me.`,
   ];
 }
+
+const DRILL_SCRIPTS = [
+  `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender.`,
+  `Now look at the agents for G D Bristol. Russell Morgan at HomeWay — 17 of their investor deals. These agents all work with active investors. Everybody is trying to find deals for those investors. I bring value first. I'm not asking them for anything — I'm showing them off-market deals. And when one of their investors needs a loan, I already know exactly who their lender is and what terms they got.`,
+  `Now look at the title companies. First American handled 19 of this borrower's closings. I know who they call. I know where their deals come from. I know what they paid. Here's what most lenders miss: borrowers don't borrow from just one lender. They shop. They rotate. Investors are looking for the best terms. Bringing them deals is how you retain the relationships you already have — and get in front of new ones where you can't afford to undercut on rate.`,
+];
 
 function BrandName() {
   return <span><span style={{ color: "#E8571A" }}>U</span><span style={{ color: "#2C3E50" }}>Sale</span></span>;
@@ -653,13 +659,20 @@ function SectionCurrentBorrowers() {
   );
 }
 
-function SectionGDBDetail() {
+function SectionGDBDetail({ drillPhase = 0 }: { drillPhase?: number }) {
   const [activeTab, setActiveTab] = useState<"entities" | "agents" | "lenders" | "title">("lenders");
   const [lenderFilter, setLenderFilter] = useState("");
   const [agentFilter, setAgentFilter] = useState("");
   const [agentSort, setAgentSort] = useState<"High to Low" | "Low to High">("High to Low");
   const [titleFilter, setTitleFilter] = useState("");
   const [titleSort, setTitleSort] = useState<"High to Low" | "Low to High">("High to Low");
+
+  const forcedTab = drillPhase === 1 ? "agents" : drillPhase === 2 ? "title" : null;
+  const displayTab = (forcedTab || activeTab) as "entities" | "agents" | "lenders" | "title";
+
+  useEffect(() => {
+    if (forcedTab) setActiveTab(forcedTab as "agents" | "title");
+  }, [forcedTab]);
 
   const tabs: { key: "entities" | "agents" | "lenders" | "title"; label: string }[] = [
     { key: "entities", label: "14 Related Entities" },
@@ -689,9 +702,9 @@ function SectionGDBDetail() {
 
   const tabBtnStyle = (key: string): React.CSSProperties => ({
     padding: "10px 18px", border: "none", borderRadius: 8, cursor: "pointer",
-    fontWeight: activeTab === key ? 700 : 500, fontSize: 14,
-    background: activeTab === key ? "#e9ecef" : "transparent",
-    color: activeTab === key ? "#E8571A" : "#6c757d",
+    fontWeight: displayTab === key ? 700 : 500, fontSize: 14,
+    background: displayTab === key ? "#e9ecef" : "transparent",
+    color: displayTab === key ? "#E8571A" : "#6c757d",
     transition: "all 0.15s",
     whiteSpace: "nowrap",
   });
@@ -728,14 +741,14 @@ function SectionGDBDetail() {
               </button>
             ))}
           </div>
-          {activeTab === "lenders" && (
+          {displayTab === "lenders" && (
             <input
               value={lenderFilter} onChange={e => setLenderFilter(e.target.value)}
               placeholder="Filter by lender name..."
               style={{ padding: "7px 12px", borderRadius: 8, border: "1px solid #dee2e6", fontSize: 13, width: 210, outline: "none", background: "#fff" }}
             />
           )}
-          {activeTab === "agents" && (
+          {displayTab === "agents" && (
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input
                 value={agentFilter} onChange={e => setAgentFilter(e.target.value)}
@@ -749,7 +762,7 @@ function SectionGDBDetail() {
               </select>
             </div>
           )}
-          {activeTab === "title" && (
+          {displayTab === "title" && (
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <input
                 value={titleFilter} onChange={e => setTitleFilter(e.target.value)}
@@ -765,13 +778,13 @@ function SectionGDBDetail() {
           )}
         </div>
 
-        {activeTab === "entities" && (
+        {displayTab === "entities" && (
           <div style={{ padding: 32, color: "#6c757d", fontSize: 15, fontStyle: "italic" }}>
             Related entity data for G D BRISTOL LLC — 14 entities across Yorba Linda, CA area.
           </div>
         )}
 
-        {activeTab === "lenders" && (
+        {displayTab === "lenders" && (
           <div style={{ overflowX: "auto" }}>
             <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Lender Relationships:</div>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -809,7 +822,7 @@ function SectionGDBDetail() {
           </div>
         )}
 
-        {activeTab === "agents" && (
+        {displayTab === "agents" && (
           <div style={{ overflowX: "auto" }}>
             <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Agent Relationships:</div>
             <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 860 }}>
@@ -855,7 +868,7 @@ function SectionGDBDetail() {
           </div>
         )}
 
-        {activeTab === "title" && (
+        {displayTab === "title" && (
           <div style={{ overflowX: "auto" }}>
             <div style={{ padding: "12px 20px 6px", background: "#f8f9fa", fontSize: 13, fontWeight: 600, color: "#495057" }}>Title Company Relationships:</div>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -883,6 +896,27 @@ function SectionGDBDetail() {
           </div>
         )}
       </div>
+
+      {drillPhase > 0 && (
+        <div style={{
+          position: "fixed", bottom: 32, right: 32, zIndex: 200,
+          background: "#fff", borderRadius: 16, padding: "16px 20px",
+          boxShadow: "0 8px 40px rgba(0,0,0,0.18)", border: "2px solid #E8571A",
+          display: "flex", alignItems: "center", gap: 14, maxWidth: 340,
+          animation: "slideInRight 0.35s ease",
+        }}>
+          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
+          <div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", marginBottom: 2 }}>Tony Diaz</div>
+            <div style={{ fontSize: 12, color: "#6c757d", marginBottom: 6 }}>Founder &amp; CEO — USale &amp; FlipIQ</div>
+            <div style={{ fontSize: 13, color: "#E8571A", fontWeight: 600, lineHeight: 1.4 }}>
+              {drillPhase === 1
+                ? "I have direct relationships with 2 agents on this list."
+                : "I know who closes their deals. I know what they paid."}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1363,15 +1397,25 @@ export default function HardMoneyPresentation() {
   const [lenderLoaded, setLenderLoaded] = useState(false);
   const [started, setStarted] = useState(false);
   const [slide, setSlide] = useState(0);
+  const [drillPhase, setDrillPhase] = useState(0);
   const [audioOn, setAudioOn] = useState(true);
   const [showBorrowers, setShowBorrowers] = useState(false);
   const [selectedBorrower, setSelectedBorrower] = useState<string | null>(null);
   const narratedSlidesRef = useRef<Set<number>>(new Set());
   const initialPlayDone = useRef(false);
+  const slideRef = useRef(0);
+  const drillPhaseRef = useRef(0);
+  useEffect(() => { slideRef.current = slide; }, [slide]);
+  useEffect(() => { drillPhaseRef.current = drillPhase; }, [drillPhase]);
 
   const total = SECTION_TITLES.length;
 
   const handleTTSEnded = useCallback(() => {
+    if (slideRef.current === 3 && drillPhaseRef.current < 2) {
+      setDrillPhase(p => p + 1);
+      return;
+    }
+    setDrillPhase(0);
     setSlide(s => {
       narratedSlidesRef.current.add(s);
       if (s < total - 1) return s + 1;
@@ -1413,9 +1457,10 @@ export default function HardMoneyPresentation() {
   useEffect(() => {
     if (!started) return;
     if (!initialPlayDone.current) { initialPlayDone.current = true; return; }
+    if (slide !== 3) setDrillPhase(0);
     if (audioOn) {
       unlockAudioContext();
-      playTTS(SCRIPTS[slide]);
+      playTTS(slide === 3 ? DRILL_SCRIPTS[0] : SCRIPTS[slide]);
       for (let i = 1; i <= 3; i++) {
         if (slide + i < total) preloadTTS(SCRIPTS[slide + i]);
       }
@@ -1423,6 +1468,12 @@ export default function HardMoneyPresentation() {
       stopTTS();
     }
   }, [slide, audioOn, started]);
+
+  useEffect(() => {
+    if (!started || !audioOn || slide !== 3 || drillPhase === 0) return;
+    unlockAudioContext();
+    playTTS(DRILL_SCRIPTS[drillPhase]);
+  }, [drillPhase]);
 
   const toggleAudio = useCallback(() => {
     if (audioOn) { stopTTS(); setAudioOn(false); }
@@ -1484,7 +1535,7 @@ export default function HardMoneyPresentation() {
     <SectionWelcome key={0} />,
     <SectionData key={1} onShowBorrowers={() => setShowBorrowers(true)} />,
     <SectionCurrentBorrowers key={2} />,
-    <SectionGDBDetail key={3} />,
+    <SectionGDBDetail key={3} drillPhase={drillPhase} />,
     <SectionChanged key={4} />,
     <SectionLens key={5} />,
     <SectionMath key={6} />,
