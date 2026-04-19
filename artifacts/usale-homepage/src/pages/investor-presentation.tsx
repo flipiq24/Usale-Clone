@@ -666,7 +666,7 @@ function SectionCTA({ hl }: { hl: number }) {
             textDecoration: "none",
           }}
         >
-          Not for you? Sign up for USale — it's free. There's value regardless.
+          Not for you? Sign up for USale and ONLY get deals based on your buy box — it's free. There's value regardless.
         </a>
       </div>
 
