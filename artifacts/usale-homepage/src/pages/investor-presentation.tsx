@@ -195,7 +195,7 @@ function getScripts(_inv: InvestorData) {
     `Here's the reality — I'm not going to try to convince you. You already know. AI is going to change this business. Fast. AI is not going to take your deals. Somebody using it will. You're either in front of it or behind it. Think about the last time an opportunity was right in front of you and you jumped in too late. Eventually you'll be a user. It's a no-brainer.`,
     `First movers win. Early adopters get the unfair advantage. Once a marketplace hits network effects, the people inside it own the biggest share of the market. We're not on Facebook. We're not running ads. We have the data. That's how we found you. We don't charge ninety-nine bucks for a tool. The marketplace is a hundred percent free. That's not a discount — that's the model. The biggest platforms ever built were free. They weren't trying to charge per use. They built the machine, and the transactions came. That's us.`,
     `Two of the largest national hard money lenders and two of the largest national title companies are already behind U-Sale. Not because we paid them — because they understand what we're building. A frictionless community where everybody wins. In our local market there's just under half a million licensed individuals. Twelve thousand four hundred forty-eight of them are investor-friendly agents in Southern California. All we have to do is show them how to double-end their listings — no fees, no strings, no middleman, just value. And our investor-operators get first look. Then we go national.`,
-    `Think of the biggest dispo platform out there — without the cost. Think of the best acquisition tool — with actual intelligence behind it. If you're not seeing where this is going, we're not it. No harm done. Enjoy the free marketplace — and eventually you'll have no choice but to join, simply because it makes sense and it's free.`,
+    `Think of the biggest dispo platform out there — without getting your wallet lifted. Think of the best acquisition tool — with actual AI intelligence behind it. If you're not seeing where this is going, we're not it. No harm done. Enjoy the free marketplace — and eventually you'll have no choice but to join, simply because it makes sense and it's free.`,
     `You already have the volume. The relationships. The discipline. The reality — not all investors need us. The only question is whether you want an unfair advantage. Give me fifteen minutes to show you the most advanced acquisition platform in the market. No pitch. You see the system live, you see your market live, and you choose how we bring you value — simply using U-Sale, or being one of our early adopters with our Command platform. Either way, we both win. We get a great buyer like you. You get off-market deals you otherwise wouldn't see. You can even monetize deals to the marketplace that you don't buy. You get the point — we all win. If this isn't super exciting to you, simply sign up for U-Sale. It's free. Either way, we're only looking for a select few early adopters. There's value regardless.`,
   ];
 }
@@ -206,7 +206,7 @@ const STATIC_HIGHLIGHT_COUNTS = [3, 6, 3, 3, 3, 2, 2];
 
 const STATIC_HIGHLIGHT_CUES: [number, number][][] = [
   [[0, 0], [0.4, 1], [0.75, 2]],
-  [[0, 0], [0.22, 1], [0.36, 2], [0.47, 3], [0.56, 4], [0.66, 5]],
+  [[0, 0], [0.20, 1], [0.39, 2], [0.45, 3], [0.55, 4], [0.66, 5]],
   [[0, 0], [0.30, 1], [0.65, 2]],
   [[0, 0], [0.30, 1], [0.65, 2]],
   [[0, 0], [0.30, 1], [0.65, 2]],
