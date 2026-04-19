@@ -850,27 +850,6 @@ function SectionGDBDetail({ drillPhase = 0 }: { drillPhase?: number }) {
           </div>
         )}
       </div>
-
-      {drillPhase > 0 && (
-        <div style={{
-          position: "fixed", bottom: 32, right: 32, zIndex: 200,
-          background: "#fff", borderRadius: 16, padding: "16px 20px",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.18)", border: "2px solid #E8571A",
-          display: "flex", alignItems: "center", gap: 14, maxWidth: 340,
-          animation: "slideInRight 0.35s ease",
-        }}>
-          <img src={TONY_PHOTO} alt="Tony Diaz" style={{ width: 56, height: 56, borderRadius: 10, objectFit: "cover", flexShrink: 0 }} />
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: "#2C3E50", marginBottom: 2 }}>Tony Diaz</div>
-            <div style={{ fontSize: 12, color: "#6c757d", marginBottom: 6 }}>Founder &amp; CEO — USale &amp; FlipIQ</div>
-            <div style={{ fontSize: 13, color: "#E8571A", fontWeight: 600, lineHeight: 1.4 }}>
-              {drillPhase === 1
-                ? "I have direct relationships with 2 agents on this list."
-                : "I know who closes their deals. I know what they paid."}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
