@@ -199,7 +199,7 @@ function getHMLScripts(company: string): string[] {
     `Ten of your top relationships. G D Bristol: 38 transactions. H K Investments: 18 deals, average loan $900K. Flipping SoCal: 30 deals. Millennial Investments: 28 deals. These aren't names from a skip-trace list. These are operators who already know you and already trust you with their capital. Let's drill down on one of them.`,
 
     // 3: Investor Drill-Down (split into phases — see DRILL_SCRIPTS)
-    `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender.`,
+    `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender. Now — do you know how they find their deals? 89 of them came from the MLS. That's the core of their pipeline. And that's exactly what our technology helps them do better. It all ties together.`,
 
     // 4: What Changed
     `A lot has changed. Hard money used to be relationship-driven. Common-sense lending. Today it's institutionalized. You and every one of your competitors buy data from the same three sources. You all see the same investors, the same transactions, the same markets — and you all make the same call: "Great service. Do you have any loans I can do for you?" Which means you're competing on two things: rate and sales pressure. That's a losing game. If a borrower is with Kiavi, you can't touch them on rate. So you either undercut yourself into thin margins, or you live or die with a sales team that costs you 0.4 to 0.5 percent of loan origination. And even then, what are they saying? "Hey, I saw you borrow from Kiavi — our rates are competitive and our service is great." Click. I get ten of those calls a month. Every operator hears the same pitch: "Give me a loan." Not: "Here's a way for you to find deals — and when you do, I get the loan." That's a nice easy conversation. And I can tell you what the answer is already.`,
@@ -219,7 +219,7 @@ function getHMLScripts(company: string): string[] {
 }
 
 const DRILL_SCRIPTS = [
-  `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender.`,
+  `G D Bristol. 48 transactions. Average purchase $674K — they buy right. Average resale $867K. You are their primary lender. Now — do you know how they find their deals? 89 of them came from the MLS. That's the core of their pipeline. And that's exactly what our technology helps them do better. It all ties together.`,
   `Now look at the agents for G D Bristol. Russell Morgan at HomeWay — 17 of their investor deals. These agents all work with active investors. Everybody is trying to find deals for those investors. I bring value first. I'm not asking them for anything — I'm showing them off-market deals. And when one of their investors needs a loan, I already know exactly who their lender is and what terms they got.`,
   `Now look at the title companies. First American handled 19 of this borrower's closings. I know who they call. I know where their deals come from. I know what they paid. Here's what most lenders miss: borrowers don't borrow from just one lender. They shop. They rotate. Investors are looking for the best terms. Bringing them deals is how you retain the relationships you already have — and get in front of new ones where you can't afford to undercut on rate.`,
 ];
