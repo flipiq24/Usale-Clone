@@ -1140,8 +1140,19 @@ function useAudioNarration(onEnded?: () => void) {
     progressRef.current = 0;
   }, [stopProgressTracker]);
 
+  const isValidMp3 = (buf: ArrayBuffer | undefined): boolean => {
+    if (!buf || buf.byteLength < 4) return false;
+    const v = new Uint8Array(buf, 0, 3);
+    if (v[0] === 0x49 && v[1] === 0x44 && v[2] === 0x33) return true; // "ID3"
+    if (v[0] === 0xff && (v[1] & 0xe0) === 0xe0) return true; // MPEG sync
+    return false;
+  };
+
   const preload = useCallback(async (text: string) => {
-    if (preloadCache.current.has(text) || preloadingKeys.current.has(text)) return;
+    const existing = preloadCache.current.get(text);
+    if (existing && isValidMp3(existing)) return;
+    if (existing) preloadCache.current.delete(text);
+    if (preloadingKeys.current.has(text)) return;
     preloadingKeys.current.add(text);
     try {
       const resp = await fetch(`${API_BASE}/ai/tts`, {
@@ -1178,10 +1189,11 @@ function useAudioNarration(onEnded?: () => void) {
     try {
       let arrayBuf: ArrayBuffer;
       const cached = preloadCache.current.get(text);
-      if (cached) {
+      if (cached && isValidMp3(cached)) {
         arrayBuf = cached;
         preloadCache.current.delete(text);
       } else {
+        if (cached) preloadCache.current.delete(text);
         const resp = await fetch(`${API_BASE}/ai/tts`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },

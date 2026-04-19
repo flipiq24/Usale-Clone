@@ -793,7 +793,17 @@ function useAudioNarration(onEnded?: () => void) {
   }, [stopProgressTracker]);
 
   const fetchPayload = useCallback(async (text: string): Promise<TTSPayload> => {
-    if (cacheRef.current.has(text)) return cacheRef.current.get(text)!;
+    const cached = cacheRef.current.get(text);
+    if (cached) {
+      const buf = cached.audio;
+      if (buf && buf.byteLength >= 4) {
+        const v = new Uint8Array(buf, 0, 3);
+        const isId3 = v[0] === 0x49 && v[1] === 0x44 && v[2] === 0x33;
+        const isMpeg = v[0] === 0xff && (v[1] & 0xe0) === 0xe0;
+        if (isId3 || isMpeg) return cached;
+      }
+      cacheRef.current.delete(text);
+    }
     const resp = await fetch(`${API_BASE}/ai/tts`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text }) });
     if (!resp.ok) throw new Error("TTS fetch failed");
     const json = await resp.json();
