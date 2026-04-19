@@ -1150,8 +1150,13 @@ function useAudioNarration(onEnded?: () => void) {
         body: JSON.stringify({ text }),
       });
       if (resp.ok) {
-        const buf = await resp.arrayBuffer();
-        preloadCache.current.set(text, buf);
+        const json = (await resp.json()) as { audio_base64?: string };
+        if (json.audio_base64) {
+          const bin = atob(json.audio_base64);
+          const u8 = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+          preloadCache.current.set(text, u8.buffer);
+        }
       }
     } catch { /* silent */ }
     preloadingKeys.current.delete(text);
@@ -1184,7 +1189,12 @@ function useAudioNarration(onEnded?: () => void) {
           signal: controller.signal,
         });
         if (!resp.ok) throw new Error("TTS failed");
-        arrayBuf = await resp.arrayBuffer();
+        const json = (await resp.json()) as { audio_base64?: string };
+        if (!json.audio_base64) throw new Error("TTS missing audio");
+        const bin = atob(json.audio_base64);
+        const u8 = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+        arrayBuf = u8.buffer;
       }
       if (controller.signal.aborted) return;
 
