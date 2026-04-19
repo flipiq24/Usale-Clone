@@ -238,17 +238,10 @@ function introReveal(step: number, index: number): React.CSSProperties {
 function SectionWelcome({ hl }: { hl: number }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
-      <div style={{
-        padding: "8px 18px", borderRadius: 999, background: "#fff", border: "1px solid #E8571A40",
-        fontSize: 13, fontWeight: 700, color: "#E8571A", letterSpacing: "0.08em", textTransform: "uppercase",
-        ...introReveal(hl, 0),
-      }}>
-        INVESTSOCAL LLC
-      </div>
-      <h1 style={{ fontSize: "clamp(38px,6vw,68px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em", ...introReveal(hl, 1) }}>
+      <h1 style={{ fontSize: "clamp(38px,6vw,68px)", fontWeight: 700, color: "#2C3E50", margin: 0, lineHeight: 1.1, letterSpacing: "-0.03em", ...introReveal(hl, 0) }}>
         You're a <span style={{ color: "#E8571A" }}>real operator</span>.
       </h1>
-      <img src={USALE_LOGO} alt="USale" style={{ height: 110, ...introReveal(hl, 2) }} />
+      <img src={USALE_LOGO} alt="USale" style={{ height: 110, ...introReveal(hl, 1) }} />
     </div>
   );
 }
