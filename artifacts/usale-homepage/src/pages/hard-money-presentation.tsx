@@ -1395,6 +1395,8 @@ export default function HardMoneyPresentation() {
   const SCRIPTS = getHMLScripts(LENDER.company);
 
   useEffect(() => {
+    LENDER = DEFAULT_LENDER;
+    setLenderLoaded(false);
     async function fetchContact() {
       try {
         const resp = await fetch(`${API_BASE}/contacts/by-slug/${slug}`);
