@@ -243,7 +243,7 @@ function introReveal(step: number, index: number): React.CSSProperties {
 
 function SectionWelcome({ hl }: { hl: number }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "65vh", textAlign: "center", gap: 32, background: "#FFFFFF", borderRadius: 16, padding: "48px 32px" }}>
       <div style={{
         padding: "8px 18px", borderRadius: 999, background: "#fff", border: "1px solid #E8571A40",
         fontSize: 13, fontWeight: 700, color: "#E8571A", letterSpacing: "0.08em", textTransform: "uppercase",
